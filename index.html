@@ -70,7 +70,30 @@
     }
   </style>
 </head>
-<body>
+<body><!-- CityBlocks Intro Animation -->
+<video id="introVideo" autoplay muted playsinline style="
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  z-index: 9999;
+  background-color: green;
+" onended="fadeOutVideo()">
+  <source src="cityblocks_intro.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
+<script>
+  function fadeOutVideo() {
+    const video = document.getElementById("introVideo");
+    video.style.transition = "opacity 1.5s ease";
+    video.style.opacity = 0;
+    setTimeout(() => video.style.display = "none", 1500);
+  }
+</script>
+
   <div class="grid">
     <div class="tile">
       <img src="1940s.png" alt="1940s Era" />
