@@ -69,32 +69,34 @@
       color: #ccc;
     }#introText {
   position: fixed;
-  top: 40%;
+  top: 35%;
   width: 100%;
   text-align: center;
   z-index: 99999;
   font-family: 'Helvetica Neue', sans-serif;
   color: white;
-  font-size: 3rem;
+  font-size: 5rem;
   pointer-events: none;
 }
 
 .fade-text {
   opacity: 0;
-  animation: popIn 0.6s ease-out forwards;
+  animation: popIn 1.2s ease-out forwards;
+  position: absolute;
+  width: 100%;
 }
-
 @keyframes popIn {
   0% {
     opacity: 0;
     transform: scale(0.8) translateY(20px);
   }
-  60% {
+  50% {
     opacity: 1;
     transform: scale(1.1) translateY(0);
   }
   100% {
-    transform: scale(1) translateY(0);
+    opacity: 0;
+    transform: scale(1) translateY(-20px);
   }
 }
 
@@ -116,21 +118,32 @@
   Your browser does not support the video tag.
 </video>
   <div id="introText">
-  <div class="fade-text" style="animation-delay: 0.5s">BUILD</div>
-  <div class="fade-text" style="animation-delay: 1.5s">THE</div>
-  <div class="fade-text" style="animation-delay: 2.5s">NEXT</div>
-  <div class="fade-text" style="animation-delay: 3.5s">WORLD</div>
-  <div class="fade-text" style="animation-delay: 4.5s">at CityBlocks.com</div>
+  <div class="fade-text" style="animation-delay: 0s;">BUILD</div>
+  <div class="fade-text" style="animation-delay: 2s;">THE</div>
+  <div class="fade-text" style="animation-delay: 4s;">NEXT</div>
+  <div class="fade-text" style="animation-delay: 6s;">WORLD</div>
+  <div class="fade-text" style="animation-delay: 8s;">at CityBlocks.com</div>
 </div>
 
 
 <script>
-  function fadeOutVideo() {
-    const video = document.getElementById("introVideo");
-    video.style.transition = "opacity 1.5s ease";
-    video.style.opacity = 0;
-    setTimeout(() => video.style.display = "none", 1500);
-  }
+  const fadeWords = document.querySelectorAll('.fade-text');
+  const mainContent = document.querySelector('.grid');
+
+  // Hide quadrant content at first
+  mainContent.style.opacity = 0;
+
+  // Reveal words one at a time
+  fadeWords.forEach((el, index) => {
+    setTimeout(() => {
+      el.style.opacity = 1;
+    }, index * 2000);
+  });
+
+  // Fade in the grid after the final word
+  setTimeout(() => {
+    mainContent.style.opacity = 1;
+  }, fadeWords.length * 2000 + 1000);
 </script>
 
   <div class="grid">
