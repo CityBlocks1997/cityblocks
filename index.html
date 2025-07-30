@@ -81,14 +81,23 @@
 
 .fade-text {
   opacity: 0;
-  animation: fadeIn 1s forwards;
+  animation: popIn 0.6s ease-out forwards;
 }
 
-@keyframes fadeIn {
-  to {
+@keyframes popIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.8) translateY(20px);
+  }
+  60% {
     opacity: 1;
+    transform: scale(1.1) translateY(0);
+  }
+  100% {
+    transform: scale(1) translateY(0);
   }
 }
+
 
   </style>
 </head>
@@ -111,7 +120,7 @@
   <div class="fade-text" style="animation-delay: 1.5s">THE</div>
   <div class="fade-text" style="animation-delay: 2.5s">NEXT</div>
   <div class="fade-text" style="animation-delay: 3.5s">WORLD</div>
-  <div class="fade-text" style="animation-delay: 5s">at CityBlocks.com</div>
+  <div class="fade-text" style="animation-delay: 4.5s">at CityBlocks.com</div>
 </div>
 
 
