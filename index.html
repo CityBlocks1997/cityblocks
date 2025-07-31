@@ -15,7 +15,9 @@
       align-items: center;
       justify-content: center;
       height: 100vh;
+      overflow: hidden;
     }
+
     .grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -24,7 +26,10 @@
       width: 90%;
       max-width: 1000px;
       margin-bottom: 20px;
+      opacity: 0;
+      transition: opacity 1.5s ease;
     }
+
     .tile {
       position: relative;
       width: 100%;
@@ -33,24 +38,29 @@
       border-radius: 8px;
       background-color: #111;
     }
+
     .tile video {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: none;
     }
+
     .tile img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
     }
+
     .tile:hover img {
       display: none;
     }
+
     .tile:hover video {
       display: block;
     }
+
     .cta {
       font-size: 1.25rem;
       background-color: #fff;
@@ -60,112 +70,131 @@
       border-radius: 6px;
       margin-top: 20px;
     }
+
     .cta:hover {
       background-color: #ccc;
     }
+
     .tagline {
       font-size: 1rem;
       margin-top: 10px;
       color: #ccc;
-    }#introText {
-  position: fixed;
-  top: 35%;
-  width: 100%;
-  text-align: center;
-  z-index: 99999;
-  font-family: 'Helvetica Neue', sans-serif;
-  color: white;
-  font-size: 5rem;
-  pointer-events: none;
-}
+    }
 
-.fade-text {
-  opacity: 0;
-  animation: popIn 1.2s ease-out forwards;
-  position: absolute;
-  width: 100%;
-}
-@keyframes popIn {
-  0% {
-    opacity: 0;
-    transform: scale(0.8) translateY(20px);
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1.1) translateY(0);
-  }
-  100% {
-    opacity: 0;
-    transform: scale(1) translateY(-20px);
-  }
-}
+    #introLogo {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.5);
+      z-index: 10000;
+      opacity: 0;
+      animation: growFade 3s ease-out forwards;
+    }
 
+    @keyframes growFade {
+      0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.5);
+      }
+      50% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.1);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(1.5);
+      }
+    }
 
+    #introText {
+      position: fixed;
+      top: 35%;
+      width: 100%;
+      text-align: center;
+      z-index: 9999;
+      font-family: 'Helvetica Neue', sans-serif;
+      color: white;
+      font-size: 5rem;
+      pointer-events: none;
+    }
+
+    .fade-text {
+      opacity: 0;
+      position: absolute;
+      width: 100%;
+      animation: popIn 1.8s ease-out forwards;
+    }
+
+    .fade-text:nth-child(1) { animation-delay: 3.2s; }
+    .fade-text:nth-child(2) { animation-delay: 5.4s; }
+    .fade-text:nth-child(3) { animation-delay: 7.6s; }
+    .fade-text:nth-child(4) { animation-delay: 9.8s; }
+    .fade-text:nth-child(5) { animation-delay: 12s; }
+    .fade-text:nth-child(6) { animation-delay: 14.2s; }
+
+    @keyframes popIn {
+      0% {
+        opacity: 0;
+        transform: scale(0.8) translateY(20px);
+      }
+      50% {
+        opacity: 1;
+        transform: scale(1.1) translateY(0);
+      }
+      100% {
+        opacity: 0;
+        transform: scale(1) translateY(-20px);
+      }
+    }
   </style>
 </head>
-<body><!-- CityBlocks Intro Animation -->
-<video id="introVideo" autoplay muted playsinline style="
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  object-fit: cover;
-  z-index: 9999;
-  background-color: black;
-" onended="fadeOutVideo()">
-  <source src="cityblocks_intro.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
-  <div id="introText">
-  <div class="fade-text" style="animation-delay: 0s;">BUILD</div>
-  <div class="fade-text" style="animation-delay: 2s;">YOUR</div>
-  <div class="fade-text" style="animation-delay: 4s;">NEXT</div>
-  <div class="fade-text" style="animation-delay: 6s;">WORLD</div>
-  <div class="fade-text" style="animation-delay: 6s;">at</div>
-  <div class="fade-text" style="animation-delay: 8s;">CityBlocks</div>
+<body>
+
+<img id="introLogo" src="CityBlocksLogo01.png" alt="CityBlocks Logo">
+
+<div id="introText">
+  <div class="fade-text">Build</div>
+  <div class="fade-text">Your</div>
+  <div class="fade-text">Next</div>
+  <div class="fade-text">World</div>
+  <div class="fade-text">at</div>
+  <div class="fade-text">CityBlocks.com</div>
 </div>
 
+<div class="grid">
+  <div class="tile">
+    <img src="1940s.png" alt="1940s Era" />
+    <video src="1940s.mp4" autoplay muted loop playsinline></video>
+  </div>
+  <div class="tile">
+    <img src="PresentDay.png" alt="Present Day" />
+    <video src="PresentDay.mp4" autoplay muted loop playsinline></video>
+  </div>
+  <div class="tile">
+    <img src="Future.png" alt="Future" />
+    <video src="Future.mp4" autoplay muted loop playsinline></video>
+  </div>
+  <div class="tile">
+    <img src="HistoricPast.png" alt="Historic Past" />
+    <video src="HistoricPast.mp4" autoplay muted loop playsinline></video>
+  </div>
+</div>
+
+<a class="cta" href="InvestorStatement.pdf" target="_blank">Inquire Now</a>
+<div class="tagline">Est. 1997 • A Metaverse Engine in the Making</div>
 
 <script>
-  const fadeWords = document.querySelectorAll('.fade-text');
   const mainContent = document.querySelector('.grid');
+  const introText = document.getElementById('introText');
 
-  // Hide quadrant content at first
-  mainContent.style.opacity = 0;
-
-  // Reveal words one at a time
-  fadeWords.forEach((el, index) => {
-    setTimeout(() => {
-      el.style.opacity = 1;
-    }, index * 2000);
-  });
-
-  // Fade in the grid after the final word
   setTimeout(() => {
-    mainContent.style.opacity = 1;
-  }, fadeWords.length * 2000 + 1000);
+    introText.style.opacity = 0;
+    setTimeout(() => {
+      introText.remove();
+      mainContent.style.opacity = 1;
+    }, 1500);
+  }, 17000); // delay for logo (3s) + words (12s) + buffer
 </script>
 
-  <div class="grid">
-    <div class="tile">
-      <img src="1940s.png" alt="1940s Era" />
-      <video src="1940s.mp4" autoplay muted loop playsinline></video>
-    </div>
-    <div class="tile">
-      <img src="PresentDay.png" alt="Present Day" />
-      <video src="PresentDay.mp4" autoplay muted loop playsinline></video>
-    </div>
-    <div class="tile">
-      <img src="Future.png" alt="Future" />
-      <video src="Future.mp4" autoplay muted loop playsinline></video>
-    </div>
-    <div class="tile">
-      <img src="HistoricPast.png" alt="Historic Past" />
-      <video src="HistoricPast.mp4" autoplay muted loop playsinline></video>
-    </div>
-  </div>
-  <a class="cta" href="InvestorStatement.pdf" target="_blank">Inquire Now</a>
-  <div class="tagline">Est. 1997 • A Metaverse Engine in the Making</div>
 </body>
 </html>
