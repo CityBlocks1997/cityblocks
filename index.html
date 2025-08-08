@@ -14,9 +14,7 @@
     position:fixed; inset:0; z-index:10; background:var(--bg);
     display:flex; flex-direction:column; align-items:center; justify-content:center;
   }
-  #words{
-    position:relative; width:100%; height:22vh; /* room so words don't overlap */
-  }
+  #words{ position:relative; width:100%; height:22vh; }
   .w{
     position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
     opacity:0; font-weight:300; letter-spacing:.04em;
@@ -26,12 +24,12 @@
   @media (min-width:900px){ .w{ font-size: clamp(30px, 7vw, 88px); } }
   @media (max-width:899px){ .w{ font-size: clamp(26px, 9vw, 54px); } }
 
-  /* Delays to get ~7s total pacing (you can tweak later) */
-  .w.w1{ animation-delay: .2s; }  /* BUILD */
-  .w.w2{ animation-delay: 1.4s; } /* YOUR */
-  .w.w3{ animation-delay: 2.6s; } /* NEXT */
-  .w.w4{ animation-delay: 3.8s; } /* WORLD */
-  .w.w5{ animation-delay: 4.8s; } /* AT (snappier beat before logo) */
+  /* timing for ~7s total before logo hold */
+  .w.w1{ animation-delay:.2s }   /* BUILD  */
+  .w.w2{ animation-delay:1.4s }  /* YOUR   */
+  .w.w3{ animation-delay:2.6s }  /* NEXT   */
+  .w.w4{ animation-delay:3.8s }  /* WORLD  */
+  .w.w5{ animation-delay:4.8s }  /* AT     */
 
   @keyframes wordCycle{
     0%{ opacity:0; transform:translateY(8px) scale(.98) }
@@ -40,14 +38,15 @@
     100%{ opacity:0; transform:translateY(-6px) scale(.99) }
   }
 
-  /* Final beat: logo (with cityblocks.com embedded) */
+  /* Final beat: LOGO fills same square as the grid */
   #final{
-    display:flex; flex-direction:column; align-items:center; gap:.5rem;
+    width:100vmin; height:100vmin; margin:0 auto;
+    display:flex; align-items:center; justify-content:center;
     opacity:0; transform:translateY(10px) scale(.98);
     animation:finalBeat 1.2s ease forwards 5.9s; /* starts after 'AT' */
   }
   #final img{
-    width:min(42vw, 420px); max-width:82vw; height:auto;
+    max-width:100%; max-height:100%; object-fit:contain;
     filter: drop-shadow(0 8px 28px rgba(0,0,0,.6));
   }
   @keyframes finalBeat{
@@ -56,14 +55,14 @@
     100%{opacity:1; transform:translateY(0) scale(1)}
   }
 
-  /* Fade the whole intro away after a short hold */
+  /* Fade whole intro away */
   .intro-out{ animation:introOut .8s ease forwards; }
   @keyframes introOut{ to{ opacity:0; visibility:hidden } }
 
-  /* ---------- SQUARE 2×2 GRID (centered) ---------- */
+  /* ---------- SQUARE 2×2 GRID ---------- */
   #stage{ position:fixed; inset:0; display:flex; align-items:center; justify-content:center; }
   .grid{
-    width: 100vmin; height: 100vmin;  /* perfect square that fits the smaller side */
+    width:100vmin; height:100vmin; /* perfect square */
     display:grid; grid-template-columns:1fr 1fr; grid-template-rows:1fr 1fr;
     opacity:0; transition:opacity .9s ease;
   }
@@ -93,7 +92,7 @@
   }
   #inquire button:hover{ filter:brightness(1.06); }
 
-  /* Tall screens (phones) keep it square using width */
+  /* Tall screens keep the square using width */
   @media (max-aspect-ratio: 3/4){
     .grid{ width:100vw; height:100vw; }
   }
@@ -110,13 +109,13 @@
     <div class="w w4">WORLD</div>
     <div class="w w5">AT</div>
   </div>
-  <!-- Use the logo image that already includes "cityblocks.com" embedded -->
+  <!-- Logo image should already include "cityblocks.com" embedded -->
   <div id="final">
-    <img src="CityBlocksLogo01.png?v=2" alt="CityBlocks Logo" />
+    <img src="CityBlocksLogo01.png?v=3" alt="CityBlocks Logo" />
   </div>
 </section>
 
-<!-- MAIN (square grid) -->
+<!-- MAIN -->
 <div id="stage">
   <section class="grid" id="grid" aria-hidden="true">
     <figure class="tile" data-target="1940s.html">
@@ -149,8 +148,12 @@
 <div id="inquire"><button type="button" onclick="openInvestor()">Investors Inquire</button></div>
 
 <script>
-  // After ~7s total, fade intro out and reveal grid + CTA
-  const introEndsAt = 7600; // ms (adjust later if you want)
+  /* Fade intro out after logo animation + 6s hold */
+  const logoStartsAt = 5900;   // matches CSS delay for #final animation
+  const logoAnimMs   = 1200;
+  const logoHoldMs   = 6000;   // keep logo up ~6s
+  const introEndsAt  = logoStartsAt + logoAnimMs + logoHoldMs;
+
   setTimeout(() => {
     document.getElementById('intro').classList.add('intro-out');
     document.getElementById('grid').style.opacity = 1;
@@ -178,7 +181,7 @@
     const vid = tile.querySelector('video');
     tile.addEventListener('mouseenter', ()=>showVideo(tile,true));
     tile.addEventListener('mouseleave', ()=>showVideo(tile,false));
-    // Mobile: first tap previews, second tap clicks through
+    // Mobile: first tap previews, second tap opens page
     let tapped = false;
     tile.addEventListener('touchstart', (e)=>{
       if(!tapped){
@@ -189,7 +192,6 @@
         const target = tile.dataset.target; if(target) location.href = target;
       }
     }, {passive:false});
-    // Desktop click
     tile.addEventListener('click', ()=>{
       const target = tile.dataset.target; if(target) location.href = target;
     });
