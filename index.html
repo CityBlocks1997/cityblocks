@@ -8,138 +8,130 @@
     body {
         margin: 0;
         padding: 0;
-        background-color: white;
         overflow: hidden;
         font-family: Arial, sans-serif;
+        background-color: #fff;
+        color: #000;
     }
-
-    /* Intro container */
+    /* Intro styles */
     #intro {
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        background-color: white;
+        background: #fff;
         display: flex;
-        justify-content: center;
-        align-items: center;
         flex-direction: column;
-        z-index: 10;
-    }
-
-    #introText {
-        font-size: 3vw;
+        align-items: center;
+        justify-content: center;
+        font-size: 2.5rem;
         font-weight: bold;
-        opacity: 0;
-        transition: opacity 0.3s ease;
+        z-index: 1000;
     }
-
+    .fade-in {
+        opacity: 0;
+        animation: fadeIn 0.8s forwards;
+    }
+    .word {
+        display: inline-block;
+        margin: 0 0.2rem;
+    }
+    @keyframes fadeIn {
+        to { opacity: 1; }
+    }
     #logo {
-        width: 20vw;
         max-width: 300px;
+        margin-top: 20px;
         opacity: 0;
-        transition: opacity 0.5s ease;
-        margin-top: 10px;
+        animation: fadeIn 1s forwards;
     }
-
-    /* Quadrant background */
-    #quadrants {
+    /* Quadrant page */
+    #main {
+        display: none;
         width: 100%;
-        height: 100%;
-        background: url('Cityblocks4Verses.png') no-repeat center center/cover;
-        position: fixed;
-        top: 0;
-        left: 0;
-        z-index: 1;
+        height: 100vh;
+        background: url('Cityblocks4Verses.png') center/cover no-repeat;
+        position: relative;
     }
-
     /* Inquire Now button */
-    #inquireBtn {
-        position: fixed;
+    #inquire {
+        position: absolute;
         bottom: 20px;
         right: 20px;
-        padding: 15px 25px;
-        background-color: #000;
+        background: #000;
         color: #fff;
+        padding: 12px 18px;
+        font-size: 1rem;
         border: none;
-        font-size: 1.2em;
         cursor: pointer;
-        border-radius: 8px;
-        box-shadow: 0 0 10px rgba(255,255,255,0.6);
+        border-radius: 6px;
         animation: pulse 2s infinite;
-        z-index: 5;
     }
-
     @keyframes pulse {
-        0% { box-shadow: 0 0 10px rgba(255,255,255,0.6); }
-        50% { box-shadow: 0 0 20px rgba(255,255,255,1); }
-        100% { box-shadow: 0 0 10px rgba(255,255,255,0.6); }
+        0% { box-shadow: 0 0 0 0 rgba(0,0,0,0.4); }
+        70% { box-shadow: 0 0 0 10px rgba(0,0,0,0); }
+        100% { box-shadow: 0 0 0 0 rgba(0,0,0,0); }
     }
 </style>
 </head>
 <body>
 
+<!-- Intro -->
 <div id="intro">
-    <div id="introText"></div>
-    <img id="logo" src="cityblocks-logo.png" alt="CityBlocks Logo">
+    <div id="intro-text"></div>
+    <img id="logo" src="CityBlocksLogo.png" alt="CityBlocks Logo">
 </div>
 
-<div id="quadrants"></div>
-
-<button id="inquireBtn">Inquire Now</button>
+<!-- Main content -->
+<div id="main">
+    <button id="inquire">Inquire Now</button>
+</div>
 
 <script>
-const introTextEl = document.getElementById('introText');
-const logoEl = document.getElementById('logo');
-const introEl = document.getElementById('intro');
-
-const lines = [
-    "Build...",
-    "Your...",
-    "Next...",
-    "World...",
-    "at",
-    "CityBlocks.com"
-];
-
+const words = ["Build", "Your", "Next", "World", "at"];
+const introText = document.getElementById('intro-text');
+const logo = document.getElementById('logo');
+const main = document.getElementById('main');
 let delay = 0;
 
-lines.forEach((line, index) => {
-    setTimeout(() => {
-        introTextEl.textContent = line;
-        introTextEl.style.opacity = 1;
-
-        if (line.toLowerCase() === "cityblocks.com") {
-            logoEl.style.opacity = 1; // Show logo with final line
-        }
-
-        setTimeout(() => {
-            introTextEl.style.opacity = 0;
-        }, 400);
-
-    }, delay);
-
-    // Faster speed for "at"
-    delay += (line.toLowerCase() === "at") ? 400 : 900;
+// Show words one by one
+words.forEach((word, index) => {
+    const span = document.createElement('span');
+    span.className = 'word fade-in';
+    span.style.animationDelay = `${delay}s`;
+    span.textContent = word;
+    introText.appendChild(span);
+    delay += (word === "at") ? 0.4 : 0.8; // faster for "at"
 });
 
+// After all words, show logo synced with "CityBlocks.com"
 setTimeout(() => {
-    introEl.style.transition = "opacity 1s ease, transform 1s ease";
-    introEl.style.opacity = 0;
-    introEl.style.transform = "scale(0.7)";
-}, delay + 500);
+    const span = document.createElement('span');
+    span.className = 'word fade-in';
+    span.style.animationDelay = '0s';
+    span.textContent = "CityBlocks.com";
+    introText.appendChild(span);
+    logo.style.animationDelay = '0s';
+    logo.style.opacity = 1;
+}, delay * 1000);
 
+// Fade out intro and show main
 setTimeout(() => {
-    introEl.style.display = "none";
-}, delay + 1500);
+    document.getElementById('intro').style.transition = 'opacity 1s';
+    document.getElementById('intro').style.opacity = 0;
+    setTimeout(() => {
+        document.getElementById('intro').style.display = 'none';
+        main.style.display = 'block';
+    }, 1000);
+}, (delay + 1.5) * 1000);
 
-// Inquire Now button function
-document.getElementById('inquireBtn').addEventListener('click', () => {
-    window.open('Investor-OneSheet.pdf', '_blank'); // PDF first
+// Inquire button logic: PDF → email
+document.getElementById('inquire').addEventListener('click', () => {
+    window.open('Investor-OneSheet.pdf', '_blank');
     setTimeout(() => {
         window.location.href = 'mailto:cityblocks@icloud.com';
-    }, 2000);
+    }, 4000);
 });
 </script>
 
