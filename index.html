@@ -1,163 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CityBlocks.com</title>
 <style>
-  :root{ --bg:#000; --fg:#fff; --cta:#ffcc00; }
-  html,body{height:100%;margin:0}
-  body{
-    background:var(--bg); color:var(--fg);
-    font-family: "Helvetica Neue", Arial, sans-serif;
-    overflow:hidden;
-  }
+    body {
+        margin: 0;
+        background-color: black;
+        font-family: Arial, sans-serif;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+    }
 
-  /* ---------- INTRO ---------- */
-  #intro{ position:fixed; inset:0; display:flex; flex-direction:column;
-          align-items:center; justify-content:center; gap:.6rem;
-          background:var(--bg); z-index:10; }
-  #introText{ position:relative; width:100%; text-align:center; line-height:1.05;
-              font-weight:900; letter-spacing:.06em; }
-  .word{
-    position:absolute; inset:0 auto auto 0; width:100%; text-align:center;
-    opacity:0; transform:scale(.85) translateY(12px);
-    filter: drop-shadow(0 6px 20px rgba(0,0,0,.55));
-    will-change: transform, opacity;
-  }
-  @media (min-width:900px){ .word{ font-size: clamp(56px, 8.5vw, 132px); } }
-  @media (max-width:899px){ .word{ font-size: clamp(34px, 10vw, 64px); } }
-  .word.show{ animation:pop .7s ease-out forwards; }
-  @keyframes pop{
-    0%{opacity:0; transform:scale(.85) translateY(16px)}
-    55%{opacity:1; transform:scale(1.08) translateY(0)}
-    100%{opacity:1; transform:scale(1) translateY(0)}
-  }
-  #introLogo{
-    width:min(44vw,520px); max-width:92vw;
-    opacity:0; transform:scale(.9);
-    transition:opacity .6s ease, transform .6s ease;
-    margin-top:.4rem;
-    filter: drop-shadow(0 8px 28px rgba(0,0,0,.6));
-  }
-  #introLogo.show{ opacity:1; transform:scale(1); }
-  .intro-fade-out{ animation:introFade .8s ease forwards; }
-  @keyframes introFade{ to{ opacity:0; visibility:hidden } }
+    header {
+        text-align: center;
+        padding: 10px;
+        background-color: black;
+    }
 
-  /* ---------- QUADRANTS ---------- */
-  #app{
-    position:fixed; inset:0; z-index:1; opacity:0; transition:opacity .9s ease;
-    display:grid; grid-template-columns:1fr 1fr; grid-template-rows:1fr 1fr;
-  }
-  .tile{ position:relative; overflow:hidden; outline:1px solid rgba(255,255,255,.05); }
-  .tile img{ width:100%; height:100%; object-fit:cover; transform:scale(1); transition:transform .45s ease; display:block; }
-  .tile:hover img{ transform:scale(1.06); }
-  .label{
-    position:absolute; left:12px; bottom:12px; background:rgba(0,0,0,.55);
-    padding:.45rem .7rem; border-radius:8px; font-weight:800;
-    font-size:clamp(12px,1.6vw,16px);
-  }
+    header img {
+        max-width: 250px;
+    }
 
-  /* ---------- CTA ---------- */
-  #inquire{ position:fixed; right:18px; bottom:18px; z-index:2; opacity:0; transition:opacity .9s ease; }
-  #inquire button{
-    background:var(--cta); color:#111; border:0; padding:.7rem 1rem; border-radius:10px;
-    font-weight:800; font-size:clamp(14px,1.6vw,16px); cursor:pointer;
-    box-shadow:0 8px 24px rgba(0,0,0,.35); animation:pulse 2.6s ease-in-out infinite 1.2s;
-  }
-  #inquire button:hover{ filter:brightness(1.06); }
-  @keyframes pulse{
-    0%{ box-shadow:0 0 0 0 rgba(255,204,0,.5) }
-    60%{ box-shadow:0 0 0 22px rgba(255,204,0,0) }
-    100%{ box-shadow:0 0 0 0 rgba(255,204,0,0) }
-  }
+    .grid {
+        flex: 1;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+    }
 
-  @media (max-width:700px){
-    #app{ grid-template-columns:1fr; grid-template-rows:repeat(4,25vh); }
-  }
+    .quadrant {
+        position: relative;
+        overflow: hidden;
+        cursor: pointer;
+    }
+
+    .quadrant img,
+    .quadrant video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: opacity 0.4s ease-in-out;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    .quadrant video {
+        opacity: 0;
+    }
+
+    .quadrant:hover video {
+        opacity: 1;
+    }
+
+    .inquire-btn {
+        display: block;
+        text-align: center;
+        padding: 15px;
+        background-color: gold;
+        color: black;
+        font-weight: bold;
+        text-decoration: none;
+        font-size: 20px;
+    }
+
+    .inquire-btn:hover {
+        background-color: orange;
+    }
 </style>
 </head>
 <body>
 
-<!-- INTRO -->
-<div id="intro" aria-hidden="false">
-  <div id="introText" aria-label="Build the next world at CityBlocks dot com">
-    <div class="word" id="w1">BUILD</div>
-    <div class="word" id="w2">THE</div>
-    <div class="word" id="w3">NEXT</div>
-    <div class="word" id="w4">WORLD</div>
-    <div class="word" id="w5">AT</div>
-    <div class="word" id="w6">CITYBLOCKS.COM</div>
-  </div>
-  <img id="introLogo" src="CityBlocksLogo01.png" alt="CityBlocks Logo" />
+<header>
+    <img src="CityBlocksLogo01.png" alt="CityBlocks.com Logo">
+</header>
+
+<div class="grid">
+    <div class="quadrant" onclick="location.href='1940s.html'">
+        <img src="1940s.png" alt="1940s">
+        <video src="1940s.mp4" muted loop></video>
+    </div>
+    <div class="quadrant" onclick="location.href='Future.html'">
+        <img src="Future.png" alt="Future">
+        <video src="Future.mp4" muted loop></video>
+    </div>
+    <div class="quadrant" onclick="location.href='PresentDay.html'">
+        <img src="PresentDay.png" alt="Present Day">
+        <video src="PresentDay.mp4" muted loop></video>
+    </div>
+    <div class="quadrant" onclick="location.href='HistoricPast.html'">
+        <img src="HistoricPast.png" alt="Historic Past">
+        <video src="HistoricPast.mp4" muted loop></video>
+    </div>
 </div>
 
-<!-- QUADRANTS -->
-<main id="app" aria-hidden="true">
-  <figure class="tile">
-    <img src="1940s.png" alt="1940s World" />
-    <figcaption class="label">1940s</figcaption>
-  </figure>
-  <figure class="tile">
-    <img src="PresentDay.png" alt="Present Day World" />
-    <figcaption class="label">Present Day</figcaption>
-  </figure>
-  <figure class="tile">
-    <img src="Future.png" alt="Future World" />
-    <figcaption class="label">Future</figcaption>
-  </figure>
-  <figure class="tile">
-    <img src="HistoricPast.png" alt="Historic Past World" />
-    <figcaption class="label">Historic Past</figcaption>
-  </figure>
-</main>
-
-<!-- CTA -->
-<div id="inquire">
-  <button type="button" onclick="openInvestor()">Inquire Now</button>
-</div>
-
-<script>
-  // Fast, enthusiastic beats (AT is quicker)
-  const beats = [
-    { id:'w1', delay: 400 }, // BUILD
-    { id:'w2', delay: 300 }, // THE
-    { id:'w3', delay: 400 }, // NEXT
-    { id:'w4', delay: 400 }, // WORLD
-    { id:'w5', delay: 220 }, // AT (snappy)
-    { id:'w6', delay: 520, withLogo:true } // CITYBLOCKS.COM + logo in sync
-  ];
-
-  let t = 0;
-  beats.forEach(step => {
-    t += step.delay;
-    setTimeout(() => {
-      const el = document.getElementById(step.id);
-      el.classList.add('show');
-      if(step.withLogo){ document.getElementById('introLogo').classList.add('show'); }
-    }, t);
-  });
-
-  // Fade intro out and reveal grid + CTA together
-  const introTotal = t + 900; // brief hold
-  setTimeout(() => {
-    document.getElementById('intro').classList.add('intro-fade-out');
-    document.getElementById('app').style.opacity = 1;
-    document.getElementById('inquire').style.opacity = 1;
-    document.getElementById('intro').setAttribute('aria-hidden','true');
-    document.getElementById('app').setAttribute('aria-hidden','false');
-  }, introTotal);
-
-  // Inquire behavior: open PDF if present, else email
-  function openInvestor(){
-    fetch('InvestorOneSheet.pdf', { method:'HEAD' })
-      .then(r => {
-        if(r.ok){ window.open('InvestorOneSheet.pdf','_blank'); }
-        else { window.location.href='mailto:cityblocks@icloud.com'; }
-      })
-      .catch(() => { window.location.href='mailto:cityblocks@icloud.com'; });
-  }
-</script>
+<a class="inquire-btn" href="InvestorOneSheet.pdf" target="_blank">Inquire Now</a>
 
 </body>
 </html>
