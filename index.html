@@ -1,199 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CityBlocks.com – Build Your Next World</title>
-  <style>
-    body {
-      margin: 0;
-      background-color: #000;
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      color: #fff;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      overflow: hidden;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CityBlocks Intro</title>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+  }
 
-    .grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      grid-template-rows: 1fr 1fr;
-      gap: 10px;
-      width: 90%;
-      max-width: 1000px;
-      margin-bottom: 20px;
-      opacity: 0;
-      transition: opacity 1.5s ease;
-    }
+  .intro-container {
+    text-align: center;
+    position: relative;
+  }
 
-    .tile {
-      position: relative;
-      width: 100%;
-      aspect-ratio: 1 / 1;
-      overflow: hidden;
-      border-radius: 8px;
-      background-color: #111;
-    }
+  .intro-text {
+    font-size: 3rem;
+    font-weight: bold;
+    opacity: 0;
+    transform: scale(0.9);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
 
-    .tile video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: none;
-    }
+  .intro-text.show {
+    opacity: 1;
+    transform: scale(1);
+  }
 
-    .tile img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
+  .logo {
+    max-width: 300px;
+    margin-top: 20px;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
 
-    .tile:hover img {
-      display: none;
-    }
-
-    .tile:hover video {
-      display: block;
-    }
-
-    .cta {
-      font-size: 1.25rem;
-      background-color: #fff;
-      color: #000;
-      padding: 12px 24px;
-      text-decoration: none;
-      border-radius: 6px;
-      margin-top: 20px;
-    }
-
-    .cta:hover {
-      background-color: #ccc;
-    }
-
-    .tagline {
-      font-size: 1rem;
-      margin-top: 10px;
-      color: #ccc;
-    }
-
-    #introLogo {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%) scale(0.5);
-      z-index: 10000;
-      opacity: 0;
-      animation: growFade 3s ease-out forwards;
-    }
-
-    @keyframes growFade {
-      0% {
-        opacity: 0;
-        transform: translate(-50%, -50%) scale(0.5);
-      }
-      50% {
-        opacity: 1;
-        transform: translate(-50%, -50%) scale(1.1);
-      }
-      100% {
-        opacity: 0;
-        transform: translate(-50%, -50%) scale(1.5);
-      }
-    }
-
-    #introText {
-      position: fixed;
-      top: 35%;
-      width: 100%;
-      text-align: center;
-      z-index: 9999;
-      font-family: 'Helvetica Neue', sans-serif;
-      color: white;
-      font-size: 5rem;
-      pointer-events: none;
-    }
-
-    .fade-text {
-      opacity: 0;
-      position: absolute;
-      width: 100%;
-      animation: popIn 1.8s ease-out forwards;
-    }
-
-    .fade-text:nth-child(1) { animation-delay: 3.2s; }
-    .fade-text:nth-child(2) { animation-delay: 5.4s; }
-    .fade-text:nth-child(3) { animation-delay: 7.6s; }
-    .fade-text:nth-child(4) { animation-delay: 9.8s; }
-    .fade-text:nth-child(5) { animation-delay: 12s; }
-    .fade-text:nth-child(6) { animation-delay: 14.2s; }
-
-    @keyframes popIn {
-      0% {
-        opacity: 0;
-        transform: scale(0.8) translateY(20px);
-      }
-      50% {
-        opacity: 1;
-        transform: scale(1.1) translateY(0);
-      }
-      100% {
-        opacity: 0;
-        transform: scale(1) translateY(-20px);
-      }
-    }
-  </style>
+  .logo.show {
+    opacity: 1;
+    transform: scale(1);
+  }
+</style>
 </head>
 <body>
 
-<img id="introLogo" src="CityBlocksLogo01.png" alt="CityBlocks Logo">
-
-<div id="introText">
-  <div class="fade-text">Build</div>
-  <div class="fade-text">Your</div>
-  <div class="fade-text">Next</div>
-  <div class="fade-text">World</div>
-  <div class="fade-text">at</div>
-  <div class="fade-text">CityBlocks.com</div>
+<div class="intro-container">
+  <div id="text"></div>
+  <img id="logo" class="logo" src="logo.png" alt="CityBlocks Logo">
 </div>
-
-<div class="grid">
-  <div class="tile">
-    <img src="1940s.png" alt="1940s Era" />
-    <video src="1940s.mp4" autoplay muted loop playsinline></video>
-  </div>
-  <div class="tile">
-    <img src="PresentDay.png" alt="Present Day" />
-    <video src="PresentDay.mp4" autoplay muted loop playsinline></video>
-  </div>
-  <div class="tile">
-    <img src="Future.png" alt="Future" />
-    <video src="Future.mp4" autoplay muted loop playsinline></video>
-  </div>
-  <div class="tile">
-    <img src="HistoricPast.png" alt="Historic Past" />
-    <video src="HistoricPast.mp4" autoplay muted loop playsinline></video>
-  </div>
-</div>
-
-<a class="cta" href="InvestorStatement.pdf" target="_blank">Inquire Now</a>
-<div class="tagline">Est. 1997 • A Metaverse Engine in the Making</div>
 
 <script>
-  const mainContent = document.querySelector('.grid');
-  const introText = document.getElementById('introText');
+  const words = ["BUILD...", "THE...", "NEXT...", "WORLD...", "AT...", "CITYBLOCKS.COM"];
+  const textContainer = document.getElementById("text");
+  const logo = document.getElementById("logo");
 
-  setTimeout(() => {
-    introText.style.opacity = 0;
+  let delay = 0;
+
+  words.forEach((word, index) => {
     setTimeout(() => {
-      introText.remove();
-      mainContent.style.opacity = 1;
-    }, 1500);
-  }, 17000); // delay for logo (3s) + words (12s) + buffer
+      textContainer.textContent = word;
+      textContainer.classList.add("intro-text", "show");
+
+      // Remove show class after each word except last
+      if (index < words.length - 1) {
+        setTimeout(() => {
+          textContainer.classList.remove("show");
+        }, 400);
+      }
+
+      // When CITYBLOCKS.COM appears, fade in the logo
+      if (word === "CITYBLOCKS.COM") {
+        logo.classList.add("show");
+      }
+    }, delay);
+
+    // Slightly faster on "AT..."
+    delay += (word === "AT...") ? 500 : 900;
+  });
+
+  // After everything, fade to homepage
+  setTimeout(() => {
+    window.location.href = "homepage.html";
+  }, delay + 2000);
 </script>
 
 </body>
