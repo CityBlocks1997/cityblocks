@@ -1,104 +1,146 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>CityBlocks.com</title>
 <style>
-    body {
-        margin: 0;
-        background-color: black;
-        font-family: Arial, sans-serif;
-        overflow: hidden;
-        display: flex;
-        flex-direction: column;
-        height: 100vh;
-    }
+  :root { --bg:#000; --fg:#fff; --cta:#ffcc00; }
+  html,body{height:100%;margin:0}
+  body{background:var(--bg); color:var(--fg); font-family:Arial,Helvetica,sans-serif; overflow:hidden; display:flex; flex-direction:column}
 
-    header {
-        text-align: center;
-        padding: 10px;
-        background-color: black;
-    }
+  header{display:flex; justify-content:center; align-items:center; padding:10px 0; flex:0 0 auto}
+  header img{height:56px; width:auto}
 
-    header img {
-        max-width: 250px;
-    }
+  /* Grid */
+  .grid{flex:1 1 auto; display:grid; grid-template-columns:1fr 1fr; grid-template-rows:1fr 1fr; gap:0; min-height:0; min-width:0}
+  @media (max-width:800px){ .grid{ grid-template-columns:1fr; grid-template-rows:repeat(4,25vh); } }
 
-    .grid {
-        flex: 1;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: 1fr 1fr;
-    }
+  .tile{position:relative; overflow:hidden; background:#111}
+  .tile img, .tile video{
+    position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block;
+  }
+  .tile img{opacity:1; transition:opacity .25s ease;}
+  .tile video{opacity:0; transition:opacity .25s ease;}
 
-    .quadrant {
-        position: relative;
-        overflow: hidden;
-        cursor: pointer;
-    }
+  /* Desktop hover */
+  .tile:hover img{opacity:0}
+  .tile:hover video{opacity:1}
 
-    .quadrant img,
-    .quadrant video {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transition: opacity 0.4s ease-in-out;
-        position: absolute;
-        top: 0;
-        left: 0;
-    }
+  /* Label (only on hover/tap) */
+  .label{
+    position:absolute; left:12px; bottom:12px; padding:.45rem .7rem;
+    background:rgba(0,0,0,.55); border-radius:8px; font-weight:700; font-size:14px;
+    opacity:0; transition:opacity .25s ease;
+  }
+  .tile:hover .label{opacity:1}
 
-    .quadrant video {
-        opacity: 0;
-    }
-
-    .quadrant:hover video {
-        opacity: 1;
-    }
-
-    .inquire-btn {
-        display: block;
-        text-align: center;
-        padding: 15px;
-        background-color: gold;
-        color: black;
-        font-weight: bold;
-        text-decoration: none;
-        font-size: 20px;
-    }
-
-    .inquire-btn:hover {
-        background-color: orange;
-    }
+  /* CTA */
+  .cta{flex:0 0 auto; display:flex; justify-content:flex-end}
+  .cta a{
+    margin:14px; padding:.7rem 1rem; border-radius:10px; text-decoration:none;
+    background:var(--cta); color:#111; font-weight:800; box-shadow:0 8px 24px rgba(0,0,0,.35);
+  }
+  .cta a:hover{filter:brightness(1.06)}
 </style>
 </head>
 <body>
 
 <header>
-    <img src="CityBlocksLogo01.png" alt="CityBlocks.com Logo">
+  <img src="CityBlocksLogo01.png" alt="CityBlocks Logo" />
 </header>
 
-<div class="grid">
-    <div class="quadrant" onclick="location.href='1940s.html'">
-        <img src="1940s.png" alt="1940s">
-        <video src="1940s.mp4" muted loop></video>
-    </div>
-    <div class="quadrant" onclick="location.href='Future.html'">
-        <img src="Future.png" alt="Future">
-        <video src="Future.mp4" muted loop></video>
-    </div>
-    <div class="quadrant" onclick="location.href='PresentDay.html'">
-        <img src="PresentDay.png" alt="Present Day">
-        <video src="PresentDay.mp4" muted loop></video>
-    </div>
-    <div class="quadrant" onclick="location.href='HistoricPast.html'">
-        <img src="HistoricPast.png" alt="Historic Past">
-        <video src="HistoricPast.mp4" muted loop></video>
-    </div>
+<section class="grid" id="grid">
+  <!-- 1940s -->
+  <figure class="tile" data-target="1940s.html">
+    <img src="1940s.png" alt="1940s World" />
+    <video src="1940s.mp4" muted loop playsinline preload="metadata"></video>
+    <figcaption class="label">1940s</figcaption>
+  </figure>
+
+  <!-- Present Day -->
+  <figure class="tile" data-target="PresentDay.html">
+    <img src="PresentDay.png" alt="Present Day World" />
+    <video src="PresentDay.mp4" muted loop playsinline preload="metadata"></video>
+    <figcaption class="label">Present Day</figcaption>
+  </figure>
+
+  <!-- Future -->
+  <figure class="tile" data-target="Future.html">
+    <img src="Future.png" alt="Future World" />
+    <video src="Future.mp4" muted loop playsinline preload="metadata"></video>
+    <figcaption class="label">Future</figcaption>
+  </figure>
+
+  <!-- Historic Past -->
+  <figure class="tile" data-target="HistoricPast.html">
+    <img src="HistoricPast.png" alt="Historic Past World" />
+    <video src="HistoricPast.mp4" muted loop playsinline preload="metadata"></video>
+    <figcaption class="label">Historic Past</figcaption>
+  </figure>
+</section>
+
+<div class="cta">
+  <a href="InvestorOneSheet.pdf" target="_blank">Inquire Now</a>
 </div>
 
-<a class="inquire-btn" href="InvestorOneSheet.pdf" target="_blank">Inquire Now</a>
+<script>
+  // Autoplay videos on first user interaction for iOS, and support tap-to-preview
+  const tiles = document.querySelectorAll('.tile');
+
+  function showVideo(tile, show){
+    const img = tile.querySelector('img');
+    const vid = tile.querySelector('video');
+    const label = tile.querySelector('.label');
+    if(!vid) return;
+    if(show){
+      vid.play().catch(()=>{});
+      vid.style.opacity = 1;
+      img.style.opacity = 0;
+      label.style.opacity = 1;
+    }else{
+      vid.pause();
+      vid.currentTime = 0;
+      vid.style.opacity = 0;
+      img.style.opacity = 1;
+      label.style.opacity = 0;
+    }
+  }
+
+  tiles.forEach(tile=>{
+    const vid = tile.querySelector('video');
+    // Desktop hover
+    tile.addEventListener('mouseenter', ()=>showVideo(tile,true));
+    tile.addEventListener('mouseleave', ()=>showVideo(tile,false));
+    // Mobile tap (toggle preview, second tap = navigate)
+    let tapped = false;
+    tile.addEventListener('touchstart', (e)=>{
+      if(!tapped){
+        e.preventDefault(); // prevent immediate click
+        showVideo(tile,true);
+        tapped = true;
+        setTimeout(()=>tapped=false, 900); // small window to accept second tap as click
+      }else{
+        const target = tile.dataset.target;
+        if(target) window.location.href = target;
+      }
+    }, {passive:false});
+
+    // Click to navigate on desktop
+    tile.addEventListener('click', ()=>{
+      const target = tile.dataset.target;
+      if(target) window.location.href = target;
+    });
+
+    // Ensure video is muted & ready
+    if(vid){
+      vid.muted = true; vid.playsInline = true;
+      // try to prime playback after first interaction
+      window.addEventListener('click', ()=>vid.play().catch(()=>{}), {once:true});
+      window.addEventListener('touchstart', ()=>vid.play().catch(()=>{}), {once:true});
+    }
+  });
+</script>
 
 </body>
 </html>
