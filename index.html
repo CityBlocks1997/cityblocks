@@ -7,67 +7,63 @@
 <style>
   :root{ --bg:#000; --fg:#fff; --cta:#ffcc00; }
   html,body{height:100%;margin:0}
-  body{background:var(--bg); color:var(--fg); font-family: "Helvetica Neue", Arial, sans-serif; overflow:hidden;}
+  body{background:var(--bg); color:var(--fg); font-family:"Helvetica Neue", Arial, sans-serif; overflow:hidden;}
 
   /* ---------- INTRO (one word at a time) ---------- */
-  #intro{ position:fixed; inset:0; background:var(--bg); z-index:10;
-          display:flex; flex-direction:column; align-items:center; justify-content:center; }
-  #words{ position:relative; width:100%; height:20vh; }
+  #intro{
+    position:fixed; inset:0; z-index:10; background:var(--bg);
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+  }
+  #words{
+    position:relative; width:100%; height:22vh; /* room so words don't overlap */
+  }
   .w{
     position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
     opacity:0; font-weight:300; letter-spacing:.04em;
     text-shadow:0 8px 24px rgba(0,0,0,.55);
-    animation:wordCycle 1.2s ease forwards;
+    animation:wordCycle 1.1s ease forwards;
   }
-  /* Slimmer + responsive sizing */
-  @media (min-width:900px){ .w{ font-size: clamp(36px, 7.2vw, 96px); } }
-  @media (max-width:899px){ .w{ font-size: clamp(28px, 10vw, 56px); } }
+  @media (min-width:900px){ .w{ font-size: clamp(30px, 7vw, 88px); } }
+  @media (max-width:899px){ .w{ font-size: clamp(26px, 9vw, 54px); } }
 
-  /* Each gets its own delay so only one shows at a time */
-  .w.w1{ animation-delay: .2s; }
-  .w.w2{ animation-delay: 1.6s; }
-  .w.w3{ animation-delay: 3.0s; }
-  .w.w4{ animation-delay: 4.4s; }
-  .w.w5{ animation-delay: 5.6s; }          /* AT (snappier next beat) */
+  /* Delays to get ~7s total pacing (you can tweak later) */
+  .w.w1{ animation-delay: .2s; }  /* BUILD */
+  .w.w2{ animation-delay: 1.4s; } /* YOUR */
+  .w.w3{ animation-delay: 2.6s; } /* NEXT */
+  .w.w4{ animation-delay: 3.8s; } /* WORLD */
+  .w.w5{ animation-delay: 4.8s; } /* AT (snappier beat before logo) */
 
   @keyframes wordCycle{
     0%{ opacity:0; transform:translateY(8px) scale(.98) }
-    20%{ opacity:1; transform:translateY(0) scale(1) }
-    80%{ opacity:1; transform:translateY(0) scale(1) }
+    25%{ opacity:1; transform:translateY(0) scale(1) }
+    75%{ opacity:1; transform:translateY(0) scale(1) }
     100%{ opacity:0; transform:translateY(-6px) scale(.99) }
   }
 
-  /* Final beat: domain + logo together */
+  /* Final beat: logo (with cityblocks.com embedded) */
   #final{
     display:flex; flex-direction:column; align-items:center; gap:.5rem;
     opacity:0; transform:translateY(10px) scale(.98);
-    animation:finalBeat 1.2s ease forwards 6.6s; /* starts after 'AT' */
+    animation:finalBeat 1.2s ease forwards 5.9s; /* starts after 'AT' */
   }
-  #final .domain{
-    font-weight:700; letter-spacing:.06em;
-  }
-  @media (min-width:900px){ #final .domain{ font-size: clamp(28px, 5.5vw, 72px); } }
-  @media (max-width:899px){ #final .domain{ font-size: clamp(22px, 8vw, 40px); } }
-
   #final img{
     width:min(42vw, 420px); max-width:82vw; height:auto;
     filter: drop-shadow(0 8px 28px rgba(0,0,0,.6));
   }
-
   @keyframes finalBeat{
     0%{opacity:0; transform:translateY(10px) scale(.98)}
     60%{opacity:1; transform:translateY(0) scale(1.02)}
     100%{opacity:1; transform:translateY(0) scale(1)}
   }
 
-  /* Fade the whole intro away, reveal main */
+  /* Fade the whole intro away after a short hold */
   .intro-out{ animation:introOut .8s ease forwards; }
   @keyframes introOut{ to{ opacity:0; visibility:hidden } }
 
   /* ---------- SQUARE 2×2 GRID (centered) ---------- */
   #stage{ position:fixed; inset:0; display:flex; align-items:center; justify-content:center; }
   .grid{
-    width: 100vmin; height: 100vmin;       /* perfect square */
+    width: 100vmin; height: 100vmin;  /* perfect square that fits the smaller side */
     display:grid; grid-template-columns:1fr 1fr; grid-template-rows:1fr 1fr;
     opacity:0; transition:opacity .9s ease;
   }
@@ -97,7 +93,7 @@
   }
   #inquire button:hover{ filter:brightness(1.06); }
 
-  /* Tall screens (phones) keep it square using width instead of height if needed */
+  /* Tall screens (phones) keep it square using width */
   @media (max-aspect-ratio: 3/4){
     .grid{ width:100vw; height:100vw; }
   }
@@ -114,13 +110,13 @@
     <div class="w w4">WORLD</div>
     <div class="w w5">AT</div>
   </div>
+  <!-- Use the logo image that already includes "cityblocks.com" embedded -->
   <div id="final">
-    <div class="domain">CITYBLOCKS.COM</div>
-    <img src="CityBlocksLogo01.png" alt="CityBlocks Logo" />
+    <img src="CityBlocksLogo01.png?v=2" alt="CityBlocks Logo" />
   </div>
 </section>
 
-<!-- MAIN -->
+<!-- MAIN (square grid) -->
 <div id="stage">
   <section class="grid" id="grid" aria-hidden="true">
     <figure class="tile" data-target="1940s.html">
@@ -128,16 +124,19 @@
       <video src="1940s.mp4" muted loop playsinline preload="metadata"></video>
       <figcaption class="label">1940s</figcaption>
     </figure>
+
     <figure class="tile" data-target="PresentDay.html">
       <img src="PresentDay.png" alt="Present Day">
       <video src="PresentDay.mp4" muted loop playsinline preload="metadata"></video>
       <figcaption class="label">Present Day</figcaption>
     </figure>
+
     <figure class="tile" data-target="Future.html">
       <img src="Future.png" alt="Future World">
       <video src="Future.mp4" muted loop playsinline preload="metadata"></video>
       <figcaption class="label">Future</figcaption>
     </figure>
+
     <figure class="tile" data-target="HistoricPast.html">
       <img src="HistoricPast.png" alt="Historic Past">
       <video src="HistoricPast.mp4" muted loop playsinline preload="metadata"></video>
@@ -147,18 +146,16 @@
 </div>
 
 <!-- CTA -->
-<div id="inquire"><button type="button" onclick="openInvestor()">Inquire Now</button></div>
+<div id="inquire"><button type="button" onclick="openInvestor()">Investors Inquire</button></div>
 
 <script>
-  // When the final beat finishes, fade intro out and reveal grid + CTA
-  const totalIntroMs = 6.6 * 1000 + 1200 + 400; // delays + final anim + small hold
+  // After ~7s total, fade intro out and reveal grid + CTA
+  const introEndsAt = 7600; // ms (adjust later if you want)
   setTimeout(() => {
     document.getElementById('intro').classList.add('intro-out');
     document.getElementById('grid').style.opacity = 1;
     document.getElementById('inquire').style.opacity = 1;
-    document.getElementById('intro').setAttribute('aria-hidden','true');
-    document.getElementById('grid').setAttribute('aria-hidden','false');
-  }, totalIntroMs);
+  }, introEndsAt);
 
   // Hover/tap video logic (desktop + iOS)
   const tiles = document.querySelectorAll('.tile');
@@ -199,10 +196,11 @@
     if(vid){ vid.muted = true; vid.playsInline = true; }
   });
 
-  // Inquire: open PDF if present, else email
+  // Investors Inquire → open new PDF (fallback to email)
   function openInvestor(){
-    fetch('InvestorOneSheet.pdf', { method:'HEAD' })
-      .then(r => { if(r.ok) window.open('InvestorOneSheet.pdf','_blank'); else throw 0; })
+    const pdf = 'CityBlocks_Investor_oneSheet.pdf';
+    fetch(pdf, { method:'HEAD' })
+      .then(r => { if(r.ok) window.open(pdf,'_blank'); else throw 0; })
       .catch(()=>{ window.location.href='mailto:cityblocks@icloud.com'; });
   }
 </script>
