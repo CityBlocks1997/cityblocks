@@ -5,114 +5,152 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CityBlocks.com</title>
 <style>
-    body, html {
+    body {
         margin: 0;
         padding: 0;
-        height: 100%;
-        background: black;
+        background-color: white;
         overflow: hidden;
         font-family: Arial, sans-serif;
     }
-    .intro, .quadrants {
-        position: absolute;
+
+    /* Intro Screen */
+    #intro {
+        position: fixed;
+        top: 0;
+        left: 0;
         width: 100%;
         height: 100%;
+        background-color: white;
         display: flex;
-        justify-content: center;
-        align-items: center;
         flex-direction: column;
-        color: white;
-        background: black;
-        z-index: 2;
+        align-items: center;
+        justify-content: center;
+        z-index: 10;
     }
-    .intro-text {
-        font-size: 3em;
+
+    #intro img {
+        max-width: 400px;
         opacity: 0;
-        transition: opacity 0.3s ease;
+        animation: fadeIn 1s forwards 0.5s;
     }
-    .logo {
-        max-width: 500px;
-        opacity: 0;
-        transition: opacity 0.5s ease;
+
+    #introText {
+        font-size: 2.5rem;
+        font-weight: bold;
         margin-top: 20px;
-    }
-    .quadrants {
-        background: url('Cityblocks4Verses.png') center/cover no-repeat;
         opacity: 0;
-        z-index: 1;
-        transition: opacity 1s ease;
+        animation: fadeIn 1s forwards 1.5s;
     }
-    .inquire-btn {
+
+    @keyframes fadeIn {
+        to { opacity: 1; }
+    }
+
+    /* Fade-out animation for intro */
+    .fade-out {
+        animation: fadeOut 1s forwards;
+    }
+    @keyframes fadeOut {
+        to { opacity: 0; visibility: hidden; }
+    }
+
+    /* Quadrant Layout */
+    #quadrants {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        width: 100%;
+        height: 100vh;
+    }
+    .quad {
+        position: relative;
+        overflow: hidden;
+    }
+    .quad img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.4s ease;
+    }
+    .quad:hover img {
+        transform: scale(1.05);
+    }
+    .quad span {
         position: absolute;
+        bottom: 15px;
+        left: 15px;
+        background: rgba(0, 0, 0, 0.6);
+        color: white;
+        padding: 8px 12px;
+        font-size: 1.2rem;
+        border-radius: 6px;
+    }
+
+    /* Inquire Button */
+    #inquireBtn {
+        position: fixed;
         bottom: 20px;
         right: 20px;
-        background: #ffcc00;
-        color: black;
+        background-color: #222;
+        color: white;
         padding: 12px 20px;
+        font-size: 1rem;
         border: none;
         border-radius: 8px;
-        font-size: 1.2em;
-        font-weight: bold;
         cursor: pointer;
-        animation: pulse 2s infinite;
+        z-index: 5;
     }
-    @keyframes pulse {
-        0% { box-shadow: 0 0 0 0 rgba(255,204,0,0.7); }
-        70% { box-shadow: 0 0 15px 20px rgba(255,204,0,0); }
-        100% { box-shadow: 0 0 0 0 rgba(255,204,0,0); }
+    #inquireBtn:hover {
+        background-color: #444;
     }
 </style>
 </head>
 <body>
 
-<div class="intro">
-    <div id="text1" class="intro-text">Build...</div>
-    <div id="text2" class="intro-text">Your...</div>
-    <div id="text3" class="intro-text">Next...</div>
-    <div id="text4" class="intro-text">World...</div>
-    <div id="text5" class="intro-text">At</div>
-    <img id="logo" class="logo" src="CityBlocksLogo.png" alt="CityBlocks Logo">
-    <div id="text6" class="intro-text">CityBlocks.com</div>
+<!-- Intro Screen -->
+<div id="intro">
+    <img src="CityBlocksLogo01.png" alt="CityBlocks Logo">
+    <div id="introText">Build... Your... Next... World... At... CityBlocks.com</div>
 </div>
 
-<div class="quadrants">
-    <button class="inquire-btn" onclick="openInvestor()">Inquire Now</button>
+<!-- Quadrants -->
+<div id="quadrants" style="display:none;">
+    <div class="quad"><img src="1940s.png" alt="1940s"><span>1940s</span></div>
+    <div class="quad"><img src="PresentDay.png" alt="Present Day"><span>Present Day</span></div>
+    <div class="quad"><img src="Future.png" alt="Future"><span>Future</span></div>
+    <div class="quad"><img src="HistoricPast.png" alt="Historic Past"><span>Historic Past</span></div>
 </div>
+
+<!-- Inquire Button -->
+<button id="inquireBtn">Inquire Now</button>
 
 <script>
-    const texts = [
-        document.getElementById('text1'),
-        document.getElementById('text2'),
-        document.getElementById('text3'),
-        document.getElementById('text4'),
-        document.getElementById('text5'),
-        document.getElementById('logo'),
-        document.getElementById('text6')
-    ];
-
-    // Faster timing with quick "At"
-    let delays = [500, 500, 500, 500, 300, 600, 800];
-    let totalTime = 0;
-
-    texts.forEach((el, i) => {
-        setTimeout(() => el.style.opacity = 1, totalTime);
-        totalTime += delays[i];
-    });
-
-    // Fade out intro and fade in quadrants
+    // Show quadrants after intro animation
     setTimeout(() => {
-        document.querySelector('.intro').style.opacity = 0;
-        document.querySelector('.intro').style.transition = 'opacity 1s ease';
-        document.querySelector('.quadrants').style.opacity = 1;
-    }, totalTime + 1000);
-
-    // PDF then email
-    function openInvestor() {
-        window.open('InvestorPitch.pdf', '_blank'); // Replace with your actual PDF path
+        document.getElementById('intro').classList.add('fade-out');
         setTimeout(() => {
-            window.location.href = 'mailto:cityblocks@icloud.com';
-        }, 2000); // 2 second delay
-    }
+            document.getElementById('intro').style.display = 'none';
+            document.getElementById('quadrants').style.display = 'grid';
+        }, 1000);
+    }, 4000); // 4 seconds total before fade
+
+    // Inquire button behavior
+    document.getElementById('inquireBtn').addEventListener('click', () => {
+        fetch('InvestorOneSheet.pdf')
+            .then(response => {
+                if (response.ok) {
+                    window.open('InvestorOneSheet.pdf', '_blank');
+                    setTimeout(() => {
+                        window.location.href = 'mailto:cityblocks@icloud.com';
+                    }, 1500);
+                } else {
+                    window.location.href = 'mailto:cityblocks@icloud.com';
+                }
+            })
+            .catch(() => {
+                window.location.href = 'mailto:cityblocks@icloud.com';
+            });
+    });
 </script>
 
 </body>
