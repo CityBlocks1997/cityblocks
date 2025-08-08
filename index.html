@@ -5,134 +5,114 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CityBlocks.com</title>
 <style>
-    body {
+    body, html {
         margin: 0;
         padding: 0;
+        height: 100%;
+        background: black;
         overflow: hidden;
         font-family: Arial, sans-serif;
-        background-color: #fff;
-        color: #000;
     }
-    /* Intro styles */
-    #intro {
-        position: fixed;
-        top: 0;
-        left: 0;
+    .intro, .quadrants {
+        position: absolute;
         width: 100%;
         height: 100%;
-        background: #fff;
         display: flex;
-        flex-direction: column;
-        align-items: center;
         justify-content: center;
-        font-size: 2.5rem;
-        font-weight: bold;
-        z-index: 1000;
+        align-items: center;
+        flex-direction: column;
+        color: white;
+        background: black;
+        z-index: 2;
     }
-    .fade-in {
+    .intro-text {
+        font-size: 3em;
         opacity: 0;
-        animation: fadeIn 0.8s forwards;
+        transition: opacity 0.3s ease;
     }
-    .word {
-        display: inline-block;
-        margin: 0 0.2rem;
-    }
-    @keyframes fadeIn {
-        to { opacity: 1; }
-    }
-    #logo {
-        max-width: 300px;
+    .logo {
+        max-width: 500px;
+        opacity: 0;
+        transition: opacity 0.5s ease;
         margin-top: 20px;
-        opacity: 0;
-        animation: fadeIn 1s forwards;
     }
-    /* Quadrant page */
-    #main {
-        display: none;
-        width: 100%;
-        height: 100vh;
+    .quadrants {
         background: url('Cityblocks4Verses.png') center/cover no-repeat;
-        position: relative;
+        opacity: 0;
+        z-index: 1;
+        transition: opacity 1s ease;
     }
-    /* Inquire Now button */
-    #inquire {
+    .inquire-btn {
         position: absolute;
         bottom: 20px;
         right: 20px;
-        background: #000;
-        color: #fff;
-        padding: 12px 18px;
-        font-size: 1rem;
+        background: #ffcc00;
+        color: black;
+        padding: 12px 20px;
         border: none;
+        border-radius: 8px;
+        font-size: 1.2em;
+        font-weight: bold;
         cursor: pointer;
-        border-radius: 6px;
         animation: pulse 2s infinite;
     }
     @keyframes pulse {
-        0% { box-shadow: 0 0 0 0 rgba(0,0,0,0.4); }
-        70% { box-shadow: 0 0 0 10px rgba(0,0,0,0); }
-        100% { box-shadow: 0 0 0 0 rgba(0,0,0,0); }
+        0% { box-shadow: 0 0 0 0 rgba(255,204,0,0.7); }
+        70% { box-shadow: 0 0 15px 20px rgba(255,204,0,0); }
+        100% { box-shadow: 0 0 0 0 rgba(255,204,0,0); }
     }
 </style>
 </head>
 <body>
 
-<!-- Intro -->
-<div id="intro">
-    <div id="intro-text"></div>
-    <img id="logo" src="CityBlocksLogo.png" alt="CityBlocks Logo">
+<div class="intro">
+    <div id="text1" class="intro-text">Build...</div>
+    <div id="text2" class="intro-text">Your...</div>
+    <div id="text3" class="intro-text">Next...</div>
+    <div id="text4" class="intro-text">World...</div>
+    <div id="text5" class="intro-text">At</div>
+    <img id="logo" class="logo" src="CityBlocksLogo.png" alt="CityBlocks Logo">
+    <div id="text6" class="intro-text">CityBlocks.com</div>
 </div>
 
-<!-- Main content -->
-<div id="main">
-    <button id="inquire">Inquire Now</button>
+<div class="quadrants">
+    <button class="inquire-btn" onclick="openInvestor()">Inquire Now</button>
 </div>
 
 <script>
-const words = ["Build", "Your", "Next", "World", "at"];
-const introText = document.getElementById('intro-text');
-const logo = document.getElementById('logo');
-const main = document.getElementById('main');
-let delay = 0;
+    const texts = [
+        document.getElementById('text1'),
+        document.getElementById('text2'),
+        document.getElementById('text3'),
+        document.getElementById('text4'),
+        document.getElementById('text5'),
+        document.getElementById('logo'),
+        document.getElementById('text6')
+    ];
 
-// Show words one by one
-words.forEach((word, index) => {
-    const span = document.createElement('span');
-    span.className = 'word fade-in';
-    span.style.animationDelay = `${delay}s`;
-    span.textContent = word;
-    introText.appendChild(span);
-    delay += (word === "at") ? 0.4 : 0.8; // faster for "at"
-});
+    // Faster timing with quick "At"
+    let delays = [500, 500, 500, 500, 300, 600, 800];
+    let totalTime = 0;
 
-// After all words, show logo synced with "CityBlocks.com"
-setTimeout(() => {
-    const span = document.createElement('span');
-    span.className = 'word fade-in';
-    span.style.animationDelay = '0s';
-    span.textContent = "CityBlocks.com";
-    introText.appendChild(span);
-    logo.style.animationDelay = '0s';
-    logo.style.opacity = 1;
-}, delay * 1000);
+    texts.forEach((el, i) => {
+        setTimeout(() => el.style.opacity = 1, totalTime);
+        totalTime += delays[i];
+    });
 
-// Fade out intro and show main
-setTimeout(() => {
-    document.getElementById('intro').style.transition = 'opacity 1s';
-    document.getElementById('intro').style.opacity = 0;
+    // Fade out intro and fade in quadrants
     setTimeout(() => {
-        document.getElementById('intro').style.display = 'none';
-        main.style.display = 'block';
-    }, 1000);
-}, (delay + 1.5) * 1000);
+        document.querySelector('.intro').style.opacity = 0;
+        document.querySelector('.intro').style.transition = 'opacity 1s ease';
+        document.querySelector('.quadrants').style.opacity = 1;
+    }, totalTime + 1000);
 
-// Inquire button logic: PDF → email
-document.getElementById('inquire').addEventListener('click', () => {
-    window.open('Investor-OneSheet.pdf', '_blank');
-    setTimeout(() => {
-        window.location.href = 'mailto:cityblocks@icloud.com';
-    }, 4000);
-});
+    // PDF then email
+    function openInvestor() {
+        window.open('InvestorPitch.pdf', '_blank'); // Replace with your actual PDF path
+        setTimeout(() => {
+            window.location.href = 'mailto:cityblocks@icloud.com';
+        }, 2000); // 2 second delay
+    }
 </script>
 
 </body>
