@@ -6,95 +6,69 @@
 <title>CityBlocks.com</title>
 <style>
   :root{ --bg:#000; --fg:#fff; --cta:#ffcc00; }
+  *{box-sizing:border-box}
   html,body{height:100%;margin:0}
-  body{background:var(--bg); color:var(--fg); font-family:"Helvetica Neue", Arial, sans-serif; overflow:hidden;}
+  body{background:var(--bg);color:var(--fg);font-family:"Helvetica Neue",Arial,sans-serif;overflow:hidden;}
 
-  /* ---------- INTRO (one word at a time) ---------- */
+  /* ---------- INTRO (centered with 100svh for iOS) ---------- */
   #intro{
     position:fixed; inset:0; z-index:10; background:var(--bg);
-    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    display:grid; place-items:center; /* centers both axes */
+    min-height:100svh; /* iOS-friendly viewport height */
   }
-  #words{ position:relative; width:100%; height:22vh; }
-  .w{
-    position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
-    opacity:0; font-weight:300; letter-spacing:.04em;
-    text-shadow:0 8px 24px rgba(0,0,0,.55);
-    animation:wordCycle 1.1s ease forwards;
+  .intro-inner{
+    display:flex; flex-direction:column; align-items:center; gap:.6rem;
+    text-align:center;
   }
-  @media (min-width:900px){ .w{ font-size: clamp(30px, 7vw, 88px); } }
-  @media (max-width:899px){ .w{ font-size: clamp(26px, 9vw, 54px); } }
+  #introWord{
+    font-weight:900; letter-spacing:.06em; line-height:1.05; margin:0;
+    filter: drop-shadow(0 6px 20px rgba(0,0,0,.55));
+    opacity:1;
+  }
+  @media (min-width:900px){ #introWord{ font-size: clamp(56px, 9vw, 136px); } }
+  @media (max-width:899px){ #introWord{ font-size: clamp(36px, 10vw, 64px); } }
 
-  /* timing for ~7s total before logo hold */
-  .w.w1{ animation-delay:.2s }   /* BUILD  */
-  .w.w2{ animation-delay:1.4s }  /* YOUR   */
-  .w.w3{ animation-delay:2.6s }  /* NEXT   */
-  .w.w4{ animation-delay:3.8s }  /* WORLD  */
-  .w.w5{ animation-delay:4.8s }  /* AT     */
-
-  @keyframes wordCycle{
-    0%{ opacity:0; transform:translateY(8px) scale(.98) }
-    25%{ opacity:1; transform:translateY(0) scale(1) }
-    75%{ opacity:1; transform:translateY(0) scale(1) }
-    100%{ opacity:0; transform:translateY(-6px) scale(.99) }
-  }
-
-  /* Final beat: LOGO fills same square as the grid */
-  #final{
-    width:100vmin; height:100vmin; margin:0 auto;
-    display:flex; align-items:center; justify-content:center;
-    opacity:0; transform:translateY(10px) scale(.98);
-    animation:finalBeat 1.2s ease forwards 5.9s; /* starts after 'AT' */
-  }
-  #final img{
-    max-width:100%; max-height:100%; object-fit:contain;
+  #introLogo{
+    width:min(44vw,520px); max-width:92vw;
     filter: drop-shadow(0 8px 28px rgba(0,0,0,.6));
   }
-  @keyframes finalBeat{
-    0%{opacity:0; transform:translateY(10px) scale(.98)}
-    60%{opacity:1; transform:translateY(0) scale(1.02)}
-    100%{opacity:1; transform:translateY(0) scale(1)}
-  }
+  .intro-fade-out{ animation:introFade 700ms ease forwards; }
+  @keyframes introFade{ to{ opacity:0; visibility:hidden } }
 
-  /* Fade whole intro away */
-  .intro-out{ animation:introOut .8s ease forwards; }
-  @keyframes introOut{ to{ opacity:0; visibility:hidden } }
-
-  /* ---------- SQUARE 2×2 GRID ---------- */
-  #stage{ position:fixed; inset:0; display:flex; align-items:center; justify-content:center; }
-  .grid{
-    width:100vmin; height:100vmin; /* perfect square */
+  /* ---------- QUADRANTS ---------- */
+  #app{
+    position:fixed; inset:0; z-index:1;
     display:grid; grid-template-columns:1fr 1fr; grid-template-rows:1fr 1fr;
-    opacity:0; transition:opacity .9s ease;
+    opacity:0; transition:opacity .8s ease;
   }
-  .tile{ position:relative; overflow:hidden; background:#111; }
-  .tile img, .tile video{
-    position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block;
-    transition:opacity .25s ease, transform .45s ease;
-  }
-  .tile img{ opacity:1; }
-  .tile video{ opacity:0; }
-  .tile:hover img{ opacity:0; }
-  .tile:hover video{ opacity:1; transform:scale(1.06); }
-
+  .tile{ position:relative; overflow:hidden; outline:1px solid rgba(255,255,255,.05); }
+  .tile img{ width:100%; height:100%; object-fit:cover; display:block;
+             transform:scale(1); transition:transform .4s ease; }
+  .tile:hover img{ transform:scale(1.06); }
   .label{
-    position:absolute; left:12px; bottom:12px; padding:.45rem .7rem;
-    background:rgba(0,0,0,.55); border-radius:8px; font-weight:700; font-size:14px;
-    opacity:0; transition:opacity .25s ease;
+    position:absolute; left:12px; bottom:12px; background:rgba(0,0,0,.55);
+    padding:.45rem .7rem; border-radius:8px; font-weight:800;
+    font-size:clamp(12px,1.6vw,16px);
   }
-  .tile:hover .label{ opacity:1; }
 
-  /* CTA */
-  #inquire{ position:fixed; right:18px; bottom:18px; z-index:2; opacity:0; transition:opacity .9s ease; }
+  /* ---------- CTA ---------- */
+  #inquire{ position:fixed; right:18px; bottom:18px; z-index:2; opacity:0; transition:opacity .8s ease; }
   #inquire button{
     background:var(--cta); color:#111; border:0; padding:.7rem 1rem; border-radius:10px;
     font-weight:800; font-size:clamp(14px,1.6vw,16px); cursor:pointer;
     box-shadow:0 8px 24px rgba(0,0,0,.35);
+    animation:pulse 2.6s ease-in-out infinite 1.2s;
   }
   #inquire button:hover{ filter:brightness(1.06); }
+  @keyframes pulse{
+    0%{ box-shadow:0 0 0 0 rgba(255,204,0,.5) }
+    60%{ box-shadow:0 0 0 22px rgba(255,204,0,0) }
+    100%{ box-shadow:0 0 0 0 rgba(255,204,0,0) }
+  }
 
-  /* Tall screens keep the square using width */
-  @media (max-aspect-ratio: 3/4){
-    .grid{ width:100vw; height:100vw; }
+  /* mobile: stack quadrants */
+  @media (max-width:700px){
+    #app{ grid-template-columns:1fr; grid-template-rows:repeat(4, 25vh); }
   }
 </style>
 </head>
@@ -102,109 +76,52 @@
 
 <!-- INTRO -->
 <section id="intro" aria-hidden="false">
-  <div id="words">
-    <div class="w w1">BUILD</div>
-    <div class="w w2">YOUR</div>
-    <div class="w w3">NEXT</div>
-    <div class="w w4">WORLD</div>
-    <div class="w w5">AT</div>
-  </div>
-  <!-- Logo image should already include "cityblocks.com" embedded -->
-  <div id="final">
-    <img src="CityBlocksLogo01.png?v=3" alt="CityBlocks Logo" />
+  <div class="intro-inner">
+    <h1 id="introWord">CITYBLOCKS.COM</h1>
+    <img id="introLogo" src="CityBlocksLogo01.png" alt="CityBlocks Logo" />
   </div>
 </section>
 
-<!-- MAIN -->
-<div id="stage">
-  <section class="grid" id="grid" aria-hidden="true">
-    <figure class="tile" data-target="1940s.html">
-      <img src="1940s.png" alt="1940s World">
-      <video src="1940s.mp4" muted loop playsinline preload="metadata"></video>
-      <figcaption class="label">1940s</figcaption>
-    </figure>
-
-    <figure class="tile" data-target="PresentDay.html">
-      <img src="PresentDay.png" alt="Present Day">
-      <video src="PresentDay.mp4" muted loop playsinline preload="metadata"></video>
-      <figcaption class="label">Present Day</figcaption>
-    </figure>
-
-    <figure class="tile" data-target="Future.html">
-      <img src="Future.png" alt="Future World">
-      <video src="Future.mp4" muted loop playsinline preload="metadata"></video>
-      <figcaption class="label">Future</figcaption>
-    </figure>
-
-    <figure class="tile" data-target="HistoricPast.html">
-      <img src="HistoricPast.png" alt="Historic Past">
-      <video src="HistoricPast.mp4" muted loop playsinline preload="metadata"></video>
-      <figcaption class="label">Historic Past</figcaption>
-    </figure>
-  </section>
-</div>
+<!-- QUADRANTS -->
+<main id="app" aria-hidden="true">
+  <figure class="tile">
+    <img src="1940s.png" alt="1940s World" />
+    <figcaption class="label">1940s</figcaption>
+  </figure>
+  <figure class="tile">
+    <img src="PresentDay.png" alt="Present Day World" />
+    <figcaption class="label">Present Day</figcaption>
+  </figure>
+  <figure class="tile">
+    <img src="Future.png" alt="Future World" />
+    <figcaption class="label">Future</figcaption>
+  </figure>
+  <figure class="tile">
+    <img src="HistoricPast.png" alt="Historic Past World" />
+    <figcaption class="label">Historic Past</figcaption>
+  </figure>
+</main>
 
 <!-- CTA -->
-<div id="inquire"><button type="button" onclick="openInvestor()">Investors Inquire</button></div>
+<div id="inquire">
+  <button type="button" onclick="openInvestor()">Inquire Now</button>
+</div>
 
 <script>
-  /* Fade intro out after logo animation + 6s hold */
-  const logoStartsAt = 5900;   // matches CSS delay for #final animation
-  const logoAnimMs   = 1200;
-  const logoHoldMs   = 6000;   // keep logo up ~6s
-  const introEndsAt  = logoStartsAt + logoAnimMs + logoHoldMs;
-
+  // Fade intro out and reveal grid + CTA (3s hold)
   setTimeout(() => {
-    document.getElementById('intro').classList.add('intro-out');
-    document.getElementById('grid').style.opacity = 1;
+    document.getElementById('intro').classList.add('intro-fade-out');
+    document.getElementById('app').style.opacity = 1;
     document.getElementById('inquire').style.opacity = 1;
-  }, introEndsAt);
+    document.getElementById('intro').setAttribute('aria-hidden','true');
+    document.getElementById('app').setAttribute('aria-hidden','false');
+  }, 3000);
 
-  // Hover/tap video logic (desktop + iOS)
-  const tiles = document.querySelectorAll('.tile');
-  function showVideo(tile, show){
-    const img = tile.querySelector('img');
-    const vid = tile.querySelector('video');
-    const label = tile.querySelector('.label');
-    if(!vid) return;
-    if(show){
-      vid.play().catch(()=>{});
-      vid.style.opacity = 1; img.style.opacity = 0; label.style.opacity = 1;
-      vid.style.transform = 'scale(1.06)';
-    }else{
-      vid.pause(); vid.currentTime = 0;
-      vid.style.opacity = 0; img.style.opacity = 1; label.style.opacity = 0;
-      vid.style.transform = 'scale(1)';
-    }
-  }
-  tiles.forEach(tile=>{
-    const vid = tile.querySelector('video');
-    tile.addEventListener('mouseenter', ()=>showVideo(tile,true));
-    tile.addEventListener('mouseleave', ()=>showVideo(tile,false));
-    // Mobile: first tap previews, second tap opens page
-    let tapped = false;
-    tile.addEventListener('touchstart', (e)=>{
-      if(!tapped){
-        e.preventDefault();
-        showVideo(tile,true);
-        tapped = true; setTimeout(()=>tapped=false, 900);
-      }else{
-        const target = tile.dataset.target; if(target) location.href = target;
-      }
-    }, {passive:false});
-    tile.addEventListener('click', ()=>{
-      const target = tile.dataset.target; if(target) location.href = target;
-    });
-    if(vid){ vid.muted = true; vid.playsInline = true; }
-  });
-
-  // Investors Inquire → open new PDF (fallback to email)
+  // Inquire: go to a webpage (investors.html) instead of a PDF
   function openInvestor(){
-    const pdf = 'CityBlocks_Investor_oneSheet.pdf';
-    fetch(pdf, { method:'HEAD' })
-      .then(r => { if(r.ok) window.open(pdf,'_blank'); else throw 0; })
-      .catch(()=>{ window.location.href='mailto:cityblocks@icloud.com'; });
+    window.location.href = 'investors.html';
   }
 </script>
+
 </body>
 </html>
