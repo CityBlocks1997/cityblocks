@@ -1,162 +1,56 @@
-<!DOCTYPE html>
-<!-- v2025-08-12-2: Zero-404 homepage. Uses only two assets at repo root: CityBlocksLogo01.png and Cityblocks4Verses.png -->
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>CityBlocks.com — Build the Next World</title>
-  <meta name="description" content="CityBlocks.com — Build the Next World. A metaverse engine and platform concept. Inquire for acquisition or partnership.">
-  <meta name="theme-color" content="#0b0b0b">
-  <!-- Preload the only two required assets (placed at repo root) -->
-  <link rel="preload" as="image" href="CityBlocksLogo01.png" />
-  <link rel="preload" as="image" href="Cityblocks4Verses.png" />
-  <style>
-    :root{
-      --bg:#0b0b0b; --fg:#ffffff; --accent:#ffd24d; --shadow:0 10px 30px rgba(0,0,0,.45);
-      --radius:16px; --gap:clamp(10px,2vw,20px); --maxW:1200px;
-    }
-    *,*::before,*::after{ box-sizing:border-box; }
-    html,body{ height:100%; margin:0; }
-    body{ background:var(--bg); color:var(--fg); font:400 16px/1.5 system-ui,-apple-system,Segoe UI,Inter,Roboto,Arial,sans-serif; overflow:hidden; -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; }
-    a{ color:inherit; text-decoration:none; }
-
-    /* ===== INTRO OVERLAY ===== */
-    #intro{ position:fixed; inset:0; display:grid; place-items:center; background:var(--bg); z-index:9999; user-select:none; }
-    .intro-inner{ display:flex; flex-direction:column; align-items:center; gap:3.5rem; text-align:center; }
-    #introLogo{ width:min(44vw,520px); filter: drop-shadow(0 8px 28px rgba(0,0,0,.6)); transition: transform .9s ease, opacity .6s ease; }
-    #tagline{ font-weight:800; letter-spacing:.04em; line-height:1.08; opacity:.98; text-wrap:balance; }
-    #tagline span{ display:inline-block; opacity:0; transform:translateY(12px); animation:fadeIn .55s forwards; font-size:clamp(24px,4vw,52px); margin:.06em .18em; }
-    #tagline span:nth-child(1){animation-delay:.15s}
-    #tagline span:nth-child(2){animation-delay:.65s}
-    #tagline span:nth-child(3){animation-delay:1.15s}
-    #tagline span:nth-child(4){animation-delay:1.65s}
-    #tagline span:nth-child(5){animation-delay:2.15s}
-    #tagline span:nth-child(6){animation-delay:2.65s}
-    @keyframes fadeIn{ to{ opacity:1; transform:translateY(0) } }
-    body.ready #intro{ background:transparent; }
-    body.ready #introLogo{ transform: translateY(-44vh) scale(.24); opacity:.9; }
-
-    /* ===== MAIN LAYOUT ===== */
-    main{ min-height:100svh; display:grid; place-items:center; padding:clamp(10px,2.4vw,26px); }
-    .quad{ width:min(96vw,var(--maxW)); display:grid; gap:var(--gap); }
-    .quad{ grid-template-columns:1fr; }
-    @media (min-width:820px){ .quad{ grid-template-columns:1fr 1fr; grid-auto-rows:min(35vh,38svh); } }
-
-    .tile{ position:relative; overflow:hidden; border-radius:var(--radius); box-shadow:var(--shadow); isolation:isolate; background-image:url('Cityblocks4Verses.png'); background-size:200% 200%; background-repeat:no-repeat; background-position:center; }
-    /* Quadrant cropping from one image */
-    #era-1940s{ background-position:left top; }
-    #era-present{ background-position:right top; }
-    #era-future{ background-position:left bottom; }
-    #era-historic{ background-position:right bottom; }
-
-    .label{ position:absolute; left:12px; bottom:12px; padding:.5em .75em; border-radius:999px; background:rgba(0,0,0,.55); color:#fff; font-weight:700; font-size:clamp(12px,1.6vw,16px); backdrop-filter:saturate(120%) blur(6px); }
-
-    /* Inquire CTA */
-    .cta-wrap{ width:min(96vw,var(--maxW)); margin:var(--gap) auto 0; display:flex; justify-content:flex-end; }
-    #inquire{ appearance:none; border:0; border-radius:999px; padding:.9em 1.15em; font-weight:800; cursor:pointer; background:var(--accent); box-shadow:var(--shadow); }
-    #inquire:active{ transform:translateY(1px); }
-
-    /* Toast */
-    #toast{ position:fixed; left:50%; bottom:22px; transform:translateX(-50%); background:rgba(0,0,0,.8); color:#fff; padding:.7em 1em; border-radius:999px; font-weight:600; opacity:0; pointer-events:none; transition:opacity .2s ease; }
-    #toast.show{ opacity:1; }
-
-    footer{ opacity:.6; text-align:center; font-size:.85rem; padding:18px 0 28px; }
-    noscript .hide-when-noscript{ display:none !important; }
-  </style>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>CityBlocks.com — Build Your Next World</title>
+  <link rel="preload" href="assets/logo-cityblocks.png" as="image">
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <!-- ===== INTRO OVERLAY ===== -->
-  <div id="intro" class="hide-when-noscript" aria-live="polite">
-    <div class="intro-inner">
-      <!-- Uses root-level logo file present on live site -->
-      <img id="introLogo" src="CityBlocksLogo01.png" alt="CityBlocks logo" />
-      <div id="tagline" aria-label="Build Your Next World At CityBlocks dot com">
-        <span>Build</span><span>Your</span><span>Next</span><span>World</span><span>At</span><span>CityBlocks.com</span>
-      </div>
+
+  <!-- INTRO SEQUENCE -->
+  <div id="intro" aria-label="Intro animation">
+    <div class="intro-words" aria-hidden="true">
+      <span class="word w1">Build</span>
+      <span class="word w2">Your</span>
+      <span class="word w3">Next</span>
+      <span class="word w4">World</span>
+      <span class="word w5">At</span>
+      <img class="word w6 logo" src="assets/logo-cityblocks.png" alt="CityBlocks logo" />
+      <span class="word w7 domain">CityBlocks.com</span>
     </div>
   </div>
 
-  <!-- ===== MAIN CONTENT ===== -->
-  <main>
-    <section class="quad" aria-label="World selection">
-      <!-- All tiles temporarily disabled (no 404s). Click shows toast. -->
-      <a class="tile" href="#" id="era-1940s" data-era="1940s">
-        <span class="label">1940s</span>
-      </a>
-      <a class="tile" href="#" id="era-present" data-era="Present Day">
-        <span class="label">Present Day</span>
-      </a>
-      <a class="tile" href="#" id="era-future" data-era="Future">
-        <span class="label">Future</span>
-      </a>
-      <a class="tile" href="#" id="era-historic" data-era="Historic Past">
-        <span class="label">Historic Past</span>
-      </a>
-    </section>
+  <!-- MAIN GRID -->
+  <main id="grid" class="hidden">
+    <a class="tile" id="era-40s" href="worlds/1940s/">
+      <img src="assets/1940s.jpg" alt="1940s" />
+      <video class="hover-vid" src="assets/1940s.mp4" muted loop playsinline></video>
+      <span class="label">1940s</span>
+    </a>
 
-    <div class="cta-wrap">
-      <button id="inquire" type="button" aria-label="Contact about CityBlocks.com">Inquire Now</button>
-    </div>
+    <a class="tile" id="era-present" href="worlds/present/">
+      <img src="assets/present.jpg" alt="Present Day" />
+      <video class="hover-vid" src="assets/present.mp4" muted loop playsinline></video>
+      <span class="label">Present Day</span>
+    </a>
+
+    <a class="tile" id="era-future" href="worlds/future/">
+      <img src="assets/future.jpg" alt="Future" />
+      <video class="hover-vid" src="assets/future.mp4" muted loop playsinline></video>
+      <span class="label">Future</span>
+    </a>
+
+    <a class="tile" id="era-historic" href="worlds/historic/">
+      <img src="assets/historic.jpg" alt="Historic Past" />
+      <video class="hover-vid" src="assets/historic.mp4" muted loop playsinline></video>
+      <span class="label">Historic Past</span>
+    </a>
+
+    <button id="inquire" type="button" class="inquire">Inquire Now</button>
   </main>
 
-  <div id="toast" role="status" aria-live="polite">Coming soon</div>
-
-  <footer>
-    <small>© 1997–2025 CityBlocks.com — Held since 1997. All rights reserved.</small>
-  </footer>
-
-  <noscript>
-    <style>#intro{display:none}</style>
-  </noscript>
-
-  <script>
-    // Intro sequence — respects reduced motion
-    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    window.addEventListener('load', () => {
-      if(prefersReduced){
-        document.body.classList.add('ready');
-        const intro = document.getElementById('intro');
-        if(intro) intro.style.display='none';
-        return;
-      }
-      setTimeout(() => document.body.classList.add('ready'), 3300);
-      setTimeout(() => {
-        const intro = document.getElementById('intro');
-        if(intro) intro.style.display='none';
-      }, 4300);
-    });
-
-    // Inquire: mailto only (no PDF to avoid 404s for now)
-    (function(){
-      const btn = document.getElementById('inquire');
-      if(!btn) return;
-      btn.addEventListener('click', () => {
-        window.location.href = 'mailto:cityblocks@icloud.com?subject=CityBlocks.com%20Inquiry&body=Hi%2C%20I%27d%20like%20to%20discuss%20CityBlocks.com.';
-      });
-    })();
-
-    // Disable tile navigation for now and show a toast instead of 404s
-    (function(){
-      const toast = document.getElementById('toast');
-      const showToast = (msg) => {
-        toast.textContent = msg; toast.classList.add('show');
-        setTimeout(() => toast.classList.remove('show'), 1200);
-      };
-      document.querySelectorAll('.tile').forEach(t => {
-        t.addEventListener('click', (e) => {
-          e.preventDefault();
-          showToast(`${t.dataset.era} world — coming soon`);
-        });
-      });
-    })();
-
-    // Console hint for dev environment on github.io
-    (function(){
-      const base = document.baseURI;
-      if(base.includes('github.io') && location.hostname !== 'www.cityblocks.com'){
-        console.log('[CityBlocks] Dev mode on GitHub Pages subdomain. Keep paths relative.');
-      }
-    })();
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
