@@ -96,39 +96,62 @@
 <div id="inquire"><button type="button" onclick="openInvestor()">Investors Inquire</button></div>
 
 <script>
-  // One-word beat sequence (fast; “at” is snappy)
+  // One-word beat sequence
   const words = ['BUILD','YOUR','NEXT','WORLD','at','CITYBLOCKS.COM'];
   const introWord = document.getElementById('introWord');
   const introLogo = document.getElementById('introLogo');
-  let i = 0, t = 0;
+  const intro = document.getElementById('intro');
+  const app = document.getElementById('app');
+  const inquire = document.getElementById('inquire');
+
+  let i = 0;
 
   function showNext(){
     const w = words[i];
+    // fade the current text out
     introWord.classList.remove('show');
-    setTimeout(()=>{ // swap text after fade-out
-      introWord.textContent = w;
-      introWord.classList.add('show');
-      if(w === 'CITYBLOCKS.COM'){ introLogo.classList.add('show'); }
+
+    setTimeout(()=> {
+      // If final step: hide text, show logo (logo replaces the words)
+      if (w === 'CITYBLOCKS.COM') {
+        introWord.textContent = '';          // remove the text
+        introLogo.classList.add('show');     // show logo
+      } else {
+        introWord.textContent = w.toUpperCase();
+        introLogo.classList.remove('show');  // ensure logo hidden until final
+        introWord.classList.add('show');
+      }
     }, 60);
 
-    const beat = (w === 'AT') ? 220 : 420; // quicker “AT”
-    t += beat; i++;
-    if(i < words.length){ setTimeout(showNext, beat); }
-    else{
-      // fade to grid after brief hold
-      setTimeout(()=>{
-        document.getElementById('intro').classList.add('intro-fade-out');
-        document.getElementById('app').style.opacity = 1;
-        document.getElementById('inquire').style.opacity = 1;
+    // Quick beat specifically for the word "at" (case-insensitive)
+    const beat = (w.toLowerCase() === 'at') ? 220 : 420;
+
+    i++;
+    if (i < words.length) {
+      setTimeout(showNext, beat);
+    } else {
+      // Fade intro → reveal app + CTA
+      setTimeout(() => {
+        intro.classList.add('intro-fade-out');
+        intro.setAttribute('aria-hidden','true');
+        app.style.opacity = 1;
+        app.setAttribute('aria-hidden','false');
+        inquire.style.opacity = 1;
       }, 800);
     }
   }
-  // kick off sequence
-  setTimeout(()=>{ introWord.classList.add('show'); setTimeout(showNext, 420); }, 150);
 
-  // Inquire goes to a web page, not a PDF
+  // Kick off sequence after a tiny settle
+  setTimeout(() => {
+    introWord.classList.add('show');
+    setTimeout(showNext, 420);
+  }, 150);
+
+  // Inquire goes to a web page (we'll add a stub so it doesn't 404)
   function openInvestor(){ window.location.href = 'investors.html'; }
+  window.openInvestor = openInvestor;
 </script>
+
 
 </body>
 </html>
