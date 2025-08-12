@@ -1,173 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>CityBlocks.com</title>
-<style>
-  :root{ --bg:#000; --fg:#fff; --cta:#ffcc00; }
-  html,body{height:100%;margin:0}
-  body{
-    background:var(--bg); color:var(--fg);
-    font-family: "Helvetica Neue", Arial, sans-serif;
-    overflow:hidden;
-  }
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>CityBlocks.com</title>
+  <style>
+    :root {
+      --bg: #000;
+      --fg: #fff;
+      --cta: #ffcc00;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { height: 100%; background: var(--bg); color: var(--fg); font-family: Arial, sans-serif; }
 
-  /* ---------- INTRO (simple, no stacking) ---------- */
-  #intro{
-    position:fixed; inset:0; z-index:10; background:var(--bg);
-    display:flex; align-items:center; justify-content:center; flex-direction:column;
-  }
-  #introWord{
-    font-weight:900; letter-spacing:.06em; line-height:1.05;
-    text-align:center; margin:0;
-    filter: drop-shadow(0 6px 20px rgba(0,0,0,.55));
-    opacity:0; transform:scale(.85) translateY(8px);
-    transition: opacity .25s ease, transform .25s ease;
-  }
-  /* responsive size for the single word */
-  @media (min-width:900px){ #introWord{ font-size: clamp(56px, 9vw, 136px); } }
-  @media (max-width:899px){ #introWord{ font-size: clamp(36px, 10vw, 64px); } }
+    .fade-screen {
+      position: fixed; inset: 0; display: flex; justify-content: center; align-items: center;
+      background: var(--bg); flex-direction: column; opacity: 1; transition: opacity 0.8s ease;
+      z-index: 10;
+    }
+    .fade-screen.hidden { opacity: 0; pointer-events: none; }
 
-  #introLogo{
-    width:min(44vw, 520px); max-width:92vw;
-    margin-top:.4rem;
-    opacity:0; transform:scale(.9);
-    transition: opacity .45s ease, transform .45s ease;
-    filter: drop-shadow(0 8px 28px rgba(0,0,0,.6));
-  }
-  .intro-fade-out{ animation:introFade 700ms ease forwards; }
-  @keyframes introFade{ to{ opacity:0; visibility:hidden } }
+    .fade-screen h1 {
+      font-size: clamp(48px, 8vw, 120px); font-weight: bold; margin-bottom: 1rem;
+      text-align: center;
+    }
+    .fade-screen img { width: min(60vw, 300px); }
 
-  /* ---------- QUADRANTS ---------- */
-  #app{
-    position:fixed; inset:0; z-index:1;
-    display:grid; grid-template-columns:1fr 1fr; grid-template-rows:1fr 1fr;
-    opacity:0; transition:opacity .8s ease;
-  }
-  .tile{ position:relative; overflow:hidden; outline:1px solid rgba(255,255,255,.05); }
-  .tile img{ width:100%; height:100%; object-fit:cover; display:block;
-             transform:scale(1); transition:transform .4s ease; }
-  .tile:hover img{ transform:scale(1.06); }
+    #grid {
+      display: grid; grid-template-columns: repeat(2, 1fr); grid-template-rows: repeat(2, 1fr);
+      width: 100%; height: 100vh; opacity: 0; transition: opacity 0.8s ease;
+    }
+    .tile {
+      position: relative; overflow: hidden;
+    }
+    .tile img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+    .tile:hover img, .tile:active img {
+      transform: scale(1.05);
+    }
+    .label {
+      position: absolute; bottom: 10px; left: 10px;
+      background: rgba(0, 0, 0, 0.6); padding: 6px 10px;
+      font-size: 14px; font-weight: bold; border-radius: 4px;
+    }
 
-  .label{
-    position:absolute; left:12px; bottom:12px; background:rgba(0,0,0,.55);
-    padding:.45rem .7rem; border-radius:8px; font-weight:800;
-    font-size:clamp(12px,1.6vw,16px);
-  }
-
-  /* ---------- CTA ---------- */
-  #inquire{ position:fixed; right:18px; bottom:18px; z-index:2; opacity:0; transition:opacity .8s ease; }
-  #inquire button{
-    background:var(--cta); color:#111; border:0; padding:.7rem 1rem; border-radius:10px;
-    font-weight:800; font-size:clamp(14px,1.6vw,16px); cursor:pointer;
-    box-shadow:0 8px 24px rgba(0,0,0,.35);
-    animation:pulse 2.6s ease-in-out infinite 1.2s;
-  }
-  #inquire button:hover{ filter:brightness(1.06); }
-  @keyframes pulse{
-    0%{ box-shadow:0 0 0 0 rgba(255,204,0,.5) }
-    60%{ box-shadow:0 0 0 22px rgba(255,204,0,0) }
-    100%{ box-shadow:0 0 0 0 rgba(255,204,0,0) }
-  }
-
-  /* mobile: stack quadrants */
-  @media (max-width:700px){
-    #app{ grid-template-columns:1fr; grid-template-rows:repeat(4, 25vh); }
-  }
-
-  /* reduce motion users */
-  @media (prefers-reduced-motion:reduce){
-    #introWord, #introLogo, #app, #inquire, .tile img { transition:none; animation:none }
-  }
-</style>
+    #cta {
+      position: fixed; bottom: 20px; right: 20px; opacity: 0; transition: opacity 0.8s ease;
+    }
+    #cta button {
+      background: var(--cta); border: none; padding: 12px 18px; border-radius: 8px;
+      font-size: 16px; font-weight: bold; color: #111; cursor: pointer;
+    }
+    #cta button:hover { filter: brightness(1.05); }
+  </style>
 </head>
 <body>
 
-<!-- INTRO (single word element to avoid stacking) -->
-<section id="intro" aria-hidden="false">
-  <h1 id="introWord">BUILD</h1>
-  <img id="introLogo" src="CityBlocksLogo01.png" alt="CityBlocks Logo" />
-</section>
+  <div id="intro" class="fade-screen">
+    <h1>CITYBLOCKS.COM</h1>
+    <img src="CityBlocksLogo01.png" alt="CityBlocks Logo">
+  </div>
 
-<!-- QUADRANTS -->
-<main id="app" aria-hidden="true">
-  <figure class="tile">
-    <img src="1940s.png" alt="1940s World" />
-    <figcaption class="label">1940s</figcaption>
-  </figure>
-  <figure class="tile">
-    <img src="PresentDay.png" alt="Present Day World" />
-    <figcaption class="label">Present Day</figcaption>
-  </figure>
-  <figure class="tile">
-    <img src="Future.png" alt="Future World" />
-    <figcaption class="label">Future</figcaption>
-  </figure>
-  <figure class="tile">
-    <img src="HistoricPast.png" alt="Historic Past World" />
-    <figcaption class="label">Historic Past</figcaption>
-  </figure>
-</main>
+  <div id="grid">
+    <div class="tile"><img src="1940s.png" alt=""><div class="label">1940s</div></div>
+    <div class="tile"><img src="PresentDay.png" alt=""><div class="label">Present Day</div></div>
+    <div class="tile"><img src="Future.png" alt=""><div class="label">Future</div></div>
+    <div class="tile"><img src="HistoricPast.png" alt=""><div class="label">Historic Past</div></div>
+  </div>
 
-<!-- CTA -->
-<div id="inquire">
-  <button type="button" onclick="openInvestor()">Inquire Now</button>
-</div>
+  <div id="cta">
+    <button onclick="openInvestor()">Inquire Now</button>
+  </div>
 
-<script>
-  // One word at a time (no stacking), “AT” is snappier
-  const sequence = [
-    { text: 'BUILD', delay: 400 },
-    { text: 'THE', delay: 300 },
-    { text: 'NEXT', delay: 400 },
-    { text: 'WORLD', delay: 400 },
-    { text: 'AT', delay: 220 },
-    // final beat — show CITYBLOCKS.COM and bring logo in behind it
-    { text: 'CITYBLOCKS.COM', delay: 520, showLogo: true }
-  ];
-
-  const wordEl = document.getElementById('introWord');
-  const logoEl = document.getElementById('introLogo');
-
-  let t = 0;
-  sequence.forEach(step => {
-    t += step.delay;
+  <script>
+    // Fade out intro after 3 seconds
     setTimeout(() => {
-      // update text, pop it in
-      wordEl.style.opacity = 0;
-      // tiny timeout to let opacity drop before swapping text
-      setTimeout(() => {
-        wordEl.textContent = step.text;
-        wordEl.style.opacity = 1;
-        wordEl.style.transform = 'scale(1) translateY(0)';
-      }, 40);
+      document.getElementById('intro').classList.add('hidden');
+      document.getElementById('grid').style.opacity = 1;
+      document.getElementById('cta').style.opacity = 1;
+    }, 3000);
 
-      if (step.showLogo) {
-        logoEl.classList.add('show');
-      }
-    }, t);
-  });
+    // Inquire: open minimal PDF or mailto
+    function openInvestor() {
+      fetch('InvestorOneSheet.pdf', { method: 'HEAD' })
+        .then(r => {
+          if (r.ok) window.open('InvestorOneSheet.pdf','_blank');
+          else window.location.href = 'mailto:cityblocks@icloud.com';
+        })
+        .catch(() => window.location.href = 'mailto:cityblocks@icloud.com');
+    }
+  </script>
 
-  // Fade intro out and reveal grid + CTA together
-  const outro = t + 900; // brief hold after final word
-  setTimeout(() => {
-    document.getElementById('intro').classList.add('intro-fade-out');
-    document.getElementById('app').style.opacity = 1;
-    document.getElementById('inquire').style.opacity = 1;
-    document.getElementById('intro').setAttribute('aria-hidden','true');
-    document.getElementById('app').setAttribute('aria-hidden','false');
-  }, outro);
-
-  // Inquire behavior: open minimal PDF if present; else email
-  function openInvestor(){
-    fetch('InvestorOneSheet.pdf', { method:'HEAD' })
-      .then(r => {
-        if(r.ok){ window.open('InvestorOneSheet.pdf','_blank'); }
-        else { window.location.href='mailto:cityblocks@icloud.com'; }
-      })
-      .catch(() => { window.location.href='mailto:cityblocks@icloud.com'; });
-  }
-</script>
 </body>
 </html>
