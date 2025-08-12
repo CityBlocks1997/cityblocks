@@ -5,13 +5,17 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>CityBlocks.com</title>
+<link rel="preload" href="CityBlocksLogo01.png" as="image">
+<link rel="preload" href="1940s.png" as="image">
+<link rel="preload" href="PresentDay.png" as="image">
+<link rel="preload" href="Future.png" as="image">
+<link rel="preload" href="HistoricPast.png" as="image">
 <style>
   :root{ --bg:#000; --fg:#fff; --cta:#ffcc00; }
   *{ box-sizing:border-box }
   html,body{ height:100%; margin:0 }
   body{ background:var(--bg); color:var(--fg); font-family:"Helvetica Neue",Arial,sans-serif; overflow:hidden }
 
-  /* INTRO – centered perfectly (uses 100svh for iOS) */
   #intro{ position:fixed; inset:0; z-index:10; background:var(--bg); display:grid; place-items:center; min-height:100svh }
   .intro-inner{ display:flex; flex-direction:column; align-items:center; gap:.6rem; text-align:center }
   #introWord{
@@ -34,7 +38,6 @@
   .intro-fade-out{ animation:introFade .7s ease forwards }
   @keyframes introFade{ to{ opacity:0; visibility:hidden } }
 
-  /* QUADRANTS */
   #app{
     position:fixed; inset:0; z-index:1;
     display:grid; grid-template-columns:1fr 1fr; grid-template-rows:1fr 1fr;
@@ -47,8 +50,8 @@
     position:absolute; left:12px; bottom:12px; background:rgba(0,0,0,.55);
     padding:.45rem .7rem; border-radius:8px; font-weight:800; font-size:clamp(12px,1.6vw,16px)
   }
+  .tile:where(a){ display:block; height:100% } /* so <a> fills the tile */
 
-  /* CTA */
   #inquire{ position:fixed; right:18px; bottom:18px; z-index:2; opacity:0; transition:opacity .8s ease }
   #inquire button{
     background:var(--cta); color:#111; border:0; padding:.7rem 1rem; border-radius:10px;
@@ -56,12 +59,12 @@
   }
   #inquire button:hover{ filter:brightness(1.06) }
 
-  /* stack on small screens */
   @media (max-width:700px){
     #app{ grid-template-columns:1fr; grid-template-rows:repeat(4, 25vh) }
   }
 </style>
 </head>
+
 <body>
 
 <!-- INTRO -->
