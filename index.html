@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- v2025-08-12-2: Zero-404 homepage. Uses only two assets at repo root: CityBlocksLogo01.png and Cityblocks4Verses.png -->
 <html lang="en">
 <head>
   <meta charset="utf-8" />
@@ -6,19 +7,21 @@
   <title>CityBlocks.com — Build the Next World</title>
   <meta name="description" content="CityBlocks.com — Build the Next World. A metaverse engine and platform concept. Inquire for acquisition or partnership.">
   <meta name="theme-color" content="#0b0b0b">
+  <!-- Preload the only two required assets (placed at repo root) -->
+  <link rel="preload" as="image" href="CityBlocksLogo01.png" />
+  <link rel="preload" as="image" href="Cityblocks4Verses.png" />
   <style>
     :root{
-      --bg:#0b0b0b; --fg:#ffffff; --muted:#b9c0cb; --accent:#ffd24d; --shadow:0 10px 30px rgba(0,0,0,.45);
+      --bg:#0b0b0b; --fg:#ffffff; --accent:#ffd24d; --shadow:0 10px 30px rgba(0,0,0,.45);
       --radius:16px; --gap:clamp(10px,2vw,20px); --maxW:1200px;
     }
     *,*::before,*::after{ box-sizing:border-box; }
     html,body{ height:100%; margin:0; }
-    body{ background:var(--bg); color:var(--fg); font:400 16px/1.5 system-ui,-apple-system,Segoe UI,Inter,Roboto,Arial,sans-serif; overflow:hidden; }
+    body{ background:var(--bg); color:var(--fg); font:400 16px/1.5 system-ui,-apple-system,Segoe UI,Inter,Roboto,Arial,sans-serif; overflow:hidden; -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; }
     a{ color:inherit; text-decoration:none; }
-    img,video{ max-width:100%; display:block; }
 
     /* ===== INTRO OVERLAY ===== */
-    #intro{ position:fixed; inset:0; display:grid; place-items:center; background:var(--bg); z-index:9999; }
+    #intro{ position:fixed; inset:0; display:grid; place-items:center; background:var(--bg); z-index:9999; user-select:none; }
     .intro-inner{ display:flex; flex-direction:column; align-items:center; gap:3.5rem; text-align:center; }
     #introLogo{ width:min(44vw,520px); filter: drop-shadow(0 8px 28px rgba(0,0,0,.6)); transition: transform .9s ease, opacity .6s ease; }
     #tagline{ font-weight:800; letter-spacing:.04em; line-height:1.08; opacity:.98; text-wrap:balance; }
@@ -39,11 +42,12 @@
     .quad{ grid-template-columns:1fr; }
     @media (min-width:820px){ .quad{ grid-template-columns:1fr 1fr; grid-auto-rows:min(35vh,38svh); } }
 
-    .tile{ position:relative; overflow:hidden; border-radius:var(--radius); box-shadow:var(--shadow); isolation:isolate; }
-    .tile img,.tile video{ width:100%; height:100%; object-fit:cover; }
-    .tile video{ position:absolute; inset:0; opacity:0; transition:opacity .25s ease; pointer-events:none; }
-    .tile:hover video{ opacity:1; }
-    @media (prefers-reduced-motion:reduce){ .tile:hover video{ opacity:0; } }
+    .tile{ position:relative; overflow:hidden; border-radius:var(--radius); box-shadow:var(--shadow); isolation:isolate; background-image:url('Cityblocks4Verses.png'); background-size:200% 200%; background-repeat:no-repeat; background-position:center; }
+    /* Quadrant cropping from one image */
+    #era-1940s{ background-position:left top; }
+    #era-present{ background-position:right top; }
+    #era-future{ background-position:left bottom; }
+    #era-historic{ background-position:right bottom; }
 
     .label{ position:absolute; left:12px; bottom:12px; padding:.5em .75em; border-radius:999px; background:rgba(0,0,0,.55); color:#fff; font-weight:700; font-size:clamp(12px,1.6vw,16px); backdrop-filter:saturate(120%) blur(6px); }
 
@@ -52,19 +56,20 @@
     #inquire{ appearance:none; border:0; border-radius:999px; padding:.9em 1.15em; font-weight:800; cursor:pointer; background:var(--accent); box-shadow:var(--shadow); }
     #inquire:active{ transform:translateY(1px); }
 
-    /* Footer note */
-    footer{ opacity:.6; text-align:center; font-size:.85rem; padding:18px 0 28px; }
+    /* Toast */
+    #toast{ position:fixed; left:50%; bottom:22px; transform:translateX(-50%); background:rgba(0,0,0,.8); color:#fff; padding:.7em 1em; border-radius:999px; font-weight:600; opacity:0; pointer-events:none; transition:opacity .2s ease; }
+    #toast.show{ opacity:1; }
 
-    /* Safety: if JS disabled */
+    footer{ opacity:.6; text-align:center; font-size:.85rem; padding:18px 0 28px; }
     noscript .hide-when-noscript{ display:none !important; }
   </style>
 </head>
 <body>
   <!-- ===== INTRO OVERLAY ===== -->
-  <div id="intro" class="hide-when-noscript">
+  <div id="intro" class="hide-when-noscript" aria-live="polite">
     <div class="intro-inner">
-      <!-- Replace with your logo asset path -->
-      <img id="introLogo" src="assets/logo-cityblocks.png" alt="CityBlocks logo" />
+      <!-- Uses root-level logo file present on live site -->
+      <img id="introLogo" src="CityBlocksLogo01.png" alt="CityBlocks logo" />
       <div id="tagline" aria-label="Build Your Next World At CityBlocks dot com">
         <span>Build</span><span>Your</span><span>Next</span><span>World</span><span>At</span><span>CityBlocks.com</span>
       </div>
@@ -74,48 +79,27 @@
   <!-- ===== MAIN CONTENT ===== -->
   <main>
     <section class="quad" aria-label="World selection">
-      <!-- 1940s -->
-      <a class="tile" href="worlds/1940s/" id="era-1940s">
-        <img src="assets/1940s.jpg" alt="1940s city scene" loading="eager" />
-        <!-- Optional hover video (place file to enable) -->
-        <video muted preload="none" playsinline loop onmouseenter="this.play()" onmouseleave="this.pause()">
-          <source src="assets/1940s-hover.mp4" type="video/mp4" />
-        </video>
+      <!-- All tiles temporarily disabled (no 404s). Click shows toast. -->
+      <a class="tile" href="#" id="era-1940s" data-era="1940s">
         <span class="label">1940s</span>
       </a>
-
-      <!-- Present -->
-      <a class="tile" href="worlds/present/" id="era-present">
-        <img src="assets/present.jpg" alt="Present day city scene" />
-        <video muted preload="none" playsinline loop onmouseenter="this.play()" onmouseleave="this.pause()">
-          <source src="assets/present-hover.mp4" type="video/mp4" />
-        </video>
+      <a class="tile" href="#" id="era-present" data-era="Present Day">
         <span class="label">Present Day</span>
       </a>
-
-      <!-- Future -->
-      <a class="tile" href="worlds/future/" id="era-future">
-        <img src="assets/future.jpg" alt="Future city scene" />
-        <video muted preload="none" playsinline loop onmouseenter="this.play()" onmouseleave="this.pause()">
-          <source src="assets/future-hover.mp4" type="video/mp4" />
-        </video>
+      <a class="tile" href="#" id="era-future" data-era="Future">
         <span class="label">Future</span>
       </a>
-
-      <!-- Historic Past -->
-      <a class="tile" href="worlds/historic/" id="era-historic">
-        <img src="assets/historic.jpg" alt="Historic classical city" />
-        <video muted preload="none" playsinline loop onmouseenter="this.play()" onmouseleave="this.pause()">
-          <source src="assets/historic-hover.mp4" type="video/mp4" />
-        </video>
+      <a class="tile" href="#" id="era-historic" data-era="Historic Past">
         <span class="label">Historic Past</span>
       </a>
     </section>
 
     <div class="cta-wrap">
-      <button id="inquire" type="button" aria-label="Open investor one-sheet and start email">Inquire Now</button>
+      <button id="inquire" type="button" aria-label="Contact about CityBlocks.com">Inquire Now</button>
     </div>
   </main>
+
+  <div id="toast" role="status" aria-live="polite">Coming soon</div>
 
   <footer>
     <small>© 1997–2025 CityBlocks.com — Held since 1997. All rights reserved.</small>
@@ -131,10 +115,10 @@
     window.addEventListener('load', () => {
       if(prefersReduced){
         document.body.classList.add('ready');
-        document.getElementById('intro').style.display='none';
+        const intro = document.getElementById('intro');
+        if(intro) intro.style.display='none';
         return;
       }
-      // Reveal after tagline completes
       setTimeout(() => document.body.classList.add('ready'), 3300);
       setTimeout(() => {
         const intro = document.getElementById('intro');
@@ -142,26 +126,35 @@
       }, 4300);
     });
 
-    // Inquire flow — open PDF, then email
+    // Inquire: mailto only (no PDF to avoid 404s for now)
     (function(){
       const btn = document.getElementById('inquire');
       if(!btn) return;
-      btn.addEventListener('click', async () => {
-        const pdfPath = 'Investor-One-Sheet.pdf'; // Put this file at repo root
-        // Open the investor sheet in a new tab
-        window.open(pdfPath, '_blank');
-        // Then prime an email
-        setTimeout(() => {
-          window.location.href = 'mailto:cityblocks@icloud.com?subject=CityBlocks.com%20Inquiry&body=Hi%2C%20I%27d%20like%20to%20discuss%20CityBlocks.com.';
-        }, 700);
+      btn.addEventListener('click', () => {
+        window.location.href = 'mailto:cityblocks@icloud.com?subject=CityBlocks.com%20Inquiry&body=Hi%2C%20I%27d%20like%20to%20discuss%20CityBlocks.com.';
       });
     })();
 
-    // Lightweight runtime check for common 404 path mistakes (logs only)
+    // Disable tile navigation for now and show a toast instead of 404s
+    (function(){
+      const toast = document.getElementById('toast');
+      const showToast = (msg) => {
+        toast.textContent = msg; toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 1200);
+      };
+      document.querySelectorAll('.tile').forEach(t => {
+        t.addEventListener('click', (e) => {
+          e.preventDefault();
+          showToast(`${t.dataset.era} world — coming soon`);
+        });
+      });
+    })();
+
+    // Console hint for dev environment on github.io
     (function(){
       const base = document.baseURI;
-      if(base.includes('github.io') && location.hostname !== 'cityblocks.com'){
-        console.log('[CityBlocks] Dev mode on GitHub Pages subdomain. Ensure asset paths are relative, not absolute.');
+      if(base.includes('github.io') && location.hostname !== 'www.cityblocks.com'){
+        console.log('[CityBlocks] Dev mode on GitHub Pages subdomain. Keep paths relative.');
       }
     })();
   </script>
