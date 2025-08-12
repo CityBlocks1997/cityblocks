@@ -1,56 +1,173 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>CityBlocks.com — Build Your Next World</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>CityBlocks.com</title>
+<style>
+  :root{ --bg:#000; --fg:#fff; --cta:#ffcc00; }
+  html,body{height:100%;margin:0}
+  body{
+    background:var(--bg); color:var(--fg);
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    overflow:hidden;
+  }
 
-  <!-- no leading slash -->
-  <link rel="preload" href="CityBlocksLogo01.png" as="image">
-  <link rel="stylesheet" href="styles.css" />
+  /* ---------- INTRO (simple, no stacking) ---------- */
+  #intro{
+    position:fixed; inset:0; z-index:10; background:var(--bg);
+    display:flex; align-items:center; justify-content:center; flex-direction:column;
+  }
+  #introWord{
+    font-weight:900; letter-spacing:.06em; line-height:1.05;
+    text-align:center; margin:0;
+    filter: drop-shadow(0 6px 20px rgba(0,0,0,.55));
+    opacity:0; transform:scale(.85) translateY(8px);
+    transition: opacity .25s ease, transform .25s ease;
+  }
+  /* responsive size for the single word */
+  @media (min-width:900px){ #introWord{ font-size: clamp(56px, 9vw, 136px); } }
+  @media (max-width:899px){ #introWord{ font-size: clamp(36px, 10vw, 64px); } }
+
+  #introLogo{
+    width:min(44vw, 520px); max-width:92vw;
+    margin-top:.4rem;
+    opacity:0; transform:scale(.9);
+    transition: opacity .45s ease, transform .45s ease;
+    filter: drop-shadow(0 8px 28px rgba(0,0,0,.6));
+  }
+  .intro-fade-out{ animation:introFade 700ms ease forwards; }
+  @keyframes introFade{ to{ opacity:0; visibility:hidden } }
+
+  /* ---------- QUADRANTS ---------- */
+  #app{
+    position:fixed; inset:0; z-index:1;
+    display:grid; grid-template-columns:1fr 1fr; grid-template-rows:1fr 1fr;
+    opacity:0; transition:opacity .8s ease;
+  }
+  .tile{ position:relative; overflow:hidden; outline:1px solid rgba(255,255,255,.05); }
+  .tile img{ width:100%; height:100%; object-fit:cover; display:block;
+             transform:scale(1); transition:transform .4s ease; }
+  .tile:hover img{ transform:scale(1.06); }
+
+  .label{
+    position:absolute; left:12px; bottom:12px; background:rgba(0,0,0,.55);
+    padding:.45rem .7rem; border-radius:8px; font-weight:800;
+    font-size:clamp(12px,1.6vw,16px);
+  }
+
+  /* ---------- CTA ---------- */
+  #inquire{ position:fixed; right:18px; bottom:18px; z-index:2; opacity:0; transition:opacity .8s ease; }
+  #inquire button{
+    background:var(--cta); color:#111; border:0; padding:.7rem 1rem; border-radius:10px;
+    font-weight:800; font-size:clamp(14px,1.6vw,16px); cursor:pointer;
+    box-shadow:0 8px 24px rgba(0,0,0,.35);
+    animation:pulse 2.6s ease-in-out infinite 1.2s;
+  }
+  #inquire button:hover{ filter:brightness(1.06); }
+  @keyframes pulse{
+    0%{ box-shadow:0 0 0 0 rgba(255,204,0,.5) }
+    60%{ box-shadow:0 0 0 22px rgba(255,204,0,0) }
+    100%{ box-shadow:0 0 0 0 rgba(255,204,0,0) }
+  }
+
+  /* mobile: stack quadrants */
+  @media (max-width:700px){
+    #app{ grid-template-columns:1fr; grid-template-rows:repeat(4, 25vh); }
+  }
+
+  /* reduce motion users */
+  @media (prefers-reduced-motion:reduce){
+    #introWord, #introLogo, #app, #inquire, .tile img { transition:none; animation:none }
+  }
+</style>
 </head>
 <body>
-  <div id="intro" aria-label="Intro animation">
-    <div class="intro-words" aria-hidden="true">
-      <span class="word w1">Build</span>
-      <span class="word w2">Your</span>
-      <span class="word w3">Next</span>
-      <span class="word w4">World</span>
-      <span class="word w5">at</span>
 
-      <!-- no leading slash -->
-     <img class="word w6 logo" src="CityBlocksLogo01.png" alt="CityBlocks logo">
-        </div>
+<!-- INTRO (single word element to avoid stacking) -->
+<section id="intro" aria-hidden="false">
+  <h1 id="introWord">BUILD</h1>
+  <img id="introLogo" src="CityBlocksLogo01.png" alt="CityBlocks Logo" />
+</section>
 
-  <!-- MAIN GRID -->
-  <main id="grid" class="hidden">
-    <a class="tile" id="era-40s" href="worlds/1940s/">
-      <img src="1940s.jpg" alt="1940s" />
-      <video class="hover-vid" src="assets/1940s.mp4" muted loop playsinline></video>
-      <span class="label">1940s</span>
-    </a>
+<!-- QUADRANTS -->
+<main id="app" aria-hidden="true">
+  <figure class="tile">
+    <img src="1940s.png" alt="1940s World" />
+    <figcaption class="label">1940s</figcaption>
+  </figure>
+  <figure class="tile">
+    <img src="PresentDay.png" alt="Present Day World" />
+    <figcaption class="label">Present Day</figcaption>
+  </figure>
+  <figure class="tile">
+    <img src="Future.png" alt="Future World" />
+    <figcaption class="label">Future</figcaption>
+  </figure>
+  <figure class="tile">
+    <img src="HistoricPast.png" alt="Historic Past World" />
+    <figcaption class="label">Historic Past</figcaption>
+  </figure>
+</main>
 
-    <a class="tile" id="era-present" href="worlds/present/">
-      <img src="assets/present.jpg" alt="Present Day" />
-      <video class="hover-vid" src="assets/present.mp4" muted loop playsinline></video>
-      <span class="label">Present Day</span>
-    </a>
+<!-- CTA -->
+<div id="inquire">
+  <button type="button" onclick="openInvestor()">Inquire Now</button>
+</div>
 
-    <a class="tile" id="era-future" href="worlds/future/">
-      <img src="assets/future.jpg" alt="Future" />
-      <video class="hover-vid" src="assets/future.mp4" muted loop playsinline></video>
-      <span class="label">Future</span>
-    </a>
+<script>
+  // One word at a time (no stacking), “AT” is snappier
+  const sequence = [
+    { text: 'BUILD', delay: 400 },
+    { text: 'THE', delay: 300 },
+    { text: 'NEXT', delay: 400 },
+    { text: 'WORLD', delay: 400 },
+    { text: 'AT', delay: 220 },
+    // final beat — show CITYBLOCKS.COM and bring logo in behind it
+    { text: 'CITYBLOCKS.COM', delay: 520, showLogo: true }
+  ];
 
-    <a class="tile" id="era-historic" href="worlds/historic/">
-      <img src="assets/historic.jpg" alt="Historic Past" />
-      <video class="hover-vid" src="assets/historic.mp4" muted loop playsinline></video>
-      <span class="label">Historic Past</span>
-    </a>
+  const wordEl = document.getElementById('introWord');
+  const logoEl = document.getElementById('introLogo');
 
-    <button id="inquire" type="button" class="inquire">Inquire Now</button>
-  </main>
+  let t = 0;
+  sequence.forEach(step => {
+    t += step.delay;
+    setTimeout(() => {
+      // update text, pop it in
+      wordEl.style.opacity = 0;
+      // tiny timeout to let opacity drop before swapping text
+      setTimeout(() => {
+        wordEl.textContent = step.text;
+        wordEl.style.opacity = 1;
+        wordEl.style.transform = 'scale(1) translateY(0)';
+      }, 40);
 
-  <script src="script.js"></script>
+      if (step.showLogo) {
+        logoEl.classList.add('show');
+      }
+    }, t);
+  });
+
+  // Fade intro out and reveal grid + CTA together
+  const outro = t + 900; // brief hold after final word
+  setTimeout(() => {
+    document.getElementById('intro').classList.add('intro-fade-out');
+    document.getElementById('app').style.opacity = 1;
+    document.getElementById('inquire').style.opacity = 1;
+    document.getElementById('intro').setAttribute('aria-hidden','true');
+    document.getElementById('app').setAttribute('aria-hidden','false');
+  }, outro);
+
+  // Inquire behavior: open minimal PDF if present; else email
+  function openInvestor(){
+    fetch('InvestorOneSheet.pdf', { method:'HEAD' })
+      .then(r => {
+        if(r.ok){ window.open('InvestorOneSheet.pdf','_blank'); }
+        else { window.location.href='mailto:cityblocks@icloud.com'; }
+      })
+      .catch(() => { window.location.href='mailto:cityblocks@icloud.com'; });
+  }
+</script>
 </body>
 </html>
