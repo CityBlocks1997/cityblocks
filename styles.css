@@ -1,58 +1,111 @@
-body {
-  margin: 0;
-  padding: 0;
-  background-color: #0a0a0a;
-  color: white;
-  font-family: 'Segoe UI', sans-serif;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  text-align: center;
+:root{
+  --bg: #0b0b0b;
+  --fg: #ffffff;
+  --gap: clamp(10px, 2vw, 22px);
+  --maxW: 1280px;
+  --radius: 16px;
+  --shadow: 0 8px 28px rgba(0,0,0,.35);
+  --label-bg: rgba(0,0,0,.55);
+  --brand: #ffd24d;
+  --intro-time: .92s; /* duration for each word */
+  --intro-gap: .22s;  /* pause between words */
 }
 
-.container {
-  max-width: 800px;
-  padding: 20px;
+/* ===== Intro layer ===== */
+#intro{
+  position: fixed; inset: 0; display: grid; place-items: center;
+  background: var(--bg); z-index: 9999;
+}
+.intro-words{
+  position: relative; display: grid; place-items: center;
+  text-align: center; color: var(--fg);
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  font-weight: 800;
+}
+.word{
+  position: absolute; opacity: 0; transform: translateZ(0) scale(.2);
+  will-change: transform, opacity; white-space: nowrap;
+  font-size: clamp(28px, 7vw, 88px); letter-spacing: .02em;
+  animation: pop var(--intro-time) ease-out forwards;
+}
+.logo{ width: clamp(120px, 26vw, 360px); height: auto; }
+.domain{ font-weight: 900; }
+
+/* Stagger timing: each next word starts after the previous finishes + gap */
+.w1 { animation-delay: calc(0 * (var(--intro-time) + var(--intro-gap))); }
+.w2 { animation-delay: calc(1 * (var(--intro-time) + var(--intro-gap))); }
+.w3 { animation-delay: calc(2 * (var(--intro-time) + var(--intro-gap))); }
+.w4 { animation-delay: calc(3 * (var(--intro-time) + var(--intro-gap))); }
+.w5 { animation-delay: calc(4 * (var(--intro-time) + var(--intro-gap))); }
+.w6 { animation-delay: calc(5 * (var(--intro-time) + var(--intro-gap))); }
+.w7 { animation-delay: calc(6 * (var(--intro-time) + var(--intro-gap))); }
+
+/* Word zoom & vanish */
+@keyframes pop{
+  0%   { opacity: 0; transform: translateZ(0) scale(.2); }
+  55%  { opacity: 1; transform: translateZ(0) scale(1); }
+  100% { opacity: 0; transform: translateZ(0) scale(1.08); }
 }
 
-h1 {
-  font-size: 3em;
-  margin-bottom: 0.5em;
-  letter-spacing: 2px;
+/* When intro completes, fade out entire layer and reveal grid */
+body.ready #intro{ animation: fadeOut .6s ease forwards; }
+@keyframes fadeOut { to { opacity: 0; visibility: hidden; } }
+
+/* ===== Grid ===== */
+#grid.hidden{ opacity: 0; }
+body.ready #grid{ animation: gridIn .5s ease .2s forwards; }
+
+@keyframes gridIn { to { opacity: 1; } }
+
+#grid{
+  min-height: 100svh;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-auto-rows: min(34vh, 38svh);
+  gap: var(--gap);
+  align-content: center;
+  padding: clamp(10px, 3vw, 30px);
+  width: min(96vw, var(--maxW));
+  margin: 0 auto;
 }
 
-#tagline {
-  font-size: 1.5em;
-  font-weight: bold;
-  margin: 0.75em 0;
+@media (min-width: 840px){
+  #grid{
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
-.subtext {
-  font-size: 1em;
-  color: #ccc;
+.tile{
+  position: relative; overflow: hidden; border-radius: var(--radius);
+  box-shadow: var(--shadow); display: block; isolation: isolate;
+  background: #111;
+}
+.tile img, .tile video{
+  width: 100%; height: 100%; display: block; object-fit: cover; /* MDN: object-fit cover */ /* :contentReference[oaicite:1]{index=1} */
 }
 
-.button {
-  margin-top: 1.5em;
-  padding: 0.75em 1.5em;
-  background-color: #00bcd4;
-  color: white;
-  text-decoration: none;
-  border-radius: 4px;
-  font-size: 1.1em;
-  transition: background 0.3s;
+/* Hover: reveal video smoothly */
+.tile video{
+  position: absolute; inset: 0; opacity: 0; transition: opacity .25s ease;
+  pointer-events: none;
+}
+.tile:hover video{ opacity: 1; }
+
+.label{
+  position: absolute; left: 12px; bottom: 12px;
+  padding: .5em .75em; border-radius: 10px;
+  background: var(--label-bg); color: #fff;
+  font: 700 clamp(12px, 1.6vw, 16px)/1 Inter, system-ui, sans-serif;
 }
 
-.button:hover {
-  background-color: #019aad;
+.inquire{
+  justify-self: end; align-self: end; padding: .85em 1.2em;
+  border: 0; border-radius: 999px; background: var(--brand);
+  font: 800 14px/1 Inter, system-ui, sans-serif; cursor: pointer;
 }
 
-.fade {
-  opacity: 0;
-  transition: opacity 1s ease-in-out;
-}
-
-.fade.show {
-  opacity: 1;
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce){ /* MDN: prefers-reduced-motion */ /* :contentReference[oaicite:2]{index=2} */
+  .word, #grid, .tile video { animation: none !important; transition: none !important; }
+  #intro{ display: none; }
 }
