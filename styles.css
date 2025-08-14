@@ -116,4 +116,13 @@ body.ready #grid{ animation: gridIn .5s ease .2s forwards; }
 @media (prefers-reduced-motion: reduce){ /* MDN: prefers-reduced-motion */ /* :contentReference[oaicite:2]{index=2} */
   .word, #grid, .tile video { animation: none !important; transition: none !important; }
   #intro{ display: none; }
-}
+}/* FORCE the tile (it's the <a>) to be white in all states */
+a.tile { color:#fff !important; text-decoration:none !important; }
+a.tile:link,
+a.tile:visited,
+a.tile:hover,
+a.tile:active { color:#fff !important; text-decoration:none !important; }
+
+/* And be explicit about the label too */
+.tile .label { color:#fff !important; text-decoration:none !important; }
+
