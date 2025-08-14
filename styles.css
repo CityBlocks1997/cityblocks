@@ -79,7 +79,16 @@ body.ready #grid{ animation: gridIn .5s ease .2s forwards; }
   position: relative; overflow: hidden; border-radius: var(--radius);
   box-shadow: var(--shadow); display: block; isolation: isolate;
   background: #111;
+}/* Make the entire tile (which is an <a>) inherit color and remove link styling */
+.tile,
+.tile:link,
+.tile:visited,
+.tile:hover,
+.tile:active {
+  color: inherit;
+  text-decoration: none;
 }
+
 .tile img, .tile video{
   width: 100%; height: 100%; display: block; object-fit: cover; /* MDN: object-fit cover */ /* :contentReference[oaicite:1]{index=1} */
 }
