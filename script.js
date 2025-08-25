@@ -1,28 +1,66 @@
-const words = ['BUILD','YOUR','NEXT','WORLD','at','CITYBLOCKS.COM'];
+// CityBlocks.com — script.js — v2025-08-24
+(function(){
+  const tiles = Array.from(document.querySelectorAll('.tile'));
+  const isTouch = matchMedia('(hover: none)').matches || 'ontouchstart' in window;
 
-function showNext(){
-  const w = words[i];
-  introWord.classList.remove('show');
+  // Year in footer
+  const y = document.getElementById('y');
+  if (y) y.textContent = new Date().getFullYear();
 
-  setTimeout(()=> {
-    if (w === 'CITYBLOCKS.COM') {
-      introWord.textContent = '';            // hide text
-      introLogo.classList.add('show');       // show logo as final beat
+  tiles.forEach(tile => {
+    const video = tile.querySelector('video');
+    const img = tile.querySelector('img');
+
+    if (!video || !img) return;
+
+    video.muted = true;
+    video.setAttribute('playsinline', '');
+    video.preload = 'none';
+
+    const showVideo = () => {
+      img.style.display = 'none';
+      video.style.display = 'block';
+    };
+    const hideVideo = () => {
+      video.pause();
+      video.currentTime = 0;
+      video.style.display = 'none';
+      img.style.display = 'block';
+    };
+
+    const play = () => {
+      showVideo();
+      if (video.readyState === 0) {
+        try { video.load(); } catch(e){}
+      }
+      const p = video.play();
+      if (p && typeof p.catch === 'function') p.catch(()=>{});
+    };
+
+    const pause = () => {
+      hideVideo();
+    };
+
+    if (!isTouch){
+      tile.addEventListener('mouseenter', play);
+      tile.addEventListener('mouseleave', pause);
+      tile.addEventListener('focus', play, true);
+      tile.addEventListener('blur', pause, true);
     } else {
-      introWord.textContent = w.toUpperCase();
-      introLogo.classList.remove('show');
-      introWord.classList.add('show');
+      // Touch devices: tap to toggle
+      let playing = false;
+      tile.addEventListener('click', (e) => {
+        e.preventDefault();
+        playing ? pause() : play();
+        playing = !playing;
+      });
     }
-  }, 60);
 
-  const beat = (w.toLowerCase() === 'at') ? 220 : 420;
-  i++;
-  if (i < words.length) setTimeout(showNext, beat);
-  else setTimeout(() => {
-    intro.classList.add('intro-fade-out');
-    intro.setAttribute('aria-hidden','true');
-    app.style.opacity = 1;
-    app.setAttribute('aria-hidden','false');
-    inquire.style.opacity = 1;
-  }, 800);
-}
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) pause();
+      });
+    }, { threshold: 0.1 });
+    io.observe(tile);
+  });
+})();
