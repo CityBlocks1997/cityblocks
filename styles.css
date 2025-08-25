@@ -79,10 +79,10 @@ body.ready #grid{ animation: gridIn .5s ease .2s forwards; }
 .tile:link,
 .tile:visited,
 .tile:hover,
-.tile:active { color:#fff; text-decoration:none; }
+.tile:active { color:#fffff; text-decoration:none; }
 
 /* (Already present, but keep it) */
-.label { color:#fff; background:rgba(0,0,0,.55); text-shadow:0 2px 6px rgba(0,0,0,.6); }
+.label { color:#fffff; background:rgba(0,0,0,.55); text-shadow:0 2px 6px rgba(0,0,0,.6); }
 
 }
 
