@@ -74,16 +74,17 @@ body.ready #grid{ animation: gridIn .5s ease .2s forwards; }
     grid-template-columns: 1fr 1fr;
   }
 }
-/* The tile itself IS the <a>. Force link states to be white & no underline */
-.tile { color:#fff; text-decoration:none; }
+/* Force link states to be white & no underline */
+.tile { 
+  color: #ffffff; 
+  text-decoration: none; 
+}
 .tile:link,
 .tile:visited,
 .tile:hover,
-.tile:active { color:#fffff; text-decoration:none; }
-
-/* (Already present, but keep it) */
-.label { color:#fffff; background:rgba(0,0,0,.55); text-shadow:0 2px 6px rgba(0,0,0,.6); }
-
+.tile:active { 
+  color: #ffffff; 
+  text-decoration: none; 
 }
 
 }
