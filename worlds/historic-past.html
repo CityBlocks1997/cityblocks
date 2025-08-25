@@ -3,101 +3,49 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>CityBlocks.com</title>
-  <link rel="stylesheet" href="styles.css?v=20250825">
+  <title>Historic Past — CityBlocks.com</title>
+  <link rel="stylesheet" href="../styles.css?v=20250825">
   <style>
-    /* Intro overlay */
-    #intro-overlay {
-      position:fixed; inset:0;
-      display:flex; align-items:center; justify-content:center;
-      background:#000;
-      color:#fff;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
-      font-size:2rem; font-weight:700;
-      z-index:9999;
-      opacity:0;
-      animation: fadein 2s forwards, fadeout 2s forwards 3s;
+    body, html { margin:0; padding:0; height:100%; width:100%; background:#000; }
+    video, img {
+      position:fixed; top:0; left:0; width:100%; height:100%; object-fit:cover;
     }
-    @keyframes fadein { from{opacity:0;} to{opacity:1;} }
-    @keyframes fadeout { from{opacity:1;} to{opacity:0;} }
+    .overlay {
+      position:fixed; top:0; left:0; width:100%;
+      display:flex; justify-content:space-between; align-items:center;
+      padding:16px 20px;
+      background:rgba(0,0,0,0.35);
+      z-index:10;
+    }
+    .overlay a {
+      color:#fff !important;
+      text-decoration:none !important;
+      padding:8px 14px;
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,0.3);
+      background:rgba(0,0,0,0.25);
+      transition:background .2s ease, color .2s ease, border-color .2s ease;
+    }
+    .overlay a:hover {
+      color:gold !important;
+      background:rgba(255,255,255,0.1);
+      border-color:rgba(255,255,255,0.5);
+    }
   </style>
 </head>
 <body>
-  <!-- Intro overlay -->
-  <div id="intro-overlay">Welcome to CityBlocks.com</div>
-
-  <!-- Your existing header, quadrants, footer -->
-  <header class="site-header">
+  <div class="overlay">
     <div class="brand">
-      <img src="CityBlocksLogo01.png" alt="CityBlocks logo" class="logo" />
-      <h1>CityBlocks.com</h1>
+      <img src="../CityBlocksLogo01.png" alt="CityBlocks logo" class="logo" />
+      <h1>Historic Past</h1>
     </div>
-    <nav class="top-nav">
-      <a href="investors.html" class="btn">Investors</a>
-    </nav>
-  </header>
+    <nav><a href="../index.html">Back to Home</a></nav>
+  </div>
 
-  <main class="grid">
-    <!-- Quadrants (unchanged) -->
-    <a class="tile" href="worlds/1940s.html">
-      <div class="media">
-        <img src="1940s.png" alt="1940s still">
-        <video muted playsinline preload="none">
-          <source src="1940s.mp4" type="video/mp4">
-        </video>
-        <div class="scrim"></div>
-      </div>
-      <span class="label">1940s</span>
-    </a>
-
-    <a class="tile" href="worlds/present-day.html">
-      <div class="media">
-        <img src="PresentDay.png" alt="Present Day still">
-        <video muted playsinline preload="none">
-          <source src="PresentDay.mp4" type="video/mp4">
-        </video>
-        <div class="scrim"></div>
-      </div>
-      <span class="label">Present Day</span>
-    </a>
-
-    <a class="tile" href="worlds/future.html">
-      <div class="media">
-        <img src="Future.png" alt="Future still">
-        <video muted playsinline preload="none">
-          <source src="Future.mp4" type="video/mp4">
-        </video>
-        <div class="scrim"></div>
-      </div>
-      <span class="label">Future</span>
-    </a>
-
-    <a class="tile" href="worlds/historic-past.html">
-      <div class="media">
-        <img src="HistoricPast.png" alt="Historic Past still">
-        <video muted playsinline preload="none">
-          <source src="HistoricPast.mp4" type="video/mp4">
-        </video>
-        <div class="scrim"></div>
-      </div>
-      <span class="label">Historic Past</span>
-    </a>
-  </main>
-
-  <footer class="site-footer">
-    <p>© <span id="y"></span> CityBlocks.com</p>
-  </footer>
-
-  <script src="script.js?v=20250825"></script>
-  <script>
-    // Remove intro overlay after animation completes (~5s)
-    setTimeout(() => {
-      const intro = document.getElementById('intro-overlay');
-      if (intro) intro.style.display = 'none';
-    }, 5000);
-
-    // Year in footer
-    document.getElementById('y').textContent = new Date().getFullYear();
-  </script>
+  <!-- Video with PNG fallback -->
+  <video autoplay muted loop playsinline poster="../HistoricPast.png">
+    <source src="../historic_world.mp4" type="video/mp4">
+  </video>
+  <img src="../HistoricPast.png" alt="Historic Past still" />
 </body>
 </html>
