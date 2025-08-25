@@ -1,17 +1,11 @@
 <!DOCTYPE html>
-<!-- CityBlocks.com | Single-Page Launch - v2025-08-24 -->
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>CityBlocks.com</title>
   <meta name="description" content="CityBlocks.com — four animated worlds. Hover to play.">
-  <link rel="preload" href="CityBlocksLogo01.png" as="image">
-  <link rel="preload" href="1940s.png" as="image">
-  <link rel="preload" href="PresentDay.png" as="image">
-  <link rel="preload" href="Future.png" as="image">
-  <link rel="preload" href="HistoricPast.png" as="image">
-  <link rel="stylesheet" href="styles.css?v=20250824">
+  <link rel="stylesheet" href="styles.css?v=20250825">
 </head>
 <body>
   <header class="site-header">
@@ -26,10 +20,9 @@
 
   <main class="grid">
     <!-- 1940s -->
-    <a class="tile" href="#" aria-label="Enter the 1940s world"
-       data-image="1940s.png" data-video="1940s.mp4">
+    <a class="tile" href="worlds/1940s.html">
       <div class="media">
-        <img src="1940s.png" alt="1940s still" loading="eager">
+        <img src="1940s.png" alt="1940s still">
         <video muted playsinline preload="none">
           <source src="1940s.mp4" type="video/mp4">
         </video>
@@ -39,9 +32,47 @@
     </a>
 
     <!-- Present Day -->
-    <a class="tile" href="#" aria-label="Enter the Present Day world"
-       data-image="PresentDay.png" data-video="PresentDay.mp4">
+    <a class="tile" href="worlds/present-day.html">
       <div class="media">
-        <img src="PresentDay.png" alt="Present Day still" loading="lazy">
+        <img src="PresentDay.png" alt="Present Day still">
         <video muted playsinline preload="none">
-          <source src="PresentDay.mp4" type="vide
+          <source src="PresentDay.mp4" type="video/mp4">
+        </video>
+        <div class="scrim"></div>
+      </div>
+      <span class="label">Present Day</span>
+    </a>
+
+    <!-- Future -->
+    <a class="tile" href="worlds/future.html">
+      <div class="media">
+        <img src="Future.png" alt="Future still">
+        <video muted playsinline preload="none">
+          <source src="Future.mp4" type="video/mp4">
+        </video>
+        <div class="scrim"></div>
+      </div>
+      <span class="label">Future</span>
+    </a>
+
+    <!-- Historic Past -->
+    <a class="tile" href="worlds/historic-past.html">
+      <div class="media">
+        <img src="HistoricPast.png" alt="Historic Past still">
+        <video muted playsinline preload="none">
+          <source src="HistoricPast.mp4" type="video/mp4">
+        </video>
+        <div class="scrim"></div>
+      </div>
+      <span class="label">Historic Past</span>
+    </a>
+  </main>
+
+  <footer class="site-footer">
+    <p>© <span id="y"></span> CityBlocks.com</p>
+  </footer>
+
+  <script src="script.js?v=20250825"></script>
+</body>
+</html>
+
