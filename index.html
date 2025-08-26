@@ -180,5 +180,24 @@
       }, 7000);
     })();
   </script>
+  <script>
+const KEY='cb_intro_seen';
+const store=sessionStorage; // use localStorage if you want it to persist across browser restarts
+
+document.addEventListener('DOMContentLoaded',()=>{
+  const intro=document.getElementById('intro');
+  if(store.getItem(KEY)){ 
+    intro?.remove(); 
+    return; 
+  }
+  const hide=()=>{
+    intro.style.display='none'; 
+    store.setItem(KEY,'1');
+  };
+  intro?.addEventListener('click', hide);
+  setTimeout(hide, 6400); // auto-hide after intro animation
+});
+</script>
+
 </body>
 </html>
