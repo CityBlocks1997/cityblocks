@@ -1,64 +1,145 @@
+Below are four complete HTML files. Copy each block into a file with the matching name inside `/worlds/`.
+
+---
+
+**File: `/worlds/1940s.html`**
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>CityBlocks 1940 — CityBlocks.com</title>
-  <link rel="stylesheet" href="../styles.css" />
   <style>
-    html, body {
-      margin: 0;
-      height: 100%;
-      background: #000;
-    }
-    video {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      object-fit: cover;
-      object-position: center;
-      z-index: 0;
-      background: #000;
-    }
-    .overlay {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%;
-      padding: 16px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      z-index: 10;
-    }
-    .brand h1 {
-      margin: 0;
-      font-size: 22px;
-      font-weight: 700;
-      color: #fff;
-    }
-    nav a {
-      color: #fff;
-      text-decoration: none;
-      padding: 8px 14px;
-      border-radius: 12px;
-      border: 1px solid rgba(255,255,255,.5);
-      background: rgba(0,0,0,.4);
-    }
-    nav a:hover {
-      background: gold;
-      color: #000;
-    }
+    html,body{margin:0;height:100%;background:#000}
+    video{position:fixed;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:0;background:#000}
+    .overlay{position:fixed;top:0;left:0;width:100%;padding:16px;display:flex;justify-content:space-between;align-items:center;z-index:10}
+    .brand h1{margin:0;font-size:22px;font-weight:700;color:#fff}
+    nav a{color:#fff;text-decoration:none;padding:8px 14px;border-radius:12px;border:1px solid rgba(255,255,255,.5);background:rgba(0,0,0,.4)}
+    nav a:hover{background:gold;color:#000}
   </style>
 </head>
 <body>
-  <video autoplay muted loop playsinline>
-    <source src="../1940s.mp4" type="video/mp4" />
-    <source src="../videos/1940s.mp4" type="video/mp4" />
+  <video autoplay muted loop playsinline preload="auto" oncanplay="this.play()">
+    <source src="/videos/1940s.mp4" type="video/mp4" />
+    <source src="/1940s.mp4" type="video/mp4" />
   </video>
 
   <div class="overlay">
     <div class="brand"><h1>CityBlocks 1940</h1></div>
-    <nav><a href="../index.html">Back to Home</a></nav>
+    <nav><a href="/index.html">Back to Home</a></nav>
   </div>
 </body>
 </html>
+```
+
+---
+
+**File: `/worlds/future.html`**
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CityBlocks Future — CityBlocks.com</title>
+  <style>
+    html,body{margin:0;height:100%;background:#000}
+    video{position:fixed;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:0;background:#000}
+    .overlay{position:fixed;top:0;left:0;width:100%;padding:16px;display:flex;justify-content:space-between;align-items:center;z-index:10}
+    .brand h1{margin:0;font-size:22px;font-weight:700;color:#fff}
+    nav a{color:#fff;text-decoration:none;padding:8px 14px;border-radius:12px;border:1px solid rgba(255,255,255,.5);background:rgba(0,0,0,.4)}
+    nav a:hover{background:gold;color:#000}
+  </style>
+</head>
+<body>
+  <video autoplay muted loop playsinline preload="auto" oncanplay="this.play()">
+    <source src="/videos/future_world.mp4" type="video/mp4" />
+    <source src="/future_world.mp4" type="video/mp4" />
+  </video>
+
+  <div class="overlay">
+    <div class="brand"><h1>CityBlocks Future</h1></div>
+    <nav><a href="/index.html">Back to Home</a></nav>
+  </div>
+</body>
+</html>
+```
+
+---
+
+**File: `/worlds/historic-past.html`**
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CityBlocks Historic Past — CityBlocks.com</title>
+  <style>
+    html,body{margin:0;height:100%;background:#000}
+    video{position:fixed;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:0;background:#000}
+    .overlay{position:fixed;top:0;left:0;width:100%;padding:16px;display:flex;justify-content:space-between;align-items:center;z-index:10}
+    .brand h1{margin:0;font-size:22px;font-weight:700;color:#fff}
+    nav a{color:#fff;text-decoration:none;padding:8px 14px;border-radius:12px;border:1px solid rgba(255,255,255,.5);background:rgba(0,0,0,.4)}
+    nav a:hover{background:gold;color:#000}
+  </style>
+</head>
+<body>
+  <video autoplay muted loop playsinline preload="auto" oncanplay="this.play()">
+    <source src="/videos/historic_world.mp4" type="video/mp4" />
+    <source src="/historic_world.mp4" type="video/mp4" />
+  </video>
+
+  <div class="overlay">
+    <div class="brand"><h1>CityBlocks Historic Past</h1></div>
+    <nav><a href="/index.html">Back to Home</a></nav>
+  </div>
+</body>
+</html>
+```
+
+---
+
+**File: `/worlds/present-day.html`**
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CityBlocks Present Day — CityBlocks.com</title>
+  <style>
+    html,body{margin:0;height:100%;background:#000}
+    video{position:fixed;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:0;background:#000}
+    .overlay{position:fixed;top:0;left:0;width:100%;padding:16px;display:flex;justify-content:space-between;align-items:center;z-index:10}
+    .brand h1{margin:0;font-size:22px;font-weight:700;color:#fff}
+    nav a{color:#fff;text-decoration:none;padding:8px 14px;border-radius:12px;border:1px solid rgba(255,255,255,.5);background:rgba(0,0,0,.4)}
+    nav a:hover{background:gold;color:#000}
+  </style>
+</head>
+<body>
+  <video autoplay muted loop playsinline preload="auto" oncanplay="this.play()">
+    <source src="/videos/present_world.mp4" type="video/mp4" />
+    <source src="/present_world.mp4" type="video/mp4" />
+  </video>
+
+  <div class="overlay">
+    <div class="brand"><h1>CityBlocks Present Day</h1></div>
+    <nav><a href="/index.html">Back to Home</a></nav>
+  </div>
+</body>
+</html>
+```
+
+---
+
+Notes:
+
+* Uses root-relative paths (`/videos/...`) for reliability.
+* No external CSS, so site fonts stay untouched.
+* Overlay always on top; video fills the viewport.
