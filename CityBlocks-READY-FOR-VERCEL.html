@@ -1,0 +1,1679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CityBlocks - Color Customization</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(to bottom, #0a0e27 0%, #1a1d3a 100%);
+            color: white;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 3rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            color: #888;
+            font-style: italic;
+        }
+
+        .layout {
+            display: grid;
+            grid-template-columns: 350px 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        .controls {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 15px;
+            border: 2px solid rgba(102, 126, 234, 0.3);
+            position: sticky;
+            top: 20px;
+        }
+
+        .tab-navigation {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 25px;
+            border-bottom: 2px solid rgba(102, 126, 234, 0.3);
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 12px 8px;
+            background: transparent;
+            color: #888;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.3s;
+            margin-bottom: -2px;
+        }
+
+        .tab-btn:hover {
+            color: #667eea;
+        }
+
+        .tab-btn.active {
+            color: white;
+            border-bottom-color: #667eea;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .pattern-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .pattern-btn {
+            padding: 10px;
+            border: 3px solid transparent;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .pattern-btn:hover {
+            transform: scale(1.05);
+            border-color: white;
+        }
+
+        .pattern-btn.active {
+            border-color: #764ba2;
+            box-shadow: 0 0 15px rgba(118, 75, 162, 0.5);
+        }
+
+        .pattern-preview {
+            width: 100%;
+            height: 60px;
+            border-radius: 5px;
+            margin-bottom: 8px;
+        }
+
+        .pattern-name {
+            font-size: 0.8rem;
+            text-align: center;
+            color: #ccc;
+        }
+
+        .upload-section {
+            background: rgba(102, 126, 234, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px dashed rgba(102, 126, 234, 0.5);
+            text-align: center;
+        }
+
+        .upload-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s;
+            margin-top: 10px;
+        }
+
+        .upload-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .upload-preview {
+            margin-top: 15px;
+            padding: 10px;
+            background: rgba(74, 222, 128, 0.1);
+            border-radius: 8px;
+            border: 2px solid rgba(74, 222, 128, 0.3);
+            display: none;
+        }
+
+        .remove-btn {
+            padding: 8px 16px;
+            background: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+            border: 2px solid #ef4444;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+
+        .remove-btn:hover {
+            background: rgba(239, 68, 68, 0.3);
+        }
+
+        .control-section {
+            margin-bottom: 30px;
+        }
+
+        .control-section h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .slider-container {
+            margin-bottom: 20px;
+        }
+
+        .slider-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+
+        .slider-value {
+            color: #4ade80;
+            font-weight: 600;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            height: 8px;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.1);
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #667eea;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(102, 126, 234, 0.5);
+        }
+
+        input[type="range"]::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #667eea;
+            cursor: pointer;
+            border: none;
+        }
+
+        .preset-colors {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .color-btn {
+            aspect-ratio: 1;
+            border: 3px solid transparent;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .color-btn:hover {
+            transform: scale(1.1);
+            border-color: white;
+        }
+
+        .color-btn.active {
+            border-color: #4ade80;
+            box-shadow: 0 0 8px rgba(74, 222, 128, 0.6);
+        }
+
+        .color-label {
+            font-size: 0.75rem;
+            text-align: center;
+            margin-top: 5px;
+            color: #aaa;
+        }
+
+        select {
+            width: 100%;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 2px solid rgba(102, 126, 234, 0.3);
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        select option {
+            background: #1a1d3a;
+            color: white;
+        }
+
+        .color-info {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .color-info-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+
+        .color-swatch {
+            width: 100%;
+            height: 50px;
+            border-radius: 8px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            margin-top: 10px;
+        }
+
+        .reset-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .reset-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .preview-section {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 40px;
+            border-radius: 15px;
+            border: 2px solid rgba(102, 126, 234, 0.3);
+        }
+
+        .preview-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .preview-header h2 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        /* CRITICAL: 3-LAYER SYSTEM */
+        .brownstone-container {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+        }
+
+        .brownstone-stack {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+            max-width: 400px;
+            isolation: isolate;
+            /* Clip any overflow to prevent background patterns from showing outside brownstone */
+            overflow: hidden;
+            border-radius: 8px;
+        }
+
+        /* Layer 1: Full building base (everything - roof, windows, entryway) */
+        .brownstone-base {
+            display: block;
+            width: 100%;
+            height: auto;
+            position: relative;
+            z-index: 1;
+            /* Ensure the image fills the container completely */
+            object-fit: cover;
+            background-color: transparent;
+        }
+
+        /* Layer 2: Colored brick walls - uses background-color for colors, background-image for patterns */
+        .brownstone-walls {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            /* NO TRANSITION - instant mode switching for clean UX */
+            /* Prevent any background from extending beyond the container */
+            pointer-events: none;
+            /* Clip the background to the padding box to prevent overflow */
+            background-clip: padding-box;
+            background-origin: padding-box;
+        }
+
+        /* When in color mode: walls PNG is visible with background-color behind it */
+        .brownstone-walls.color-mode {
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            background-position: 0 0;
+        }
+
+        /* When in pattern mode: pattern fills the layer, walls PNG creates the mask effect */
+        .brownstone-walls.pattern-mode {
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            /* Ensure the pattern layer doesn't extend beyond boundaries */
+            background-clip: padding-box;
+        }
+
+        /* Layer 3: Pattern overlay mask - uses walls PNG with destination-in blend mode to clip patterns */
+        .pattern-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 3;
+            display: none;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .homepage-text {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .homepage-text h3 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .jingle {
+            font-size: 1.2rem;
+            color: #4ade80;
+            font-style: italic;
+            margin: 20px 0;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: transform 0.3s;
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 2px solid rgba(102, 126, 234, 0.5);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+        }
+
+        .instructions {
+            background: rgba(102, 126, 234, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 30px;
+            border-left: 4px solid #667eea;
+        }
+
+        .instructions h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .instructions ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .instructions li {
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .instructions li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #4ade80;
+        }
+
+        @media (max-width: 1024px) {
+            .layout {
+                grid-template-columns: 1fr;
+            }
+            
+            .controls {
+                position: static;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>CityBlocks</h1>
+            <p class="tagline">Colors, Patterns & Uploads - Your Brownstone, Your Way</p>
+        </header>
+
+        <div class="layout">
+            <div class="controls">
+                <!-- Tab Navigation -->
+                <div class="tab-navigation">
+                    <button class="tab-btn active" onclick="switchTab('colors')">🎨 Colors</button>
+                    <button class="tab-btn" onclick="switchTab('patterns')">✨ Patterns</button>
+                    <button class="tab-btn" onclick="switchTab('upload')">📤 Upload</button>
+                </div>
+
+                <!-- COLORS TAB -->
+                <div id="colorsTab" class="tab-content active">
+                <div class="control-section">
+                    <h3>🎨 Preset Colors</h3>
+                    <div class="preset-colors">
+                        <div>
+                            <button class="color-btn active" style="background: #DC143C;" data-color="#DC143C" data-name="Red"></button>
+                            <div class="color-label">Red</div>
+                        </div>
+                        <div>
+                            <button class="color-btn" style="background: #F5F5F0;" data-color="#F5F5F0" data-name="White"></button>
+                            <div class="color-label">White</div>
+                        </div>
+                        <div>
+                            <button class="color-btn" style="background: #F5A962;" data-color="#F5A962" data-name="Orange"></button>
+                            <div class="color-label">Orange</div>
+                        </div>
+                        <div>
+                            <button class="color-btn" style="background: #4169E1;" data-color="#4169E1" data-name="Blue"></button>
+                            <div class="color-label">Blue</div>
+                        </div>
+                        <div>
+                            <button class="color-btn" style="background: #7CB342;" data-color="#7CB342" data-name="Green"></button>
+                            <div class="color-label">Green</div>
+                        </div>
+                        <div>
+                            <button class="color-btn" style="background: #E89FB5;" data-color="#E89FB5" data-name="Pink"></button>
+                            <div class="color-label">Pink</div>
+                        </div>
+                        <div>
+                            <button class="color-btn" style="background: #9370DB;" data-color="#9370DB" data-name="Purple"></button>
+                            <div class="color-label">Purple</div>
+                        </div>
+                        <div>
+                            <button class="color-btn" style="background: #7A7A7A;" data-color="#7A7A7A" data-name="Gray"></button>
+                            <div class="color-label">Gray</div>
+                        </div>
+                        <div>
+                            <button class="color-btn" style="background: #FFFF00;" data-color="#FFFF00" data-name="Yellow"></button>
+                            <div class="color-label">Yellow</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="control-section">
+                    <h3>🌈 Color Hue</h3>
+                    <div class="slider-container">
+                        <div class="slider-label">
+                            <span>Hue Rotation</span>
+                            <span class="slider-value" id="hueValue">0°</span>
+                        </div>
+                        <input type="range" id="hueSlider" min="0" max="360" value="0" step="1">
+                    </div>
+                </div>
+
+                <div class="control-section">
+                    <h3>💫 Intensity</h3>
+                    <div class="slider-container">
+                        <div class="slider-label">
+                            <span>Opacity</span>
+                            <span class="slider-value" id="opacityValue">50%</span>
+                        </div>
+                        <input type="range" id="opacitySlider" min="0" max="100" value="50" step="1">
+                    </div>
+                    <div class="slider-container">
+                        <div class="slider-label">
+                            <span>Saturation</span>
+                            <span class="slider-value" id="saturationValue">100%</span>
+                        </div>
+                        <input type="range" id="saturationSlider" min="0" max="200" value="100" step="1">
+                    </div>
+                </div>
+
+                <div class="control-section">
+                    <h3>🎭 Blend Mode</h3>
+                    <select id="blendMode">
+                        <option value="multiply" selected>Multiply (Natural)</option>
+                        <option value="overlay">Overlay (Vibrant)</option>
+                        <option value="color">Color (Wash)</option>
+                        <option value="hard-light">Hard Light (Bold)</option>
+                        <option value="soft-light">Soft Light (Subtle)</option>
+                        <option value="screen">Screen (Bright)</option>
+                    </select>
+                </div>
+
+                <div class="control-section">
+                    <h3>📊 Current Color</h3>
+                    <div class="color-info">
+                        <div class="color-info-row">
+                            <span>Name:</span>
+                            <span id="colorName">Red</span>
+                        </div>
+                        <div class="color-info-row">
+                            <span>Hex:</span>
+                            <span id="colorHex">#DC143C</span>
+                        </div>
+                        <div class="color-info-row">
+                            <span>Opacity:</span>
+                            <span id="colorOpacity">50%</span>
+                        </div>
+                        <div class="color-swatch" id="colorSwatch"></div>
+                    </div>
+                </div>
+                </div>
+
+                <!-- PATTERNS TAB -->
+                <div id="patternsTab" class="tab-content">
+                    <div class="control-section">
+                        <h3>✨ Pattern Library</h3>
+                        <p style="font-size: 0.85rem; color: #888; margin-bottom: 15px;">Choose from our curated patterns</p>
+                        
+                        <div class="pattern-grid">
+                            <div class="pattern-btn" data-pattern="balloons">
+                                <div class="pattern-preview" style="background: #FFB3E6; display: flex; align-items: center; justify-content: center; font-size: 40px;">🎈</div>
+                                <div class="pattern-name">Balloons</div>
+                            </div>
+                            
+                            <div class="pattern-btn" data-pattern="rainbow">
+                                <div class="pattern-preview" style="background: linear-gradient(180deg, #FE0000 0%, #FD8C00 16.67%, #FFE500 33.33%, #119F0B 50%, #0644B3 66.67%, #C22EDC 83.33%, #C22EDC 100%);"></div>
+                                <div class="pattern-name">Rainbow Pride</div>
+                            </div>
+                            
+                            <div class="pattern-btn" data-pattern="smiley">
+                                <div class="pattern-preview" style="background: #FFE066; display: flex; align-items: center; justify-content: center; font-size: 40px;">😊</div>
+                                <div class="pattern-name">Smiley Face</div>
+                            </div>
+                            
+                            <div class="pattern-btn" data-pattern="skull">
+                                <div class="pattern-preview" style="background: #000; display: flex; align-items: center; justify-content: center; font-size: 40px;">💀</div>
+                                <div class="pattern-name">Skull</div>
+                            </div>
+                            
+                            <div class="pattern-btn" data-pattern="peace">
+                                <div class="pattern-preview" style="background: #FFE066; display: flex; align-items: center; justify-content: center; font-size: 40px;">☮️</div>
+                                <div class="pattern-name">Peace Sign</div>
+                            </div>
+                            
+                            <div class="pattern-btn" data-pattern="star">
+                                <div class="pattern-preview" style="background: #2196F3; display: flex; align-items: center; justify-content: center; font-size: 40px;">⭐</div>
+                                <div class="pattern-name">Star</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Pattern Opacity Control -->
+                        <div class="control-section" style="margin-top: 25px;">
+                            <h3>🎨 Pattern Intensity</h3>
+                            
+                            <div class="slider-container">
+                                <div class="slider-label">
+                                    <span>Opacity</span>
+                                    <span id="patternOpacityValue" class="slider-value">70%</span>
+                                </div>
+                                <input type="range" id="patternOpacitySlider" min="0" max="100" value="70">
+                                <p style="font-size: 0.75rem; color: #888; margin-top: 8px;">Lower opacity shows brick texture underneath</p>
+                            </div>
+                            
+                            <div class="slider-container" style="margin-top: 15px;">
+                                <div class="slider-label">
+                                    <span>Saturation</span>
+                                    <span id="patternSaturationValue" class="slider-value">100%</span>
+                                </div>
+                                <input type="range" id="patternSaturationSlider" min="0" max="200" value="100">
+                                <p style="font-size: 0.75rem; color: #888; margin-top: 8px;">Adjust color intensity of the pattern</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- UPLOAD TAB -->
+                <div id="uploadTab" class="tab-content">
+                    <div class="control-section">
+                        <h3>📤 Upload Your Design</h3>
+                        
+                        <div class="upload-section">
+                            <p style="font-size: 1rem; margin-bottom: 10px;">Express your creativity!</p>
+                            <p style="font-size: 0.85rem; color: #888;">Upload band logos, artwork, or patterns</p>
+                            
+                            <input type="file" id="imageUpload" accept="image/*" style="display: none;">
+                            <button class="upload-btn" onclick="document.getElementById('imageUpload').click()">Choose Image</button>
+                            
+                            <div id="uploadPreview" class="upload-preview">
+                                <span style="color: #4ade80;">✅ Image uploaded!</span>
+                                <button class="remove-btn" onclick="removeUpload()">Remove</button>
+                            </div>
+                        </div>
+
+                        <div style="background: rgba(102, 126, 234, 0.1); padding: 15px; border-radius: 8px; margin-top: 20px; border-left: 3px solid #667eea;">
+                            <p style="font-size: 0.85rem; color: #667eea; font-weight: 600; margin-bottom: 8px;">📐 Recommended Image Size:</p>
+                            <ul style="font-size: 0.8rem; color: #ccc; padding-left: 20px; list-style: none;">
+                                <li style="margin-bottom: 5px;">✓ <strong>Optimal:</strong> 1000 x 1500 pixels</li>
+                                <li style="margin-bottom: 5px;">✓ <strong>Aspect Ratio:</strong> 2:3 (portrait)</li>
+                                <li style="margin-bottom: 5px;">✓ <strong>Format:</strong> PNG, JPG, or WEBP</li>
+                            </ul>
+                        </div>
+                        
+                        <div style="background: rgba(255, 193, 7, 0.1); padding: 15px; border-radius: 8px; margin-top: 15px; border-left: 3px solid #ffc107;">
+                            <p style="font-size: 0.85rem; color: #ffc107; font-weight: 600; margin-bottom: 5px;">💡 Ideas for Your Design:</p>
+                            <ul style="font-size: 0.8rem; color: #ccc; padding-left: 20px;">
+                                <li>60s flower power patterns</li>
+                                <li>Band logos & album art</li>
+                                <li>Graffiti & street art</li>
+                                <li>Custom symbols & icons</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Upload Opacity Control -->
+                        <div class="control-section" style="margin-top: 25px;">
+                            <h3>🎨 Image Intensity</h3>
+                            
+                            <div class="slider-container">
+                                <div class="slider-label">
+                                    <span>Opacity</span>
+                                    <span id="uploadOpacityValue" class="slider-value">70%</span>
+                                </div>
+                                <input type="range" id="uploadOpacitySlider" min="0" max="100" value="70">
+                                <p style="font-size: 0.75rem; color: #888; margin-top: 8px;">Lower opacity shows brick texture underneath</p>
+                            </div>
+                            
+                            <div class="slider-container" style="margin-top: 15px;">
+                                <div class="slider-label">
+                                    <span>Saturation</span>
+                                    <span id="uploadSaturationValue" class="slider-value">100%</span>
+                                </div>
+                                <input type="range" id="uploadSaturationSlider" min="0" max="200" value="100">
+                                <p style="font-size: 0.75rem; color: #888; margin-top: 8px;">Adjust color intensity of the image</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="reset-btn" onclick="resetToDefault()">↺ Reset to Default</button>
+            </div>
+
+            <div class="preview-section">
+                <div class="preview-header">
+                    <h2>Live Preview</h2>
+                    <p>Only the brick walls change color - roof and entryway stay gray!</p>
+                </div>
+
+                <div class="brownstone-container">
+                    <div class="brownstone-stack">
+                        <!-- LAYER 1: Full building base (never changes - always gray) -->
+                        <img src="brownstone_desaturated.jpg" alt="Brownstone Base" class="brownstone-base">
+                        
+                        <!-- LAYER 2: Walls layer (shows either color OR pattern through walls PNG) -->
+                        <div class="brownstone-walls" id="coloredWalls"></div>
+                        
+                        <!-- LAYER 3: Not currently used -->
+                        <div class="pattern-overlay" id="patternOverlay"></div>
+                    </div>
+                </div>
+
+                <div class="homepage-text">
+                    <h3>CityBlocks</h3>
+                    <p style="font-size: 1.1rem; color: #ccc;">Where Creators Collaborate</p>
+                    <p class="jingle">"You can own a brownstone... on CityBlocks dot com"</p>
+                    
+                    <div class="cta-buttons">
+                        <a href="#" id="claimButton" class="btn btn-primary" onclick="event.preventDefault(); claimBrownstone(event);">Claim Your Brownstone</a>
+                        <a href="#" class="btn btn-secondary">Take a Tour</a>
+                    </div>
+                </div>
+
+                <div class="instructions">
+                    <h4>🎨 3-Layer System:</h4>
+                    <ul>
+                        <li>Layer 1: Full brownstone (roof, windows, entryway stay gray)</li>
+                        <li>Layer 2: Brick walls only (transparent PNG)</li>
+                        <li>Layer 3: Color overlay (paints the walls!)</li>
+                        <li>Result: Only the walls change color!</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- html2canvas library for capturing design as image -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    
+    <script>
+        const coloredWalls = document.getElementById('coloredWalls');
+        const patternOverlay = document.getElementById('patternOverlay');
+        const hueSlider = document.getElementById('hueSlider');
+        const opacitySlider = document.getElementById('opacitySlider');
+        const saturationSlider = document.getElementById('saturationSlider');
+        const blendModeSelect = document.getElementById('blendMode');
+        const colorButtons = document.querySelectorAll('.color-btn');
+        const patternButtons = document.querySelectorAll('.pattern-btn');
+        const imageUpload = document.getElementById('imageUpload');
+        
+        const hueValue = document.getElementById('hueValue');
+        const opacityValue = document.getElementById('opacityValue');
+        const saturationValue = document.getElementById('saturationValue');
+        const colorName = document.getElementById('colorName');
+        const colorHex = document.getElementById('colorHex');
+        const colorOpacity = document.getElementById('colorOpacity');
+        const colorSwatch = document.getElementById('colorSwatch');
+
+        let currentColor = '#DC143C';
+        let currentName = 'Red';
+        let currentHue = 0;
+        let currentSaturation = 100;
+        let currentOpacity = 50; // Start at 50% to show brick texture
+        let currentMode = 'color'; // 'color', 'pattern', or 'upload'
+        let currentPatternOpacity = 70; // Separate opacity for patterns
+        let currentUploadOpacity = 70; // Separate opacity for uploads
+        let currentPattern = null; // Track which pattern is active
+        let uploadedImageUrl = null; // Track the uploaded image URL
+
+        // Pattern definitions - emoji-style patterns that tile
+        const patterns = {
+            balloons: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext x='50' y='70' font-size='50' text-anchor='middle'%3E🎈%3C/text%3E%3C/svg%3E")`,
+            rainbow: 'linear-gradient(180deg, #FF0000 0%, #FF7F00 14%, #FFFF00 28%, #00FF00 42%, #0000FF 57%, #4B0082 71%, #9400D3 85%, #FF00FF 100%)',
+            smiley: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext x='50' y='70' font-size='50' text-anchor='middle'%3E😊%3C/text%3E%3C/svg%3E")`,
+            skull: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext x='50' y='70' font-size='50' text-anchor='middle'%3E💀%3C/text%3E%3C/svg%3E")`,
+            peace: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext x='50' y='70' font-size='50' text-anchor='middle'%3E☮️%3C/text%3E%3C/svg%3E")`,
+            star: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext x='50' y='70' font-size='50' text-anchor='middle'%3E⭐%3C/text%3E%3C/svg%3E")`
+        };
+
+        // Tab switching
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            
+            event.target.classList.add('active');
+            document.getElementById(tabName + 'Tab').classList.add('active');
+            
+            // Restore the appropriate visual based on tab and stored data
+            if (tabName === 'upload' && uploadedImageUrl) {
+                // Restore uploaded image
+                currentMode = 'upload';
+                coloredWalls.className = 'brownstone-walls pattern-mode';
+                coloredWalls.style.backgroundColor = 'transparent';
+                coloredWalls.style.backgroundImage = `url(${uploadedImageUrl})`;
+                coloredWalls.style.backgroundSize = 'cover';
+                coloredWalls.style.backgroundRepeat = 'no-repeat';
+                coloredWalls.style.backgroundPosition = 'center';
+                coloredWalls.style.opacity = currentUploadOpacity / 100;
+                coloredWalls.style.filter = `saturate(${currentUploadSaturation}%)`;
+                coloredWalls.style.transition = 'none';
+                
+                coloredWalls.style.maskImage = `url('brownstone_walls_only_FIXED.png')`;
+                coloredWalls.style.webkitMaskImage = `url('brownstone_walls_only_FIXED.png')`;
+                coloredWalls.style.maskSize = '100% 100%';
+                coloredWalls.style.webkitMaskSize = '100% 100%';
+                coloredWalls.style.maskRepeat = 'no-repeat';
+                coloredWalls.style.webkitMaskRepeat = 'no-repeat';
+                coloredWalls.style.maskPosition = '0 0';
+                coloredWalls.style.webkitMaskPosition = '0 0';
+                coloredWalls.style.maskComposite = 'source-in';
+                
+                patternOverlay.style.display = 'none';
+                patternOverlay.style.opacity = 0;
+                
+                document.getElementById('uploadPreview').style.display = 'block';
+            } else if (tabName === 'patterns' && currentPattern) {
+                // Restore pattern
+                currentMode = 'pattern';
+                coloredWalls.className = 'brownstone-walls pattern-mode';
+                coloredWalls.style.backgroundColor = 'transparent';
+                coloredWalls.style.backgroundImage = patterns[currentPattern];
+                coloredWalls.style.opacity = currentPatternOpacity / 100;
+                coloredWalls.style.filter = `saturate(${currentPatternSaturation}%)`;
+                coloredWalls.style.transition = 'none';
+                
+                if (currentPattern === 'rainbow') {
+                    coloredWalls.style.backgroundSize = '100% 100%';
+                    coloredWalls.style.backgroundRepeat = 'no-repeat';
+                } else {
+                    coloredWalls.style.backgroundSize = '80px 80px';
+                    coloredWalls.style.backgroundRepeat = 'repeat';
+                }
+                coloredWalls.style.backgroundPosition = '0 0';
+                
+                coloredWalls.style.maskImage = `url('brownstone_walls_only_FIXED.png')`;
+                coloredWalls.style.webkitMaskImage = `url('brownstone_walls_only_FIXED.png')`;
+                coloredWalls.style.maskSize = '100% 100%';
+                coloredWalls.style.webkitMaskSize = '100% 100%';
+                coloredWalls.style.maskRepeat = 'no-repeat';
+                coloredWalls.style.webkitMaskRepeat = 'no-repeat';
+                coloredWalls.style.maskPosition = '0 0';
+                coloredWalls.style.webkitMaskPosition = '0 0';
+                coloredWalls.style.maskComposite = 'source-in';
+                
+                patternOverlay.style.display = 'none';
+                patternOverlay.style.opacity = 0;
+            } else if (tabName === 'colors') {
+                // Restore color mode
+                currentMode = 'color';
+                document.getElementById('uploadPreview').style.display = 'none';
+                updateWallColor();
+            }
+        }
+
+        // Pattern button handlers
+        patternButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                patternButtons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                currentMode = 'pattern';
+                currentPattern = btn.dataset.pattern; // Track current pattern
+                
+                // Pattern mode: pattern is background, mask it with walls PNG
+                coloredWalls.className = 'brownstone-walls pattern-mode';
+                coloredWalls.style.backgroundColor = 'transparent';
+                coloredWalls.style.backgroundImage = patterns[btn.dataset.pattern];
+                coloredWalls.style.opacity = currentPatternOpacity / 100; // Use pattern opacity slider value
+                
+                // Apply saturation filter
+                coloredWalls.style.filter = `saturate(${currentPatternSaturation}%)`;
+                
+                // CRITICAL: Disable transitions to prevent glitchy animations
+                coloredWalls.style.transition = 'none';
+                
+                // Rainbow fills entire area, others TILE/REPEAT like wallpaper
+                if (btn.dataset.pattern === 'rainbow') {
+                    coloredWalls.style.backgroundSize = '100% 100%';
+                    coloredWalls.style.backgroundRepeat = 'no-repeat';
+                } else {
+                    // Make patterns tile/repeat across the walls
+                    coloredWalls.style.backgroundSize = '80px 80px'; // Fixed size for tiling
+                    coloredWalls.style.backgroundRepeat = 'repeat'; // Repeat the pattern!
+                }
+                coloredWalls.style.backgroundPosition = '0 0';
+                
+                // Apply mask directly to coloredWalls with precise positioning
+                coloredWalls.style.maskImage = `url('brownstone_walls_only_FIXED.png')`;
+                coloredWalls.style.webkitMaskImage = `url('brownstone_walls_only_FIXED.png')`;
+                coloredWalls.style.maskSize = '100% 100%';
+                coloredWalls.style.webkitMaskSize = '100% 100%';
+                coloredWalls.style.maskRepeat = 'no-repeat';
+                coloredWalls.style.webkitMaskRepeat = 'no-repeat';
+                coloredWalls.style.maskPosition = '0 0';
+                coloredWalls.style.webkitMaskPosition = '0 0';
+                coloredWalls.style.maskComposite = 'source-in';
+                
+                // Hide Layer 3 since we're using mask-image instead
+                patternOverlay.style.display = 'none';
+                patternOverlay.style.opacity = 0;
+            });
+        });
+
+        // Image upload handler - SINGLE LARGE IMAGE (not tiled!)
+        imageUpload.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    currentMode = 'upload';
+                    uploadedImageUrl = event.target.result; // Save the uploaded image URL
+                    
+                    // Upload mode: uploaded image is background, mask it with walls PNG
+                    coloredWalls.className = 'brownstone-walls pattern-mode';
+                    coloredWalls.style.backgroundColor = 'transparent';
+                    coloredWalls.style.backgroundImage = `url(${uploadedImageUrl})`;
+                    coloredWalls.style.backgroundSize = 'cover'; // Single large image!
+                    coloredWalls.style.backgroundRepeat = 'no-repeat';
+                    coloredWalls.style.backgroundPosition = 'center';
+                    coloredWalls.style.opacity = currentUploadOpacity / 100; // Use upload opacity slider value
+                    
+                    // Apply saturation filter
+                    coloredWalls.style.filter = `saturate(${currentUploadSaturation}%)`;
+                    
+                    // CRITICAL: Disable transitions to prevent glitchy animations
+                    coloredWalls.style.transition = 'none';
+                    
+                    // Apply mask directly to coloredWalls
+                    coloredWalls.style.maskImage = `url('brownstone_walls_only_FIXED.png')`;
+                    coloredWalls.style.webkitMaskImage = `url('brownstone_walls_only_FIXED.png')`;
+                    coloredWalls.style.maskSize = '100% 100%';
+                    coloredWalls.style.webkitMaskSize = '100% 100%';
+                    coloredWalls.style.maskRepeat = 'no-repeat';
+                    coloredWalls.style.webkitMaskRepeat = 'no-repeat';
+                    coloredWalls.style.maskPosition = '0 0';
+                    coloredWalls.style.webkitMaskPosition = '0 0';
+                    coloredWalls.style.maskComposite = 'source-in';
+                    
+                    // Hide Layer 3 since we're using mask-image instead
+                    patternOverlay.style.display = 'none';
+                    patternOverlay.style.opacity = 0;
+                    
+                    // Clear pattern selection and show upload preview
+                    patternButtons.forEach(b => b.classList.remove('active'));
+                    document.getElementById('uploadPreview').style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Remove upload function
+        function removeUpload() {
+            currentMode = 'color';
+            uploadedImageUrl = null; // Clear the saved image URL
+            
+            document.getElementById('uploadPreview').style.display = 'none';
+            imageUpload.value = '';
+            
+            // Hide Layer 3
+            patternOverlay.style.display = 'none';
+            patternOverlay.style.opacity = 0;
+            
+            // Clear masks and filters
+            coloredWalls.style.maskImage = 'none';
+            coloredWalls.style.webkitMaskImage = 'none';
+            coloredWalls.style.filter = 'none';
+            
+            // CRITICAL: Explicitly clear the uploaded image background
+            coloredWalls.style.backgroundImage = '';
+            coloredWalls.style.backgroundSize = '';
+            coloredWalls.style.backgroundRepeat = '';
+            coloredWalls.style.backgroundPosition = '';
+            
+            // Call updateWallColor to restore default tan color with walls PNG
+            updateWallColor();
+        }
+
+        // Initialize by calling updateWallColor
+        updateWallColor();
+
+        colorButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                colorButtons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                currentColor = btn.dataset.color;
+                currentName = btn.dataset.name;
+                currentHue = 0;
+                hueSlider.value = 0;
+                
+                // Switch back to color mode
+                currentMode = 'color';
+                patternButtons.forEach(b => b.classList.remove('active'));
+                
+                // Note: We don't clear uploadedImageUrl - we keep it stored
+                // We just hide the upload preview when in color mode
+                // It will reappear when user switches back to Upload tab
+                
+                // Hide Layer 3 (pattern overlay)
+                patternOverlay.style.display = 'none';
+                patternOverlay.style.opacity = 0;
+                
+                // Clear any masks (from pattern/upload mode)
+                coloredWalls.style.maskImage = 'none';
+                coloredWalls.style.webkitMaskImage = 'none';
+                
+                // Clear any pattern/upload backgrounds
+                coloredWalls.style.backgroundImage = '';
+                coloredWalls.style.backgroundSize = '';
+                coloredWalls.style.backgroundRepeat = '';
+                
+                // updateWallColor will apply the CSS filters for color mode
+                updateWallColor();
+            });
+        });
+
+        hueSlider.addEventListener('input', (e) => {
+            currentHue = e.target.value;
+            hueValue.textContent = currentHue + '°';
+            updateWallColor();
+        });
+
+        opacitySlider.addEventListener('input', (e) => {
+            currentOpacity = e.target.value;
+            opacityValue.textContent = currentOpacity + '%';
+            colorOpacity.textContent = currentOpacity + '%';
+            updateWallColor();
+        });
+
+        saturationSlider.addEventListener('input', (e) => {
+            currentSaturation = e.target.value;
+            saturationValue.textContent = currentSaturation + '%';
+            updateWallColor();
+        });
+
+        // Pattern opacity slider
+        const patternOpacitySlider = document.getElementById('patternOpacitySlider');
+        const patternOpacityValue = document.getElementById('patternOpacityValue');
+        
+        patternOpacitySlider.addEventListener('input', (e) => {
+            currentPatternOpacity = e.target.value;
+            patternOpacityValue.textContent = currentPatternOpacity + '%';
+            if (currentMode === 'pattern') {
+                coloredWalls.style.opacity = currentPatternOpacity / 100;
+            }
+        });
+
+        // Pattern saturation slider
+        const patternSaturationSlider = document.getElementById('patternSaturationSlider');
+        const patternSaturationValue = document.getElementById('patternSaturationValue');
+        let currentPatternSaturation = 100;
+        
+        patternSaturationSlider.addEventListener('input', (e) => {
+            currentPatternSaturation = e.target.value;
+            patternSaturationValue.textContent = currentPatternSaturation + '%';
+            if (currentMode === 'pattern') {
+                coloredWalls.style.filter = `saturate(${currentPatternSaturation}%)`;
+            }
+        });
+
+        // Upload opacity slider
+        const uploadOpacitySlider = document.getElementById('uploadOpacitySlider');
+        const uploadOpacityValue = document.getElementById('uploadOpacityValue');
+        
+        uploadOpacitySlider.addEventListener('input', (e) => {
+            currentUploadOpacity = e.target.value;
+            uploadOpacityValue.textContent = currentUploadOpacity + '%';
+            if (currentMode === 'upload') {
+                coloredWalls.style.opacity = currentUploadOpacity / 100;
+            }
+        });
+
+        // Upload saturation slider
+        const uploadSaturationSlider = document.getElementById('uploadSaturationSlider');
+        const uploadSaturationValue = document.getElementById('uploadSaturationValue');
+        let currentUploadSaturation = 100;
+        
+        uploadSaturationSlider.addEventListener('input', (e) => {
+            currentUploadSaturation = e.target.value;
+            uploadSaturationValue.textContent = currentUploadSaturation + '%';
+            if (currentMode === 'upload') {
+                coloredWalls.style.filter = `saturate(${currentUploadSaturation}%)`;
+            }
+        });
+
+        blendModeSelect.addEventListener('change', (e) => {
+            if (currentMode === 'pattern' || currentMode === 'upload') {
+                // In pattern mode, use background-blend-mode
+                coloredWalls.style.backgroundBlendMode = e.target.value;
+            } else {
+                // In color mode, use mix-blend-mode
+                coloredWalls.style.mixBlendMode = e.target.value;
+            }
+        });
+
+        function updateWallColor() {
+            let color = currentColor;
+            
+            // Calculate hue shift
+            if (currentHue !== 0) {
+                const hsl = hexToHSL(currentColor);
+                hsl.h = (hsl.h + parseInt(currentHue)) % 360;
+                color = HSLToHex(hsl.h, hsl.s, hsl.l);
+            }
+            
+            // Calculate saturation
+            if (currentSaturation !== 100) {
+                const hsl = hexToHSL(color);
+                hsl.s = (hsl.s * currentSaturation) / 100;
+                if (hsl.s > 100) hsl.s = 100;
+                color = HSLToHex(hsl.h, hsl.s, hsl.l);
+            }
+            
+            // In color mode: use the walls PNG as background-image and apply CSS filters
+            coloredWalls.className = 'brownstone-walls color-mode';
+            coloredWalls.style.backgroundImage = `url('brownstone_walls_only_FIXED.png')`;
+            coloredWalls.style.backgroundColor = 'transparent';
+            coloredWalls.style.backgroundSize = '100% 100%';
+            coloredWalls.style.backgroundRepeat = 'no-repeat';
+            coloredWalls.style.backgroundPosition = '0 0';
+            
+            // CRITICAL: Disable transitions to prevent glitchy animations
+            coloredWalls.style.transition = 'none';
+            
+            // Apply color tint using CSS filter (this is what makes colors work!)
+            const hsl = hexToHSL(color);
+            coloredWalls.style.filter = `
+                brightness(0.8)
+                sepia(100%)
+                hue-rotate(${hsl.h - 40}deg)
+                saturate(${hsl.s / 100 * 3})
+            `;
+            
+            // Apply opacity to the whole layer
+            coloredWalls.style.opacity = currentOpacity / 100;
+            
+            // Clear any masks from pattern/upload mode
+            coloredWalls.style.maskImage = 'none';
+            coloredWalls.style.webkitMaskImage = 'none';
+            coloredWalls.style.backgroundBlendMode = '';
+            coloredWalls.style.maskComposite = 'auto';
+            
+            // Update UI
+            colorHex.textContent = color.toUpperCase();
+            colorSwatch.style.backgroundColor = color;
+            colorName.textContent = currentHue === 0 ? currentName : currentName + ' (Modified)';
+        }
+
+        function resetToDefault() {
+            currentColor = '#DC143C';
+            currentName = 'Red';
+            currentHue = 0;
+            currentSaturation = 100;
+            currentOpacity = 50; // Reset to 50% to show brick texture
+            currentMode = 'color';
+            currentPatternOpacity = 70;
+            currentUploadOpacity = 70;
+            currentPatternSaturation = 100;
+            currentUploadSaturation = 100;
+            uploadedImageUrl = null;
+            currentPattern = null;
+            
+            hueSlider.value = 0;
+            saturationSlider.value = 100;
+            opacitySlider.value = 50; // Reset slider to 50%
+            patternOpacitySlider.value = 70;
+            uploadOpacitySlider.value = 70;
+            patternSaturationSlider.value = 100;
+            uploadSaturationSlider.value = 100;
+            blendModeSelect.value = 'multiply';
+            
+            hueValue.textContent = '0°';
+            saturationValue.textContent = '100%';
+            opacityValue.textContent = '50%'; // Display 50%
+            patternOpacityValue.textContent = '70%';
+            uploadOpacityValue.textContent = '70%';
+            patternSaturationValue.textContent = '100%';
+            uploadSaturationValue.textContent = '100%';
+            
+            colorButtons.forEach(b => b.classList.remove('active'));
+            colorButtons[0].classList.add('active');
+            patternButtons.forEach(b => b.classList.remove('active'));
+            
+            // Hide Layer 3
+            patternOverlay.style.display = 'none';
+            patternOverlay.style.opacity = 0;
+            
+            // Clear masks (for pattern mode)
+            coloredWalls.style.maskImage = 'none';
+            coloredWalls.style.webkitMaskImage = 'none';
+            
+            // Clear any pattern/upload backgrounds
+            coloredWalls.style.backgroundImage = '';
+            coloredWalls.style.backgroundSize = '';
+            coloredWalls.style.backgroundRepeat = '';
+            
+            // Reset upload
+            document.getElementById('uploadPreview').style.display = 'none';
+            imageUpload.value = '';
+            
+            // Reset claim button
+            const claimBtn = document.getElementById('claimButton');
+            if (claimBtn) {
+                claimBtn.textContent = 'Claim Your Brownstone';
+                claimBtn.style.pointerEvents = 'auto';
+            }
+            
+            // Switch back to Colors tab
+            const tabButtons = document.querySelectorAll('.tab-btn');
+            tabButtons.forEach((btn, index) => {
+                btn.classList.remove('active');
+                if (index === 0) btn.classList.add('active');
+            });
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            document.getElementById('colorsTab').classList.add('active');
+            
+            updateWallColor();
+        }
+
+        function hexToHSL(hex) {
+            let r = parseInt(hex.slice(1, 3), 16) / 255;
+            let g = parseInt(hex.slice(3, 5), 16) / 255;
+            let b = parseInt(hex.slice(5, 7), 16) / 255;
+
+            let max = Math.max(r, g, b);
+            let min = Math.min(r, g, b);
+            let h, s, l = (max + min) / 2;
+
+            if (max === min) {
+                h = s = 0;
+            } else {
+                let d = max - min;
+                s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+                
+                switch (max) {
+                    case r: h = ((g - b) / d + (g < b ? 6 : 0)) / 6; break;
+                    case g: h = ((b - r) / d + 2) / 6; break;
+                    case b: h = ((r - g) / d + 4) / 6; break;
+                }
+            }
+
+            return {
+                h: Math.round(h * 360),
+                s: Math.round(s * 100),
+                l: Math.round(l * 100)
+            };
+        }
+
+        function HSLToHex(h, s, l) {
+            s /= 100;
+            l /= 100;
+
+            let c = (1 - Math.abs(2 * l - 1)) * s;
+            let x = c * (1 - Math.abs((h / 60) % 2 - 1));
+            let m = l - c / 2;
+            let r = 0, g = 0, b = 0;
+
+            if (0 <= h && h < 60) {
+                r = c; g = x; b = 0;
+            } else if (60 <= h && h < 120) {
+                r = x; g = c; b = 0;
+            } else if (120 <= h && h < 180) {
+                r = 0; g = c; b = x;
+            } else if (180 <= h && h < 240) {
+                r = 0; g = x; b = c;
+            } else if (240 <= h && h < 300) {
+                r = x; g = 0; b = c;
+            } else if (300 <= h && h < 360) {
+                r = c; g = 0; b = x;
+            }
+
+            r = Math.round((r + m) * 255);
+            g = Math.round((g + m) * 255);
+            b = Math.round((b + m) * 255);
+
+            return '#' + [r, g, b].map(x => {
+                const hex = x.toString(16);
+                return hex.length === 1 ? '0' + hex : hex;
+            }).join('');
+        }
+
+        // Function to generate and publish a brownstone page
+        function claimBrownstone(event) {
+            // Show a loading message
+            const originalButtonText = event.target.textContent;
+            event.target.textContent = '🎨 Generating Your Page...';
+            event.target.style.pointerEvents = 'none';
+            
+            // Get the current brownstone state
+            const modeName = currentMode === 'color' ? currentName : 
+                           currentMode === 'pattern' ? currentPattern : 
+                           'Custom';
+            
+            const timestamp = new Date().toLocaleDateString('en-US', { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            });
+            
+            // Create a visual representation based on mode
+            let displayContent = '';
+            
+            if (currentMode === 'color') {
+                // For color mode, show a colored rectangle
+                let color = currentColor;
+                if (currentHue !== 0) {
+                    const hsl = hexToHSL(currentColor);
+                    hsl.h = (hsl.h + parseInt(currentHue)) % 360;
+                    color = HSLToHex(hsl.h, hsl.s, hsl.l);
+                }
+                if (currentSaturation !== 100) {
+                    const hsl = hexToHSL(color);
+                    hsl.s = (hsl.s * currentSaturation) / 100;
+                    if (hsl.s > 100) hsl.s = 100;
+                    color = HSLToHex(hsl.h, hsl.s, hsl.l);
+                }
+                
+                displayContent = `
+                    <div style="width: 400px; height: 600px; background: ${color}; opacity: ${currentOpacity / 100}; border-radius: 15px; box-shadow: 0 20px 60px rgba(102, 126, 234, 0.3); margin: 0 auto;">
+                    </div>
+                `;
+            } else if (currentMode === 'pattern') {
+                // For pattern mode, show the pattern
+                const patternBg = patterns[currentPattern];
+                const bgSize = currentPattern === 'rainbow' ? '100% 100%' : '80px 80px';
+                const bgRepeat = currentPattern === 'rainbow' ? 'no-repeat' : 'repeat';
+                
+                displayContent = `
+                    <div style="width: 400px; height: 600px; background-image: ${patternBg}; background-size: ${bgSize}; background-repeat: ${bgRepeat}; background-position: center; opacity: ${currentPatternOpacity / 100}; filter: saturate(${currentPatternSaturation}%); border-radius: 15px; box-shadow: 0 20px 60px rgba(102, 126, 234, 0.3); margin: 0 auto;">
+                    </div>
+                `;
+            } else if (currentMode === 'upload' && uploadedImageUrl) {
+                // For upload mode, use the stored image URL
+                displayContent = `
+                    <div style="width: 400px; height: 600px; background-image: url('${uploadedImageUrl}'); background-size: cover; background-repeat: no-repeat; background-position: center; opacity: ${currentUploadOpacity / 100}; filter: saturate(${currentUploadSaturation}%); border-radius: 15px; box-shadow: 0 20px 60px rgba(102, 126, 234, 0.3); margin: 0 auto;">
+                    </div>
+                `;
+            }
+            
+            const pageHTML = `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My CityBlocks Brownstone - ${modeName}</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(to bottom, #0a0e27 0%, #1a1d3a 100%);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            width: 100%;
+            text-align: center;
+        }
+        
+        .header {
+            margin-bottom: 40px;
+        }
+        
+        .logo {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        h1 {
+            font-size: 3rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
+        }
+        
+        .tagline {
+            font-size: 1.3rem;
+            color: #4ade80;
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+        
+        .creator-info {
+            font-size: 1rem;
+            color: #888;
+            margin-bottom: 40px;
+        }
+        
+        .brownstone-showcase {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 40px;
+            border-radius: 20px;
+            border: 3px solid rgba(102, 126, 234, 0.4);
+            margin-bottom: 40px;
+        }
+        
+        .design-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 25px;
+            border-radius: 12px;
+            margin-top: 30px;
+        }
+        
+        .detail-item {
+            text-align: center;
+        }
+        
+        .detail-label {
+            font-size: 0.85rem;
+            color: #888;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .detail-value {
+            font-size: 1.2rem;
+            color: #4ade80;
+            font-weight: 600;
+        }
+        
+        .cta-section {
+            margin-top: 40px;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            padding: 15px 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 10px;
+            transition: transform 0.3s;
+            margin: 10px;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+        }
+        
+        .secondary-button {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(102, 126, 234, 0.5);
+        }
+        
+        .footer {
+            margin-top: 60px;
+            padding: 30px;
+            border-top: 2px solid rgba(102, 126, 234, 0.3);
+            color: #666;
+        }
+        
+        .jingle {
+            font-size: 1.1rem;
+            color: #4ade80;
+            font-style: italic;
+            margin-bottom: 15px;
+        }
+        
+        .share-note {
+            background: rgba(74, 222, 128, 0.1);
+            border: 2px solid rgba(74, 222, 128, 0.3);
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 30px;
+        }
+        
+        .share-note h3 {
+            color: #4ade80;
+            margin-bottom: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .logo {
+                font-size: 3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>My CityBlocks Brownstone</h1>
+            <p class="tagline">"${modeName}" Design</p>
+            <p class="creator-info">Created on ${timestamp}</p>
+        </div>
+        
+        <div class="brownstone-showcase">
+            ${displayContent}
+            
+            <div class="design-details">
+                <div class="detail-item">
+                    <div class="detail-label">Style</div>
+                    <div class="detail-value">${currentMode === 'color' ? 'Solid Color' : currentMode === 'pattern' ? 'Pattern' : 'Custom Image'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Design</div>
+                    <div class="detail-value">${modeName}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Opacity</div>
+                    <div class="detail-value">${currentMode === 'color' ? currentOpacity : currentMode === 'pattern' ? currentPatternOpacity : currentUploadOpacity}%</div>
+                </div>
+                ${currentMode === 'color' ? `
+                <div class="detail-item">
+                    <div class="detail-label">Hue Shift</div>
+                    <div class="detail-value">${currentHue}°</div>
+                </div>
+                ` : ''}
+                <div class="detail-item">
+                    <div class="detail-label">Saturation</div>
+                    <div class="detail-value">${currentMode === 'color' ? currentSaturation : currentMode === 'pattern' ? currentPatternSaturation : currentUploadSaturation}%</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="share-note">
+            <h3>📢 Share Your Creation!</h3>
+            <p>This page is completely self-contained! Save it (Ctrl+S or Cmd+S) and share it with anyone.</p>
+        </div>
+        
+        <div class="cta-section">
+            <button class="cta-button secondary-button" onclick="window.print(); return false;">🖨️ Print This Page</button>
+        </div>
+        
+        <div class="footer">
+            <p class="jingle">"You can own a brownstone... on CityBlocks dot com"</p>
+            <p style="font-size: 0.9rem;">© 2025 CityBlocks - Where Creators Collaborate</p>
+            <p style="font-size: 0.85rem; margin-top: 10px;">Built with the CityBlocks 3-Layer System</p>
+        </div>
+    </div>
+</body>
+</html>`;
+            
+            // Create a Blob from the HTML content
+            const blob = new Blob([pageHTML], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            
+            // Try to open in new window
+            const newWindow = window.open(url, '_blank', 'width=1000,height=800');
+            
+            if (newWindow) {
+                console.log('Page opened successfully!');
+                event.target.textContent = '✓ Page Generated!';
+                setTimeout(() => {
+                    event.target.textContent = originalButtonText;
+                    event.target.style.pointerEvents = 'auto';
+                }, 2000);
+            } else {
+                // If popup blocked, download instead
+                console.log('Popup blocked, downloading...');
+                const link = document.createElement('a');
+                const fileTimestamp = new Date().toISOString().slice(0,10);
+                link.download = `My-CityBlocks-Brownstone-${modeName}-${fileTimestamp}.html`;
+                link.href = url;
+                link.click();
+                
+                event.target.textContent = '✓ Page Downloaded!';
+                alert('Popup blocked! Your brownstone page has been downloaded. Open the HTML file to view your creation!');
+                setTimeout(() => {
+                    event.target.textContent = originalButtonText;
+                    event.target.style.pointerEvents = 'auto';
+                }, 3000);
+            }
+        }
+    </script>
+</body>
+</html>
