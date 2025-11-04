@@ -879,8 +879,8 @@
                 coloredWalls.style.filter = `saturate(${currentUploadSaturation}%)`;
                 coloredWalls.style.transition = 'none';
                 
-                coloredWalls.style.maskImage = `url('brownstone_walls_only.png')`;
-                coloredWalls.style.webkitMaskImage = `url('brownstone_walls_only.png')`;
+                coloredWalls.style.maskImage = `url('walls_only.png')`;
+                coloredWalls.style.webkitMaskImage = `url('walls_only.png')`;
                 coloredWalls.style.maskSize = '100% 100%';
                 coloredWalls.style.webkitMaskSize = '100% 100%';
                 coloredWalls.style.maskRepeat = 'no-repeat';
@@ -912,8 +912,8 @@
                 }
                 coloredWalls.style.backgroundPosition = '0 0';
                 
-                coloredWalls.style.maskImage = `url('brownstone_walls_only.png')`;
-                coloredWalls.style.webkitMaskImage = `url('brownstone_walls_only.png')`;
+                coloredWalls.style.maskImage = `url('walls_only.png')`;
+                coloredWalls.style.webkitMaskImage = `url('walls_only.png')`;
                 coloredWalls.style.maskSize = '100% 100%';
                 coloredWalls.style.webkitMaskSize = '100% 100%';
                 coloredWalls.style.maskRepeat = 'no-repeat';
@@ -965,8 +965,8 @@
                 coloredWalls.style.backgroundPosition = '0 0';
                 
                 // Apply mask directly to coloredWalls with precise positioning
-                coloredWalls.style.maskImage = `url('brownstone_walls_only.png')`;
-                coloredWalls.style.webkitMaskImage = `url('brownstone_walls_only.png')`;
+                coloredWalls.style.maskImage = `url('walls_only.png')`;
+                coloredWalls.style.webkitMaskImage = `url('walls_only.png')`;
                 coloredWalls.style.maskSize = '100% 100%';
                 coloredWalls.style.webkitMaskSize = '100% 100%';
                 coloredWalls.style.maskRepeat = 'no-repeat';
@@ -1006,8 +1006,8 @@
                     coloredWalls.style.transition = 'none';
                     
                     // Apply mask directly to coloredWalls
-                    coloredWalls.style.maskImage = `url('brownstone_walls_only.png')`;
-                    coloredWalls.style.webkitMaskImage = `url('brownstone_walls_only.png')`;
+                    coloredWalls.style.maskImage = `url('walls_only.png')`;
+                    coloredWalls.style.webkitMaskImage = `url('walls_only.png')`;
                     coloredWalls.style.maskSize = '100% 100%';
                     coloredWalls.style.webkitMaskSize = '100% 100%';
                     coloredWalls.style.maskRepeat = 'no-repeat';
@@ -1193,7 +1193,7 @@
             
             // In color mode: use the walls PNG as background-image and apply CSS filters
             coloredWalls.className = 'brownstone-walls color-mode';
-            coloredWalls.style.backgroundImage = `url('brownstone_walls_only.png')`;
+            coloredWalls.style.backgroundImage = `url('walls_only.png')`;
             coloredWalls.style.backgroundColor = 'transparent';
             coloredWalls.style.backgroundSize = '100% 100%';
             coloredWalls.style.backgroundRepeat = 'no-repeat';
@@ -1582,7 +1582,7 @@
                         // Return just the base brownstone if mask fails
                         resolve(canvas.toDataURL('image/png'));
                     };
-                    maskImg.src = 'brownstone_walls_only.png';
+                    maskImg.src = 'walls_only.png';
                 };
                 
                 baseImg.onerror = (error) => {
