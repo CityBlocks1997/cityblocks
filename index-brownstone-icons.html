@@ -364,7 +364,7 @@
             width: 100%;
             height: 100%;
             z-index: 2;
-            background-color: #8b5cf6;
+            background-color: #D4A574;
             -webkit-mask-image: url('walls_only.png');
             mask-image: url('walls_only.png');
             -webkit-mask-size: 100% 100%;
@@ -729,8 +729,8 @@
     <script>
         // State variables
         let currentMode = 'colors';
-        let currentColor = '#8b5cf6';
-        let currentName = 'Purple';
+        let currentColor = '#8b5cf6';     ← Change to '#D4A574'
+        let currentName = 'Purple';        ← Change to 'Natural Tan'
         let currentHue = 0;
         let currentOpacity = 50;
         let currentSaturation = 100;
@@ -1300,9 +1300,9 @@
 
         // Reset to default
         function resetToDefault() {
-            // Reset colors
-            currentColor = '#8b5cf6';
-            currentName = 'Purple';
+       // Reset colors
+            currentColor = '#D4A574';      ← Change this
+            currentName = 'Natural Tan';   ← Change this
             currentHue = 0;
             currentOpacity = 50;
             currentSaturation = 100;
