@@ -107,12 +107,17 @@
 
         .color-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 12px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
             margin-bottom: 30px;
         }
 
+        .color-option {
+            text-align: center;
+        }
+
         .color-btn {
+            width: 100%;
             aspect-ratio: 1;
             border: 3px solid transparent;
             border-radius: 12px;
@@ -120,16 +125,29 @@
             transition: all 0.3s;
             position: relative;
             overflow: hidden;
+            background: rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
         }
 
         .color-btn:hover {
-            transform: scale(1.1);
+            transform: scale(1.05);
             box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+            border-color: rgba(102, 126, 234, 0.5);
         }
 
         .color-btn.active {
             border-color: white;
             box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .brownstone-icon {
+            width: 100%;
+            height: auto;
+            display: block;
         }
 
         .color-label {
@@ -417,6 +435,10 @@
             h1 {
                 font-size: 2rem;
             }
+
+            .color-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
         }
     </style>
 </head>
@@ -438,42 +460,150 @@
 
                 <!-- Colors Tab -->
                 <div id="colorsTab" class="tab-content active">
-                    <div class="section-title">🎨 Preset Colors</div>
+                    <div class="section-title">🏠 Preset Colors</div>
                     <div class="color-grid">
-                        <div>
-                            <div class="color-btn" style="background-color: #dc2626;" onclick="selectColor('#dc2626', 'Red')" data-color="red"></div>
+                        <div class="color-option">
+                            <div class="color-btn" onclick="selectColor('#dc2626', 'Red')" data-color="red">
+                                <svg class="brownstone-icon" viewBox="0 0 100 140" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="10" y="30" width="80" height="100" fill="#dc2626"/>
+                                    <polygon points="50,10 10,30 90,30" fill="#333"/>
+                                    <rect x="20" y="50" width="15" height="20" fill="#87CEEB"/>
+                                    <rect x="42" y="50" width="15" height="20" fill="#87CEEB"/>
+                                    <rect x="65" y="50" width="15" height="20" fill="#87CEEB"/>
+                                    <rect x="20" y="80" width="15" height="20" fill="#87CEEB"/>
+                                    <rect x="42" y="80" width="15" height="20" fill="#87CEEB"/>
+                                    <rect x="65" y="80" width="15" height="20" fill="#87CEEB"/>
+                                    <rect x="35" y="105" width="30" height="25" fill="#654321"/>
+                                </svg>
+                            </div>
                             <div class="color-label">Red</div>
                         </div>
-                        <div>
-                            <div class="color-btn" style="background-color: #f5f5f5;" onclick="selectColor('#f5f5f5', 'White')" data-color="white"></div>
+                        <div class="color-option">
+                            <div class="color-btn" onclick="selectColor('#f5f5f5', 'White')" data-color="white">
+                                <svg class="brownstone-icon" viewBox="0 0 100 140" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="10" y="30" width="80" height="100" fill="#f5f5f5"/>
+                                    <polygon points="50,10 10,30 90,30" fill="#333"/>
+                                    <rect x="20" y="50" width="15" height="20" fill="#87CEEB"/>
+                                    <rect x="42" y="50" width="15" height="20" fill="#87CEEB"/>
+                                    <rect x="65" y="50" width="15" height="20" fill="#87CEEB"/>
+                                    <rect x="20" y="80" width="15" height="20" fill="#87CEEB"/>
+                                    <rect x="42" y="80" width="15" height="20" fill="#87CEEB"/>
+                                    <rect x="65" y="80" width="15" height="20" fill="#87CEEB"/>
+                                    <rect x="35" y="105" width="30" height="25" fill="#654321"/>
+                                </svg>
+                            </div>
                             <div class="color-label">White</div>
                         </div>
-                        <div>
-                            <div class="color-btn" style="background-color: #f97316;" onclick="selectColor('#f97316', 'Orange')" data-color="orange"></div>
+                        <div class="color-option">
+                            <div class="color-btn" onclick="selectColor('#f97316', 'Orange')" data-color="orange">
+                                <svg class="brownstone-icon" viewBox="0 0 100 140" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="10" y="30" width="80" height="100" fill="#f97316"/>
+                                    <polygon points="50,10 10,30 90,30" fill="#333"/>
+                                    <rect x="20" y="50" width="15" height="20" fill="#87CEEB"/>
+                                    <rect x="42" y="50" width="15" height="20" fill="#87CEEB"/>
+                                    <rect x="65" y="50" width="15" height="20" fill="#87CEEB"/>
+                                    <rect x="20" y="80" width="15" height="20" fill="#87CEEB"/>
+                                    <rect x="42" y="80" width="15" height="20" fill="#87CEEB"/>
+                                    <rect x="65" y="80" width="15" height="20" fill="#87CEEB"/>
+                                    <rect x="35" y="105" width="30" height="25" fill="#654321"/>
+                                </svg>
+                            </div>
                             <div class="color-label">Orange</div>
                         </div>
-                        <div>
-                            <div class="color-btn" style="background-color: #3b82f6;" onclick="selectColor('#3b82f6', 'Blue')" data-color="blue"></div>
+                        <div class="color-option">
+                            <div class="color-btn" onclick="selectColor('#3b82f6', 'Blue')" data-color="blue">
+                                <svg class="brownstone-icon" viewBox="0 0 100 140" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="10" y="30" width="80" height="100" fill="#3b82f6"/>
+                                    <polygon points="50,10 10,30 90,30" fill="#333"/>
+                                    <rect x="20" y="50" width="15" height="20" fill="#87CEEB"/>
+                                    <rect x="42" y="50" width="15" height="20" fill="#87CEEB"/>
+                                    <rect x="65" y="50" width="15" height="20" fill="#87CEEB"/>
+                                    <rect x="20" y="80" width="15" height="20" fill="#87CEEB"/>
+                                    <rect x="42" y="80" width="15" height="20" fill="#87CEEB"/>
+                                    <rect x="65" y="80" width="15" height="20" fill="#87CEEB"/>
+                                    <rect x="35" y="105" width="30" height="25" fill="#654321"/>
+                                </svg>
+                            </div>
                             <div class="color-label">Blue</div>
                         </div>
-                        <div>
-                            <div class="color-btn" style="background-color: #10b981;" onclick="selectColor('#10b981', 'Green')" data-color="green"></div>
+                        <div class="color-option">
+                            <div class="color-btn" onclick="selectColor('#10b981', 'Green')" data-color="green">
+                                <svg class="brownstone-icon" viewBox="0 0 100 140" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="10" y="30" width="80" height="100" fill="#10b981"/>
+                                    <polygon points="50,10 10,30 90,30" fill="#333"/>
+                                    <rect x="20" y="50" width="15" height="20" fill="#87CEEB"/>
+                                    <rect x="42" y="50" width="15" height="20" fill="#87CEEB"/>
+                                    <rect x="65" y="50" width="15" height="20" fill="#87CEEB"/>
+                                    <rect x="20" y="80" width="15" height="20" fill="#87CEEB"/>
+                                    <rect x="42" y="80" width="15" height="20" fill="#87CEEB"/>
+                                    <rect x="65" y="80" width="15" height="20" fill="#87CEEB"/>
+                                    <rect x="35" y="105" width="30" height="25" fill="#654321"/>
+                                </svg>
+                            </div>
                             <div class="color-label">Green</div>
                         </div>
-                        <div>
-                            <div class="color-btn" style="background-color: #ec4899;" onclick="selectColor('#ec4899', 'Pink')" data-color="pink"></div>
+                        <div class="color-option">
+                            <div class="color-btn" onclick="selectColor('#ec4899', 'Pink')" data-color="pink">
+                                <svg class="brownstone-icon" viewBox="0 0 100 140" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="10" y="30" width="80" height="100" fill="#ec4899"/>
+                                    <polygon points="50,10 10,30 90,30" fill="#333"/>
+                                    <rect x="20" y="50" width="15" height="20" fill="#87CEEB"/>
+                                    <rect x="42" y="50" width="15" height="20" fill="#87CEEB"/>
+                                    <rect x="65" y="50" width="15" height="20" fill="#87CEEB"/>
+                                    <rect x="20" y="80" width="15" height="20" fill="#87CEEB"/>
+                                    <rect x="42" y="80" width="15" height="20" fill="#87CEEB"/>
+                                    <rect x="65" y="80" width="15" height="20" fill="#87CEEB"/>
+                                    <rect x="35" y="105" width="30" height="25" fill="#654321"/>
+                                </svg>
+                            </div>
                             <div class="color-label">Pink</div>
                         </div>
-                        <div>
-                            <div class="color-btn" style="background-color: #8b5cf6;" onclick="selectColor('#8b5cf6', 'Purple')" data-color="purple"></div>
+                        <div class="color-option">
+                            <div class="color-btn" onclick="selectColor('#8b5cf6', 'Purple')" data-color="purple">
+                                <svg class="brownstone-icon" viewBox="0 0 100 140" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="10" y="30" width="80" height="100" fill="#8b5cf6"/>
+                                    <polygon points="50,10 10,30 90,30" fill="#333"/>
+                                    <rect x="20" y="50" width="15" height="20" fill="#87CEEB"/>
+                                    <rect x="42" y="50" width="15" height="20" fill="#87CEEB"/>
+                                    <rect x="65" y="50" width="15" height="20" fill="#87CEEB"/>
+                                    <rect x="20" y="80" width="15" height="20" fill="#87CEEB"/>
+                                    <rect x="42" y="80" width="15" height="20" fill="#87CEEB"/>
+                                    <rect x="65" y="80" width="15" height="20" fill="#87CEEB"/>
+                                    <rect x="35" y="105" width="30" height="25" fill="#654321"/>
+                                </svg>
+                            </div>
                             <div class="color-label">Purple</div>
                         </div>
-                        <div>
-                            <div class="color-btn" style="background-color: #6b7280;" onclick="selectColor('#6b7280', 'Gray')" data-color="gray"></div>
+                        <div class="color-option">
+                            <div class="color-btn" onclick="selectColor('#6b7280', 'Gray')" data-color="gray">
+                                <svg class="brownstone-icon" viewBox="0 0 100 140" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="10" y="30" width="80" height="100" fill="#6b7280"/>
+                                    <polygon points="50,10 10,30 90,30" fill="#333"/>
+                                    <rect x="20" y="50" width="15" height="20" fill="#87CEEB"/>
+                                    <rect x="42" y="50" width="15" height="20" fill="#87CEEB"/>
+                                    <rect x="65" y="50" width="15" height="20" fill="#87CEEB"/>
+                                    <rect x="20" y="80" width="15" height="20" fill="#87CEEB"/>
+                                    <rect x="42" y="80" width="15" height="20" fill="#87CEEB"/>
+                                    <rect x="65" y="80" width="15" height="20" fill="#87CEEB"/>
+                                    <rect x="35" y="105" width="30" height="25" fill="#654321"/>
+                                </svg>
+                            </div>
                             <div class="color-label">Gray</div>
                         </div>
-                        <div>
-                            <div class="color-btn" style="background-color: #fbbf24;" onclick="selectColor('#fbbf24', 'Yellow')" data-color="yellow"></div>
+                        <div class="color-option">
+                            <div class="color-btn" onclick="selectColor('#fbbf24', 'Yellow')" data-color="yellow">
+                                <svg class="brownstone-icon" viewBox="0 0 100 140" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="10" y="30" width="80" height="100" fill="#fbbf24"/>
+                                    <polygon points="50,10 10,30 90,30" fill="#333"/>
+                                    <rect x="20" y="50" width="15" height="20" fill="#87CEEB"/>
+                                    <rect x="42" y="50" width="15" height="20" fill="#87CEEB"/>
+                                    <rect x="65" y="50" width="15" height="20" fill="#87CEEB"/>
+                                    <rect x="20" y="80" width="15" height="20" fill="#87CEEB"/>
+                                    <rect x="42" y="80" width="15" height="20" fill="#87CEEB"/>
+                                    <rect x="65" y="80" width="15" height="20" fill="#87CEEB"/>
+                                    <rect x="35" y="105" width="30" height="25" fill="#654321"/>
+                                </svg>
+                            </div>
                             <div class="color-label">Yellow</div>
                         </div>
                     </div>
@@ -666,7 +796,7 @@
             document.querySelectorAll('.color-btn').forEach(btn => {
                 btn.classList.remove('active');
             });
-            event.target.classList.add('active');
+            event.target.closest('.color-btn').classList.add('active');
             
             updateWallColor();
         }
