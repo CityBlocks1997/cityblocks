@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CityBlocks - Your Creative Brownstone</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #fff;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            margin-bottom: 40px;
+            backdrop-filter: blur(10px);
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            background: linear-gradient(135deg, #d4af37 0%, #f5c842 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+
+        .tagline {
+            font-size: 1.3rem;
+            color: #d4af37;
+            font-style: italic;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 250px 1fr 250px;
+            gap: 30px;
+            align-items: start;
+        }
+
+        /* Navigation Columns */
+        .nav-column {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 25px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            position: sticky;
+            top: 20px;
+        }
+
+        .nav-column h3 {
+            color: #d4af37;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            text-align: center;
+            border-bottom: 2px solid rgba(212, 175, 55, 0.5);
+            padding-bottom: 10px;
+        }
+
+        .nav-btn {
+            display: block;
+            margin: 15px 0;
+            background: rgba(212, 175, 55, 0.2);
+            border: 2px solid rgba(212, 175, 55, 0.4);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            text-decoration: none;
+            text-align: center;
+            font-weight: 600;
+            transition: all 0.3s;
+            cursor: pointer;
+            font-size: 0.95rem;
+        }
+
+        .nav-btn:hover {
+            background: rgba(212, 175, 55, 0.4);
+            border-color: #d4af37;
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        .nav-btn.primary {
+            background: linear-gradient(135deg, #d4af37 0%, #f5c842 100%);
+            border-color: #d4af37;
+            color: #1a1a2e;
+        }
+
+        .nav-btn.primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.5);
+        }
+
+        /* Center Content */
+        .center-content {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 40px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .brownstone-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto 30px;
+        }
+
+        .brownstone-image {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 10px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Category Window Overlays */
+        .category-window {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.4);
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .category-window:hover {
+            background: rgba(212, 175, 55, 0.3);
+            border-color: #d4af37;
+            transform: scale(1.05);
+            z-index: 10;
+            box-shadow: 0 10px 40px rgba(212, 175, 55, 0.6);
+        }
+
+        .category-icon {
+            font-size: 2.5rem;
+            margin-bottom: 5px;
+            transition: all 0.3s;
+            filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.8));
+        }
+
+        .category-window:hover .category-icon {
+            transform: scale(1.2);
+        }
+
+        .category-label {
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .category-window:hover .category-label {
+            color: #d4af37;
+        }
+
+        /* Host Window - Center Top */
+        #window-host {
+            top: 15%;
+            left: 41%;
+            width: 18%;
+            height: 12%;
+            background: rgba(212, 175, 55, 0.3);
+            border-color: #d4af37;
+        }
+
+        /* Row 1 - Top Windows */
+        #window-musicians {
+            top: 32%;
+            left: 12%;
+            width: 18%;
+            height: 14%;
+        }
+
+        #window-artists {
+            top: 32%;
+            left: 41%;
+            width: 18%;
+            height: 14%;
+        }
+
+        #window-animators {
+            top: 32%;
+            left: 70%;
+            width: 18%;
+            height: 14%;
+        }
+
+        /* Row 2 - Middle Windows */
+        #window-photographers {
+            top: 52%;
+            left: 12%;
+            width: 18%;
+            height: 14%;
+        }
+
+        #window-writers {
+            top: 52%;
+            left: 41%;
+            width: 18%;
+            height: 14%;
+        }
+
+        #window-designers {
+            top: 52%;
+            left: 70%;
+            width: 18%;
+            height: 14%;
+        }
+
+        /* Row 3 - Lower Windows */
+        #window-filmmakers {
+            top: 72%;
+            left: 12%;
+            width: 18%;
+            height: 14%;
+        }
+
+        #window-gamedev {
+            top: 72%;
+            left: 41%;
+            width: 18%;
+            height: 14%;
+        }
+
+        #window-dancers {
+            top: 72%;
+            left: 70%;
+            width: 18%;
+            height: 14%;
+        }
+
+        /* Row 4 - Bottom Windows */
+        #window-voice {
+            top: 92%;
+            left: 12%;
+            width: 18%;
+            height: 14%;
+        }
+
+        #window-sculptors {
+            top: 92%;
+            left: 41%;
+            width: 18%;
+            height: 14%;
+        }
+
+        #window-fashion {
+            top: 92%;
+            left: 70%;
+            width: 18%;
+            height: 14%;
+        }
+
+        .intro-text {
+            background: rgba(212, 175, 55, 0.1);
+            padding: 25px;
+            border-radius: 10px;
+            border-left: 4px solid #d4af37;
+            line-height: 1.8;
+        }
+
+        .intro-text p {
+            margin-bottom: 15px;
+        }
+
+        .intro-text strong {
+            color: #d4af37;
+        }
+
+        /* Video Preview Modal */
+        .video-preview-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(10px);
+        }
+
+        .video-preview-content {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            margin: 3% auto;
+            padding: 0;
+            border: 2px solid #d4af37;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 900px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+        }
+
+        .video-preview-header {
+            background: rgba(212, 175, 55, 0.2);
+            padding: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .video-preview-title {
+            color: #d4af37;
+            font-size: 2rem;
+            margin: 0;
+        }
+
+        .video-preview-close {
+            color: #d4af37;
+            font-size: 3rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            line-height: 1;
+        }
+
+        .video-preview-close:hover {
+            color: #f5c842;
+            transform: rotate(90deg);
+        }
+
+        .video-preview-frame {
+            background: #000;
+            padding: 40px;
+            text-align: center;
+            color: #666;
+            font-size: 1.2rem;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .creator-info {
+            padding: 30px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .creator-avatar {
+            font-size: 4rem;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(212, 175, 55, 0.2);
+            border-radius: 50%;
+            border: 2px solid #d4af37;
+        }
+
+        .creator-details {
+            flex: 1;
+        }
+
+        .creator-name {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #d4af37;
+            margin-bottom: 5px;
+        }
+
+        .creator-category {
+            color: #999;
+            font-size: 1.1rem;
+        }
+
+        .view-directory-btn {
+            display: block;
+            margin: 30px;
+            padding: 18px 40px;
+            background: linear-gradient(135deg, #d4af37 0%, #f5c842 100%);
+            color: #1a1a2e;
+            text-decoration: none;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .view-directory-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.5);
+        }
+
+        /* About Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(10px);
+            overflow-y: auto;
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            margin: 5% auto;
+            padding: 40px;
+            border: 2px solid #d4af37;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 800px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            position: relative;
+        }
+
+        .close {
+            position: absolute;
+            right: 25px;
+            top: 25px;
+            color: #d4af37;
+            font-size: 3rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .close:hover {
+            color: #f5c842;
+            transform: rotate(90deg);
+        }
+
+        .modal h2 {
+            color: #d4af37;
+            font-size: 2.5rem;
+            margin-bottom: 25px;
+            border-bottom: 2px solid rgba(212, 175, 55, 0.3);
+            padding-bottom: 15px;
+        }
+
+        .modal p {
+            color: #ccc;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        .modal ul {
+            margin-left: 30px;
+            margin-bottom: 20px;
+        }
+
+        .modal li {
+            color: #ccc;
+            line-height: 1.8;
+            margin-bottom: 10px;
+        }
+
+        .modal strong {
+            color: #d4af37;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 60px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        footer p {
+            margin: 10px 0;
+            color: #999;
+        }
+
+        footer strong {
+            color: #d4af37;
+        }
+
+        footer a {
+            color: #d4af37;
+            text-decoration: none;
+            margin: 0 10px;
+            transition: color 0.3s;
+        }
+
+        footer a:hover {
+            color: #f5c842;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-column {
+                position: static;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .category-icon {
+                font-size: 1.8rem;
+            }
+
+            .category-label {
+                font-size: 0.7rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🏙️ CityBlocks</h1>
+        <p class="tagline">Where Creators Collaborate</p>
+    </header>
+
+    <div class="container">
+        <!-- Left Navigation -->
+        <div class="nav-column">
+            <h3>Get Started</h3>
+            <button class="nav-btn primary" onclick="alert('Sign up feature coming soon!')">🏠 Get Your Own Brownstone</button>
+            <button class="nav-btn" onclick="alert('Tutorial coming soon!')">📺 How it Works</button>
+            <button class="nav-btn" onclick="alert('Collaboration feature coming soon!')">🤝 Collaborate</button>
+            <button class="nav-btn" onclick="alert('Community feature coming soon!')">👥 Creators Community</button>
+            <button class="nav-btn" onclick="openAboutModal()">ℹ️ About</button>
+        </div>
+
+        <!-- Center Content -->
+        <div class="center-content">
+            <div class="brownstone-container">
+                <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=800&h=1000&fit=crop" alt="Classic Brownstone Building" class="brownstone-image">
+                
+                <!-- Host Window - Project Creator -->
+                <div id="window-host" class="category-window" onclick="showCategoryPreview('host')">
+                    <div class="category-icon">⭐</div>
+                    <div class="category-label">Host Project</div>
+                </div>
+
+                <!-- Row 1 - Top 3 Windows -->
+                <div id="window-musicians" class="category-window" onclick="showCategoryPreview('musicians')">
+                    <div class="category-icon">🎵</div>
+                    <div class="category-label">Musicians</div>
+                </div>
+
+                <div id="window-artists" class="category-window" onclick="showCategoryPreview('artists')">
+                    <div class="category-icon">🎨</div>
+                    <div class="category-label">Visual Artists</div>
+                </div>
+
+                <div id="window-animators" class="category-window" onclick="showCategoryPreview('animators')">
+                    <div class="category-icon">🎬</div>
+                    <div class="category-label">Animators</div>
+                </div>
+
+                <!-- Row 2 - Middle 3 Windows -->
+                <div id="window-photographers" class="category-window" onclick="showCategoryPreview('photographers')">
+                    <div class="category-icon">📸</div>
+                    <div class="category-label">Photographers</div>
+                </div>
+
+                <div id="window-writers" class="category-window" onclick="showCategoryPreview('writers')">
+                    <div class="category-icon">✍️</div>
+                    <div class="category-label">Writers</div>
+                </div>
+
+                <div id="window-designers" class="category-window" onclick="showCategoryPreview('designers')">
+                    <div class="category-icon">💎</div>
+                    <div class="category-label">Designers</div>
+                </div>
+
+                <!-- Row 3 - Lower 3 Windows -->
+                <div id="window-filmmakers" class="category-window" onclick="showCategoryPreview('filmmakers')">
+                    <div class="category-icon">🎥</div>
+                    <div class="category-label">Filmmakers</div>
+                </div>
+
+                <div id="window-gamedev" class="category-window" onclick="showCategoryPreview('gamedev')">
+                    <div class="category-icon">🎮</div>
+                    <div class="category-label">Game Developers</div>
+                </div>
+
+                <div id="window-dancers" class="category-window" onclick="showCategoryPreview('dancers')">
+                    <div class="category-icon">💃</div>
+                    <div class="category-label">Dancers</div>
+                </div>
+
+                <!-- Row 4 - Bottom 3 Windows -->
+                <div id="window-voice" class="category-window" onclick="showCategoryPreview('voice')">
+                    <div class="category-icon">🎙️</div>
+                    <div class="category-label">Voice Artists</div>
+                </div>
+
+                <div id="window-sculptors" class="category-window" onclick="showCategoryPreview('sculptors')">
+                    <div class="category-icon">🗿</div>
+                    <div class="category-label">Sculptors</div>
+                </div>
+
+                <div id="window-fashion" class="category-window" onclick="showCategoryPreview('fashion')">
+                    <div class="category-icon">👗</div>
+                    <div class="category-label">Fashion Designers</div>
+                </div>
+            </div>
+            
+            <div class="intro-text">
+                <p><strong>🎬 The Hollywood Squares Concept for Videos</strong></p>
+                <p>Each brownstone is your creative canvas with 13 windows - 1 host window for your project and 12 collaborator windows for approved video submissions.</p>
+                <p><strong>🎯 How It Works:</strong> Set your creative goal → Creators submit videos → You approve the best ones → Videos appear in your brownstone windows → Play sequentially for narratives or randomly for comedy!</p>
+                <p><strong>🤝 Algorithm-Free | Politics-Free | Pure Creative Collaboration</strong></p>
+            </div>
+        </div>
+
+        <!-- Right Navigation -->
+        <div class="nav-column">
+            <h3>Browse Categories</h3>
+            <a href="#musicians" class="nav-btn">🎵 Musicians</a>
+            <a href="#artists" class="nav-btn">🎨 Visual Artists</a>
+            <a href="#animators" class="nav-btn">🎬 Animators</a>
+            <a href="#photographers" class="nav-btn">📸 Photographers</a>
+            <a href="#writers" class="nav-btn">✍️ Writers</a>
+            <a href="#designers" class="nav-btn">💎 Designers</a>
+            <a href="#filmmakers" class="nav-btn">🎥 Filmmakers</a>
+            <a href="#gamedev" class="nav-btn">🎮 Game Developers</a>
+            <a href="#dancers" class="nav-btn">💃 Dancers</a>
+            <a href="#voice" class="nav-btn">🎙️ Voice Artists</a>
+            <a href="#sculptors" class="nav-btn">🗿 Sculptors</a>
+            <a href="#fashion" class="nav-btn">👗 Fashion Designers</a>
+        </div>
+    </div>
+
+    <!-- Video Preview Modal -->
+    <div id="videoPreviewModal" class="video-preview-modal">
+        <div class="video-preview-content">
+            <div class="video-preview-header">
+                <h2 class="video-preview-title" id="previewCategory">Category</h2>
+                <span class="video-preview-close" onclick="closeVideoPreview()">&times;</span>
+            </div>
+
+            <!-- Video Player -->
+            <div class="video-preview-frame">
+                <p>🎬 Video submissions will play here<br><br>Sequential playback for narratives 🎞️<br>Random playback for comedy 🎭</p>
+            </div>
+
+            <!-- Creator Info -->
+            <div class="creator-info">
+                <div class="creator-avatar" id="creatorAvatar">🎸</div>
+                <div class="creator-details">
+                    <div class="creator-name" id="creatorName">Featured Creator</div>
+                    <div class="creator-category" id="creatorCategoryLabel">Approved video submission</div>
+                </div>
+            </div>
+
+            <!-- View Full Directory Button -->
+            <a href="#" class="view-directory-btn" id="directoryLink">
+                🏘️ View Full Category Directory
+            </a>
+        </div>
+    </div>
+
+    <!-- About Modal -->
+    <div id="aboutModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeAboutModal()">&times;</span>
+            <h2>About CityBlocks</h2>
+            
+            <p><strong>Welcome to CityBlocks.com</strong> - where creativity meets community through collaborative video storytelling.</p>
+            
+            <p><strong>🏢 The Brownstone Concept:</strong> Inspired by iconic urban architecture and the Hollywood Squares, each brownstone becomes an interactive video canvas with 13 windows - one host and twelve collaborators.</p>
+            
+            <p><strong>🎬 How It Works:</strong></p>
+            <ul>
+                <li><strong>Host Creates a Project:</strong> Set your creative goal (animation, music video, comedy sketch, etc.)</li>
+                <li><strong>Creators Submit Videos:</strong> Musicians, artists, animators, and other creators submit their contributions</li>
+                <li><strong>Host Approves Content:</strong> Review submissions and approve the best ones</li>
+                <li><strong>Videos Populate Your Brownstone:</strong> Approved videos appear in your 12 collaborator windows</li>
+                <li><strong>Playback Options:</strong> Sequential for narratives/cartoons or random for comedy Ad-Libs effect</li>
+            </ul>
+            
+            <p><strong>🎨 Customize Your Brownstone:</strong></p>
+            <ul>
+                <li><strong>Solid Colors:</strong> Classic brick tones or bold modern hues</li>
+                <li><strong>Repeating Patterns:</strong> Psychedelic 60s designs, flag patterns, artistic motifs</li>
+                <li><strong>Custom Images:</strong> Upload your own designs for maximum personalization</li>
+                <li><strong>Your Brand:</strong> Make your brownstone instantly recognizable</li>
+            </ul>
+            
+            <p><strong>🤝 Our Principles:</strong></p>
+            <ul>
+                <li><strong>Algorithm-Free:</strong> No AI deciding who sees your work. Your project, your collaborators.</li>
+                <li><strong>Politics-Free:</strong> Pure creativity without controversy.</li>
+                <li><strong>Creator-Focused:</strong> Tools designed for actual collaboration, not just content consumption.</li>
+                <li><strong>Community First:</strong> Personalization is free. Building connections is the goal.</li>
+            </ul>
+            
+            <p><strong>🎯 The Vision:</strong> CityBlocks is Hollywood Squares meets TikTok Duets meets collaborative storytelling. Create projects that bring together musicians, animators, voice artists, and more - all in one beautiful brownstone interface.</p>
+            
+            <p><strong>📅 Established:</strong> Premium domain since 1997, reimagined for 2025 as the ultimate creative collaboration platform.</p>
+            
+            <p><strong>Ready to start your project?</strong> Click "Get Your Own Brownstone" and build something amazing with creators worldwide.</p>
+        </div>
+    </div>
+
+    <footer>
+        <p><strong>CityBlocks.com</strong> - Premium Domain Since 1997, Reimagined 2025</p>
+        <p>Algorithm-Free | Politics-Free | Creator-Focused</p>
+        <p>&copy; 2025 CityBlocks | <a href="#privacy">Privacy</a> | <a href="#terms">Terms</a> | <a href="#contact">Contact</a></p>
+    </footer>
+
+    <script>
+        // Category data for preview
+        const categoryData = {
+            host: {
+                icon: '⭐',
+                title: 'Host Project',
+                avatar: '🎯',
+                directoryUrl: '#',
+                description: 'This is where YOU set the creative goal and curate your collaborative masterpiece.'
+            },
+            musicians: {
+                icon: '🎵',
+                title: 'Musicians',
+                avatar: '🎸',
+                directoryUrl: 'musicians-directory.html',
+                description: 'Collaborate with producers, singers, instrumentalists, and composers.'
+            },
+            artists: {
+                icon: '🎨',
+                title: 'Visual Artists',
+                avatar: '🖌️',
+                directoryUrl: 'artists-directory.html',
+                description: 'Painters, illustrators, and digital artists bringing visual magic.'
+            },
+            animators: {
+                icon: '🎬',
+                title: 'Animators',
+                avatar: '🎞️',
+                directoryUrl: 'animators-directory.html',
+                description: '2D, 3D, stop-motion, and motion graphics specialists.'
+            },
+            photographers: {
+                icon: '📸',
+                title: 'Photographers',
+                avatar: '📷',
+                directoryUrl: 'photographers-directory.html',
+                description: 'Visual storytellers capturing moments and creating magic.'
+            },
+            writers: {
+                icon: '✍️',
+                title: 'Writers',
+                avatar: '📚',
+                directoryUrl: 'writers-directory.html',
+                description: 'Novelists, poets, screenwriters, and content creators.'
+            },
+            designers: {
+                icon: '💎',
+                title: 'Designers',
+                avatar: '🎨',
+                directoryUrl: 'designers-directory.html',
+                description: 'UX/UI, graphic, and product designers shaping experiences.'
+            },
+            filmmakers: {
+                icon: '🎥',
+                title: 'Filmmakers',
+                avatar: '🎬',
+                directoryUrl: 'filmmakers-directory.html',
+                description: 'Directors, cinematographers, and editors creating visual stories.'
+            },
+            gamedev: {
+                icon: '🎮',
+                title: 'Game Developers',
+                avatar: '🕹️',
+                directoryUrl: 'gamedev-directory.html',
+                description: 'Building immersive gaming experiences and interactive worlds.'
+            },
+            dancers: {
+                icon: '💃',
+                title: 'Dancers',
+                avatar: '🩰',
+                directoryUrl: 'dancers-directory.html',
+                description: 'Choreographers and performers expressing through movement.'
+            },
+            voice: {
+                icon: '🎙️',
+                title: 'Voice Artists',
+                avatar: '🎤',
+                directoryUrl: 'voice-directory.html',
+                description: 'Voice actors, narrators, and audio performers bringing characters to life.'
+            },
+            sculptors: {
+                icon: '🗿',
+                title: 'Sculptors',
+                avatar: '🏛️',
+                directoryUrl: 'sculptors-directory.html',
+                description: '3D artists working with physical and digital materials.'
+            },
+            fashion: {
+                icon: '👗',
+                title: 'Fashion Designers',
+                avatar: '✨',
+                directoryUrl: 'fashion-directory.html',
+                description: 'Clothing designers, stylists, and textile artists creating wearable art.'
+            }
+        };
+
+        // Show category preview modal
+        function showCategoryPreview(category) {
+            const data = categoryData[category];
+            if (!data) return;
+
+            document.getElementById('previewCategory').textContent = data.icon + ' ' + data.title;
+            document.getElementById('creatorAvatar').textContent = data.avatar;
+            document.getElementById('creatorName').textContent = data.title;
+            document.getElementById('creatorCategoryLabel').textContent = data.description;
+            document.getElementById('directoryLink').href = data.directoryUrl;
+            
+            document.getElementById('videoPreviewModal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Close video preview modal
+        function closeVideoPreview() {
+            document.getElementById('videoPreviewModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // About Modal Functions
+        function openAboutModal() {
+            document.getElementById('aboutModal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeAboutModal() {
+            document.getElementById('aboutModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modals when clicking outside
+        window.onclick = function(event) {
+            const videoModal = document.getElementById('videoPreviewModal');
+            const aboutModal = document.getElementById('aboutModal');
+            
+            if (event.target == videoModal) {
+                closeVideoPreview();
+            }
+            if (event.target == aboutModal) {
+                closeAboutModal();
+            }
+        }
+
+        // Close modals with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeVideoPreview();
+                closeAboutModal();
+            }
+        });
+
+        // Console messages
+        console.log('🏙️ Welcome to CityBlocks - The Hollywood Squares for Video Collaboration!');
+        console.log('Click any window to preview that creator category.');
+    </script>
+</body>
+</html>
