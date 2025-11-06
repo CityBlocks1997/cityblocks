@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CityBlocks - Creator Collaboration</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="header">
+    <h1>CityBlocks</h1>
+    <p>Where Creators Collaborate</p>
+    <div class="block-info">
+      <strong>Your Block:</strong> Click any window to add or view content
+    </div>
+  </div>
+
+  <div class="building-container">
+    <!-- Brownstone image with clickable map -->
+    <img src="brownstone.jpg" 
+         alt="CityBlocks Brownstone" 
+         usemap="#brownstone-map" 
+         class="building-image">
+    
+    <!-- Image Map Definition -->
+    <map name="brownstone-map">
+      <!-- HOST WINDOW - Top decorative area (parapet/roofline) -->
+      <area shape="rect" 
+            coords="290,45,540,160" 
+            href="javascript:void(0)" 
+            onclick="openWindow('host')" 
+            alt="Host Window"
+            title="Host Window - Final Performance">
+
+      <!-- ROW 1 - Top Floor (3 windows) -->
+      <area shape="rect" 
+            coords="130,240,300,380" 
+            href="javascript:void(0)" 
+            onclick="openWindow('1')" 
+            alt="Window 1"
+            title="Collaborator 1">
+      
+      <area shape="rect" 
+            coords="330,240,500,380" 
+            href="javascript:void(0)" 
+            onclick="openWindow('2')" 
+            alt="Window 2"
+            title="Collaborator 2">
+      
+      <area shape="rect" 
+            coords="530,240,700,380" 
+            href="javascript:void(0)" 
+            onclick="openWindow('3')" 
+            alt="Window 3"
+            title="Collaborator 3">
+
+      <!-- ROW 2 - Second Floor (3 windows) -->
+      <area shape="rect" 
+            coords="130,430,300,570" 
+            href="javascript:void(0)" 
+            onclick="openWindow('4')" 
+            alt="Window 4"
+            title="Collaborator 4">
+      
+      <area shape="rect" 
+            coords="330,430,500,570" 
+            href="javascript:void(0)" 
+            onclick="openWindow('5')" 
+            alt="Window 5"
+            title="Collaborator 5">
+      
+      <area shape="rect" 
+            coords="530,430,700,570" 
+            href="javascript:void(0)" 
+            onclick="openWindow('6')" 
+            alt="Window 6"
+            title="Collaborator 6">
+
+      <!-- ROW 3 - Third Floor (3 windows) -->
+      <area shape="rect" 
+            coords="130,620,300,760" 
+            href="javascript:void(0)" 
+            onclick="openWindow('7')" 
+            alt="Window 7"
+            title="Collaborator 7">
+      
+      <area shape="rect" 
+            coords="330,620,500,760" 
+            href="javascript:void(0)" 
+            onclick="openWindow('8')" 
+            alt="Window 8"
+            title="Collaborator 8">
+      
+      <area shape="rect" 
+            coords="530,620,700,760" 
+            href="javascript:void(0)" 
+            onclick="openWindow('9')" 
+            alt="Window 9"
+            title="Collaborator 9">
+
+      <!-- ROW 4 - Fourth Floor (3 windows) -->
+      <area shape="rect" 
+            coords="130,810,300,950" 
+            href="javascript:void(0)" 
+            onclick="openWindow('10')" 
+            alt="Window 10"
+            title="Collaborator 10">
+      
+      <area shape="rect" 
+            coords="330,810,500,950" 
+            href="javascript:void(0)" 
+            onclick="openWindow('11')" 
+            alt="Window 11"
+            title="Collaborator 11">
+      
+      <area shape="rect" 
+            coords="530,810,700,950" 
+            href="javascript:void(0)" 
+            onclick="openWindow('12')" 
+            alt="Window 12"
+            title="Collaborator 12">
+    </map>
+  </div>
+
+  <!-- Instructions Section -->
+  <div class="instructions">
+    <h3>🏙️ How CityBlocks Works</h3>
+    <ul>
+      <li><strong>🎭 Physical Graffiti Style:</strong> Inspired by Led Zeppelin's iconic album cover</li>
+      <li><strong>🏠 Host Window (Top):</strong> The owner's window featuring the final combined performance</li>
+      <li><strong>🎬 12 Collaborator Windows:</strong> Each window showcases a different creator's contribution</li>
+      <li><strong>🔒 Public or Private:</strong> Choose whether your block is open to all or invite-only</li>
+      <li><strong>🎨 Custom Backgrounds:</strong> Select different building styles for your homepage</li>
+      <li><strong>✨ Pure Collaboration:</strong> No politics - just creators building together</li>
+    </ul>
+  </div>
+
+  <!-- Modal for Video Display -->
+  <div class="modal" id="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="modal-title">Window Title</h2>
+        <button class="close-btn" id="closeModal">&times;</button>
+      </div>
+      <div id="modal-body">
+        <!-- Video content will be inserted here -->
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
