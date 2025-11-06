@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<!-- Version: 20251106_180000 - LOOP/LAYER MODE! Fixed Sequential + Side Nav! -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CityBlocks - Living Brownstone Collaboration Platform</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #fff;
+            min-height: 100vh;
+            overflow-x: hidden;
+            display: flex;
+        }
+
+        /* SIDE NAVIGATION - Compact & Elegant */
+        .side-nav {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 250px;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 30px 20px;
+            border-right: 2px solid rgba(212, 175, 55, 0.3);
+            z-index: 100;
+            overflow-y: auto;
+        }
+
+        .side-nav h1 {
+            font-size: 2rem;
+            background: linear-gradient(135deg, #d4af37 0%, #f5c842 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+
+        .side-nav .tagline {
+            font-size: 0.9rem;
+            color: #d4af37;
+            font-style: italic;
+            margin-bottom: 30px;
+            opacity: 0.8;
+        }
+
+        .side-nav nav {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .side-nav nav a {
+            color: #d4af37;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            padding: 12px 16px;
+            border-radius: 8px;
+            border-left: 3px solid transparent;
+        }
+
+        .side-nav nav a:hover {
+            background: rgba(212, 175, 55, 0.2);
+            border-left-color: #d4af37;
+            color: #f5c842;
+            transform: translateX(5px);
+        }
+
+        /* Main Content Area - Shifted Right */
+        .main-content {
+            margin-left: 250px;
+            width: calc(100% - 250px);
+            padding: 40px;
+        }
+
+        /* Hero Section - The Brownstone! */
+        .hero-section {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .hero-section h2 {
+            font-size: 2.5rem;
+            color: #d4af37;
+            margin-bottom: 15px;
+        }
+
+        .hero-section p {
+            font-size: 1.2rem;
+            color: #ccc;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        /* Brownstone Container - PROMINENT! */
+        .brownstone-container {
+            position: relative;
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto 40px;
+        }
+
+        .brownstone-image {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 15px;
+            box-shadow: 0 25px 100px rgba(0, 0, 0, 0.9);
+        }
+
+        /* Category Windows */
+        .category-window {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.8);
+            border: 3px solid rgba(212, 175, 55, 0.4);
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .category-window:hover {
+            border-color: #d4af37;
+            transform: scale(1.05);
+            z-index: 5;
+            box-shadow: 0 5px 25px rgba(212, 175, 55, 0.5);
+        }
+
+        /* PLAYING STATE - Golden Glow! */
+        .category-window.playing {
+            border: 5px solid #ffd700 !important;
+            box-shadow: 0 0 50px rgba(255, 215, 0, 1), 
+                        inset 0 0 30px rgba(255, 215, 0, 0.4) !important;
+            transform: scale(1.12) !important;
+            z-index: 15 !important;
+            animation: pulse-glow 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% {
+                box-shadow: 0 0 50px rgba(255, 215, 0, 1), 
+                            inset 0 0 30px rgba(255, 215, 0, 0.4);
+            }
+            50% {
+                box-shadow: 0 0 70px rgba(255, 215, 0, 1), 
+                            inset 0 0 40px rgba(255, 215, 0, 0.6);
+            }
+        }
+
+        .category-window video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .category-window.playing video {
+            opacity: 1;
+        }
+
+        .category-icon {
+            font-size: 3rem;
+            margin-bottom: 8px;
+            filter: drop-shadow(3px 3px 6px rgba(0, 0, 0, 0.9));
+            z-index: 2;
+        }
+
+        .category-label {
+            font-size: 1rem;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.9);
+            text-align: center;
+            padding: 0 8px;
+            z-index: 2;
+        }
+
+        .category-window.playing .category-icon,
+        .category-window.playing .category-label {
+            opacity: 0;
+        }
+
+        /* Window Positions */
+        #window-animators { top: 20.13%; left: 21.15%; width: 12.02%; height: 7.67%; }
+        #window-composers { top: 20.13%; left: 44.0%; width: 12.02%; height: 7.67%; }
+        #window-cosplayers { top: 20.07%; left: 67.19%; width: 12.02%; height: 7.67%; }
+        #window-filmmakers { top: 33.33%; left: 21.39%; width: 11.78%; height: 9.27%; }
+        #window-gamedev { top: 33.33%; left: 44.35%; width: 11.78%; height: 9.27%; }
+        #window-illustrators { top: 33.33%; left: 67.43%; width: 11.78%; height: 9.27%; }
+        #window-musicians { top: 47.2%; left: 21.51%; width: 11.78%; height: 9.27%; }
+        #window-performers { top: 47.4%; left: 44.35%; width: 11.78%; height: 9.27%; }
+        #window-producers { top: 47.2%; left: 67.55%; width: 11.78%; height: 9.27%; }
+        #window-agencies { top: 63.8%; left: 21.39%; width: 11.78%; height: 9.27%; }
+        #window-voice { top: 63.73%; left: 44.47%; width: 11.78%; height: 9.27%; }
+        #window-writers { top: 63.8%; left: 67.67%; width: 11.78%; height: 9.27%; }
+
+        /* Video Controls Button - MORE PROMINENT */
+        #video-controls {
+            position: absolute;
+            top: 93.47%;
+            left: 35%;
+            width: 30%;
+            height: 4.5%;
+            background: linear-gradient(135deg, #d4af37 0%, #f5c842 100%);
+            border: 4px solid #f5c842;
+            border-radius: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 8px 30px rgba(212, 175, 55, 0.7);
+            font-weight: bold;
+            color: #1a1a2e;
+            font-size: 1.3rem;
+            z-index: 10;
+        }
+
+        #video-controls:hover {
+            transform: scale(1.08) translateY(-2px);
+            box-shadow: 0 12px 40px rgba(212, 175, 55, 1);
+            background: linear-gradient(135deg, #f5c842 0%, #d4af37 100%);
+        }
+
+        /* Sound Toggle - Top Right of Brownstone */
+        #unmute-btn {
+            position: absolute;
+            top: 2%;
+            right: 2%;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            background: rgba(220, 53, 69, 0.9);
+            color: white;
+            border: 3px solid #dc3545;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            z-index: 20;
+            box-shadow: 0 5px 20px rgba(220, 53, 69, 0.5);
+        }
+
+        #unmute-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 30px rgba(220, 53, 69, 0.8);
+        }
+
+        #unmute-btn.active {
+            background: rgba(40, 167, 69, 0.9);
+            border-color: #28a745;
+            box-shadow: 0 5px 20px rgba(40, 167, 69, 0.5);
+        }
+
+        #unmute-btn.active:hover {
+            box-shadow: 0 8px 30px rgba(40, 167, 69, 0.8);
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            margin: 8% auto;
+            padding: 40px;
+            border: 3px solid #d4af37;
+            border-radius: 15px;
+            width: 80%;
+            max-width: 700px;
+            box-shadow: 0 20px 80px rgba(212, 175, 55, 0.5);
+            position: relative;
+        }
+
+        .modal-content h2 {
+            color: #d4af37;
+            margin-bottom: 20px;
+            font-size: 2rem;
+        }
+
+        .modal-content p {
+            color: #ccc;
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .close {
+            color: #d4af37;
+            float: right;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            line-height: 0.8;
+        }
+
+        .close:hover {
+            color: #f5c842;
+        }
+
+        /* CONTROLS MODAL - The Command Center! */
+        .controls-modal-content {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            margin: 5% auto;
+            padding: 50px;
+            border: 4px solid #d4af37;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 900px;
+            box-shadow: 0 30px 100px rgba(212, 175, 55, 0.7);
+        }
+
+        .controls-modal-content h2 {
+            color: #d4af37;
+            margin-bottom: 15px;
+            font-size: 2.5rem;
+            text-align: center;
+        }
+
+        .mode-description {
+            color: #ccc;
+            font-size: 1.1rem;
+            text-align: center;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        .controls-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .control-button {
+            padding: 30px 20px;
+            font-size: 1.4rem;
+            font-weight: bold;
+            border: 3px solid;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .control-button.sequential {
+            background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
+            border-color: #4a90e2;
+            color: white;
+        }
+
+        .control-button.sequential:hover {
+            transform: scale(1.08) translateY(-5px);
+            box-shadow: 0 10px 40px rgba(74, 144, 226, 0.7);
+        }
+
+        .control-button.random {
+            background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%);
+            border-color: #9b59b6;
+            color: white;
+        }
+
+        .control-button.random:hover {
+            transform: scale(1.08) translateY(-5px);
+            box-shadow: 0 10px 40px rgba(155, 89, 182, 0.7);
+        }
+
+        /* NEW LOOP/LAYER MODE - The Game Changer! */
+        .control-button.loop-layer {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            border-color: #e74c3c;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .control-button.loop-layer:hover {
+            transform: scale(1.08) translateY(-5px);
+            box-shadow: 0 10px 40px rgba(231, 76, 60, 0.7);
+        }
+
+        .control-button.loop-layer::before {
+            content: '🔥 NEW!';
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            background: #ffd700;
+            color: #000;
+            padding: 3px 8px;
+            border-radius: 5px;
+            font-size: 0.7rem;
+            font-weight: bold;
+        }
+
+        .control-button.stop {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            border-color: #e74c3c;
+            color: white;
+            grid-column: 1 / -1;
+        }
+
+        .control-button.stop:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 35px rgba(231, 76, 60, 0.7);
+        }
+
+        .control-button .mode-emoji {
+            display: block;
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+
+        .control-button .mode-name {
+            display: block;
+            font-size: 1.6rem;
+            margin-bottom: 8px;
+        }
+
+        .control-button .mode-detail {
+            display: block;
+            font-size: 0.9rem;
+            opacity: 0.9;
+            font-weight: normal;
+        }
+
+        #playback-status {
+            text-align: center;
+            font-size: 1.5rem;
+            color: #d4af37;
+            min-height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            background: rgba(0, 0, 0, 0.6);
+            margin-top: 60px;
+            border-top: 2px solid rgba(212, 175, 55, 0.3);
+        }
+
+        footer p {
+            color: #ccc;
+            font-size: 1rem;
+            margin: 8px 0;
+        }
+
+        footer a {
+            color: #d4af37;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        footer a:hover {
+            color: #f5c842;
+        }
+    </style>
+</head>
+<body>
+    <!-- SIDE NAVIGATION -->
+    <div class="side-nav">
+        <h1>CityBlocks</h1>
+        <p class="tagline">Living Collaboration</p>
+        <nav>
+            <a href="#" onclick="openModal('aboutModal'); return false;">About</a>
+            <a href="#" onclick="openModal('howModal'); return false;">How It Works</a>
+            <a href="#" onclick="openModal('libraryModal'); return false;">The Library</a>
+            <a href="#" onclick="openModal('contactModal'); return false;">Contact</a>
+        </nav>
+    </div>
+
+    <!-- MAIN CONTENT AREA -->
+    <div class="main-content">
+        <div class="hero-section">
+            <h2>The Living Brownstone</h2>
+            <p>12 creators. Infinite performances. Pure collaboration.</p>
+        </div>
+
+        <!-- THE BROWNSTONE! -->
+        <div class="brownstone-container">
+            <img src="https://i.imgur.com/QJKgWnr.png" alt="Brownstone Building" class="brownstone-image">
+            
+            <!-- Sound Toggle -->
+            <button id="unmute-btn" onclick="toggleSound()">🔇 UNMUTE VIDEOS</button>
+            
+            <!-- Category Windows with Videos -->
+            <div id="window-animators" class="category-window" data-category="animators">
+                <div class="category-icon">🎨</div>
+                <div class="category-label">Animators</div>
+                <video loop preload="metadata">
+                    <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" type="video/mp4">
+                </video>
+            </div>
+
+            <div id="window-composers" class="category-window" data-category="composers">
+                <div class="category-icon">🎼</div>
+                <div class="category-label">Composers</div>
+                <video loop preload="metadata">
+                    <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4" type="video/mp4">
+                </video>
+            </div>
+
+            <div id="window-cosplayers" class="category-window" data-category="cosplayers">
+                <div class="category-icon">🎭</div>
+                <div class="category-label">Cosplayers</div>
+                <video loop preload="metadata">
+                    <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4" type="video/mp4">
+                </video>
+            </div>
+
+            <div id="window-filmmakers" class="category-window" data-category="filmmakers">
+                <div class="category-icon">🎬</div>
+                <div class="category-label">Filmmakers</div>
+                <video loop preload="metadata">
+                    <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4" type="video/mp4">
+                </video>
+            </div>
+
+            <div id="window-gamedev" class="category-window" data-category="gamedev">
+                <div class="category-icon">🎮</div>
+                <div class="category-label">Game Developers</div>
+                <video loop preload="metadata">
+                    <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4" type="video/mp4">
+                </video>
+            </div>
+
+            <div id="window-illustrators" class="category-window" data-category="illustrators">
+                <div class="category-icon">🖼️</div>
+                <div class="category-label">Visual Artists</div>
+                <video loop preload="metadata">
+                    <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4" type="video/mp4">
+                </video>
+            </div>
+
+            <div id="window-musicians" class="category-window" data-category="musicians">
+                <div class="category-icon">🎸</div>
+                <div class="category-label">Musicians</div>
+                <video loop preload="metadata">
+                    <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackOnStreetAndDirt.mp4" type="video/mp4">
+                </video>
+            </div>
+
+            <div id="window-performers" class="category-window" data-category="performers">
+                <div class="category-icon">🎤</div>
+                <div class="category-label">Performers</div>
+                <video loop preload="metadata">
+                    <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4" type="video/mp4">
+                </video>
+            </div>
+
+            <div id="window-producers" class="category-window" data-category="producers">
+                <div class="category-icon">🎧</div>
+                <div class="category-label">Producers</div>
+                <video loop preload="metadata">
+                    <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/VolkswagenGTIReview.mp4" type="video/mp4">
+                </video>
+            </div>
+
+            <div id="window-agencies" class="category-window" data-category="agencies">
+                <div class="category-icon">🏢</div>
+                <div class="category-label">Talent Agencies</div>
+                <video loop preload="metadata">
+                    <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4" type="video/mp4">
+                </video>
+            </div>
+
+            <div id="window-voice" class="category-window" data-category="voice">
+                <div class="category-icon">🎙️</div>
+                <div class="category-label">Voice Actors</div>
+                <video loop preload="metadata">
+                    <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WhatCarCanYouGetForAGrand.mp4" type="video/mp4">
+                </video>
+            </div>
+
+            <div id="window-writers" class="category-window" data-category="writers">
+                <div class="category-icon">✍️</div>
+                <div class="category-label">Writers</div>
+                <video loop preload="metadata">
+                    <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">
+                </video>
+            </div>
+
+            <!-- VIDEO CONTROLS BUTTON -->
+            <div id="video-controls" onclick="openControlsModal()">
+                ▶️ PLAYBACK CONTROLS
+            </div>
+        </div>
+
+        <footer>
+            <p><strong>CityBlocks.com</strong> - Premium Domain Since 1997</p>
+            <p>Urban Brownstone • Brady Bunch • Living Community Collaboration</p>
+            <p>&copy; 2025 CityBlocks | <a href="#" onclick="openModal('aboutModal'); return false;">About</a> | <a href="#" onclick="openModal('contactModal'); return false;">Contact</a></p>
+        </footer>
+    </div>
+
+    <!-- CONTROLS MODAL - The Command Center! -->
+    <div id="controlsModal" class="modal">
+        <div class="controls-modal-content">
+            <span class="close" onclick="closeControlsModal()">&times;</span>
+            <h2>🎬 Playback Controls</h2>
+            <p class="mode-description">Choose your experience: Tell a story, embrace chaos, or layer them all!</p>
+            
+            <div class="controls-grid">
+                <button class="control-button sequential" onclick="playSequential()">
+                    <span class="mode-emoji">📖</span>
+                    <span class="mode-name">Sequential</span>
+                    <span class="mode-detail">Play in order, tell a story</span>
+                </button>
+                
+                <button class="control-button random" onclick="playRandom()">
+                    <span class="mode-emoji">🎲</span>
+                    <span class="mode-name">Random</span>
+                    <span class="mode-detail">Shuffle for surprises</span>
+                </button>
+                
+                <button class="control-button loop-layer" onclick="playLoopLayer()">
+                    <span class="mode-emoji">🎚️</span>
+                    <span class="mode-name">Loop/Layer</span>
+                    <span class="mode-detail">All play together - musician's dream!</span>
+                </button>
+            </div>
+            
+            <button class="control-button stop" onclick="stopPlayback()">
+                ⏹ Stop Playback
+            </button>
+            
+            <div id="playback-status"></div>
+        </div>
+    </div>
+
+    <!-- About Modal -->
+    <div id="aboutModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('aboutModal')">&times;</span>
+            <h2>About CityBlocks</h2>
+            <p>CityBlocks is a creative collaboration platform built on a premium domain owned since 1997.</p>
+            <p>Our mission: Create the first TV-optimized platform where creators collaborate in living brownstone communities.</p>
+            <p><strong>Algorithm-free.</strong> No AI deciding who gets seen.</p>
+            <p><strong>Politics-free.</strong> Pure creativity, zero controversy.</p>
+            <p><strong>Community-first.</strong> Content that amplifies everyone's reach through collaboration.</p>
+        </div>
+    </div>
+
+    <!-- How It Works Modal -->
+    <div id="howModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('howModal')">&times;</span>
+            <h2>How It Works</h2>
+            <p><strong>Step 1: Creators Upload to Library</strong></p>
+            <p>Submit 30-second clips tagged by theme, mood, or style. One upload can be featured in hundreds of brownstones!</p>
+            
+            <p style="margin-top: 25px;"><strong>Step 2: Hosts Build Brownstones</strong></p>
+            <p>Browse the library and select 12 videos that work together. Create comedy brownstones, drama brownstones, musical brownstones - anything!</p>
+            
+            <p style="margin-top: 25px;"><strong>Step 3: Visitors Watch Performances</strong></p>
+            <p>Choose Sequential (story), Random (chaos), or Loop/Layer (live mix). Same 12 videos create infinite unique performances!</p>
+        </div>
+    </div>
+
+    <!-- Library Modal -->
+    <div id="libraryModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('libraryModal')">&times;</span>
+            <h2>The Collaboration Library</h2>
+            <p>The heart of CityBlocks is the Collaboration Library - a searchable collection of creator content designed for mixing and remixing.</p>
+            <p><strong>Submit once, featured everywhere.</strong> Your drummer beat could be used in 100 different brownstones. That's 100x the exposure!</p>
+            <p>Network effects mean the more content in the library, the more creative combinations possible, and the more exposure for everyone.</p>
+            <p style="margin-top: 25px;"><em>Phase 2 will launch the full browsable library. For now, enjoy the proof of concept!</em></p>
+        </div>
+    </div>
+
+    <!-- Contact Modal -->
+    <div id="contactModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('contactModal')">&times;</span>
+            <h2>Contact Us</h2>
+            <p>CityBlocks is currently in development as a proof of concept for the living brownstone collaboration platform.</p>
+            <p><strong>Interested in partnering?</strong> contact@cityblocks.com (coming soon)</p>
+            <p><strong>Want early access?</strong> Check back for updates!</p>
+            <p style="margin-top: 25px;"><em>Premium domain since 1997, reimagined for the TV era.</em></p>
+        </div>
+    </div>
+
+    <script>
+        // Sound Management
+        let soundEnabled = false;
+
+        function toggleSound() {
+            soundEnabled = !soundEnabled;
+            const btn = document.getElementById('unmute-btn');
+            const allVideos = document.querySelectorAll('video');
+            
+            allVideos.forEach(video => {
+                video.muted = !soundEnabled;
+            });
+            
+            if (soundEnabled) {
+                btn.textContent = '🔊 SOUND ON';
+                btn.classList.add('active');
+            } else {
+                btn.textContent = '🔇 UNMUTE VIDEOS';
+                btn.classList.remove('active');
+            }
+        }
+
+        // Playback System
+        let playbackQueue = [];
+        let currentPlaybackIndex = 0;
+        let isPlaying = false;
+        let playbackMode = null; // 'sequential', 'random', or 'loop-layer'
+
+        const categoryOrder = ['animators', 'composers', 'cosplayers', 'filmmakers', 'gamedev', 'illustrators', 
+                               'musicians', 'performers', 'producers', 'agencies', 'voice', 'writers'];
+
+        const categoryNames = {
+            animators: 'Animators (Aurora)',
+            composers: 'Composers (Bill)',
+            cosplayers: 'Cosplayers (Cecil)',
+            filmmakers: 'Filmmakers (Fergus)',
+            gamedev: 'Game Developers (Finley)',
+            illustrators: 'Visual Artists (Harriet)',
+            musicians: 'Musicians (Lars)',
+            performers: 'Performers (Magnuson)',
+            producers: 'Producers (Nico)',
+            agencies: 'Talent Agencies (Phoenix)',
+            voice: 'Voice Actors (Skeleton)',
+            writers: 'Writers (Una)'
+        };
+
+        function openControlsModal() {
+            document.getElementById('controlsModal').style.display = 'block';
+        }
+
+        function closeControlsModal() {
+            document.getElementById('controlsModal').style.display = 'none';
+        }
+
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'block';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        function playSequential() {
+            stopPlayback(); // Clear any existing playback
+            playbackMode = 'sequential';
+            playbackQueue = [...categoryOrder];
+            currentPlaybackIndex = 0;
+            startPlayback();
+            closeControlsModal();
+        }
+
+        function playRandom() {
+            stopPlayback(); // Clear any existing playback
+            playbackMode = 'random';
+            playbackQueue = [...categoryOrder];
+            // Fisher-Yates shuffle
+            for (let i = playbackQueue.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [playbackQueue[i], playbackQueue[j]] = [playbackQueue[j], playbackQueue[i]];
+            }
+            currentPlaybackIndex = 0;
+            startPlayback();
+            closeControlsModal();
+        }
+
+        // NEW! LOOP/LAYER MODE - The Game Changer for Musicians!
+        function playLoopLayer() {
+            stopPlayback(); // Clear any existing playback
+            playbackMode = 'loop-layer';
+            isPlaying = true;
+            
+            document.getElementById('playback-status').textContent = '🎚️ LOOP/LAYER MODE: All windows playing together!';
+            closeControlsModal();
+            
+            // Play ALL videos simultaneously and loop them!
+            categoryOrder.forEach(category => {
+                const windowElement = document.getElementById(`window-${category}`);
+                const videoElement = windowElement.querySelector('video');
+                
+                windowElement.classList.add('playing');
+                videoElement.currentTime = 0;
+                videoElement.muted = !soundEnabled;
+                videoElement.loop = true; // Enable looping!
+                videoElement.play().catch(err => {
+                    console.log(`Video playback prevented for ${category}:`, err);
+                });
+            });
+        }
+
+        function startPlayback() {
+            isPlaying = true;
+            if (playbackMode === 'loop-layer') {
+                playLoopLayer(); // This shouldn't normally be called, but just in case
+            } else {
+                playNextVideo();
+            }
+        }
+
+        function playNextVideo() {
+            if (!isPlaying || currentPlaybackIndex >= playbackQueue.length) {
+                if (currentPlaybackIndex >= playbackQueue.length) {
+                    // Sequence finished
+                    document.getElementById('playback-status').textContent = '✅ Playback complete!';
+                    setTimeout(() => {
+                        document.getElementById('playback-status').textContent = '';
+                    }, 3000);
+                }
+                stopPlayback();
+                return;
+            }
+
+            const category = playbackQueue[currentPlaybackIndex];
+            const windowElement = document.getElementById(`window-${category}`);
+            const videoElement = windowElement.querySelector('video');
+
+            document.getElementById('playback-status').textContent = 
+                `Now Playing: ${categoryNames[category]} (${currentPlaybackIndex + 1}/12)`;
+
+            windowElement.classList.add('playing');
+            
+            // CRITICAL FIX: Disable loop for sequential/random mode!
+            videoElement.loop = false;
+            videoElement.currentTime = 0;
+            videoElement.muted = !soundEnabled;
+            
+            // Remove any old event listeners
+            videoElement.onended = null;
+            
+            // Play the video
+            videoElement.play().catch(err => {
+                console.log('Video playback prevented:', err);
+            });
+
+            // Set up the ended event to move to next video
+            videoElement.onended = function() {
+                windowElement.classList.remove('playing');
+                currentPlaybackIndex++;
+                setTimeout(() => {
+                    playNextVideo();
+                }, 400);
+            };
+        }
+
+        function stopPlayback() {
+            isPlaying = false;
+            currentPlaybackIndex = 0;
+            playbackQueue = [];
+            playbackMode = null;
+
+            const allWindows = document.querySelectorAll('.category-window');
+            allWindows.forEach(window => {
+                window.classList.remove('playing');
+                const video = window.querySelector('video');
+                if (video) {
+                    video.pause();
+                    video.currentTime = 0;
+                    video.onended = null; // Clear event listeners
+                }
+            });
+
+            document.getElementById('playback-status').textContent = 'Playback stopped';
+            setTimeout(() => {
+                document.getElementById('playback-status').textContent = '';
+            }, 2000);
+        }
+
+        // Modal click-outside-to-close
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = 'none';
+            }
+        }
+
+        // ESC key to close modals
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                document.querySelectorAll('.modal').forEach(modal => {
+                    modal.style.display = 'none';
+                });
+            }
+        });
+
+        console.log('🏘️ CityBlocks - Loop/Layer Mode is LIVE!');
+        console.log('🎚️ Musicians: Try Loop/Layer mode to hear all 12 videos at once!');
+        console.log('🔊 Remember to turn on sound for the full experience!');
+    </script>
+</body>
+</html>
