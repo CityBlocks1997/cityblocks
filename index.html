@@ -2,11 +2,10 @@
 <!--
 ╔═══════════════════════════════════════════════════════════════════════════╗
 ║                           CITYBLOCKS HOMEPAGE                              ║
-║                          index.html - VERSION 2.7                          ║
-║                    MULTI-WINDOW GRID VIEW - TV DIRECTOR                    ║
+║                          index.html - VERSION 2.6                          ║
 ╚═══════════════════════════════════════════════════════════════════════════╝
 
-📅 DATE: November 12, 2025
+📅 DATE: November 11, 2025
 👤 DEVELOPER: Richard Tucker (Batman1997)
 🏢 PROJECT: CityBlocks.com - Video Collaboration Platform
 🌐 DOMAIN: Premium domain since 1997 | Retirement project for Adobe pitch
@@ -15,18 +14,6 @@
 
 VERSION HISTORY:
 ─────────────────────────────────────────────────────────────────────────────
-v2.7 (Nov 12, 2025) - MULTI-WINDOW GRID VIEW (Creative Photoplay)
-  ✅ Dynamic grid layout: Adjusts as videos join (1, 2, 3, 4+ windows)
-  ✅ TV-style production: Split-screen, multi-window display
-  ✅ Busker Mode integration: All active layers display simultaneously
-  ✅ Category labels on each video in grid
-  ✅ Sequential/Random/Custom: Single video popup with auto-advance
-  ✅ Busker Mode: Multi-window grid that grows as layers join
-  ✅ Close button returns to brownstone (videos continue playing)
-  ✅ Progress indicator shows active windows
-  ✅ Video controls on each window in grid
-  ⚙️ STATUS: Creative Photoplay concept operational
-
 v2.6 (Nov 11, 2025) - CINEMATIC VIEW POPUP CORRECTED
   ✅ Fixed video modal: Now popup window (not full-screen takeover)
   ✅ Brownstone visible behind semi-transparent overlay (70% opacity)
@@ -1061,22 +1048,20 @@ NOTES FOR NEXT SESSION:
                 </div>
             </div>
             
-            <!-- VIDEO MODAL FOR CINEMATIC VIEW - MULTI-WINDOW GRID -->
+            <!-- VIDEO MODAL FOR CINEMATIC VIEW POPUP -->
             <div id="video-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); z-index: 10000; align-items: center; justify-content: center;">
-                <div style="position: relative; width: 90%; max-width: 1400px; background: #1a1a2e; border-radius: 15px; padding: 20px; box-shadow: 0 10px 50px rgba(0, 0, 0, 0.8); max-height: 90vh; overflow-y: auto;">
+                <div style="position: relative; width: 70%; max-width: 900px; background: #1a1a2e; border-radius: 15px; padding: 20px; box-shadow: 0 10px 50px rgba(0, 0, 0, 0.8);">
                     <!-- Progress Indicator -->
                     <div id="modal-progress" style="text-align: center; background: rgba(212, 175, 55, 0.2); color: #d4af37; padding: 8px 15px; border-radius: 20px; font-size: 1em; font-weight: bold; margin-bottom: 15px;">
-                        <span id="modal-status">Playing Window 1</span>
+                        Playing <span id="modal-current">1</span> of <span id="modal-total">12</span>
                     </div>
                     
-                    <!-- Multi-Video Grid Container -->
-                    <div id="video-grid" style="display: grid; gap: 15px; margin-bottom: 15px;">
-                        <!-- Videos will be inserted here dynamically -->
-                    </div>
+                    <!-- Video Container -->
+                    <video id="modal-video" style="width: 100%; height: auto; border-radius: 10px; background: black;" controls></video>
                     
                     <!-- Control Buttons -->
-                    <div style="display: flex; gap: 15px; justify-content: center;">
-                        <button onclick="skipVideo()" id="skip-button" style="padding: 12px 25px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 8px; font-weight: bold; font-size: 1em; cursor: pointer; transition: all 0.3s; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);" onmouseover="this.style.transform='scale(1.05)';" onmouseout="this.style.transform='scale(1)';">
+                    <div style="display: flex; gap: 15px; justify-content: center; margin-top: 15px;">
+                        <button onclick="skipVideo()" style="padding: 12px 25px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 8px; font-weight: bold; font-size: 1em; cursor: pointer; transition: all 0.3s; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);" onmouseover="this.style.transform='scale(1.05)';" onmouseout="this.style.transform='scale(1)';">
                             ⏭️ Skip
                         </button>
                         <button onclick="closeVideoModal()" style="padding: 12px 25px; background: linear-gradient(135deg, #dc3545 0%, #c82333 100%); color: white; border: none; border-radius: 8px; font-weight: bold; font-size: 1em; cursor: pointer; transition: all 0.3s; box-shadow: 0 4px 15px rgba(220, 53, 69, 0.4);" onmouseover="this.style.transform='scale(1.05)';" onmouseout="this.style.transform='scale(1)';">
@@ -1146,8 +1131,6 @@ NOTES FOR NEXT SESSION:
         let fullScreenMode = false;
         let modalVideoQueue = [];
         let modalCurrentIndex = 0;
-        let activeModalVideos = []; // Tracks currently playing videos in modal
-        let modalVideoElements = {}; // Maps category to video element
 
         // ACTIVE BUTTON MANAGEMENT - Cassette Player Effect
         function setActiveButton(buttonElement) {
@@ -1183,133 +1166,44 @@ NOTES FOR NEXT SESSION:
             }
         }
         
-        // MULTI-WINDOW GRID FUNCTIONS
-        function addVideoToModal(category) {
-            const videoGrid = document.getElementById('video-grid');
-            const videoSrc = `videos/${category}.mp4`;
+        function openVideoModal(videoSrc, currentIndex, totalVideos) {
+            const modal = document.getElementById('video-modal');
+            const video = document.getElementById('modal-video');
+            const currentSpan = document.getElementById('modal-current');
+            const totalSpan = document.getElementById('modal-total');
             
-            // Create video element
-            const videoContainer = document.createElement('div');
-            videoContainer.id = `modal-video-${category}`;
-            videoContainer.style.cssText = 'position: relative; border-radius: 10px; overflow: hidden; background: black;';
-            
-            const video = document.createElement('video');
+            // Set video source
             video.src = videoSrc;
             video.muted = !soundEnabled;
-            video.loop = true; // Loop in modal for Busker Mode
-            video.style.cssText = 'width: 100%; height: auto; display: block;';
-            video.controls = true;
-            
-            // Category label
-            const label = document.createElement('div');
-            label.textContent = categoryNames[category] || category;
-            label.style.cssText = 'position: absolute; top: 10px; left: 10px; background: rgba(0, 0, 0, 0.8); color: #d4af37; padding: 5px 10px; border-radius: 5px; font-size: 0.9em; font-weight: bold; z-index: 1;';
-            
-            videoContainer.appendChild(video);
-            videoContainer.appendChild(label);
-            videoGrid.appendChild(videoContainer);
-            
-            // Track video
-            activeModalVideos.push(category);
-            modalVideoElements[category] = video;
-            
-            // Play video
             video.play();
             
-            // Update grid layout
-            updateModalGridLayout();
-            updateModalProgress();
-        }
-        
-        function removeVideoFromModal(category) {
-            const videoContainer = document.getElementById(`modal-video-${category}`);
-            if (videoContainer) {
-                videoContainer.remove();
-            }
+            // Update progress
+            currentSpan.textContent = currentIndex + 1;
+            totalSpan.textContent = totalVideos;
             
-            // Remove from tracking
-            activeModalVideos = activeModalVideos.filter(c => c !== category);
-            delete modalVideoElements[category];
-            
-            // Update grid layout
-            updateModalGridLayout();
-            updateModalProgress();
-        }
-        
-        function updateModalGridLayout() {
-            const videoGrid = document.getElementById('video-grid');
-            const count = activeModalVideos.length;
-            
-            if (count === 0) {
-                return;
-            } else if (count === 1) {
-                // Single video - large
-                videoGrid.style.gridTemplateColumns = '1fr';
-            } else if (count === 2) {
-                // Two videos - side by side
-                videoGrid.style.gridTemplateColumns = '1fr 1fr';
-            } else if (count === 3) {
-                // Three videos - 2 top, 1 bottom center
-                videoGrid.style.gridTemplateColumns = '1fr 1fr';
-                const children = videoGrid.children;
-                if (children[2]) {
-                    children[2].style.gridColumn = '1 / -1';
-                    children[2].style.maxWidth = '50%';
-                    children[2].style.margin = '0 auto';
-                }
-            } else if (count === 4) {
-                // Four videos - 2x2 grid
-                videoGrid.style.gridTemplateColumns = '1fr 1fr';
-            } else if (count <= 6) {
-                // 5-6 videos - 2x3 grid
-                videoGrid.style.gridTemplateColumns = '1fr 1fr';
-            } else {
-                // 7+ videos - 3 columns
-                videoGrid.style.gridTemplateColumns = '1fr 1fr 1fr';
-            }
-        }
-        
-        function updateModalProgress() {
-            const status = document.getElementById('modal-status');
-            if (activeModalVideos.length === 1) {
-                const catName = categoryNames[activeModalVideos[0]] || activeModalVideos[0];
-                status.textContent = `Playing: ${catName}`;
-            } else {
-                const catNames = activeModalVideos.map(c => categoryNames[c] || c).join(', ');
-                status.textContent = `Playing: ${catNames}`;
-            }
-        }
-        
-        function openVideoModal() {
-            const modal = document.getElementById('video-modal');
+            // Show modal
             modal.style.display = 'flex';
+            
+            // Auto-advance on video end
+            video.onended = () => {
+                playNextInModal();
+            };
         }
         
         function closeVideoModal() {
             const modal = document.getElementById('video-modal');
-            const videoGrid = document.getElementById('video-grid');
+            const video = document.getElementById('modal-video');
             
-            // Stop and remove all videos
-            Object.values(modalVideoElements).forEach(video => {
-                video.pause();
-                video.src = '';
-            });
-            
-            videoGrid.innerHTML = '';
-            activeModalVideos = [];
-            modalVideoElements = {};
-            
+            video.pause();
+            video.src = '';
             modal.style.display = 'none';
             
-            // Stop playback in brownstone too
+            // Stop playback
             stopPlayback();
         }
         
         function skipVideo() {
-            // For Sequential/Random/Custom modes
-            if (!buskerModeActive) {
-                playNextInModal();
-            }
+            playNextInModal();
         }
         
         function playNextInModal() {
@@ -1325,15 +1219,10 @@ NOTES FOR NEXT SESSION:
                 return;
             }
             
-            // Clear current video
-            const videoGrid = document.getElementById('video-grid');
-            videoGrid.innerHTML = '';
-            activeModalVideos = [];
-            modalVideoElements = {};
-            
             // Play next video
             const nextCategory = modalVideoQueue[modalCurrentIndex];
-            addVideoToModal(nextCategory);
+            const nextVideoSrc = `videos/${nextCategory}.mp4`;
+            openVideoModal(nextVideoSrc, modalCurrentIndex, modalVideoQueue.length);
         }
 
         const categoryOrder = ['animators', 'composers', 'cosplayers', 'filmmakers', 'gamedev', 'illustrators', 
@@ -1435,61 +1324,11 @@ NOTES FOR NEXT SESSION:
             // DON'T clear input - let user modify and try again!
             // They can clear it themselves when ready for next sequence
             
-            // Check if full-screen mode is enabled
-            if (fullScreenMode) {
-                // Open modal for Busker Mode
-                openVideoModal();
-                processBuskerSequenceWithModal(rawNumbers, 0);
-            } else {
-                // Process sequence in brownstone windows
-                processSequenceWithDelays(rawNumbers, 0);
-            }
+            // Process sequence with delays
+            processSequenceWithDelays(rawNumbers, 0);
         }
 
-        // NEW: Process Busker sequence in modal with multi-window grid
-        function processBuskerSequenceWithModal(sequence, index) {
-            if (index >= sequence.length) {
-                // Sequence complete
-                return;
-            }
-            
-            const num = sequence[index];
-            
-            // Check if it's a pause/delay
-            if (num === 0) {
-                console.log('⏸️ Delay before next layer...');
-                document.getElementById('playback-status').textContent = 
-                    `⏸️ Waiting... (next layer coming in 1.5s)`;
-                
-                // Wait 1.5 seconds, then process next number
-                setTimeout(() => {
-                    processBuskerSequenceWithModal(sequence, index + 1);
-                }, 1500);
-                return;
-            }
-            
-            // Check if it's a valid window number
-            if (num >= 1 && num <= 12) {
-                const category = categoryOrder[num - 1];
-                
-                // Add window if not already playing
-                if (!activeModalVideos.includes(category)) {
-                    addVideoToModal(category);
-                    console.log(`🔊 Added to modal layer: ${category} (window ${num})`);
-                }
-                
-                // Update status
-                document.getElementById('playback-status').textContent = 
-                    `🎸 Layering ${activeModalVideos.length} window${activeModalVideos.length !== 1 ? 's' : ''}`;
-            }
-            
-            // Process next number immediately (unless it was a 0)
-            setTimeout(() => {
-                processBuskerSequenceWithModal(sequence, index + 1);
-            }, 100); // Small delay to prevent UI freezing
-        }
-
-        // NEW: Process sequence step-by-step with delays (for brownstone windows)
+        // NEW: Process sequence step-by-step with delays
         function processSequenceWithDelays(sequence, index) {
             if (index >= sequence.length) {
                 // Sequence complete
@@ -1557,15 +1396,7 @@ NOTES FOR NEXT SESSION:
             if (fullScreenMode) {
                 modalVideoQueue = [...playbackQueue];
                 modalCurrentIndex = 0;
-                openVideoModal();
-                addVideoToModal(modalVideoQueue[0]);
-                
-                // Auto-advance for sequential
-                const firstVideo = modalVideoElements[modalVideoQueue[0]];
-                if (firstVideo) {
-                    firstVideo.loop = false;
-                    firstVideo.onended = () => playNextInModal();
-                }
+                openVideoModal(`videos/${modalVideoQueue[0]}.mp4`, 0, modalVideoQueue.length);
             } else {
                 startPlayback();
             }
@@ -1588,15 +1419,7 @@ NOTES FOR NEXT SESSION:
             if (fullScreenMode) {
                 modalVideoQueue = [...playbackQueue];
                 modalCurrentIndex = 0;
-                openVideoModal();
-                addVideoToModal(modalVideoQueue[0]);
-                
-                // Auto-advance for random
-                const firstVideo = modalVideoElements[modalVideoQueue[0]];
-                if (firstVideo) {
-                    firstVideo.loop = false;
-                    firstVideo.onended = () => playNextInModal();
-                }
+                openVideoModal(`videos/${modalVideoQueue[0]}.mp4`, 0, modalVideoQueue.length);
             } else {
                 startPlayback();
             }
@@ -1627,21 +1450,12 @@ NOTES FOR NEXT SESSION:
             if (fullScreenMode) {
                 modalVideoQueue = [...playbackQueue];
                 modalCurrentIndex = 0;
-                openVideoModal();
-                addVideoToModal(modalVideoQueue[0]);
-                
-                // Auto-advance for custom
-                const firstVideo = modalVideoElements[modalVideoQueue[0]];
-                if (firstVideo) {
-                    firstVideo.loop = false;
-                    firstVideo.onended = () => playNextInModal();
-                }
+                openVideoModal(`videos/${modalVideoQueue[0]}.mp4`, 0, modalVideoQueue.length);
             } else {
                 startPlayback();
             }
             
             document.getElementById('playback-status').textContent = `🎯 Playing custom sequence: ${input}`;
-        }
         }
 
         function playLoopLayer() {
