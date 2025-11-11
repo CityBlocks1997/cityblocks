@@ -1,0 +1,1474 @@
+<!DOCTYPE html>
+<!--
+╔═══════════════════════════════════════════════════════════════════════════╗
+║                           CITYBLOCKS HOMEPAGE                              ║
+║                          index.html - VERSION 2.1                          ║
+╚═══════════════════════════════════════════════════════════════════════════╝
+
+📅 DATE: November 9, 2025
+👤 DEVELOPER: Richard Tucker (Batman1997)
+🏢 PROJECT: CityBlocks.com - Video Collaboration Platform
+🌐 DOMAIN: Premium domain since 1997 | Retirement project for Adobe pitch
+
+═══════════════════════════════════════════════════════════════════════════
+
+VERSION HISTORY:
+─────────────────────────────────────────────────────────────────────────────
+v2.1 (Nov 9, 2025) - FILE STRUCTURE REORGANIZATION
+  ✅ Updated all image paths to use /images/ folder
+  ✅ Fixed: city-street-background.jpg → images/city-street-background.jpg
+  ✅ Fixed: brownstone.png → images/brownstone.png
+  ✅ Fixed: Busker_Brownstone_transparent.png → images/Busker_Brownstone_transparent.png
+  ✅ Organized GitHub: /images, /videos, /audio folders created
+  ⚙️ STATUS: Ready for deployment - all paths corrected
+
+v2.0 (Nov 9, 2025) - WINDOW POSITION PERFECTION
+  ✅ All 12 category windows precisely aligned
+  ✅ Windows #8 & #11 perfect (no changes)
+  ✅ Video insets uniform at 10% all sides
+  ✅ 3D beveled cassette player buttons with GREEN glow when active
+  ✅ Bottom windows (Collaborate/Hire) adjusted to 79.8%
+
+v1.0 - INITIAL FENG SHUI REDESIGN
+  ✅ Warm cream background (#F5F1E8)
+  ✅ Gold accent colors (#d4af37)
+  ✅ Brown gradient sidebars
+  ✅ 12 category windows with video playback
+  ✅ Playback modes: Sequential, Random, Cacophony, Busker
+
+═══════════════════════════════════════════════════════════════════════════
+
+CURRENT STATUS:
+─────────────────────────────────────────────────────────────────────────────
+✅ Homepage design complete
+✅ Window positions finalized
+✅ Color scheme: Feng Shui "Colors for Success"
+✅ File structure organized (/images, /videos, /audio)
+✅ Ready for: Video content upload
+⏳ Next: Build account.html for user signups
+
+═══════════════════════════════════════════════════════════════════════════
+
+FILE STRUCTURE:
+─────────────────────────────────────────────────────────────────────────────
+images/
+  ├── brownstone.png (Main building - 832x1500px)
+  ├── city-street-background.jpg (Background overlay)
+  └── Busker_Brownstone_transparent.png (Mascot)
+
+videos/
+  └── [12 category demo videos - 30 seconds each]
+      animators.mp4, composers.mp4, cosplayers.mp4, filmmakers.mp4,
+      gamedev.mp4, illustrators.mp4, musicians.mp4, performers.mp4,
+      producers.mp4, agencies.mp4, voice.mp4, writers.mp4
+
+═══════════════════════════════════════════════════════════════════════════
+
+COLOR PALETTE:
+─────────────────────────────────────────────────────────────────────────────
+🎨 Background: #F5F1E8 (Warm cream - earth/stability)
+🌟 Gold Accent: #d4af37 (Prosperity/success)
+🏢 Dark Brown: #4a2c1f (Grounding/brownstone)
+💚 Active Green: rgba(76, 175, 80, 0.8) (Growth/vitality)
+🤎 Sidebar: rgba(107, 68, 35, 0.95) → rgba(139, 90, 60, 0.95)
+
+═══════════════════════════════════════════════════════════════════════════
+
+NOTES FOR NEXT SESSION:
+─────────────────────────────────────────────────────────────────────────────
+• All image paths now point to /images/ folder
+• Video paths will use /videos/ folder when content uploaded
+• Audio paths will use /audio/ folder for future sound effects
+• User-generated content will go in /users/[username]/ folders
+• Community Library clips: /community-library/[category]/
+
+═══════════════════════════════════════════════════════════════════════════
+-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CityBlocks - Where Pure Creativity Resides</title>
+    <style>
+        /* ============================================
+           MAIN SHELL STYLES (Header, Body, Sidebars)
+           ============================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: #F5F1E8; /* Warm cream - Feng Shui earth/stability */
+            /* Realistic tree-lined city street background - FULL COLOR (55% overlay) */
+            background-image: 
+                linear-gradient(rgba(245, 241, 232, 0.55), rgba(245, 241, 232, 0.55)),
+                url('images/city-street-background.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #2c2416;
+            min-height: 100vh;
+            padding: 12px;
+            overflow-x: hidden;
+        }
+
+        header {
+            text-align: center;
+            padding: 12px 20px; /* Reduced from 20px */
+            background: rgba(212, 175, 55, 0.15); /* Soft gold tint */
+            border: 2px solid #d4af37; /* Gold border */
+            border-radius: 15px;
+            margin-bottom: 15px; /* Reduced from 20px */
+            backdrop-filter: blur(10px);
+        }
+
+        h1 {
+            font-size: 2.8rem; /* Larger - increased from 2.4rem */
+            color: #4a2c1f; /* Dark brownstone brown */
+            margin-bottom: 5px;
+            letter-spacing: 2px;
+        }
+
+        .tagline {
+            font-size: 1.4rem; /* Increased 2 sizes from 1rem */
+            color: #4a2c1f;
+            font-style: italic;
+            text-shadow: 
+                -1px -1px 0 #fff,
+                1px -1px 0 #fff,
+                -1px 1px 0 #fff,
+                1px 1px 0 #fff,
+                2px 2px 4px rgba(0, 0, 0, 0.3); /* Light white outline + shadow */
+            font-weight: bold;
+        }
+
+        /* MAIN LAYOUT WITH SIDEBARS */
+        .main-layout {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 250px 1fr 250px;
+            gap: 20px; /* Reduced from 30px */
+            align-items: start;
+        }
+
+        /* LEFT SIDEBAR */
+        .left-sidebar {
+            background: linear-gradient(135deg, rgba(107, 68, 35, 0.95) 0%, rgba(139, 90, 60, 0.95) 100%); /* Dark brown - same as buttons */
+            border: 2px solid #4a2c1f;
+            border-radius: 15px;
+            padding: 18px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .sidebar-section {
+            margin-bottom: 20px; /* Reduced from 30px */
+        }
+
+        .sidebar-section h3 {
+            color: #ffffff;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            padding: 12px;
+            background: linear-gradient(135deg, #4a2c1f 0%, #6b4423 100%); /* Dark brown gradient */
+            border: 2px solid #4a2c1f;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+            -webkit-text-stroke: 0.5px #000000; /* Black outline for strong contrast */
+            text-stroke: 0.5px #000000; /* Black outline for strong contrast */
+            border-radius: 8px;
+            text-align: center;
+            margin: 0 auto; /* Center the header */
+            display: block;
+        }
+
+        .sidebar-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sidebar-list li {
+            padding: 12px 15px;
+            margin-bottom: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: #fff;
+        }
+
+        .sidebar-list li:hover {
+            background: rgba(212, 175, 55, 0.3);
+            transform: translateX(5px);
+        }
+
+        .featured-creators {
+            list-style: none;
+            padding: 0;
+        }
+
+        .featured-creators li {
+            padding: 12px 15px;
+            margin-bottom: 8px;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.2) 0%, rgba(255, 215, 0, 0.2) 100%);
+            border: 1px solid rgba(212, 175, 55, 0.5);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: #fff;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .featured-creators li:hover {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.4) 0%, rgba(255, 215, 0, 0.4) 100%);
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
+        }
+
+        .sidebar-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #d4af37 0%, #f5c842 100%);
+            color: #2d5016; /* Dark green text like homepage */
+            border: 2px solid #b8941f;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 20px;
+            box-shadow: 0 3px 10px rgba(212, 175, 55, 0.5);
+            -webkit-text-stroke: 0.5px #000000; /* Black outline for readability */
+            text-stroke: 0.5px #000000; /* Black outline for readability */
+        }
+
+        .sidebar-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.7);
+            background: linear-gradient(135deg, #f5c842 0%, #d4af37 100%);
+        }
+
+        /* RIGHT SIDEBAR */
+        .right-sidebar {
+            background: linear-gradient(135deg, rgba(107, 68, 35, 0.95) 0%, rgba(139, 90, 60, 0.95) 100%); /* Matching left sidebar */
+            border: 2px solid #4a2c1f;
+            border-radius: 15px;
+            padding: 18px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .right-sidebar h3 {
+            color: #ffffff;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            padding: 12px;
+            background: linear-gradient(135deg, #4a2c1f 0%, #6b4423 100%);
+            border: 2px solid #4a2c1f;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+            -webkit-text-stroke: 0.5px #000000;
+            text-stroke: 0.5px #000000;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .community-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .community-list li {
+            padding: 12px 15px;
+            margin-bottom: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: #fff;
+        }
+
+        .community-list li:hover {
+            background: rgba(212, 175, 55, 0.3);
+            transform: translateX(-5px);
+        }
+
+        /* ============================================
+           MAIN CONTENT AREA
+           ============================================ */
+        main {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        /* ============================================
+           BROWNSTONE MODULE - Physical Graffiti Style
+           ============================================ */
+        .brownstone-module {
+            position: relative;
+            margin: 0 auto;
+            width: fit-content;
+        }
+
+        .brownstone-preview {
+            position: relative;
+            width: 832px; /* EXACT brownstone width */
+            height: 1500px; /* EXACT brownstone height */
+            margin: 0 auto;
+        }
+
+        .brownstone-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        /* ============================================
+           CATEGORY WINDOWS - Precise Positioning
+           ============================================ */
+        .category-window {
+            position: absolute;
+            border-radius: 4px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s;
+            z-index: 5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: rgba(20, 20, 30, 0.7);
+        }
+
+        .category-window:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.6);
+            z-index: 15;
+        }
+
+        .category-window.playing {
+            box-shadow: 0 0 30px rgba(76, 175, 80, 0.8);
+            border: 3px solid rgba(76, 175, 80, 0.9);
+        }
+
+        .category-window.busker-playing {
+            box-shadow: 0 0 30px rgba(79, 172, 254, 0.8);
+            border: 3px solid rgba(79, 172, 254, 0.9);
+            animation: busker-pulse 2s infinite;
+        }
+
+        @keyframes busker-pulse {
+            0%, 100% {
+                box-shadow: 0 0 30px rgba(79, 172, 254, 0.8);
+            }
+            50% {
+                box-shadow: 0 0 50px rgba(79, 172, 254, 1);
+            }
+        }
+
+        .category-icon {
+            font-size: 2rem;
+            margin-bottom: 8px;
+            opacity: 0.9;
+            z-index: 6;
+            position: relative;
+            pointer-events: none;
+        }
+
+        .category-label {
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: white;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            z-index: 6;
+            position: relative;
+            pointer-events: none;
+        }
+
+        .category-window video {
+            position: absolute;
+            width: 80%; /* 10% inset on each side = 80% width */
+            height: 80%; /* 10% inset top/bottom = 80% height */
+            top: 10%; /* 10% inset from top */
+            left: 10%; /* 10% inset from left */
+            object-fit: cover;
+            border-radius: 3px;
+            z-index: 1;
+        }
+
+        .category-window:not(.playing) video {
+            opacity: 0.3;
+        }
+
+        .category-window.playing video,
+        .category-window.busker-playing video {
+            opacity: 1;
+        }
+
+        .category-window.playing .category-icon,
+        .category-window.playing .category-label,
+        .category-window.busker-playing .category-icon,
+        .category-window.busker-playing .category-label {
+            opacity: 0;
+        }
+
+        /* WINDOW POSITIONING - Physical Graffiti 3x4 grid + door + bottom windows */
+        /* ROW 1 - Top 3 windows */
+        #window-animators { top: 8.6%; left: 9.7%; width: 24.5%; height: 10.7%; }
+        #window-composers { top: 8.6%; left: 37.5%; width: 24.5%; height: 10.7%; }
+        #window-cosplayers { top: 8.6%; left: 65.5%; width: 24.5%; height: 10.7%; }
+
+        /* ROW 2 - Middle-upper 3 windows */
+        #window-filmmakers { top: 26.9%; left: 9.7%; width: 24.5%; height: 10.7%; }
+        #window-gamedev { top: 26.9%; left: 37.5%; width: 24.5%; height: 10.7%; }
+        #window-illustrators { top: 26.9%; left: 65.5%; width: 24.5%; height: 10.7%; }
+
+        /* ROW 3 - Middle-lower 3 windows */
+        #window-musicians { top: 45.3%; left: 9.7%; width: 24.5%; height: 10.7%; }
+        #window-performers { top: 45.3%; left: 37.5%; width: 24.5%; height: 10.7%; }
+        #window-producers { top: 45.3%; left: 65.5%; width: 24.5%; height: 10.7%; }
+
+        /* ROW 4 - Bottom 3 windows */
+        #window-agencies { top: 63.6%; left: 9.7%; width: 24.5%; height: 10.7%; }
+        #window-voice { top: 63.6%; left: 37.5%; width: 24.5%; height: 10.7%; }
+        #window-writers { top: 63.6%; left: 65.5%; width: 24.5%; height: 10.7%; }
+
+        /* DOOR WINDOW - Centered */
+        #window-door { top: 82.8%; left: 37.5%; width: 24.5%; height: 10.7%; }
+
+        /* BOTTOM WINDOWS - Collaborate & Hire */
+        #window-collaborate { top: 79.8%; left: 9.7%; width: 24.5%; height: 10.7%; }
+        #window-hire { top: 79.8%; left: 65.5%; width: 24.5%; height: 10.7%; }
+
+        /* ============================================
+           BUSKER BROWNSTONE MASCOT
+           ============================================ */
+        .busker-image {
+            position: absolute;
+            width: 180px;
+            height: auto;
+            bottom: -30px;
+            right: -80px;
+            z-index: 20;
+            opacity: 1;
+            animation: fadeOut 8s forwards;
+            animation-delay: 0s;
+            pointer-events: none;
+        }
+
+        @keyframes fadeOut {
+            0% { opacity: 1; }
+            85% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+
+        /* ============================================
+           MODAL STYLES
+           ============================================ */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #2d1810 0%, #4a2c1f 100%);
+            margin: 5% auto;
+            padding: 30px;
+            border: 3px solid #d4af37;
+            border-radius: 15px;
+            width: 80%;
+            max-width: 800px;
+            color: #fff;
+            box-shadow: 0 10px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-close {
+            color: #d4af37;
+            float: right;
+            font-size: 35px;
+            font-weight: bold;
+            cursor: pointer;
+            line-height: 20px;
+        }
+
+        .modal-close:hover {
+            color: #f5c842;
+        }
+
+        /* ============================================
+           CASSETTE PLAYER ACTIVE BUTTON EFFECT
+           ============================================ */
+        button.active-playback {
+            box-shadow: 0 0 25px rgba(76, 175, 80, 0.9) !important;
+            border: 3px solid rgba(76, 175, 80, 0.9) !important;
+            animation: green-glow 1.5s infinite !important;
+        }
+
+        @keyframes green-glow {
+            0%, 100% {
+                box-shadow: 0 0 25px rgba(76, 175, 80, 0.9);
+            }
+            50% {
+                box-shadow: 0 0 40px rgba(76, 175, 80, 1);
+            }
+        }
+
+        /* ============================================
+           RESPONSIVE ADJUSTMENTS
+           ============================================ */
+        @media (max-width: 1400px) {
+            .main-layout {
+                grid-template-columns: 200px 1fr 200px;
+            }
+
+            .sidebar-section h3,
+            .right-sidebar h3 {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 1100px) {
+            .main-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .left-sidebar,
+            .right-sidebar {
+                display: none;
+            }
+
+            .brownstone-preview {
+                transform: scale(0.8);
+                transform-origin: top center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .tagline {
+                font-size: 1rem;
+            }
+
+            .brownstone-preview {
+                transform: scale(0.5);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>CityBlocks</h1>
+        <p class="tagline">Where Pure Creativity Resides</p>
+    </header>
+
+    <div class="main-layout">
+        <!-- LEFT SIDEBAR (PROTECTED - Edit only this section) -->
+        <aside class="left-sidebar">
+            <div class="sidebar-section">
+                <h3 style="background: linear-gradient(135deg, #4a2c1f 0%, #6b4423 100%); border: 2px solid #4a2c1f; box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2); -webkit-text-stroke: 0.5px #000000; color: #ffffff; text-align: center; padding: 12px; margin: 0 auto; display: block;">Quick Start</h3>
+                <ul class="sidebar-list">
+                    <li>📺 How it Works</li>
+                    <li>ℹ️ About CityBlocks</li>
+                </ul>
+            </div>
+
+            <div class="sidebar-section">
+                <h3 style="background: linear-gradient(135deg, #4a2c1f 0%, #6b4423 100%); border: 2px solid #4a2c1f; box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2); -webkit-text-stroke: 0.5px #000000; color: #ffffff; text-align: center; padding: 12px; margin: 0 auto; display: block;">Featured Creators</h3>
+                <ul class="featured-creators">
+                    <li>⭐ Creator #1</li>
+                    <li>⭐ Creator #2</li>
+                    <li>⭐ Creator #3</li>
+                </ul>
+            </div>
+
+            <button class="sidebar-btn">🏠 Customize Your Brownstone</button>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main>
+            <div class="brownstone-module">
+                <div class="brownstone-preview">
+                    <img src="images/brownstone.png" alt="CityBlocks Brownstone" class="brownstone-image">
+
+                    <!-- CATEGORY WINDOWS - 12 windows arranged 3x4 -->
+                    <!-- ROW 1 -->
+                    <div class="category-window" id="window-animators" data-category="animators">
+                        <div class="category-icon">🎬</div>
+                        <div class="category-label">Animators</div>
+                        <video preload="auto" muted>
+                            <source src="videos/animators.mp4" type="video/mp4">
+                        </video>
+                    </div>
+
+                    <div class="category-window" id="window-composers" data-category="composers">
+                        <div class="category-icon">🎵</div>
+                        <div class="category-label">Composers</div>
+                        <video preload="auto" muted>
+                            <source src="videos/composers.mp4" type="video/mp4">
+                        </video>
+                    </div>
+
+                    <div class="category-window" id="window-cosplayers" data-category="cosplayers">
+                        <div class="category-icon">🦸‍♂️</div>
+                        <div class="category-label">Cosplayers</div>
+                        <video preload="auto" muted>
+                            <source src="videos/cosplayers.mp4" type="video/mp4">
+                        </video>
+                    </div>
+
+                    <!-- ROW 2 -->
+                    <div class="category-window" id="window-filmmakers" data-category="filmmakers">
+                        <div class="category-icon">🎥</div>
+                        <div class="category-label">Filmmakers</div>
+                        <video preload="auto" muted>
+                            <source src="videos/filmmakers.mp4" type="video/mp4">
+                        </video>
+                    </div>
+
+                    <div class="category-window" id="window-gamedev" data-category="gamedev">
+                        <div class="category-icon">🎮</div>
+                        <div class="category-label">Game Developers</div>
+                        <video preload="auto" muted>
+                            <source src="videos/gamedev.mp4" type="video/mp4">
+                        </video>
+                    </div>
+
+                    <div class="category-window" id="window-illustrators" data-category="illustrators">
+                        <div class="category-icon">🖼️</div>
+                        <div class="category-label">Visual Artists</div>
+                        <video preload="auto" muted>
+                            <source src="videos/illustrators.mp4" type="video/mp4">
+                        </video>
+                    </div>
+
+                    <!-- ROW 3 -->
+                    <div class="category-window" id="window-musicians" data-category="musicians">
+                        <div class="category-icon">🥁</div>
+                        <div class="category-label">Musicians</div>
+                        <video preload="auto" muted>
+                            <source src="videos/musicians.mp4" type="video/mp4">
+                        </video>
+                    </div>
+
+                    <div class="category-window" id="window-performers" data-category="performers">
+                        <div class="category-icon">💃</div>
+                        <div class="category-label">Performers</div>
+                        <video preload="auto" muted>
+                            <source src="videos/performers.mp4" type="video/mp4">
+                        </video>
+                    </div>
+
+                    <div class="category-window" id="window-producers" data-category="producers">
+                        <div class="category-icon">💰</div>
+                        <div class="category-label">Producers</div>
+                        <video preload="auto" muted>
+                            <source src="videos/producers.mp4" type="video/mp4">
+                        </video>
+                    </div>
+
+                    <!-- ROW 4 -->
+                    <div class="category-window" id="window-agencies" data-category="agencies">
+                        <div class="category-icon">💼</div>
+                        <div class="category-label">Talent Agencies</div>
+                        <video preload="auto" muted>
+                            <source src="videos/agencies.mp4" type="video/mp4">
+                        </video>
+                    </div>
+
+                    <div class="category-window" id="window-voice" data-category="voice">
+                        <div class="category-icon">🎙️</div>
+                        <div class="category-label">Voice Actors</div>
+                        <video preload="auto" muted>
+                            <source src="videos/voice.mp4" type="video/mp4">
+                        </video>
+                    </div>
+
+                    <div class="category-window" id="window-writers" data-category="writers">
+                        <div class="category-icon">✍️</div>
+                        <div class="category-label">Writers</div>
+                        <video preload="auto" muted>
+                            <source src="videos/writers.mp4" type="video/mp4">
+                        </video>
+                    </div>
+
+                    <!-- DOOR WINDOW -->
+                    <div class="category-window" id="window-door" data-category="door">
+                        <div class="category-icon">🚪</div>
+                        <div class="category-label">Welcome</div>
+                        <video preload="auto" muted>
+                            <source src="videos/door.mp4" type="video/mp4">
+                        </video>
+                    </div>
+
+                    <!-- BOTTOM LEFT WINDOW - Let's Collaborate -->
+                    <div class="category-window" id="window-collaborate" data-category="collaborate">
+                        <div class="category-icon">🤝</div>
+                        <div class="category-label">Let's Collaborate</div>
+                        <video preload="auto" muted>
+                            <source src="videos/collaborate.mp4" type="video/mp4">
+                        </video>
+                    </div>
+
+                    <!-- BOTTOM RIGHT WINDOW - For Hire -->
+                    <div class="category-window" id="window-hire" data-category="hire">
+                        <div class="category-icon">💼</div>
+                        <div class="category-label">For Hire</div>
+                        <video preload="auto" muted>
+                            <source src="videos/hire.mp4" type="video/mp4">
+                        </video>
+                    </div>
+
+                    <!-- DANCING BUSKER BROWNSTONE - Auto-fades after 8 seconds -->
+                    <img id="busker-image" src="images/Busker_Brownstone_transparent.png" alt="Busker Brownstone Mascot" class="busker-image">
+                </div>
+
+                <div style="text-align: center; margin-top: 20px; padding: 20px; background: rgba(212, 175, 55, 0.15); border: 4px solid #2c2c2c; border-radius: 10px; color: #333; max-width: 900px; margin-left: auto; margin-right: auto; box-shadow: 0 5px 20px rgba(44, 44, 44, 0.3);"> <!-- Same background as header, iron fence black border -->
+                    <h3 style="color: #2c2c2c; margin-bottom: 15px; font-size: 1.6rem; font-weight: bold;">🎬 Playback Controls</h3> <!-- Iron fence black -->
+                    <p id="playback-status" style="font-size: 1em; font-weight: bold; min-height: 25px; color: #667eea; margin-bottom: 15px;"></p>
+                    
+                    <!-- TOP ROW: 3 Buttons + Custom Sequence -->
+                    <div style="display: flex; gap: 10px; margin-bottom: 10px; align-items: stretch;">
+                        <!-- Left: 3 Main Buttons -->
+                        <div style="display: flex; gap: 10px; flex: 1;">
+                            <button onclick="playSequential(this)" style="flex: 1; padding: 10px 12px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 8px; font-weight: bold; font-size: 0.9em; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 15px rgba(102, 126, 234, 0.4)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none';">
+                                <div>1️⃣ Sequential</div>
+                                <div style="font-size: 0.75em; font-weight: normal; margin-top: 3px; opacity: 0.9;">Play 1→12</div>
+                            </button>
+                            
+                            <button onclick="playRandom(this)" style="flex: 1; padding: 10px 12px; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; border: none; border-radius: 8px; font-weight: bold; font-size: 0.9em; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 15px rgba(245, 87, 108, 0.4)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none';">
+                                <div>🎲 Random</div>
+                                <div style="font-size: 0.75em; font-weight: normal; margin-top: 3px; opacity: 0.9;">Shuffled</div>
+                            </button>
+                            
+                            <button onclick="playLoopLayer(this)" class="cacophony-step" style="flex: 1; padding: 10px 12px; background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); color: #1a1a2e; border: none; border-radius: 8px; font-weight: bold; font-size: 0.9em; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 15px rgba(250, 112, 154, 0.4)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none';">
+                                <div>🔊 Cacophony</div>
+                                <div style="font-size: 0.75em; font-weight: normal; margin-top: 3px; opacity: 0.9;">All 12 at once</div>
+                            </button>
+                        </div>
+                        
+                        <!-- Right: Custom Sequence Input + Button -->
+                        <div style="display: flex; gap: 8px; flex: 1; align-items: center; background: #f8f9fa; padding: 8px; border-radius: 8px;">
+                            <input type="text" id="custom-sequence" placeholder="e.g., 1,12,4,7,8,9" 
+                                   style="padding: 8px; flex: 1; border: 2px solid #6b4423; border-radius: 6px; font-size: 0.85em;"> <!-- Dark brown border -->
+                            <button onclick="playCustomSequence()" 
+                                    style="padding: 10px 20px; background: #d4af37; color: #1a1a2e; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 0.85em; white-space: nowrap; transition: all 0.3s;" onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 4px 12px rgba(212, 175, 55, 0.4)';" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none';">
+                                Play Custom Sequence
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <p style="font-size: 0.7em; color: #6b4423; font-style: italic; margin-bottom: 10px; text-align: right;">Play windows in your own order (sequential playback)</p> <!-- Dark brown text -->
+                    
+                    <!-- BOTTOM ROW: 3 Control Buttons -->
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 15px;">
+                        <button onclick="stopPlayback()" style="padding: 10px 12px; background: linear-gradient(135deg, #6c757d 0%, #5a6268 100%); color: white; border: none; border-radius: 8px; font-weight: bold; font-size: 0.9em; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 15px rgba(108, 117, 125, 0.4)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none';">
+                            <div>⏹️ Stop</div>
+                            <div style="font-size: 0.75em; font-weight: normal; margin-top: 3px; opacity: 0.9;">Stop all</div>
+                        </button>
+                        
+                        <button id="sound-toggle-btn" onclick="toggleSound()" style="padding: 10px 12px; background: linear-gradient(135deg, #dc3545 0%, #c82333 100%); color: white; border: none; border-radius: 8px; font-weight: bold; font-size: 0.9em; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 15px rgba(220, 53, 69, 0.4)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none';">
+                            <div>🔇 Sound</div>
+                            <div style="font-size: 0.75em; font-weight: normal; margin-top: 3px; opacity: 0.9;">Click to unmute</div>
+                        </button>
+                        
+                        <button onclick="toggleBuskerMode()" class="busker-step" id="busker-btn" style="padding: 10px 12px; background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color: #1a1a2e; border: none; border-radius: 8px; font-weight: bold; font-size: 0.9em; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 15px rgba(79, 172, 254, 0.4)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none';">
+                            <div>🎸 Busker Mode</div>
+                            <div style="font-size: 0.75em; font-weight: normal; margin-top: 3px; opacity: 1; color: rgba(26, 26, 46, 0.85);">Layer sounds</div>
+                        </button>
+                    </div>
+                    
+                    <!-- BUSKER MODE INPUT (Hidden by default) -->
+                    <div id="busker-input-area" style="display: none; padding: 15px; background: #e3f2fd; border-radius: 8px; border: 2px solid #4facfe;">
+                        <label style="font-weight: bold; display: block; margin-bottom: 10px; color: #1a1a2e; font-size: 0.95em;">🎸 Build Your Song - Enter Window Numbers:</label>
+                        <div style="display: flex; gap: 10px; justify-content: center; align-items: center;">
+                            <input type="text" id="busker-sequence" placeholder="e.g., 11,0,2 (solo, wait, harmony joins)" 
+                                   style="padding: 10px; flex: 1; max-width: 400px; border: 2px solid #4facfe; border-radius: 6px; font-size: 0.9em;">
+                            <button onclick="playBuskerSequence()" 
+                                    style="padding: 10px 25px; background: #4facfe; color: #1a1a2e; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 0.9em; transition: all 0.3s;" onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 4px 12px rgba(79, 172, 254, 0.4)';" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none';">
+                                🎵 Play Sequence
+                            </button>
+                        </div>
+                        <p style="margin-top: 8px; font-size: 0.75em; color: #666; font-style: italic;">Layer sounds with delayed entrances (use 0 for 1.5s delay before next layer)</p>
+                        
+                        <!-- SEQUENCE HISTORY -->
+                        <div id="sequence-history" style="margin-top: 10px; padding: 10px; background: white; border-radius: 6px; border: 1px solid #4facfe; min-height: 30px; display: none;">
+                            <strong style="color: #4facfe;">Last Sequence:</strong> 
+                            <span id="last-sequence" style="color: #1a1a2e; font-family: monospace; font-size: 1.1em;"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- RIGHT SIDEBAR (PROTECTED - Edit only this section) -->
+        <aside class="right-sidebar">
+            <h3 style="background: linear-gradient(135deg, #4a2c1f 0%, #6b4423 100%); border: 2px solid #4a2c1f; box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2); -webkit-text-stroke: 0.5px #000000; color: #ffffff; text-align: center; padding: 12px; margin: 0 auto; display: block;">Explore The Community</h3>
+            <ul class="community-list">
+                <li>🎬 Animators</li>
+                <li>🎵 Composers</li>
+                <li>🦸‍♂️ Cosplayers</li>
+                <li>🎥 Filmmakers</li>
+                <li>🎮 Game Developers</li>
+                <li>🖼️ Illustrators/Graphic Artists</li>
+                <li>🥁 Musicians</li>
+                <li>💃 Actors/Models/Dancers</li>
+                <li>💰 Producers</li>
+                <li>💼 Talent Agencies</li>
+                <li>🎙️ Voice Actors</li>
+                <li>✍️ Writers</li>
+            </ul>
+        </aside>
+
+    </div>
+
+    <!-- BROWNSTONE MODULE JAVASCRIPT (PROTECTED) -->
+    <script>
+        // SOUND MANAGEMENT
+        let soundEnabled = false;
+
+        function toggleSound() {
+            soundEnabled = !soundEnabled;
+            const btn = document.getElementById('sound-toggle-btn');
+            const allVideos = document.querySelectorAll('video');
+            
+            allVideos.forEach(video => {
+                video.muted = !soundEnabled;
+            });
+            
+            if (soundEnabled) {
+                btn.innerHTML = '<div>🔊 Sound</div><div style="font-size: 0.75em; font-weight: normal; margin-top: 3px; opacity: 0.9;">Sound ON</div>';
+                btn.style.background = 'linear-gradient(135deg, #28a745 0%, #218838 100%)';
+            } else {
+                btn.innerHTML = '<div>🔇 Sound</div><div style="font-size: 0.75em; font-weight: normal; margin-top: 3px; opacity: 0.9;">Click to unmute</div>';
+                btn.style.background = 'linear-gradient(135deg, #dc3545 0%, #c82333 100%)';
+            }
+        }
+
+        // Playback system
+        let playbackQueue = [];
+        let currentPlaybackIndex = 0;
+        let isPlaying = false;
+        let currentVideoElement = null;
+        let playbackMode = null;
+        
+        // Busker Mode variables
+        let buskerModeActive = false;
+        let buskerWindows = new Set(); // Tracks which windows are in the busker loop
+
+        // ACTIVE BUTTON MANAGEMENT - Cassette Player Effect
+        function setActiveButton(buttonElement) {
+            // Remove active class from all playback buttons
+            document.querySelectorAll('button').forEach(btn => {
+                btn.classList.remove('active-playback');
+            });
+            // Add active class to clicked button
+            if (buttonElement) {
+                buttonElement.classList.add('active-playback');
+            }
+        }
+        
+        function clearActiveButtons() {
+            document.querySelectorAll('button').forEach(btn => {
+                btn.classList.remove('active-playback');
+            });
+        }
+
+        const categoryOrder = ['animators', 'composers', 'cosplayers', 'filmmakers', 'gamedev', 'illustrators', 
+                               'musicians', 'performers', 'producers', 'agencies', 'voice', 'writers'];
+
+        const categoryNames = {
+            animators: 'Animators (Aurora)',
+            composers: 'Composers (Bill)',
+            cosplayers: 'Cosplayers (Cecil)',
+            filmmakers: 'Filmmakers (Fergus)',
+            gamedev: 'Game Developers (Finley)',
+            illustrators: 'Visual Artists (Harriet)',
+            musicians: 'Musicians (Lars)',
+            performers: 'Performers (Magnuson)',
+            producers: 'Producers (Zeno)',
+            agencies: 'Talent Agencies (Phoenix)',
+            voice: 'Voice Actors (Skeleton)',
+            writers: 'Writers (Una)'
+        };
+
+        // BUSKER MODE - Toggle input field on/off
+        function toggleBuskerMode() {
+            buskerModeActive = !buskerModeActive;
+            const buskerBtn = document.getElementById('busker-btn');
+            const buskerInputArea = document.getElementById('busker-input-area');
+            
+            if (buskerModeActive) {
+                // Stop any other playback first
+                if (isPlaying) {
+                    stopPlayback();
+                }
+                
+                playbackMode = 'busker';
+                setActiveButton(buskerBtn); // Activate button with green glow!
+                
+                // Show input field
+                buskerInputArea.style.display = 'block';
+                buskerBtn.style.background = 'linear-gradient(135deg, #27ae60 0%, #229954 100%)';
+                buskerBtn.innerHTML = '<div>🎸 Busker Mode</div><div style="font-size: 0.75em; font-weight: normal; margin-top: 3px; opacity: 0.9;">Active ✓</div>';
+                
+                document.getElementById('playback-status').textContent = 
+                    '🎸 Busker Mode Active! Enter window numbers to layer sounds.';
+                
+                console.log('✅ Busker Mode ACTIVATED');
+            } else {
+                // Hide input field and stop all busker windows
+                buskerInputArea.style.display = 'none';
+                document.getElementById('sequence-history').style.display = 'none'; // Hide history too
+                playbackMode = null;
+                clearActiveButtons(); // Remove green glow!
+                buskerBtn.style.background = 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)';
+                buskerBtn.innerHTML = '<div>🎸 Busker Mode</div><div style="font-size: 0.75em; font-weight: normal; margin-top: 3px; opacity: 1; color: rgba(26, 26, 46, 0.85);">Layer sounds</div>';
+                
+                // Stop all busker windows
+                buskerWindows.forEach(category => {
+                    const windowElement = document.getElementById(`window-${category}`);
+                    const videoElement = windowElement.querySelector('video');
+                    windowElement.classList.remove('busker-playing');
+                    videoElement.pause();
+                    videoElement.currentTime = 0;
+                    videoElement.loop = false;
+                });
+                buskerWindows.clear();
+                
+                document.getElementById('playback-status').textContent = '';
+                console.log('❌ Busker Mode DEACTIVATED');
+            }
+        }
+
+        // BUSKER MODE - Play sequence of looping windows
+        function playBuskerSequence() {
+            if (!buskerModeActive) {
+                console.log('❌ Busker mode not active');
+                return;
+            }
+            
+            const input = document.getElementById('busker-sequence').value;
+            
+            if (!input || input.trim() === '') {
+                return; // Nothing entered, don't do anything
+            }
+            
+            // STOP ALL CURRENT WINDOWS FIRST (so new sequence starts fresh!)
+            buskerWindows.forEach(category => {
+                const windowElement = document.getElementById(`window-${category}`);
+                const videoElement = windowElement.querySelector('video');
+                windowElement.classList.remove('busker-playing');
+                videoElement.pause();
+                videoElement.currentTime = 0;
+            });
+            buskerWindows.clear();
+            
+            // Show what was entered in history
+            document.getElementById('last-sequence').textContent = input;
+            document.getElementById('sequence-history').style.display = 'block';
+            
+            const rawNumbers = input.split(',').map(n => parseInt(n.trim()));
+            
+            // DON'T clear input - let user modify and try again!
+            // They can clear it themselves when ready for next sequence
+            
+            // Process sequence with delays
+            processSequenceWithDelays(rawNumbers, 0);
+        }
+
+        // NEW: Process sequence step-by-step with delays
+        function processSequenceWithDelays(sequence, index) {
+            if (index >= sequence.length) {
+                // Sequence complete
+                return;
+            }
+            
+            const num = sequence[index];
+            
+            // Check if it's a pause/delay
+            if (num === 0) {
+                console.log('⏸️ Delay before next layer...');
+                document.getElementById('playback-status').textContent = 
+                    `⏸️ Waiting... (next layer coming in 1.5s)`;
+                
+                // Wait 1.5 seconds, then process next number
+                setTimeout(() => {
+                    processSequenceWithDelays(sequence, index + 1);
+                }, 1500);
+                return;
+            }
+            
+            // Check if it's a valid window number
+            if (num >= 1 && num <= 12) {
+                const category = categoryOrder[num - 1];
+                
+                // Add window if not already playing
+                if (!buskerWindows.has(category)) {
+                    buskerWindows.add(category);
+                    const windowElement = document.getElementById(`window-${category}`);
+                    const videoElement = windowElement.querySelector('video');
+                    
+                    windowElement.classList.add('busker-playing');
+                    videoElement.loop = true;
+                    videoElement.currentTime = 0;
+                    videoElement.muted = !soundEnabled;
+                    videoElement.play().catch(err => console.log('Playback prevented:', err));
+                    
+                    console.log(`🔊 Added to layer: ${category} (window ${num})`);
+                }
+                
+                // Update status
+                const windowNames = Array.from(buskerWindows).map(cat => categoryNames[cat].split(' (')[0]).join(', ');
+                document.getElementById('playback-status').textContent = 
+                    `🎸 Layering ${buskerWindows.size} window${buskerWindows.size !== 1 ? 's' : ''}: ${windowNames}`;
+            }
+            
+            // Process next number immediately (unless it was a 0)
+            setTimeout(() => {
+                processSequenceWithDelays(sequence, index + 1);
+            }, 100); // Small delay to prevent UI freezing
+        }
+
+        // REMOVED OLD createBuskerPause function - no longer needed!
+
+        function playSequential(buttonElement) {
+            if (buskerModeActive) {
+                toggleBuskerMode(); // Exit busker mode first
+            }
+            stopPlayback(); // Clean slate
+            playbackQueue = [...categoryOrder];
+            currentPlaybackIndex = 0;
+            setActiveButton(buttonElement); // Activate button with green glow!
+            startPlayback();
+        }
+
+        function playRandom(buttonElement) {
+            if (buskerModeActive) {
+                toggleBuskerMode(); // Exit busker mode first
+            }
+            stopPlayback(); // Clean slate
+            playbackQueue = [...categoryOrder];
+            for (let i = playbackQueue.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [playbackQueue[i], playbackQueue[j]] = [playbackQueue[j], playbackQueue[i]];
+            }
+            currentPlaybackIndex = 0;
+            setActiveButton(buttonElement); // Activate button with green glow!
+            startPlayback();
+        }
+
+        function playCustomSequence() {
+            if (buskerModeActive) {
+                toggleBuskerMode(); // Exit busker mode first
+            }
+            stopPlayback(); // Clean slate
+            
+            const input = document.getElementById('custom-sequence').value;
+            const numbers = input.split(',').map(n => parseInt(n.trim())).filter(n => n >= 1 && n <= 12);
+            
+            if (numbers.length === 0) {
+                document.getElementById('playback-status').textContent = '❌ Please enter valid numbers (1-12)';
+                setTimeout(() => {
+                    document.getElementById('playback-status').textContent = '';
+                }, 3000);
+                return;
+            }
+            
+            // Convert numbers to category names (1=animators, 2=composers, etc.)
+            playbackQueue = numbers.map(num => categoryOrder[num - 1]);
+            currentPlaybackIndex = 0;
+            startPlayback();
+            
+            document.getElementById('playback-status').textContent = `🎯 Playing custom sequence: ${input}`;
+        }
+
+        function playLoopLayer(buttonElement) {
+            if (buskerModeActive) {
+                toggleBuskerMode(); // Exit busker mode first
+            }
+            stopPlayback(); // Clean slate
+            playbackMode = 'loop-layer';
+            isPlaying = true;
+            setActiveButton(buttonElement); // Activate button with green glow!
+            
+            // Pick one random window to be the "voice above the crowd" (louder)
+            const spotlightIndex = Math.floor(Math.random() * categoryOrder.length);
+            const spotlightCategory = categoryOrder[spotlightIndex];
+            
+            document.getElementById('playback-status').textContent = 
+                `🎚️ Cacophony: All 12 playing! "${categoryNames[spotlightCategory].split(' (')[0]}" above the crowd!`;
+            
+            categoryOrder.forEach((category, index) => {
+                const windowElement = document.getElementById(`window-${category}`);
+                const videoElement = windowElement.querySelector('video');
+                
+                windowElement.classList.add('playing');
+                videoElement.loop = true;
+                videoElement.currentTime = 0;
+                videoElement.muted = !soundEnabled;
+                
+                // Set volume levels - spotlight gets 100%, others get 30-60% randomly
+                if (index === spotlightIndex) {
+                    videoElement.volume = 1.0; // Full volume for spotlight
+                    console.log(`🔊 SPOTLIGHT: ${category} at 100%`);
+                } else {
+                    videoElement.volume = 0.3 + (Math.random() * 0.3); // Random 30-60%
+                    console.log(`🔉 ${category} at ${Math.round(videoElement.volume * 100)}%`);
+                }
+                
+                videoElement.play().catch(err => console.log('Playback prevented:', err));
+            });
+        }
+
+        function startPlayback() {
+            isPlaying = true;
+            playNextVideo();
+        }
+
+        function playNextVideo() {
+            if (!isPlaying || currentPlaybackIndex >= playbackQueue.length) {
+                if (currentPlaybackIndex >= playbackQueue.length) {
+                    document.getElementById('playback-status').textContent = '✅ Complete!';
+                    setTimeout(() => {
+                        document.getElementById('playback-status').textContent = '';
+                    }, 2000);
+                }
+                isPlaying = false;
+                return;
+            }
+
+            const category = playbackQueue[currentPlaybackIndex];
+            const windowElement = document.getElementById(`window-${category}`);
+            const videoElement = windowElement.querySelector('video');
+
+            document.getElementById('playback-status').textContent = 
+                `Now Playing: ${categoryNames[category]} (${currentPlaybackIndex + 1}/12)`;
+
+            windowElement.classList.add('playing');
+            
+            videoElement.loop = false;
+            videoElement.currentTime = 0;
+            videoElement.muted = !soundEnabled;
+            videoElement.play();
+            currentVideoElement = videoElement;
+
+            videoElement.onended = function() {
+                windowElement.classList.remove('playing');
+                currentPlaybackIndex++;
+                setTimeout(() => {
+                    playNextVideo();
+                }, 300);
+            };
+        }
+
+        function stopPlayback() {
+            // Exit busker mode if active
+            if (buskerModeActive) {
+                const buskerStep = document.querySelector('.busker-step');
+                buskerStep.classList.remove('active');
+                buskerModeActive = false;
+                buskerWindows.clear();
+            }
+            
+            isPlaying = false;
+            currentPlaybackIndex = 0;
+            playbackQueue = [];
+            playbackMode = null;
+            clearActiveButtons(); // Remove green glow from all buttons!
+
+            const allWindows = document.querySelectorAll('.category-window');
+            allWindows.forEach(window => {
+                window.classList.remove('playing', 'busker-playing', 'busker-active');
+                window.style.cursor = 'default';
+                const video = window.querySelector('video');
+                if (video) {
+                    video.pause();
+                    video.currentTime = 0;
+                    video.loop = false;
+                    video.onended = null;
+                }
+            });
+
+            document.getElementById('playback-status').textContent = '';
+        }
+
+        // CATEGORY INFO DATA
+        const categoryInfo = {
+            animators: {
+                title: '🎬 Animators',
+                description: 'From 2D traditional animation to cutting-edge 3D CGI - animators bring stories to life frame by frame. Whether character animation, motion graphics, or experimental art, this is where movement meets magic.',
+                creators: ['Aurora Chen - Stop Motion Specialist', 'Marcus Rodriguez - 3D Character Animator', 'Yuki Tanaka - 2D Traditional Artist']
+            },
+            composers: {
+                title: '🎵 Composers',
+                description: 'Masters of melody and harmony who craft original scores for film, games, theater, and media. From orchestral epics to intimate piano pieces - composers create the emotional heartbeat of storytelling.',
+                creators: ['Bill Henderson - Film Composer', 'Sofia Petrov - Video Game Music', 'James Wu - Contemporary Classical']
+            },
+            cosplayers: {
+                title: '🦸‍♂️ Cosplayers',
+                description: 'Artists who transform themselves into beloved characters through costume design, makeup artistry, and performance. Cosplayers celebrate fandom through craftsmanship and creativity.',
+                creators: ['Cecil "The Craftsman" Martinez', 'Diana Blackwood - Armor Specialist', 'Alex Kim - Makeup Effects Master']
+            },
+            filmmakers: {
+                title: '🎥 Filmmakers',
+                description: 'Visual storytellers who direct, shoot, and edit moving pictures. From indie shorts to documentaries to narrative features - filmmakers capture life through the lens.',
+                creators: ['Fergus O\'Brien - Documentary Director', 'Maya Singh - Cinematographer', 'Thomas Gray - Editor & Colorist']
+            },
+            gamedev: {
+                title: '🎮 Game Developers',
+                description: 'Creators of interactive experiences - programming gameplay, designing levels, and building worlds where players become the heroes. Game developers blend art, code, and imagination.',
+                creators: ['Finley Brooks - Unity Developer', 'Zara Ahmed - Level Designer', 'Connor Walsh - Indie Game Creator']
+            },
+            illustrators: {
+                title: '🖼️ Visual Artists & Illustrators',
+                description: 'Painters, digital artists, concept designers, and illustrators who create visual magic with brushes, pens, and pixels. From children\'s books to concept art - these artists make worlds visible.',
+                creators: ['Harriet Stone - Book Illustrator', 'Leo Vasquez - Concept Artist', 'Emma Liu - Digital Painter']
+            },
+            musicians: {
+                title: '🥁 Musicians',
+                description: 'Players of instruments and masters of rhythm - from jazz to rock to classical. Musicians perform, record, and jam their way through every genre imaginable.',
+                creators: ['Lars Eriksson - Session Drummer', 'Nina Kowalski - Jazz Pianist', 'Dante Cruz - Multi-Instrumentalist']
+            },
+            performers: {
+                title: '💃 Actors, Models & Dancers',
+                description: 'Performers who bring characters to life on stage and screen, express through movement, or showcase fashion and beauty. These artists use their bodies and voices as instruments of expression.',
+                creators: ['Magnuson "Mags" Turner - Stage Actor', 'Isabella Rossi - Ballet Dancer', 'Jordan Lee - Fashion Model']
+            },
+            producers: {
+                title: '💰 Producers',
+                description: 'The organizers and facilitators who make creative projects happen - managing budgets, coordinating teams, and turning visions into reality. Producers are the architects of creative production.',
+                creators: ['Zeno Blackwell - Film Producer', 'Rachel Goldman - Music Producer', 'Tyler Chen - Executive Producer']
+            },
+            agencies: {
+                title: '💼 Talent Agencies',
+                description: 'Professional representatives who connect creators with opportunities, negotiate contracts, and help build careers. Agencies are the bridge between talent and the industry.',
+                creators: ['Phoenix Talent Group', 'Starlight Creative Agency', 'Apex Entertainment Partners']
+            },
+            voice: {
+                title: '🎙️ Voice Actors',
+                description: 'Vocal performers who bring characters to life in animation, video games, audiobooks, commercials, and more. Voice actors are the unseen heroes behind your favorite characters.',
+                creators: ['Skeleton "Skelly" Jones - Character Voice', 'Victoria Nguyen - Audiobook Narrator', 'Marcus Sterling - Commercial VO']
+            },
+            writers: {
+                title: '✍️ Writers',
+                description: 'Storytellers who craft scripts, novels, poetry, articles, and more. Writers build worlds with words - from screenplays to short stories to epic sagas.',
+                creators: ['Una Fitzgerald - Screenwriter', 'David Park - Novelist', 'Carmen Rodriguez - Poet & Essayist']
+            }
+        };
+
+        function closeModal() {
+            document.getElementById('category-modal').style.display = 'none';
+        }
+
+        function openModal(category) {
+            const modal = document.getElementById('category-modal');
+            const modalTitle = document.getElementById('modal-title');
+            const modalDescription = document.getElementById('modal-description');
+            const creatorList = document.getElementById('creator-list');
+            
+            const info = categoryInfo[category];
+            
+            modalTitle.innerHTML = info.title;
+            modalDescription.innerHTML = `<p>${info.description}</p>`;
+            
+            // Show featured creators
+            creatorList.innerHTML = info.creators.map(creator => 
+                `<div style="padding: 15px; background: rgba(212, 175, 55, 0.1); border-left: 4px solid #d4af37; margin-bottom: 10px; border-radius: 5px;">
+                    <strong style="color: #d4af37;">⭐ ${creator}</strong>
+                </div>`
+            ).join('');
+            
+            document.getElementById('modal-creators').style.display = 'block';
+            modal.style.display = 'block';
+        }
+
+        // Close modal when clicking outside of it
+        window.onclick = function(event) {
+            const modal = document.getElementById('category-modal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+
+        // Add click handlers to category windows (when NOT in busker mode)
+        document.querySelectorAll('.category-window').forEach(window => {
+            window.addEventListener('click', function(e) {
+                if (!buskerModeActive) {
+                    const category = this.dataset.category;
+                    if (categoryInfo[category]) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        openModal(category);
+                    }
+                }
+            });
+        });
+
+        // Add click handlers to community list items
+        document.querySelectorAll('.community-list li').forEach((item, index) => {
+            const categoryMap = ['animators', 'composers', 'cosplayers', 'filmmakers', 'gamedev', 'illustrators', 'musicians', 'performers', 'producers', 'agencies', 'voice', 'writers'];
+            item.addEventListener('click', function() {
+                openModal(categoryMap[index]);
+            });
+        });
+
+        // Add click handlers for sidebar items
+        document.querySelectorAll('.sidebar-list li').forEach(item => {
+            item.addEventListener('click', function() {
+                const text = this.textContent.trim();
+                if (text.includes('How it Works')) {
+                    openInfoModal('how-it-works');
+                } else if (text.includes('About')) {
+                    openInfoModal('about');
+                }
+            });
+        });
+
+        // Add click handler for Customize button
+        document.querySelector('.sidebar-btn').addEventListener('click', function() {
+            openInfoModal('customize');
+        });
+
+        // Add click handlers for Featured Creators
+        document.querySelectorAll('.featured-creators li').forEach((item, index) => {
+            item.addEventListener('click', function() {
+                openInfoModal('featured-creator', index + 1);
+            });
+        });
+
+        // New function to handle info modals
+        function openInfoModal(type, number) {
+            const modal = document.getElementById('category-modal');
+            const modalTitle = document.getElementById('modal-title');
+            const modalDescription = document.getElementById('modal-description');
+            const modalCreators = document.getElementById('modal-creators');
+            
+            // Hide creator section for info pages
+            modalCreators.style.display = 'none';
+            
+            if (type === 'how-it-works') {
+                modalTitle.innerHTML = '📺 How It Works';
+                modalDescription.innerHTML = `
+                    <p><strong>CityBlocks is your creative playground!</strong></p>
+                    <br>
+                    <p><strong>🎵 Play Modes:</strong></p>
+                    <ul style="margin-left: 20px; line-height: 2;">
+                        <li><strong>Sequential:</strong> Play all 12 windows in order</li>
+                        <li><strong>Random:</strong> Shuffle and surprise yourself</li>
+                        <li><strong>Cacophony:</strong> All windows at once - pure creative chaos!</li>
+                        <li><strong>Custom:</strong> Choose your own sequence (e.g., 1,5,9)</li>
+                        <li><strong>Busker Mode:</strong> Layer sounds with delayed entrances - type numbers like 11,0,2 (solo, wait, harmony joins!)</li>
+                    </ul>
+                    <br>
+                    <p><strong>🎸 Tips:</strong></p>
+                    <ul style="margin-left: 20px; line-height: 2;">
+                        <li>Click windows to learn about each creator category</li>
+                        <li>Hover over windows to preview videos</li>
+                        <li>In Busker Mode, use "0" for a 1.5-second delay before the next layer</li>
+                        <li>Experiment! There are no rules - just have fun!</li>
+                    </ul>
+                `;
+            } else if (type === 'about') {
+                modalTitle.innerHTML = 'ℹ️ About CityBlocks';
+                modalDescription.innerHTML = `
+                    <p><strong>Where Pure Creativity Resides</strong></p>
+                    <br>
+                    <p>CityBlocks is the Hollywood Squares of Creativity - where EVERYONE becomes a composer by simply choosing which windows play.</p>
+                    <br>
+                    <p>It's Facebook meets YouTube meets Ad-Libs, but instead of passively watching, you're actively creating.</p>
+                    <br>
+                    <p><strong>Our Mission:</strong> Bring families and friends together through creative play. No news, no politics, no pharmaceutical ads - just good old-fashioned fun!</p>
+                    <br>
+                    <p><strong>For Everyone:</strong> From kids mixing silly sounds to professionals discovering hidden talent - creativity for all, discoveries happen naturally.</p>
+                    <br>
+                    <p><em>"Even if we're just a passing novelty, they'll remember it with joy. Mission accomplished."</em></p>
+                `;
+            } else if (type === 'customize') {
+                modalTitle.innerHTML = '🏠 Customize Your Own Brownstone';
+                modalDescription.innerHTML = `
+                    <p><strong>Coming Soon!</strong></p>
+                    <br>
+                    <p>Soon you'll be able to create your own personalized brownstone with:</p>
+                    <ul style="margin-left: 20px; line-height: 2;">
+                        <li><strong>Custom Brick Colors:</strong> Choose your brownstone's look</li>
+                        <li><strong>Upload Your Videos:</strong> Fill windows with your own content</li>
+                        <li><strong>Select from Library:</strong> Browse community samples</li>
+                        <li><strong>Feature Other Creators:</strong> Collaborate and cross-promote</li>
+                        <li><strong>Share Your Brownstone:</strong> Get your own cityblocks.com/yourname URL</li>
+                    </ul>
+                    <br>
+                    <p style="color: #d4af37;"><strong>Join the waiting list to be an early customizer!</strong></p>
+                    <br>
+                    <p><em>For now, enjoy experimenting with our demo brownstone and all its playback modes!</em></p>
+                `;
+            } else if (type === 'featured-creator') {
+                modalTitle.innerHTML = `⭐ Featured Creator #${number}`;
+                modalDescription.innerHTML = `
+                    <p><strong>Coming Soon!</strong></p>
+                    <br>
+                    <p>This talented creator will soon be showcased here with:</p>
+                    <ul style="margin-left: 20px; line-height: 2;">
+                        <li>Their unique brownstone</li>
+                        <li>Featured performances</li>
+                        <li>Collaboration opportunities</li>
+                        <li>Bio and creative journey</li>
+                    </ul>
+                    <br>
+                    <p style="color: #d4af37; font-style: italic;">Be an early adopter and claim your Featured Creator spot!</p>
+                `;
+            }
+            
+            modal.style.display = 'block';
+        }
+
+        console.log('🏙️ CityBlocks - Streamlined Controls v2.0');
+        console.log('✅ 6 control buttons (including Sound toggle)');
+        console.log('✅ Busker Mode with input field layering');
+        console.log('✅ Cacophony mode with "Voice Above the Crowd"');
+        console.log('✅ Sequential, Random, and Custom Sequence modes');
+        console.log('🎸 Enter window numbers to layer sounds like building a song!');
+    </script>
+
+    <!-- CATEGORY MODAL -->
+    <div id="category-modal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal()">&times;</span>
+            <h2 id="modal-title" style="color: #d4af37; margin-bottom: 20px;"></h2>
+            <div id="modal-description" style="margin-bottom: 20px; line-height: 1.6;"></div>
+            <div id="modal-creators" style="margin-top: 20px;">
+                <h3 style="color: #d4af37; margin-bottom: 15px;">Featured Creators in this Category</h3>
+                <div id="creator-list"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer style="text-align: center; padding: 15px 20px; margin-top: 25px; background: rgba(212, 175, 55, 0.1); border-top: 2px solid rgba(212, 175, 55, 0.3);">
+        <p style="color: #4a2c1f; font-size: 0.9rem; margin: 0; font-weight: 600;">
+            🏛️ Patent Pending • CityBlocks™ • Busker Brownstone™ • Where Pure Creativity Resides
+        </p>
+        <p style="color: #666; font-size: 0.8rem; margin-top: 8px;">
+            © 2025 CityBlocks. All Rights Reserved.
+        </p>
+    </footer>
+
+</body>
+</html>
