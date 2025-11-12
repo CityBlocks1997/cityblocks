@@ -1,0 +1,1697 @@
+<!DOCTYPE html>
+<!--
+╔═══════════════════════════════════════════════════════════════════════════╗
+║                           CITYBLOCKS HOMEPAGE                              ║
+║                          index.html - VERSION 2.9                          ║
+╚═══════════════════════════════════════════════════════════════════════════╝
+
+📅 DATE: November 11, 2025
+👤 DEVELOPER: Richard Tucker (Batman1997) + Claude
+🏢 PROJECT: CityBlocks.com - Video Collaboration Platform
+🌐 DOMAIN: Premium domain since 1997 | Retirement project for Adobe pitch
+
+═══════════════════════════════════════════════════════════════════════════
+
+VERSION HISTORY:
+─────────────────────────────────────────────────────────────────────────────
+v2.9 (Nov 11, 2025) - SEQUENTIAL DIMENSIONAL™ MODE! 🎬📺
+  ✅ NEW FEATURE: Busker Mode + Full-Screen = Sequential Dimensional™ Mode
+  ✅ Videos progressively join dynamic grid layout (1x1 → 1x2 → 2x2 → 3x3)
+  ✅ Live broadcast effect with delayed entrances (3-second delays per 0)
+  ✅ Smooth grid reorganization transitions
+  ✅ Professional multi-camera production interface
+  ✅ All videos play simultaneously with layered audio
+  🎯 STATUS: Sequential Dimensional™ technology enhanced!
+
+v2.8 (Nov 12, 2025) - STABILITY & UX IMPROVEMENTS
+  ✅ ESC key closes modal (better UX)
+  ✅ Close button doesn't stop brownstone playback (videos continue)
+  ✅ customize.html ready for deployment
+  ✅ All v2.6 features stable and working
+  ⚙️ STATUS: Stable baseline for multi-window development
+
+v2.6 (Nov 11, 2025) - CINEMATIC VIEW POPUP CORRECTED
+  ✅ Fixed video modal: Now popup window (not full-screen takeover)
+  ✅ Brownstone visible behind semi-transparent overlay (70% opacity)
+  ✅ Popup window: 70% width with dark border and rounded corners
+  ✅ Progress indicator repositioned above video
+  ✅ Video scales naturally (no forced dimensions)
+  ✅ Buttons below video for better UX
+  ⚠️ Note: Customize modal removed in v2.5 (clear browser cache if still appearing)
+  ⚙️ STATUS: Cinematic View now works as intended - popup overlay, not takeover
+
+v2.5 (Nov 11, 2025) - SEQUENTIAL DIMENSIONAL™ FULL-SCREEN MODE
+  ✅ Removed redundant "Customize Your Brownstone" modal
+  ✅ Added 4th control button: Full-Screen Mode toggle
+  ✅ Implemented video modal for Cinematic View
+  ✅ Progress indicator ("Playing X of 12")
+  ✅ Skip and Close buttons in modal
+  ✅ Auto-advance between videos
+  ✅ Dual-view system: Community View (in windows) / Cinematic View (full-screen)
+  ✅ Full-screen works with Sequential, Random, and Custom playback modes
+  ⚙️ STATUS: Sequential Dimensional™ technology operational
+
+v2.4 (Nov 11, 2025) - COPYRIGHT REFERENCE REMOVAL
+  ✅ Removed "Hollywood Squares" reference from About modal
+  ✅ Removed "Facebook meets YouTube meets Ad-Libs" reference
+  ✅ Added YouTube collaboration benefit messaging
+  ✅ Emphasized CityBlocks as original platform
+  ⚙️ STATUS: All copyrighted program references eliminated
+
+v2.3 (Nov 11, 2025) - VERSION SYNC WITH CUSTOMIZE.HTML
+  ✅ All functionality working correctly (no changes required)
+  ✅ Version updated for consistency with customize.html v2.3
+  ⚙️ STATUS: Production stable - synchronized with customize page fixes
+
+v2.1 (Nov 9, 2025) - FILE STRUCTURE REORGANIZATION
+  ✅ Updated all image paths to use /images/ folder
+  ✅ Fixed: city-street-background.jpg → images/city-street-background.jpg
+  ✅ Fixed: brownstone.png → images/brownstone.png
+  ✅ Fixed: Busker_Brownstone_transparent.png → images/Busker_Brownstone_transparent.png
+  ✅ Organized GitHub: /images, /videos, /audio folders created
+  ⚙️ STATUS: Ready for deployment - all paths corrected
+
+v2.0 (Nov 9, 2025) - WINDOW POSITION PERFECTION
+  ✅ All 12 category windows precisely aligned
+  ✅ Windows #8 & #11 perfect (no changes)
+  ✅ Video insets uniform at 10% all sides
+  ✅ 3D beveled cassette player buttons with GREEN glow when active
+  ✅ Bottom windows (Collaborate/Hire) adjusted to 79.8%
+
+v1.0 - INITIAL FENG SHUI REDESIGN
+  ✅ Warm cream background (#F5F1E8)
+  ✅ Gold accent colors (#d4af37)
+  ✅ Brown gradient sidebars
+  ✅ 12 category windows with video playback
+  ✅ Playback modes: Sequential, Random, Cacophony, Busker
+
+═══════════════════════════════════════════════════════════════════════════
+
+CURRENT STATUS:
+─────────────────────────────────────────────────────────────────────────────
+✅ Homepage design complete
+✅ Window positions finalized
+✅ Color scheme: Feng Shui "Colors for Success"
+✅ File structure organized (/images, /videos, /audio)
+✅ TV Production Mode operational 🎬
+⏳ Next: Build account.html for user signups
+
+═══════════════════════════════════════════════════════════════════════════
+
+FILE STRUCTURE:
+─────────────────────────────────────────────────────────────────────────────
+images/
+  ├── brownstone.png (Main building - 832x1500px)
+  ├── city-street-background.jpg (Background overlay)
+  └── Busker_Brownstone_transparent.png (Mascot)
+
+videos/
+  ├── animators.mp4, composers.mp4, cosplayers.mp4
+  ├── filmmakers.mp4, gamedev.mp4, illustrators.mp4
+  ├── musicians.mp4, performers.mp4, producers.mp4
+  ├── agencies.mp4, voice.mp4, writers.mp4
+  └── door.mp4, collaborate.mp4, hire.mp4
+
+═══════════════════════════════════════════════════════════════════════════
+-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CityBlocks - Where Pure Creativity Resides</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: #F5F1E8;
+            background-image: url('images/city-street-background.jpg');
+            background-size: cover;
+            background-position: center top;
+            background-attachment: fixed;
+            color: #333;
+        }
+
+        header {
+            background: linear-gradient(135deg, rgba(26, 26, 46, 0.95) 0%, rgba(52, 73, 94, 0.95) 100%);
+            color: white;
+            padding: 25px 20px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            border-bottom: 5px solid #d4af37;
+        }
+
+        header h1 {
+            font-size: 3rem;
+            margin-bottom: 5px;
+            color: #d4af37;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            color: #f5f1e8;
+            font-style: italic;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .main-layout {
+            display: grid;
+            grid-template-columns: 280px 1fr 280px;
+            gap: 30px;
+            max-width: 1800px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        /* SIDEBAR STYLES */
+        .left-sidebar,
+        .right-sidebar {
+            background: linear-gradient(180deg, #F5F1E8 0%, #E8DCC8 100%);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            border: 3px solid #2c2c2c;
+        }
+
+        .sidebar-section {
+            margin-bottom: 30px;
+        }
+
+        .sidebar-section h3,
+        .right-sidebar h3 {
+            color: #d4af37;
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            padding: 10px;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .sidebar-btn {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1rem;
+        }
+
+        .sidebar-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .sidebar-list {
+            list-style: none;
+        }
+
+        .sidebar-list li {
+            padding: 12px;
+            margin: 8px 0;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            color: #1a1a2e;
+            border: 2px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .sidebar-list li:hover {
+            background: #d4af37;
+            color: white;
+            transform: translateX(5px);
+            box-shadow: 0 3px 10px rgba(212, 175, 55, 0.4);
+        }
+
+        .featured-creators li {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.2) 0%, rgba(212, 175, 55, 0.2) 100%);
+            border: 2px solid rgba(212, 175, 55, 0.5);
+        }
+
+        .community-list li {
+            text-align: left;
+        }
+
+        /* CENTER CONTENT */
+        .center-content {
+            background: rgba(245, 241, 232, 0.95);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.2);
+            border: 5px solid #2c2c2c;
+        }
+
+        /* CONTAINER - ensures brownstone area has proper background */
+        .container {
+            background: transparent;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .brownstone-container {
+            position: relative;
+            width: 100%;
+            max-width: 832px;
+            margin: 0 auto 30px auto;
+            aspect-ratio: 832 / 1500;
+        }
+
+        .brownstone-image {
+            width: 100%;
+            height: auto;
+            display: block;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* CATEGORY WINDOWS */
+        .category-window {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.9);
+            border: 3px solid rgba(212, 175, 55, 0.6);
+            border-radius: 6px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .category-window:hover {
+            border-color: #d4af37;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.8),
+                        inset 0 0 20px rgba(212, 175, 55, 0.2);
+            transform: scale(1.02);
+        }
+
+        .category-window.playing {
+            border-color: #27ae60;
+            box-shadow: 0 0 30px rgba(39, 174, 96, 0.9),
+                        inset 0 0 25px rgba(39, 174, 96, 0.3);
+        }
+
+        .category-icon {
+            font-size: 2rem;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 5;
+            opacity: 0.7;
+            pointer-events: none;
+        }
+
+        .category-label {
+            position: absolute;
+            bottom: 5%;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-weight: bold;
+            font-size: 0.7rem;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 3px 8px;
+            border-radius: 4px;
+            z-index: 5;
+            pointer-events: none;
+            white-space: nowrap;
+        }
+
+        .category-window video {
+            position: absolute;
+            top: 10%;
+            left: 10%;
+            width: 80%;
+            height: 80%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 0.5s;
+            z-index: 2;
+        }
+
+        .category-window.playing video {
+            opacity: 1;
+        }
+
+        /* Special styling for these windows to center icon/label */
+        #window-door,
+        #window-collaborate,
+        #window-hire {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.7);
+        }
+        
+        /* Hide videos in special windows - show icons instead */
+        #window-door video,
+        #window-collaborate video,
+        #window-hire video {
+            display: none;
+        }
+
+        /* Window Positions */
+        #window-animators { top: 20.80%; left: 22.16%; width: 12.02%; height: 7.67%; }
+        #window-composers { top: 20.80%; left: 44.0%; width: 12.02%; height: 7.67%; }
+        #window-cosplayers { top: 20.74%; left: 66.24%; width: 12.02%; height: 7.67%; }
+        #window-filmmakers { top: 34.0%; left: 22.6%; width: 11.78%; height: 9.27%; }
+        #window-gamedev { top: 34.0%; left: 44.35%; width: 11.78%; height: 9.27%; }
+        #window-illustrators { top: 34.0%; left: 66.3%; width: 11.78%; height: 9.27%; }
+        #window-musicians { top: 47.87%; left: 22.7%; width: 11.78%; height: 9.27%; }
+        #window-performers { top: 47.4%; left: 44.35%; width: 11.78%; height: 9.27%; }
+        #window-producers { top: 47.87%; left: 66.4%; width: 11.78%; height: 9.27%; }
+        #window-agencies { top: 63.13%; left: 22.6%; width: 11.78%; height: 9.27%; }
+        #window-voice { top: 63.73%; left: 44.47%; width: 11.78%; height: 9.27%; }
+        #window-writers { top: 63.13%; left: 66.5%; width: 11.78%; height: 9.27%; }
+
+        /* DOOR WINDOW */
+        #window-door { 
+            top: 81.13%;
+            left: 44.0%; 
+            width: 12.74%; 
+            height: 10%; 
+        }
+
+        /* BOTTOM WINDOWS */
+        #window-collaborate { 
+            top: 79.8%;
+            left: 22.5%;
+            width: 11.78%; 
+            height: 9.27%; 
+        }
+
+        #window-hire { 
+            top: 79.8%;
+            left: 66.5%;
+            width: 11.78%; 
+            height: 9.27%; 
+        }
+
+        /* STAIRS - Actual stair steps on the brownstone */
+        .stairs {
+            position: absolute;
+            bottom: 8%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60%;
+            height: 12%;
+            display: flex;
+            flex-direction: column-reverse;
+            justify-content: flex-start;
+            z-index: 50;
+        }
+
+        .stair-step {
+            width: 100%;
+            height: 20%;
+            background: linear-gradient(135deg, rgba(139, 69, 19, 0.85) 0%, rgba(101, 50, 15, 0.85) 100%);
+            border: 2px solid rgba(212, 175, 55, 0.6);
+            border-radius: 4px;
+            margin-bottom: 2px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+        }
+
+        .stair-step:hover {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.9) 0%, rgba(245, 200, 66, 0.9) 100%);
+            border-color: #ffd700;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.6);
+        }
+
+        .stair-step.active {
+            background: linear-gradient(135deg, rgba(231, 76, 60, 0.9) 0%, rgba(192, 57, 43, 0.9) 100%);
+            border-color: #e74c3c;
+        }
+
+        .busker-step {
+            background: linear-gradient(135deg, rgba(52, 152, 219, 0.85) 0%, rgba(41, 128, 185, 0.85) 100%);
+            border-color: rgba(52, 152, 219, 0.8);
+        }
+
+        .busker-step:hover {
+            background: linear-gradient(135deg, rgba(93, 173, 226, 0.9) 0%, rgba(52, 152, 219, 0.9) 100%);
+            border-color: #3498db;
+        }
+
+        .busker-step.active {
+            background: linear-gradient(135deg, rgba(39, 174, 96, 0.9) 0%, rgba(34, 153, 84, 0.9) 100%);
+            border-color: #27ae60;
+        }
+
+        .cacophony-step {
+            background: linear-gradient(135deg, rgba(231, 76, 60, 0.85) 0%, rgba(192, 57, 43, 0.85) 100%);
+            border-color: rgba(231, 76, 60, 0.8);
+        }
+
+        .cacophony-step:hover {
+            background: linear-gradient(135deg, rgba(236, 112, 99, 0.9) 0%, rgba(231, 76, 60, 0.9) 100%);
+            border-color: #e74c3c;
+        }
+
+        .stair-label {
+            color: white;
+            font-weight: bold;
+            font-size: 0.85rem;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+            pointer-events: none;
+            margin-left: 10px;
+        }
+
+        .stair-number {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            background: #667eea;
+            border-radius: 50%;
+            color: white;
+            font-weight: bold;
+            font-size: 1rem;
+            line-height: 30px;
+            text-align: center;
+            margin-right: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+            pointer-events: none;
+        }
+
+        .busker-step .stair-number {
+            background: #3498db;
+        }
+
+        .busker-step.active .stair-number {
+            background: #27ae60;
+        }
+
+        .cacophony-step .stair-number {
+            background: #e74c3c;
+        }
+
+        /* Busker Mode - windows can be clicked to add/remove from loop */
+        .category-window.busker-active {
+            border: 4px solid #3498db !important;
+            box-shadow: 0 0 30px rgba(52, 152, 219, 0.8) !important;
+        }
+
+        .category-window.busker-playing {
+            border: 4px solid #27ae60 !important;
+            box-shadow: 0 0 40px rgba(39, 174, 96, 0.9), 
+                        inset 0 0 20px rgba(39, 174, 96, 0.3) !important;
+            animation: buskerPulse 1.5s ease-in-out infinite;
+        }
+
+        /* Active button states */
+        .busker-step.active {
+            background: linear-gradient(135deg, #27ae60 0%, #229954 100%) !important;
+            box-shadow: 0 5px 20px rgba(39, 174, 96, 0.6) !important;
+        }
+
+        .cacophony-step.active {
+            box-shadow: 0 5px 20px rgba(250, 112, 154, 0.6) !important;
+        }
+
+        @keyframes buskerPulse {
+            0%, 100% {
+                box-shadow: 0 0 40px rgba(39, 174, 96, 0.9), 
+                            inset 0 0 20px rgba(39, 174, 96, 0.3);
+            }
+            50% {
+                box-shadow: 0 0 60px rgba(39, 174, 96, 1), 
+                            inset 0 0 30px rgba(39, 174, 96, 0.5);
+            }
+        }
+
+        /* Video preview on hover */
+        .category-window:hover video {
+            opacity: 0.8;
+        }
+
+        /* MODAL STYLES */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            margin: 5% auto;
+            padding: 30px;
+            border: 2px solid #d4af37;
+            border-radius: 15px;
+            width: 80%;
+            max-width: 800px;
+            color: white;
+            position: relative;
+            animation: modalSlideIn 0.3s ease-out;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-close {
+            color: #d4af37;
+            float: right;
+            font-size: 35px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .modal-close:hover {
+            color: #f5c842;
+            transform: scale(1.2);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 1200px) {
+            .main-layout {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .left-sidebar,
+            .right-sidebar {
+                max-width: 800px;
+                margin: 0 auto;
+            }
+        }
+
+        /* BUSKER BROWNSTONE ANIMATION */
+        .busker-image {
+            position: absolute;
+            bottom: 3%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30%;
+            max-width: 250px;
+            height: auto;
+            z-index: 15;
+            pointer-events: none;
+            opacity: 1;
+            animation: buskerDance 16s ease-in-out forwards;
+        }
+
+        @keyframes buskerDance {
+            0% { opacity: 0; transform: translateX(-50%) rotate(0deg); }
+            5% { opacity: 1; transform: translateX(-50%) rotate(0deg); }
+            10% { transform: translateX(-50%) rotate(-8deg); }
+            15% { transform: translateX(-50%) rotate(8deg); }
+            20% { transform: translateX(-50%) rotate(-8deg); }
+            25% { transform: translateX(-50%) rotate(8deg); }
+            30% { transform: translateX(-50%) rotate(-8deg); }
+            35% { transform: translateX(-50%) rotate(8deg); }
+            40% { transform: translateX(-50%) rotate(-6deg); }
+            45% { transform: translateX(-50%) rotate(6deg); }
+            50% { transform: translateX(-50%) rotate(-6deg); }
+            55% { transform: translateX(-50%) rotate(6deg); }
+            60% { transform: translateX(-50%) rotate(-4deg); }
+            65% { transform: translateX(-50%) rotate(4deg); }
+            70% { transform: translateX(-50%) rotate(-2deg); }
+            75% { transform: translateX(-50%) rotate(2deg); }
+            80% { transform: translateX(-50%) rotate(0deg); }
+            85% { opacity: 1; transform: translateX(-50%) rotate(0deg); }
+            100% { opacity: 0; transform: translateX(-50%) rotate(0deg); }
+        }
+
+        .busker-image.hidden {
+            opacity: 0;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════════
+           SEQUENTIAL DIMENSIONAL™ MODE - NEW IN V2.9! 🎬📺
+           ═══════════════════════════════════════════════════════════════════════ */
+
+        /* Sequential Dimensional™ Mode - Dynamic Grid Layouts */
+        .tv-production-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+        }
+
+        .tv-grid-container {
+            width: 95vw;
+            height: 95vh;
+            display: grid;
+            gap: 10px;
+            padding: 20px;
+            transition: all 0.5s ease-in-out;
+        }
+
+        /* Grid Layout Classes */
+        .grid-1x1 { grid-template-columns: 1fr; grid-template-rows: 1fr; }
+        .grid-1x2 { grid-template-columns: 1fr 1fr; grid-template-rows: 1fr; }
+        .grid-1x3 { grid-template-columns: 1fr 1fr 1fr; grid-template-rows: 1fr; }
+        .grid-2x2 { grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; }
+        .grid-2x3 { grid-template-columns: 1fr 1fr 1fr; grid-template-rows: 1fr 1fr; }
+        .grid-3x3 { grid-template-columns: 1fr 1fr 1fr; grid-template-rows: 1fr 1fr 1fr; }
+        .grid-3x4 { grid-template-columns: 1fr 1fr 1fr 1fr; grid-template-rows: 1fr 1fr 1fr; }
+        .grid-4x3 { grid-template-columns: 1fr 1fr 1fr; grid-template-rows: 1fr 1fr 1fr 1fr; }
+
+        .tv-video-slot {
+            width: 100%;
+            height: 100%;
+            background: #000;
+            border: 2px solid #d4af37;
+            border-radius: 8px;
+            overflow: hidden;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 0.4s ease-in-out;
+            position: relative;
+        }
+
+        .tv-video-slot.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .tv-video-slot video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .tv-close-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 59, 59, 0.9);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-weight: bold;
+            z-index: 10001;
+            transition: all 0.3s;
+        }
+
+        .tv-close-btn:hover {
+            background: #ff3b3b;
+            transform: scale(1.05);
+        }
+
+        /* TV Production Mode status indicator */
+        .tv-status-badge {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: rgba(39, 174, 96, 0.95);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            z-index: 10001;
+            box-shadow: 0 4px 15px rgba(39, 174, 96, 0.6);
+            animation: tvStatusPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes tvStatusPulse {
+            0%, 100% {
+                box-shadow: 0 4px 15px rgba(39, 174, 96, 0.6);
+            }
+            50% {
+                box-shadow: 0 4px 25px rgba(39, 174, 96, 0.9);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>CityBlocks</h1>
+        <p class="tagline">Where Pure Creativity Resides</p>
+    </header>
+
+    <div class="main-layout">
+        
+        <!-- LEFT SIDEBAR (PROTECTED - Edit only this section) -->
+        <aside class="left-sidebar">
+            <div class="sidebar-section">
+                <h3 style="background: linear-gradient(135deg, #4a2c1f 0%, #6b4423 100%); border: 2px solid #4a2c1f; box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2); -webkit-text-stroke: 0.5px #000000; color: #ffffff;">Get Started</h3>
+                <button class="sidebar-btn" onclick="window.location.href='customize.html'" style="background: linear-gradient(135deg, #d4af37 0%, #f5c842 100%); color: #2d5016; border: 2px solid #b8941f; box-shadow: 0 3px 10px rgba(212, 175, 55, 0.5); -webkit-text-stroke: 0.5px #000000;">🏠 Customize Your Own Brownstone</button>
+                <ul class="sidebar-list">
+                    <li style="background: linear-gradient(135deg, #4a2c1f 0%, #6b4423 100%); color: #ffffff; font-weight: bold; -webkit-text-stroke: 0.5px #000000;">📺 How it Works</li>
+                    <li style="background: linear-gradient(135deg, #4a2c1f 0%, #6b4423 100%); color: #ffffff; font-weight: bold; -webkit-text-stroke: 0.5px #000000;">ℹ️ About</li>
+                </ul>
+            </div>
+            
+            <div class="sidebar-section">
+                <h3>Top Ten Creators</h3>
+                <ul class="sidebar-list featured-creators">
+                    <li>⭐ Creator #1</li>
+                    <li>⭐ Creator #2</li>
+                    <li>⭐ Creator #3</li>
+                    <li>⭐ Creator #4</li>
+                    <li>⭐ Creator #5</li>
+                    <li>⭐ Creator #6</li>
+                    <li>⭐ Creator #7</li>
+                    <li>⭐ Creator #8</li>
+                    <li>⭐ Creator #9</li>
+                    <li>⭐ Creator #10</li>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- CENTER CONTENT - BROWNSTONE MODULE (PROTECTED) -->
+        <main class="center-content">
+            <div class="container">
+                <div class="brownstone-container">
+                    <img src="images/brownstone.png" alt="CityBlocks Brownstone" class="brownstone-image">
+                    
+                    <!-- 12 Category Windows with embedded videos -->
+                    <div class="category-window" id="window-animators" data-category="animators">
+                        <div class="category-icon">🎞️</div>
+                        <div class="category-label">Animators</div>
+                        <video preload="auto" muted>
+                            <source src="videos/animators.mp4" type="video/mp4">
+                        </video>
+                    </div>
+
+                    <div class="category-window" id="window-composers" data-category="composers">
+                        <div class="category-icon">🎼</div>
+                        <div class="category-label">Composers</div>
+                        <video preload="auto" muted>
+                            <source src="videos/composers.mp4" type="video/mp4">
+                        </video>
+                    </div>
+
+                    <div class="category-window" id="window-cosplayers" data-category="cosplayers">
+                        <div class="category-icon">🦸‍♂️</div>
+                        <div class="category-label">Cosplayers</div>
+                        <video preload="auto" muted>
+                            <source src="videos/cosplayers.mp4" type="video/mp4">
+                        </video>
+                    </div>
+
+                    <div class="category-window" id="window-filmmakers" data-category="filmmakers">
+                        <div class="category-icon">🎥</div>
+                        <div class="category-label">Filmmakers</div>
+                        <video preload="auto" muted>
+                            <source src="videos/filmmakers.mp4" type="video/mp4">
+                        </video>
+                    </div>
+
+                    <div class="category-window" id="window-gamedev" data-category="gamedev">
+                        <div class="category-icon">🎮</div>
+                        <div class="category-label">Game Dev</div>
+                        <video preload="auto" muted>
+                            <source src="videos/gamedev.mp4" type="video/mp4">
+                        </video>
+                    </div>
+
+                    <div class="category-window" id="window-illustrators" data-category="illustrators">
+                        <div class="category-icon">🖼️</div>
+                        <div class="category-label">Visual Artists</div>
+                        <video preload="auto" muted>
+                            <source src="videos/illustrators.mp4" type="video/mp4">
+                        </video>
+                    </div>
+
+                    <div class="category-window" id="window-musicians" data-category="musicians">
+                        <div class="category-icon">🥁</div>
+                        <div class="category-label">Musicians</div>
+                        <video preload="auto" muted>
+                            <source src="videos/musicians.mp4" type="video/mp4">
+                        </video>
+                    </div>
+
+                    <div class="category-window" id="window-performers" data-category="performers">
+                        <div class="category-icon">💃</div>
+                        <div class="category-label">Performers</div>
+                        <video preload="auto" muted>
+                            <source src="videos/performers.mp4" type="video/mp4">
+                        </video>
+                    </div>
+
+                    <div class="category-window" id="window-producers" data-category="producers">
+                        <div class="category-icon">💰</div>
+                        <div class="category-label">Producers</div>
+                        <video preload="auto" muted>
+                            <source src="videos/producers.mp4" type="video/mp4">
+                        </video>
+                    </div>
+
+                    <div class="category-window" id="window-agencies" data-category="agencies">
+                        <div class="category-icon">💼</div>
+                        <div class="category-label">Talent Agencies</div>
+                        <video preload="auto" muted>
+                            <source src="videos/agencies.mp4" type="video/mp4">
+                        </video>
+                    </div>
+
+                    <div class="category-window" id="window-voice" data-category="voice">
+                        <div class="category-icon">🎙️</div>
+                        <div class="category-label">Voice Actors</div>
+                        <video preload="auto" muted>
+                            <source src="videos/voice.mp4" type="video/mp4">
+                        </video>
+                    </div>
+
+                    <div class="category-window" id="window-writers" data-category="writers">
+                        <div class="category-icon">✍️</div>
+                        <div class="category-label">Writers</div>
+                        <video preload="auto" muted>
+                            <source src="videos/writers.mp4" type="video/mp4">
+                        </video>
+                    </div>
+
+                    <!-- DOOR WINDOW -->
+                    <div class="category-window" id="window-door" data-category="door">
+                        <div class="category-icon">🚪</div>
+                        <div class="category-label">Welcome</div>
+                        <video preload="auto" muted>
+                            <source src="videos/door.mp4" type="video/mp4">
+                        </video>
+                    </div>
+
+                    <!-- BOTTOM LEFT WINDOW - Let's Collaborate -->
+                    <div class="category-window" id="window-collaborate" data-category="collaborate">
+                        <div class="category-icon">🤝</div>
+                        <div class="category-label">Let's Collaborate</div>
+                        <video preload="auto" muted>
+                            <source src="videos/collaborate.mp4" type="video/mp4">
+                        </video>
+                    </div>
+
+                    <!-- BOTTOM RIGHT WINDOW - For Hire -->
+                    <div class="category-window" id="window-hire" data-category="hire">
+                        <div class="category-icon">💼</div>
+                        <div class="category-label">For Hire</div>
+                        <video preload="auto" muted>
+                            <source src="videos/hire.mp4" type="video/mp4">
+                        </video>
+                    </div>
+
+                    <!-- DANCING BUSKER BROWNSTONE - Auto-fades after 16 seconds -->
+                    <img id="busker-image" src="images/Busker_Brownstone_transparent.png" alt="Busker Brownstone Mascot" class="busker-image">
+                </div>
+
+                <div style="text-align: center; margin-top: 20px; padding: 20px; background: rgba(212, 175, 55, 0.15); border: 4px solid #2c2c2c; border-radius: 10px; color: #333; max-width: 900px; margin-left: auto; margin-right: auto; box-shadow: 0 5px 20px rgba(44, 44, 44, 0.3);">
+                    <h3 style="color: #2c2c2c; margin-bottom: 15px; font-size: 1.6rem; font-weight: bold;">🎬 Playback Controls</h3>
+                    <p id="playback-status" style="font-size: 1em; font-weight: bold; min-height: 25px; color: #667eea; margin-bottom: 15px;"></p>
+                    
+                    <!-- TOP ROW: 3 Buttons + Custom Sequence -->
+                    <div style="display: flex; gap: 10px; margin-bottom: 10px; align-items: stretch;">
+                        <!-- Left: 3 Main Buttons -->
+                        <div style="display: flex; gap: 10px; flex: 1;">
+                            <button onclick="playSequential()" style="flex: 1; padding: 10px 12px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 8px; font-weight: bold; font-size: 0.9em; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 15px rgba(102, 126, 234, 0.4)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none';">
+                                <div>1️⃣ Sequential</div>
+                                <div style="font-size: 0.75em; font-weight: normal; margin-top: 3px; opacity: 0.9;">Play 1→12</div>
+                            </button>
+                            
+                            <button onclick="playRandom()" style="flex: 1; padding: 10px 12px; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; border: none; border-radius: 8px; font-weight: bold; font-size: 0.9em; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 15px rgba(245, 87, 108, 0.4)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none';">
+                                <div>🎲 Random</div>
+                                <div style="font-size: 0.75em; font-weight: normal; margin-top: 3px; opacity: 0.9;">Shuffled</div>
+                            </button>
+                            
+                            <button onclick="playLoopLayer()" class="cacophony-step" style="flex: 1; padding: 10px 12px; background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); color: #1a1a2e; border: none; border-radius: 8px; font-weight: bold; font-size: 0.9em; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 15px rgba(250, 112, 154, 0.4)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none';">
+                                <div>🔊 Cacophony</div>
+                                <div style="font-size: 0.75em; font-weight: normal; margin-top: 3px; opacity: 0.9;">All 12 at once</div>
+                            </button>
+                        </div>
+                        
+                        <!-- Right: Custom Sequence Input + Button -->
+                        <div style="display: flex; gap: 8px; flex: 1; align-items: center; background: #f8f9fa; padding: 8px; border-radius: 8px;">
+                            <input type="text" id="custom-sequence" placeholder="e.g., 1,12,4,7,8,9" 
+                                   style="padding: 8px; flex: 1; border: 2px solid #6b4423; border-radius: 6px; font-size: 0.85em;">
+                            <button onclick="playCustomSequence()" 
+                                    style="padding: 10px 20px; background: #d4af37; color: #1a1a2e; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 0.85em; white-space: nowrap; transition: all 0.3s;" onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 4px 12px rgba(212, 175, 55, 0.4)';" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none';">
+                                Play Custom Sequence
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <p style="font-size: 0.7em; color: #6b4423; font-style: italic; margin-bottom: 10px; text-align: right;">Play windows in your own order (sequential playback)</p>
+                    
+                    <!-- BOTTOM ROW: 4 Control Buttons -->
+                    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 15px;">
+                        <button onclick="stopPlayback()" style="padding: 10px 12px; background: linear-gradient(135deg, #6c757d 0%, #5a6268 100%); color: white; border: none; border-radius: 8px; font-weight: bold; font-size: 0.9em; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 15px rgba(108, 117, 125, 0.4)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none';">
+                            <div>⏹️ Stop</div>
+                            <div style="font-size: 0.75em; font-weight: normal; margin-top: 3px; opacity: 0.9;">Stop all</div>
+                        </button>
+                        
+                        <button id="sound-toggle-btn" onclick="toggleSound()" style="padding: 10px 12px; background: linear-gradient(135deg, #dc3545 0%, #c82333 100%); color: white; border: none; border-radius: 8px; font-weight: bold; font-size: 0.9em; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 15px rgba(220, 53, 69, 0.4)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none';">
+                            <div>🔇 Sound</div>
+                            <div style="font-size: 0.75em; font-weight: normal; margin-top: 3px; opacity: 0.9;">Click to unmute</div>
+                        </button>
+                        
+                        <button onclick="toggleBuskerMode()" class="busker-step" id="busker-btn" style="padding: 10px 12px; background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color: #1a1a2e; border: none; border-radius: 8px; font-weight: bold; font-size: 0.9em; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 15px rgba(79, 172, 254, 0.4)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none';">
+                            <div>🎸 Busker Mode</div>
+                            <div style="font-size: 0.75em; font-weight: normal; margin-top: 3px; opacity: 1; color: rgba(26, 26, 46, 0.85);">Layer sounds</div>
+                        </button>
+                        
+                        <button onclick="toggleFullScreenMode()" id="fullscreen-btn" style="padding: 10px 12px; background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%); color: white; border: none; border-radius: 8px; font-weight: bold; font-size: 0.9em; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 15px rgba(255, 107, 107, 0.4)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none';">
+                            <div>🎬 Full-Screen</div>
+                            <div style="font-size: 0.75em; font-weight: normal; margin-top: 3px; opacity: 0.9;">Cinematic View</div>
+                        </button>
+                    </div>
+                    
+                    <!-- BUSKER MODE INPUT (Hidden by default) -->
+                    <div id="busker-input-area" style="display: none; padding: 15px; background: #e3f2fd; border-radius: 8px; border: 2px solid #4facfe;">
+                        <label style="font-weight: bold; display: block; margin-bottom: 10px; color: #1a1a2e; font-size: 0.95em;">🎸 Build Your Song - Enter Window Numbers:</label>
+                        <div style="display: flex; gap: 10px; justify-content: center; align-items: center;">
+                            <input type="text" id="busker-sequence" placeholder="e.g., 11,0,2 (solo, wait 3s, harmony joins)" 
+                                   style="padding: 10px; flex: 1; max-width: 400px; border: 2px solid #4facfe; border-radius: 6px; font-size: 0.9em;">
+                            <button onclick="playBuskerSequence()" 
+                                    style="padding: 10px 25px; background: #4facfe; color: #1a1a2e; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 0.9em; transition: all 0.3s;" onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 4px 12px rgba(79, 172, 254, 0.4)';" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none';">
+                                🎵 Play Sequence
+                            </button>
+                        </div>
+                        <p style="margin-top: 8px; font-size: 0.75em; color: #666; font-style: italic;">Layer sounds with delayed entrances (use 0 for 3-second dramatic pause)</p>
+                        
+                        <!-- SEQUENCE HISTORY -->
+                        <div id="sequence-history" style="margin-top: 10px; padding: 10px; background: white; border-radius: 6px; border: 1px solid #4facfe; min-height: 30px; display: none;">
+                            <strong style="color: #4facfe;">Last Sequence:</strong> 
+                            <span id="last-sequence" style="color: #1a1a2e; font-family: monospace; font-size: 1.1em;"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- VIDEO MODAL FOR CINEMATIC VIEW POPUP -->
+            <div id="video-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); z-index: 10000; align-items: center; justify-content: center;">
+                <div style="position: relative; width: 70%; max-width: 900px; background: #1a1a2e; border-radius: 15px; padding: 20px; box-shadow: 0 10px 50px rgba(0, 0, 0, 0.8);">
+                    <!-- Progress Indicator -->
+                    <div id="modal-progress" style="text-align: center; background: rgba(212, 175, 55, 0.2); color: #d4af37; padding: 8px 15px; border-radius: 20px; font-size: 1em; font-weight: bold; margin-bottom: 15px;">
+                        Playing <span id="modal-current">1</span> of <span id="modal-total">12</span>
+                    </div>
+                    
+                    <!-- Video Container -->
+                    <video id="modal-video" style="width: 100%; height: auto; border-radius: 10px; background: black;" controls></video>
+                    
+                    <!-- Control Buttons -->
+                    <div style="display: flex; gap: 15px; justify-content: center; margin-top: 15px;">
+                        <button onclick="skipVideo()" style="padding: 12px 25px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 8px; font-weight: bold; font-size: 1em; cursor: pointer; transition: all 0.3s; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);" onmouseover="this.style.transform='scale(1.05)';" onmouseout="this.style.transform='scale(1)';">
+                            ⏭️ Skip
+                        </button>
+                        <button onclick="closeVideoModal()" style="padding: 12px 25px; background: linear-gradient(135deg, #dc3545 0%, #c82333 100%); color: white; border: none; border-radius: 8px; font-weight: bold; font-size: 1em; cursor: pointer; transition: all 0.3s; box-shadow: 0 4px 15px rgba(220, 53, 69, 0.4);" onmouseover="this.style.transform='scale(1.05)';" onmouseout="this.style.transform='scale(1)';">
+                            ✕ Close
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SEQUENTIAL DIMENSIONAL™ MODE MODAL - NEW IN V2.9! 🎬 -->
+            <div id="tv-production-modal" class="tv-production-modal" style="display: none;">
+                <div class="tv-status-badge">📺 LIVE: Sequential Dimensional™ Mode</div>
+                <button class="tv-close-btn" onclick="closeTVProductionMode()">✕ Close</button>
+                <div id="tv-grid-container" class="tv-grid-container grid-1x1">
+                    <!-- Video slots will be dynamically added here -->
+                </div>
+            </div>
+        </main>
+
+        <!-- RIGHT SIDEBAR (PROTECTED - Edit only this section) -->
+        <aside class="right-sidebar">
+            <h3 style="background: linear-gradient(135deg, #4a2c1f 0%, #6b4423 100%); border: 2px solid #4a2c1f; box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2); -webkit-text-stroke: 0.5px #000000; color: #ffffff; text-align: center; padding: 12px; margin: 0 auto; display: block;">Explore The Community</h3>
+            <ul class="community-list">
+                <li>🎬 Animators</li>
+                <li>🎵 Composers</li>
+                <li>🦸‍♂️ Cosplayers</li>
+                <li>🎥 Filmmakers</li>
+                <li>🎮 Game Developers</li>
+                <li>🖼️ Illustrators/Graphic Artists</li>
+                <li>🥁 Musicians</li>
+                <li>💃 Actors/Models/Dancers</li>
+                <li>💰 Producers</li>
+                <li>💼 Talent Agencies</li>
+                <li>🎙️ Voice Actors</li>
+                <li>✍️ Writers</li>
+            </ul>
+        </aside>
+
+    </div>
+
+    <!-- BROWNSTONE MODULE JAVASCRIPT (PROTECTED) -->
+    <script>
+        // SOUND MANAGEMENT
+        let soundEnabled = false;
+
+        function toggleSound() {
+            soundEnabled = !soundEnabled;
+            const btn = document.getElementById('sound-toggle-btn');
+            const allVideos = document.querySelectorAll('video');
+            
+            allVideos.forEach(video => {
+                video.muted = !soundEnabled;
+            });
+            
+            if (soundEnabled) {
+                btn.innerHTML = '<div>🔊 Sound</div><div style="font-size: 0.75em; font-weight: normal; margin-top: 3px; opacity: 0.9;">Sound ON</div>';
+                btn.style.background = 'linear-gradient(135deg, #28a745 0%, #218838 100%)';
+            } else {
+                btn.innerHTML = '<div>🔇 Sound</div><div style="font-size: 0.75em; font-weight: normal; margin-top: 3px; opacity: 0.9;">Click to unmute</div>';
+                btn.style.background = 'linear-gradient(135deg, #dc3545 0%, #c82333 100%)';
+            }
+        }
+
+        // Playback system
+        let playbackQueue = [];
+        let currentPlaybackIndex = 0;
+        let isPlaying = false;
+        let currentVideoElement = null;
+        let playbackMode = null;
+        
+        // Busker Mode variables
+        let buskerModeActive = false;
+        let buskerWindows = new Set(); // Tracks which windows are in the busker loop
+        
+        // Sequential Dimensional™ Full-Screen Mode variables
+        let fullScreenMode = false;
+        let modalVideoQueue = [];
+        let modalCurrentIndex = 0;
+
+        // ACTIVE BUTTON MANAGEMENT - Cassette Player Effect
+        function setActiveButton(buttonElement) {
+            // Remove active class from all playback buttons
+            document.querySelectorAll('button').forEach(btn => {
+                btn.classList.remove('active-playback');
+            });
+            // Add active class to clicked button
+            if (buttonElement) {
+                buttonElement.classList.add('active-playback');
+            }
+        }
+        
+        function clearActiveButtons() {
+            document.querySelectorAll('button').forEach(btn => {
+                btn.classList.remove('active-playback');
+            });
+        }
+        
+        // SEQUENTIAL DIMENSIONAL™ FULL-SCREEN MODE FUNCTIONS
+        function toggleFullScreenMode() {
+            fullScreenMode = !fullScreenMode;
+            const btn = document.getElementById('fullscreen-btn');
+            
+            if (fullScreenMode) {
+                btn.innerHTML = '<div>🎬 Full-Screen</div><div style="font-size: 0.75em; font-weight: normal; margin-top: 3px; opacity: 0.9;">ON - Cinematic</div>';
+                btn.style.background = 'linear-gradient(135deg, #28a745 0%, #218838 100%)';
+                document.getElementById('playback-status').textContent = '🎬 Sequential Dimensional™ Cinematic View Enabled';
+            } else {
+                btn.innerHTML = '<div>🎬 Full-Screen</div><div style="font-size: 0.75em; font-weight: normal; margin-top: 3px; opacity: 0.9;">Cinematic View</div>';
+                btn.style.background = 'linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%)';
+                document.getElementById('playback-status').textContent = '🏠 Community View - Videos play in brownstone windows';
+            }
+        }
+        
+        function openVideoModal(videoSrc, currentIndex, totalVideos) {
+            const modal = document.getElementById('video-modal');
+            const video = document.getElementById('modal-video');
+            const currentSpan = document.getElementById('modal-current');
+            const totalSpan = document.getElementById('modal-total');
+            
+            // Set video source
+            video.src = videoSrc;
+            video.muted = !soundEnabled;
+            video.play();
+            
+            // Update progress
+            currentSpan.textContent = currentIndex + 1;
+            totalSpan.textContent = totalVideos;
+            
+            // Show modal
+            modal.style.display = 'flex';
+            
+            // Auto-advance on video end
+            video.onended = () => {
+                playNextInModal();
+            };
+        }
+        
+        function closeVideoModal() {
+            const modal = document.getElementById('video-modal');
+            const video = document.getElementById('modal-video');
+            
+            video.pause();
+            video.src = '';
+            modal.style.display = 'none';
+            
+            // Don't stop brownstone playback - let videos continue
+            // stopPlayback();
+        }
+        
+        // ESC key closes modal
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                const videoModal = document.getElementById('video-modal');
+                const tvModal = document.getElementById('tv-production-modal');
+                
+                if (videoModal && videoModal.style.display === 'flex') {
+                    closeVideoModal();
+                }
+                if (tvModal && tvModal.style.display === 'flex') {
+                    closeTVProductionMode();
+                }
+            }
+        });
+        
+        function skipVideo() {
+            playNextInModal();
+        }
+        
+        function playNextInModal() {
+            modalCurrentIndex++;
+            
+            if (modalCurrentIndex >= modalVideoQueue.length) {
+                // Playback complete
+                closeVideoModal();
+                document.getElementById('playback-status').textContent = '✅ Playback complete!';
+                setTimeout(() => {
+                    document.getElementById('playback-status').textContent = '';
+                }, 3000);
+                return;
+            }
+            
+            // Play next video
+            const nextCategory = modalVideoQueue[modalCurrentIndex];
+            const nextVideoSrc = `videos/${nextCategory}.mp4`;
+            openVideoModal(nextVideoSrc, modalCurrentIndex, modalVideoQueue.length);
+        }
+
+        const categoryOrder = ['animators', 'composers', 'cosplayers', 'filmmakers', 'gamedev', 'illustrators', 
+                               'musicians', 'performers', 'producers', 'agencies', 'voice', 'writers'];
+
+        const categoryNames = {
+            animators: 'Animators (Aurora)',
+            composers: 'Composers (Bill)',
+            cosplayers: 'Cosplayers (Cecil)',
+            filmmakers: 'Filmmakers (Fergus)',
+            gamedev: 'Game Developers (Finley)',
+            illustrators: 'Visual Artists (Harriet)',
+            musicians: 'Musicians (Lars)',
+            performers: 'Performers (Magnuson)',
+            producers: 'Producers (Zeno)',
+            agencies: 'Talent Agencies (Phoenix)',
+            voice: 'Voice Actors (Skeleton)',
+            writers: 'Writers (Una)'
+        };
+
+        // BUSKER MODE - Toggle input field on/off
+        function toggleBuskerMode() {
+            buskerModeActive = !buskerModeActive;
+            const buskerBtn = document.getElementById('busker-btn');
+            const buskerInputArea = document.getElementById('busker-input-area');
+            
+            if (buskerModeActive) {
+                // Stop any other playback first
+                if (isPlaying) {
+                    stopPlayback();
+                }
+                
+                playbackMode = 'busker';
+                setActiveButton(buskerBtn);
+                
+                // Show input field
+                buskerInputArea.style.display = 'block';
+                buskerBtn.style.background = 'linear-gradient(135deg, #27ae60 0%, #229954 100%)';
+                buskerBtn.innerHTML = '<div>🎸 Busker Mode</div><div style="font-size: 0.75em; font-weight: normal; margin-top: 3px; opacity: 0.9;">Active ✓</div>';
+                
+                document.getElementById('playback-status').textContent = 
+                    '🎸 Busker Mode Active! Enter window numbers to layer sounds.';
+                
+                console.log('✅ Busker Mode ACTIVATED');
+            } else {
+                // Hide input field and stop all busker windows
+                buskerInputArea.style.display = 'none';
+                document.getElementById('sequence-history').style.display = 'none';
+                playbackMode = null;
+                clearActiveButtons();
+                buskerBtn.style.background = 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)';
+                buskerBtn.innerHTML = '<div>🎸 Busker Mode</div><div style="font-size: 0.75em; font-weight: normal; margin-top: 3px; opacity: 1; color: rgba(26, 26, 46, 0.85);">Layer sounds</div>';
+                
+                // Stop all busker windows
+                buskerWindows.forEach(category => {
+                    const windowElement = document.getElementById(`window-${category}`);
+                    const videoElement = windowElement.querySelector('video');
+                    windowElement.classList.remove('busker-playing');
+                    videoElement.pause();
+                    videoElement.currentTime = 0;
+                    videoElement.loop = false;
+                });
+                buskerWindows.clear();
+                
+                document.getElementById('playback-status').textContent = '';
+                console.log('❌ Busker Mode DEACTIVATED');
+            }
+        }
+
+        // ═══════════════════════════════════════════════════════════════════════
+        // SEQUENTIAL DIMENSIONAL™ MODE FUNCTIONS - NEW IN V2.9! 🎬📺
+        // ═══════════════════════════════════════════════════════════════════════
+
+        function calculateGridLayout(videoCount) {
+            // Returns the optimal grid class based on video count
+            if (videoCount === 1) return 'grid-1x1';
+            if (videoCount === 2) return 'grid-1x2';
+            if (videoCount === 3) return 'grid-1x3';
+            if (videoCount === 4) return 'grid-2x2';
+            if (videoCount <= 6) return 'grid-2x3';
+            if (videoCount <= 9) return 'grid-3x3';
+            if (videoCount <= 12) return 'grid-3x4';
+            return 'grid-4x3'; // For more than 12
+        }
+
+        function openTVProductionMode(videoSequence, delays) {
+            const modal = document.getElementById('tv-production-modal');
+            const gridContainer = document.getElementById('tv-grid-container');
+            
+            // Clear any existing videos
+            gridContainer.innerHTML = '';
+            
+            // Show modal
+            modal.style.display = 'flex';
+            
+            // Progressive video addition
+            let currentCount = 0;
+            
+            videoSequence.forEach((categoryKey, index) => {
+                setTimeout(() => {
+                    currentCount++;
+                    
+                    // Create video slot
+                    const slot = document.createElement('div');
+                    slot.className = 'tv-video-slot';
+                    slot.id = `tv-slot-${index}`;
+                    
+                    // Create video element
+                    const video = document.createElement('video');
+                    video.src = `videos/${categoryKey}.mp4`;
+                    video.autoplay = true;
+                    video.loop = true;
+                    video.muted = !soundEnabled;
+                    
+                    slot.appendChild(video);
+                    gridContainer.appendChild(slot);
+                    
+                    // Update grid layout
+                    const newLayout = calculateGridLayout(currentCount);
+                    gridContainer.className = `tv-grid-container ${newLayout}`;
+                    
+                    // Animate in
+                    setTimeout(() => {
+                        slot.classList.add('active');
+                    }, 50);
+                    
+                    console.log(`📺 TV Production: Video ${currentCount}/${videoSequence.length} joined (${categoryKey})`);
+                    
+                }, delays[index] || (index * 1000)); // Default 1 second delay if not specified
+            });
+        }
+
+        function closeTVProductionMode() {
+            const modal = document.getElementById('tv-production-modal');
+            const gridContainer = document.getElementById('tv-grid-container');
+            
+            // Stop all videos
+            gridContainer.querySelectorAll('video').forEach(v => {
+                v.pause();
+                v.src = '';
+            });
+            
+            // Clear grid
+            gridContainer.innerHTML = '';
+            
+            // Hide modal
+            modal.style.display = 'none';
+            
+            console.log('📺 Sequential Dimensional™ Mode CLOSED');
+        }
+
+        // ═══════════════════════════════════════════════════════════════════════
+
+        // BUSKER MODE - Play sequence of looping windows
+        function playBuskerSequence() {
+            if (!buskerModeActive) {
+                console.log('❌ Busker mode not active');
+                return;
+            }
+            
+            const input = document.getElementById('busker-sequence').value;
+            
+            if (!input || input.trim() === '') {
+                return; // Nothing entered, don't do anything
+            }
+            
+            // ═══════════════════════════════════════════════════════════════════
+            // SEQUENTIAL DIMENSIONAL™ MODE CHECK - NEW IN V2.9! 🎬
+            // If BOTH Busker Mode AND Full-Screen Mode are active = SEQUENTIAL DIMENSIONAL!
+            // ═══════════════════════════════════════════════════════════════════
+            if (buskerModeActive && fullScreenMode) {
+                console.log('🎬📺 SEQUENTIAL DIMENSIONAL™ MODE ACTIVATED!');
+                
+                // Parse the sequence
+                const rawNumbers = input.split(',').map(n => parseInt(n.trim()));
+                
+                // Filter out zeros (delays) and get valid window numbers
+                const validNumbers = rawNumbers.filter(n => n >= 1 && n <= 12);
+                
+                if (validNumbers.length === 0) {
+                    document.getElementById('playback-status').textContent = '❌ Please enter valid window numbers (1-12)';
+                    setTimeout(() => {
+                        document.getElementById('playback-status').textContent = '';
+                    }, 3000);
+                    return;
+                }
+                
+                // Convert numbers to category keys
+                const videoSequence = validNumbers.map(num => categoryOrder[num - 1]);
+                
+                // Calculate delays based on zeros in sequence
+                const delays = [];
+                let cumulativeDelay = 0;
+                let videoIndex = 0;
+                
+                rawNumbers.forEach(num => {
+                    if (num === 0) {
+                        // Add 3000ms (3 seconds) delay for next video
+                        cumulativeDelay += 3000;
+                    } else if (num >= 1 && num <= 12) {
+                        delays.push(cumulativeDelay);
+                        cumulativeDelay += 1000; // Default 1 second between videos
+                        videoIndex++;
+                    }
+                });
+                
+                // Update status
+                document.getElementById('playback-status').textContent = 
+                    `📺 Sequential Dimensional™ Mode! ${validNumbers.length} cameras joining the broadcast...`;
+                
+                // Show sequence history
+                document.getElementById('last-sequence').textContent = input;
+                document.getElementById('sequence-history').style.display = 'block';
+                
+                // Open TV Production Mode instead of playing in windows
+                openTVProductionMode(videoSequence, delays);
+                
+                return; // Don't execute normal busker mode
+            }
+            
+            // ═══════════════════════════════════════════════════════════════════
+            // NORMAL BUSKER MODE (if full-screen not enabled)
+            // ═══════════════════════════════════════════════════════════════════
+            
+            // STOP ALL CURRENT WINDOWS FIRST (so new sequence starts fresh!)
+            buskerWindows.forEach(category => {
+                const windowElement = document.getElementById(`window-${category}`);
+                const videoElement = windowElement.querySelector('video');
+                windowElement.classList.remove('busker-playing');
+                videoElement.pause();
+                videoElement.currentTime = 0;
+            });
+            buskerWindows.clear();
+            
+            // Show what was entered in history
+            document.getElementById('last-sequence').textContent = input;
+            document.getElementById('sequence-history').style.display = 'block';
+            
+            const rawNumbers = input.split(',').map(n => parseInt(n.trim()));
+            
+            // DON'T clear input - let user modify and try again!
+            
+            // Process sequence with delays
+            processSequenceWithDelays(rawNumbers, 0);
+        }
+
+        // NEW: Process sequence step-by-step with delays
+        function processSequenceWithDelays(sequence, index) {
+            if (index >= sequence.length) {
+                // Sequence complete
+                return;
+            }
+            
+            const num = sequence[index];
+            
+            // Count consecutive zeros for cumulative delay
+            if (num === 0) {
+                let zeroCount = 0;
+                let nextValidIndex = index;
+                
+                // Count how many zeros in a row
+                while (nextValidIndex < sequence.length && sequence[nextValidIndex] === 0) {
+                    zeroCount++;
+                    nextValidIndex++;
+                }
+                
+                const totalDelay = zeroCount * 3000; // 3 seconds per zero
+                
+                console.log(`⏸️ Delay: ${zeroCount} zeros = ${totalDelay/1000} seconds...`);
+                document.getElementById('playback-status').textContent = 
+                    `⏸️ Building tension... ${totalDelay/1000} second pause (${zeroCount} zeros)`;
+                
+                // Wait for total delay, then skip past all the zeros
+                setTimeout(() => {
+                    processSequenceWithDelays(sequence, nextValidIndex);
+                }, totalDelay);
+                return;
+            }
+            
+            // Check if it's a valid window number
+            if (num >= 1 && num <= 12) {
+                const category = categoryOrder[num - 1];
+                
+                // Add window if not already playing
+                if (!buskerWindows.has(category)) {
+                    buskerWindows.add(category);
+                    const windowElement = document.getElementById(`window-${category}`);
+                    const videoElement = windowElement.querySelector('video');
+                    
+                    windowElement.classList.add('busker-playing');
+                    videoElement.loop = true;
+                    videoElement.currentTime = 0;
+                    videoElement.muted = !soundEnabled;
+                    videoElement.play().catch(err => console.log('Playback prevented:', err));
+                    
+                    console.log(`🔊 Added to layer: ${category} (window ${num})`);
+                }
+                
+                // Update status
+                const windowNames = Array.from(buskerWindows).map(cat => categoryNames[cat].split(' (')[0]).join(', ');
+                document.getElementById('playback-status').textContent = 
+                    `🎸 Layering ${buskerWindows.size} window${buskerWindows.size !== 1 ? 's' : ''}: ${windowNames}`;
+            }
+            
+            // Process next number with small delay to prevent UI freezing
+            setTimeout(() => {
+                processSequenceWithDelays(sequence, index + 1);
+            }, 100);
+        }
+
+        function playSequential() {
+            if (buskerModeActive) {
+                toggleBuskerMode(); // Exit busker mode first
+            }
+            stopPlayback(); // Clean slate
+            playbackQueue = [...categoryOrder];
+            currentPlaybackIndex = 0;
+            setActiveButton(event.target.closest('button'));
+            
+            // Check if full-screen mode is enabled
+            if (fullScreenMode) {
+                modalVideoQueue = [...playbackQueue];
+                modalCurrentIndex = 0;
+                openVideoModal(`videos/${modalVideoQueue[0]}.mp4`, 0, modalVideoQueue.length);
+            } else {
+                startPlayback();
+            }
+        }
+
+        function playRandom() {
+            if (buskerModeActive) {
+                toggleBuskerMode(); // Exit busker mode first
+            }
+            stopPlayback(); // Clean slate
+            playbackQueue = [...categoryOrder];
+            for (let i = playbackQueue.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [playbackQueue[i], playbackQueue[j]] = [playbackQueue[j], playbackQueue[i]];
+            }
+            currentPlaybackIndex = 0;
+            setActiveButton(event.target.closest('button'));
+            
+            // Check if full-screen mode is enabled
+            if (fullScreenMode) {
+                modalVideoQueue = [...playbackQueue];
+                modalCurrentIndex = 0;
+                openVideoModal(`videos/${modalVideoQueue[0]}.mp4`, 0, modalVideoQueue.length);
+            } else {
+                startPlayback();
+            }
+        }
+
+        function playCustomSequence() {
+            if (buskerModeActive) {
+                toggleBuskerMode(); // Exit busker mode first
+            }
+            stopPlayback(); // Clean slate
+            
+            const input = document.getElementById('custom-sequence').value;
+            const numbers = input.split(',').map(n => parseInt(n.trim())).filter(n => n >= 1 && n <= 12);
+            
+            if (numbers.length === 0) {
+                document.getElementById('playback-status').textContent = '❌ Please enter valid numbers (1-12)';
+                setTimeout(() => {
+                    document.getElementById('playback-status').textContent = '';
+                }, 3000);
+                return;
+            }
+            
+            // Convert numbers to category names (1=animators, 2=composers, etc.)
+            playbackQueue = numbers.map(num => categoryOrder[num - 1]);
+            currentPlaybackIndex = 0;
+            
+            // Check if full-screen mode is enabled
+            if (fullScreenMode) {
+                modalVideoQueue = [...playbackQueue];
+                modalCurrentIndex = 0;
+                openVideoModal(`videos/${modalVideoQueue[0]}.mp4`, 0, modalVideoQueue.length);
+            } else {
+                startPlayback();
+            }
+            
+            document.getElementById('playback-status').textContent = `🎯 Playing custom sequence: ${input}`;
+        }
+
+        function playLoopLayer() {
+            if (buskerModeActive) {
+                toggleBuskerMode(); // Exit busker mode first
+            }
+            stopPlayback(); // Clean slate
+            playbackMode = 'loop-layer';
+            isPlaying = true;
+            setActiveButton(event.target.closest('button'));
+            
+            // Pick one random window to be the "voice above the crowd" (louder)
+            const spotlightIndex = Math.floor(Math.random() * categoryOrder.length);
+            const spotlightCategory = categoryOrder[spotlightIndex];
+            
+            document.getElementById('playback-status').textContent = 
+                `🎚️ Cacophony: All 12 playing! "${categoryNames[spotlightCategory].split(' (')[0]}" above the crowd!`;
+            
+            categoryOrder.forEach((category, index) => {
+                const windowElement = document.getElementById(`window-${category}`);
+                const videoElement = windowElement.querySelector('video');
+                
+                windowElement.classList.add('playing');
+                videoElement.loop = true;
+                videoElement.currentTime = Math.random() * 5;
+                videoElement.muted = !soundEnabled;
+                videoElement.volume = (category === spotlightCategory) ? 1.0 : 0.3;
+                videoElement.play().catch(err => console.log('Play prevented:', err));
+            });
+        }
+
+        function startPlayback() {
+            if (playbackQueue.length === 0) return;
+            
+            isPlaying = true;
+            playbackMode = 'sequential';
+            playCurrentVideo();
+        }
+
+        function playCurrentVideo() {
+            if (currentPlaybackIndex >= playbackQueue.length) {
+                isPlaying = false;
+                document.getElementById('playback-status').textContent = '✅ Playback complete!';
+                setTimeout(() => {
+                    document.getElementById('playback-status').textContent = '';
+                }, 3000);
+                return;
+            }
+            
+            const category = playbackQueue[currentPlaybackIndex];
+            const windowElement = document.getElementById(`window-${category}`);
+            const videoElement = windowElement.querySelector('video');
+            
+            currentVideoElement = videoElement;
+            
+            windowElement.classList.add('playing');
+            videoElement.currentTime = 0;
+            videoElement.muted = !soundEnabled;
+            videoElement.play().catch(err => console.log('Play prevented:', err));
+            
+            const categoryName = categoryNames[category].split(' (')[0];
+            document.getElementById('playback-status').textContent = 
+                `▶️ Playing: ${categoryName} (${currentPlaybackIndex + 1}/${playbackQueue.length})`;
+            
+            videoElement.onended = () => {
+                windowElement.classList.remove('playing');
+                currentPlaybackIndex++;
+                playCurrentVideo();
+            };
+        }
+
+        function stopPlayback() {
+            isPlaying = false;
+            playbackMode = null;
+            currentPlaybackIndex = 0;
+            playbackQueue = [];
+            clearActiveButtons();
+            
+            // Stop all videos in windows
+            categoryOrder.forEach(category => {
+                const windowElement = document.getElementById(`window-${category}`);
+                const videoElement = windowElement.querySelector('video');
+                windowElement.classList.remove('playing');
+                videoElement.pause();
+                videoElement.currentTime = 0;
+                videoElement.loop = false;
+            });
+            
+            document.getElementById('playback-status').textContent = '';
+        }
+
+        console.log('🏙️ CityBlocks v2.9 - Sequential Dimensional™ Mode Loaded! 🎬📺');
+    </script>
+</body>
+</html>
