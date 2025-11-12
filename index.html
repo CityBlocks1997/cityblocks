@@ -2,7 +2,7 @@
 <!--
 ╔═══════════════════════════════════════════════════════════════════════════╗
 ║                           CITYBLOCKS HOMEPAGE                              ║
-║                          index.html - VERSION 2.9.1                          ║
+║                          index.html - VERSION 2.9                          ║
 ╚═══════════════════════════════════════════════════════════════════════════╝
 
 📅 DATE: November 11, 2025
@@ -137,11 +137,10 @@ videos/
         }
 
         header {
-            background: linear-gradient(135deg, rgba(26, 26, 46, 0.95) 0%, rgba(52, 73, 94, 0.95) 100%);
+            background: transparent;
             color: white;
             padding: 25px 20px;
             text-align: center;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
             border-bottom: 5px solid #d4af37;
         }
 
@@ -171,7 +170,7 @@ videos/
         /* SIDEBAR STYLES */
         .left-sidebar,
         .right-sidebar {
-            background: linear-gradient(180deg, #F5F1E8 0%, #E8DCC8 100%);
+            background: transparent;
             padding: 20px;
             border-radius: 15px;
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
@@ -309,31 +308,11 @@ videos/
         }
 
         .category-icon {
-            font-size: 2rem;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 5;
-            opacity: 0.7;
-            pointer-events: none;
+            display: none;
         }
 
         .category-label {
-            position: absolute;
-            bottom: 5%;
-            left: 50%;
-            transform: translateX(-50%);
-            color: white;
-            font-weight: bold;
-            font-size: 0.7rem;
-            text-align: center;
-            background: rgba(0, 0, 0, 0.8);
-            padding: 3px 8px;
-            border-radius: 4px;
-            z-index: 5;
-            pointer-events: none;
-            white-space: nowrap;
+            display: none;
         }
 
         .category-window video {
@@ -343,8 +322,7 @@ videos/
             width: 80%;
             height: 80%;
             object-fit: cover;
-            opacity: 0;
-            transition: opacity 0.5s;
+            opacity: 1;
             z-index: 2;
         }
 
@@ -779,10 +757,8 @@ videos/
             <div class="sidebar-section">
                 <h3 style="background: linear-gradient(135deg, #4a2c1f 0%, #6b4423 100%); border: 2px solid #4a2c1f; box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2); -webkit-text-stroke: 0.5px #000000; color: #ffffff;">Get Started</h3>
                 <button class="sidebar-btn" onclick="window.location.href='customize.html'" style="background: linear-gradient(135deg, #d4af37 0%, #f5c842 100%); color: #2d5016; border: 2px solid #b8941f; box-shadow: 0 3px 10px rgba(212, 175, 55, 0.5); -webkit-text-stroke: 0.5px #000000;">🏠 Customize Your Own Brownstone</button>
-                <ul class="sidebar-list">
-                    <li style="background: linear-gradient(135deg, #4a2c1f 0%, #6b4423 100%); color: #ffffff; font-weight: bold; -webkit-text-stroke: 0.5px #000000;">📺 How it Works</li>
-                    <li style="background: linear-gradient(135deg, #4a2c1f 0%, #6b4423 100%); color: #ffffff; font-weight: bold; -webkit-text-stroke: 0.5px #000000;">ℹ️ About</li>
-                </ul>
+                <button class="sidebar-btn" onclick="openHowItWorksModal()" style="background: linear-gradient(135deg, #4a2c1f 0%, #6b4423 100%); color: #ffffff; border: 2px solid #4a2c1f; -webkit-text-stroke: 0.5px #000000;">📺 How it Works</button>
+                <button class="sidebar-btn" onclick="openAboutModal()" style="background: linear-gradient(135deg, #4a2c1f 0%, #6b4423 100%); color: #ffffff; border: 2px solid #4a2c1f; -webkit-text-stroke: 0.5px #000000;">ℹ️ About</button>
             </div>
             
             <div class="sidebar-section">
@@ -1055,18 +1031,25 @@ videos/
         <aside class="right-sidebar">
             <div class="sidebar-section">
                 <h3 style="background: linear-gradient(135deg, #4a2c1f 0%, #6b4423 100%); border: 2px solid #4a2c1f; box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2); -webkit-text-stroke: 0.5px #000000; color: #ffffff;">Explore The Community</h3>
-                <button class="sidebar-btn" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: 2px solid #5a67d8;">🎬 Animators</button>
-                <button class="sidebar-btn" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: 2px solid #5a67d8;">🎵 Composers</button>
-                <button class="sidebar-btn" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: 2px solid #5a67d8;">🦸‍♂️ Cosplayers</button>
-                <button class="sidebar-btn" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: 2px solid #5a67d8;">🎥 Filmmakers</button>
-                <button class="sidebar-btn" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: 2px solid #5a67d8;">🎮 Game Developers</button>
-                <button class="sidebar-btn" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: 2px solid #5a67d8;">🖼️ Illustrators/Graphic Artists</button>
-                <button class="sidebar-btn" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: 2px solid #5a67d8;">🥁 Musicians</button>
-                <button class="sidebar-btn" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: 2px solid #5a67d8;">💃 Actors/Models/Dancers</button>
-                <button class="sidebar-btn" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: 2px solid #5a67d8;">💰 Producers</button>
-                <button class="sidebar-btn" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: 2px solid #5a67d8;">💼 Talent Agencies</button>
-                <button class="sidebar-btn" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: 2px solid #5a67d8;">🎙️ Voice Actors</button>
-                <button class="sidebar-btn" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: 2px solid #5a67d8;">✍️ Writers</button>
+                <button class="sidebar-btn" style="background: linear-gradient(135deg, #4a2c1f 0%, #6b4423 100%); color: #ffffff; border: 2px solid #4a2c1f; -webkit-text-stroke: 0.5px #000000;">🎬 Animators</button>
+                <button class="sidebar-btn" style="background: linear-gradient(135deg, #4a2c1f 0%, #6b4423 100%); color: #ffffff; border: 2px solid #4a2c1f; -webkit-text-stroke: 0.5px #000000;">🎵 Composers</button>
+                <button class="sidebar-btn" style="background: linear-gradient(135deg, #4a2c1f 0%, #6b4423 100%); color: #ffffff; border: 2px solid #4a2c1f; -webkit-text-stroke: 0.5px #000000;">🦸‍♂️ Cosplayers</button>
+                <button class="sidebar-btn" style="background: linear-gradient(135deg, #4a2c1f 0%, #6b4423 100%); color: #ffffff; border: 2px solid #4a2c1f; -webkit-text-stroke: 0.5px #000000;">🎥 Filmmakers</button>
+                <button class="sidebar-btn" style="background: linear-gradient(135deg, #4a2c1f 0%, #6b4423 100%); color: #ffffff; border: 2px solid #4a2c1f; -webkit-text-stroke: 0.5px #000000;">🎮 Game Developers</button>
+                <button class="sidebar-btn" style="background: linear-gradient(135deg, #4a2c1f 0%, #6b4423 100%); color: #ffffff; border: 2px solid #4a2c1f; -webkit-text-stroke: 0.5px #000000;">🖼️ Illustrators/Graphic Artists</button>
+                <button class="sidebar-btn" style="background: linear-gradient(135deg, #4a2c1f 0%, #6b4423 100%); color: #ffffff; border: 2px solid #4a2c1f; -webkit-text-stroke: 0.5px #000000;">🥁 Musicians</button>
+                <button class="sidebar-btn" style="background: linear-gradient(135deg, #4a2c1f 0%, #6b4423 100%); color: #ffffff; border: 2px solid #4a2c1f; -webkit-text-stroke: 0.5px #000000;">💃 Actors/Models/Dancers</button>
+                <button class="sidebar-btn" style="background: linear-gradient(135deg, #4a2c1f 0%, #6b4423 100%); color: #ffffff; border: 2px solid #4a2c1f; -webkit-text-stroke: 0.5px #000000;">💰 Producers</button>
+                <button class="sidebar-btn" style="background: linear-gradient(135deg, #4a2c1f 0%, #6b4423 100%); color: #ffffff; border: 2px solid #4a2c1f; -webkit-text-stroke: 0.5px #000000;">💼 Talent Agencies</button>
+                <button class="sidebar-btn" style="background: linear-gradient(135deg, #4a2c1f 0%, #6b4423 100%); color: #ffffff; border: 2px solid #4a2c1f; -webkit-text-stroke: 0.5px #000000;">🎙️ Voice Actors</button>
+                <button class="sidebar-btn" style="background: linear-gradient(135deg, #4a2c1f 0%, #6b4423 100%); color: #ffffff; border: 2px solid #4a2c1f; -webkit-text-stroke: 0.5px #000000;">✍️ Writers</button>
+            </div>
+            
+            <div class="sidebar-section" style="margin-top: 30px;">
+                <h3 style="background: linear-gradient(135deg, #4a2c1f 0%, #6b4423 100%); border: 2px solid #4a2c1f; box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2); -webkit-text-stroke: 0.5px #000000; color: #ffffff;">Adobe Affiliate</h3>
+                <button class="sidebar-btn" onclick="window.open('https://adobe.com', '_blank')" style="background: linear-gradient(135deg, #d4af37 0%, #f5c842 100%); color: #2d5016; border: 2px solid #b8941f; box-shadow: 0 3px 10px rgba(212, 175, 55, 0.5); -webkit-text-stroke: 0.5px #000000;">
+                    🎨 Get Adobe Creative Cloud
+                </button>
             </div>
         </aside>
 
@@ -1693,5 +1676,118 @@ videos/
 
         console.log('🏙️ CityBlocks v2.9 - Sequential Dimensional™ Mode Loaded! 🎬📺');
     </script>
+
+    <!-- HOW IT WORKS MODAL -->
+    <div id="howitworksModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeHowItWorksModal()">&times;</span>
+            <h2 style="color: #d4af37;">📺 How It Works</h2>
+            <p><strong>CityBlocks</strong> is a revolutionary video collaboration platform where creators submit 30-second reusable clips to our Collaboration Library.</p>
+            
+            <h3>The Three Ways to Experience CityBlocks:</h3>
+            <ol>
+                <li><strong>Community View:</strong> Watch videos play in the brownstone windows</li>
+                <li><strong>Cinematic View:</strong> Toggle Full-Screen mode for popup video player</li>
+                <li><strong>Sequential Dimensional™ Mode:</strong> Activate Busker Mode + Full-Screen for our revolutionary TV Production interface with progressive grid layouts</li>
+            </ol>
+            
+            <h3>Playback Modes:</h3>
+            <ul>
+                <li><strong>Sequential:</strong> Play videos in order (1-12)</li>
+                <li><strong>Random:</strong> Shuffled playback</li>
+                <li><strong>Cacophony:</strong> All 12 windows play simultaneously</li>
+                <li><strong>Busker Mode:</strong> Layer sounds with custom sequences and delays</li>
+                <li><strong>Custom:</strong> Enter your own sequence (e.g., 1,5,7,12)</li>
+            </ul>
+            
+            <p><strong>Join the revolution!</strong> Customize your own brownstone and submit clips to collaborate with creators worldwide.</p>
+        </div>
+    </div>
+
+    <!-- ABOUT MODAL -->
+    <div id="aboutModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeAboutModal()">&times;</span>
+            <h2 style="color: #d4af37;">ℹ️ About CityBlocks</h2>
+            <p><strong>CityBlocks.com</strong> is Where Pure Creativity Resides - a platform designed to bring families together through creative play, not passive content consumption.</p>
+            
+            <h3>Our Vision:</h3>
+            <p>We're building the world's first algorithm-free, politics-free video collaboration network. Instead of waiting for viral moments, creators submit 30-second clips that hosts mix-and-match into infinite combinations across 12 creator categories.</p>
+            
+            <h3>The Busker Brownstone™ Concept:</h3>
+            <p>Our brownstone building represents collaborative creativity - one host plus twelve collaborators working in harmony. Each window showcases a different creator category, from Voice Actors to Musicians to Game Developers.</p>
+            
+            <h3>Sequential Dimensional™ Technology:</h3>
+            <p>Our breakthrough TV Production Mode creates dynamic video grid layouts where videos progressively join from solo display to multi-grid arrangements with timed delays - like a live broadcast unfolding before your eyes.</p>
+            
+            <h3>Creator Benefits:</h3>
+            <ul>
+                <li>Submit reusable 30-second clips once, appear in countless performances</li>
+                <li>Get discovered by hosts building their shows</li>
+                <li>Collaborate without scheduling conflicts</li>
+                <li>Keep all your existing platforms - CityBlocks supplements them</li>
+            </ul>
+            
+            <p><strong>Founded by:</strong> Richard Tucker (Batman1997)</p>
+            <p><strong>Premium Domain:</strong> Owned since 1997</p>
+            <p><strong>Mission:</strong> Retirement project with vision to pitch as Adobe Creative Cloud social component</p>
+        </div>
+    </div>
+
+    <script>
+        // Modal Functions
+        function openHowItWorksModal() {
+            document.getElementById('howitworksModal').style.display = 'flex';
+        }
+
+        function closeHowItWorksModal() {
+            document.getElementById('howitworksModal').style.display = 'none';
+        }
+
+        function openAboutModal() {
+            document.getElementById('aboutModal').style.display = 'flex';
+        }
+
+        function closeAboutModal() {
+            document.getElementById('aboutModal').style.display = 'none';
+        }
+
+        // Close modals with ESC key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeHowItWorksModal();
+                closeAboutModal();
+            }
+        });
+
+        // Close modals when clicking outside
+        window.addEventListener('click', function(event) {
+            const howitworksModal = document.getElementById('howitworksModal');
+            const aboutModal = document.getElementById('aboutModal');
+            if (event.target === howitworksModal) {
+                closeHowItWorksModal();
+            }
+            if (event.target === aboutModal) {
+                closeAboutModal();
+            }
+        });
+    </script>
+
+    <!-- FOOTER WITH TRADEMARK INFORMATION -->
+    <footer style="background: transparent; color: white; text-align: center; padding: 30px 20px; border-top: 3px solid #d4af37; margin-top: 50px;">
+        <p style="font-size: 0.9em; margin-bottom: 10px;">
+            <strong style="color: #d4af37;">CityBlocks™</strong> - Where Pure Creativity Resides
+        </p>
+        <p style="font-size: 0.8em; margin-bottom: 10px;">
+            CityBlocks™ | Busker Brownstone™ | Sequential Dimensional™ | I. Otto Shuda™
+        </p>
+        <p style="font-size: 0.75em; color: rgba(255, 255, 255, 0.7); margin-bottom: 10px;">
+            © 2025 CityBlocks Media LLC. All rights reserved. | EIN: 41-2485799
+        </p>
+        <p style="font-size: 0.7em; color: rgba(255, 255, 255, 0.6);">
+            Premium domain owned since 1997 | Coeur d'Alene, Idaho
+        </p>
+    </footer>
+
 </body>
 </html>
