@@ -11,12 +11,35 @@
 
 body {
     font-family: 'Georgia', serif;
-    background: linear-gradient(135deg, #f5f5dc 0%, #e8dcc4 100%);
+    background: url('../images/city-street-background.jpg') no-repeat center center fixed;
+    background-size: cover;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    position: relative;
 }
 
+/* Optional: Add slight overlay to make content more readable */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.1);
+    z-index: -1;
+}
+
+STEPS:
+
+Edit css/framework.css on GitHub
+Replace the body section with the code above
+Commit changes
+Wait 30 seconds for DigitalOcean rebuild
+Hard refresh your site
+
+Do this and screenshot the result!RetryClaude can make mistakes. Please double-check responses.
 /* HEADER MODULE CONTAINER */
 #header-module-container {
     width: 100%;
