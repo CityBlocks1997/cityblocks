@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CityBlocks Brownstone - Test</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: #F5F1E8;
+            padding: 20px;
+        }
+
+        .brownstone-container {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            padding: 20px;
+        }
+        
+        .brownstone-image {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Video Window Containers - EXACT COORDINATES FROM BEAUTIFUL_SITE */
+        .video-window {
+            position: absolute;
+            background: transparent;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-sizing: border-box;
+        }
+        
+        .video-window:hover {
+            filter: brightness(1.1);
+            z-index: 5;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.6);
+        }
+
+        .video-window video {
+            position: absolute;
+            top: 10%;
+            left: 10%;
+            width: 80%;
+            height: 80%;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        /* EXACT WORKING COORDINATES - THE 12 CATEGORY WINDOWS */
+        #window-animators { top: 20.80%; left: 22.16%; width: 12.02%; height: 7.67%; }
+        #window-composers { top: 20.80%; left: 44.0%; width: 12.02%; height: 7.67%; }
+        #window-cosplayers { top: 20.74%; left: 66.24%; width: 12.02%; height: 7.67%; }
+        #window-filmmakers { top: 34.0%; left: 22.6%; width: 11.78%; height: 9.27%; }
+        #window-gamedev { top: 34.0%; left: 44.35%; width: 11.78%; height: 9.27%; }
+        #window-illustrators { top: 34.0%; left: 66.3%; width: 11.78%; height: 9.27%; }
+        #window-musicians { top: 47.87%; left: 22.7%; width: 11.78%; height: 9.27%; }
+        #window-performers { top: 47.4%; left: 44.35%; width: 11.78%; height: 9.27%; }
+        #window-producers { top: 47.87%; left: 66.4%; width: 11.78%; height: 9.27%; }
+        #window-agencies { top: 63.13%; left: 22.6%; width: 11.78%; height: 9.27%; }
+        #window-voice { top: 63.73%; left: 44.47%; width: 11.78%; height: 9.27%; }
+        #window-writers { top: 63.13%; left: 66.5%; width: 11.78%; height: 9.27%; }
+
+        /* DOOR WINDOW */
+        #window-door { 
+            top: 81.13%;
+            left: 44.0%; 
+            width: 12.74%; 
+            height: 10%; 
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* BOTTOM WINDOWS */
+        #window-collaborate { 
+            top: 79.8%;
+            left: 22.5%;
+            width: 11.78%; 
+            height: 9.27%; 
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #window-hire { 
+            top: 79.8%;
+            left: 66.5%;
+            width: 11.78%; 
+            height: 9.27%; 
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .window-label {
+            color: white;
+            font-size: 0.9rem;
+            font-weight: bold;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+    </style>
+</head>
+<body>
+    <div class="brownstone-container">
+        <!-- Brownstone Background Image -->
+        <img src="/images/brownstone.png" alt="Brownstone Building" class="brownstone-image">
+
+        <!-- 12 Category Windows (Top Row) -->
+        <div id="window-animators" class="video-window">
+            <video loop muted playsinline>
+                <source src="/videos/animators.mp4" type="video/mp4">
+            </video>
+        </div>
+
+        <div id="window-composers" class="video-window">
+            <video loop muted playsinline>
+                <source src="/videos/composers.mp4" type="video/mp4">
+            </video>
+        </div>
+
+        <div id="window-cosplayers" class="video-window">
+            <video loop muted playsinline>
+                <source src="/videos/cosplayers.mp4" type="video/mp4">
+            </video>
+        </div>
+
+        <!-- Middle Rows -->
+        <div id="window-filmmakers" class="video-window">
+            <video loop muted playsinline>
+                <source src="/videos/filmmakers.mp4" type="video/mp4">
+            </video>
+        </div>
+
+        <div id="window-gamedev" class="video-window">
+            <video loop muted playsinline>
+                <source src="/videos/gamedev.mp4" type="video/mp4">
+            </video>
+        </div>
+
+        <div id="window-illustrators" class="video-window">
+            <video loop muted playsinline>
+                <source src="/videos/illustrators.mp4" type="video/mp4">
+            </video>
+        </div>
+
+        <div id="window-musicians" class="video-window">
+            <video loop muted playsinline>
+                <source src="/videos/musicians.mp4" type="video/mp4">
+            </video>
+        </div>
+
+        <div id="window-performers" class="video-window">
+            <video loop muted playsinline>
+                <source src="/videos/performers.mp4" type="video/mp4">
+            </video>
+        </div>
+
+        <div id="window-producers" class="video-window">
+            <video loop muted playsinline>
+                <source src="/videos/producers.mp4" type="video/mp4">
+            </video>
+        </div>
+
+        <!-- Bottom Row -->
+        <div id="window-agencies" class="video-window">
+            <video loop muted playsinline>
+                <source src="/videos/agencies.mp4" type="video/mp4">
+            </video>
+        </div>
+
+        <div id="window-voice" class="video-window">
+            <video loop muted playsinline>
+                <source src="/videos/voice.mp4" type="video/mp4">
+            </video>
+        </div>
+
+        <div id="window-writers" class="video-window">
+            <video loop muted playsinline>
+                <source src="/videos/writers.mp4" type="video/mp4">
+            </video>
+        </div>
+
+        <!-- Special Windows -->
+        <div id="window-door" class="video-window">
+            <span class="window-label">🚪 Enter</span>
+        </div>
+
+        <div id="window-collaborate" class="video-window">
+            <span class="window-label">🤝 Collaborate</span>
+        </div>
+
+        <div id="window-hire" class="video-window">
+            <span class="window-label">💼 Hire</span>
+        </div>
+    </div>
+</body>
+</html>
