@@ -1,0 +1,434 @@
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     BROWNSTONE PLAYER MODULE - CORRECTED
+     Transparent background, exact coordinates, no overlapping
+     ═══════════════════════════════════════════════════════════════════════════ -->
+
+<style>
+    .brownstone-player-module {
+        background: transparent; /* FIXED: Was solid white */
+        border: none; /* FIXED: Removed white box border */
+        padding: 0; /* FIXED: No padding needed */
+        text-align: center;
+        max-width: 832px; /* Brownstone image exact width */
+        margin: 0 auto;
+    }
+    
+    .brownstone-container {
+        width: 100%;
+        max-width: 832px;
+        margin: 20px auto;
+        position: relative;
+        display: block;
+    }
+    
+    .brownstone-image {
+        width: 100%;
+        height: auto;
+        display: block;
+        position: relative;
+    }
+    
+    /* Video Window Containers - EXACT COORDINATES FROM REFERENCE */
+    .video-window {
+        position: absolute;
+        background: transparent;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 10;
+    }
+    
+    .video-window video {
+        position: absolute;
+        top: 10%;
+        left: 10%;
+        width: 80%;
+        height: 80%;
+        object-fit: cover;
+        border-radius: 8px;
+    }
+    
+    /* ROW 1 - TOP FLOOR (3 windows: 100px × 115px) */
+    #window-1 { 
+        top: 20.13%; 
+        left: 21.15%; 
+        width: 12.02%; 
+        height: 7.67%; 
+    }
+    
+    #window-2 { 
+        top: 20.13%; 
+        left: 44.0%; 
+        width: 12.02%; 
+        height: 7.67%; 
+    }
+    
+    #window-3 { 
+        top: 20.07%; 
+        left: 67.19%; 
+        width: 12.02%; 
+        height: 7.67%; 
+    }
+    
+    /* ROW 2 - SECOND FLOOR (3 windows: 98px × 139px) */
+    #window-4 { 
+        top: 33.33%; 
+        left: 21.39%; 
+        width: 11.78%; 
+        height: 9.27%; 
+    }
+    
+    #window-5 { 
+        top: 33.33%; 
+        left: 44.35%; 
+        width: 11.78%; 
+        height: 9.27%; 
+    }
+    
+    #window-6 { 
+        top: 33.33%; 
+        left: 67.43%; 
+        width: 11.78%; 
+        height: 9.27%; 
+    }
+    
+    /* ROW 3 - THIRD FLOOR (3 windows: 98px × 139px) */
+    #window-7 { 
+        top: 47.2%; 
+        left: 21.51%; 
+        width: 11.78%; 
+        height: 9.27%; 
+    }
+    
+    #window-8 { 
+        top: 47.4%; 
+        left: 44.35%; 
+        width: 11.78%; 
+        height: 9.27%; 
+    }
+    
+    #window-9 { 
+        top: 47.2%; 
+        left: 67.55%; 
+        width: 11.78%; 
+        height: 9.27%; 
+    }
+    
+    /* ROW 4 - FOURTH FLOOR (3 windows: 98px × 139px) */
+    #window-10 { 
+        top: 63.8%; 
+        left: 21.39%; 
+        width: 11.78%; 
+        height: 9.27%; 
+    }
+    
+    #window-11 { 
+        top: 63.73%; 
+        left: 44.47%; 
+        width: 11.78%; 
+        height: 9.27%; 
+    }
+    
+    #window-12 { 
+        top: 63.8%; 
+        left: 67.67%; 
+        width: 11.78%; 
+        height: 9.27%; 
+    }
+    
+    /* SPECIAL WINDOWS - BASEMENT LEVEL (no videos, just icons/labels) */
+    #window-collaborate {
+        position: absolute;
+        top: 80.13%;
+        left: 21.27%;
+        width: 11.78%;
+        height: 9.27%;
+        background: rgba(212, 175, 55, 0.8);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.7rem;
+        color: #4A2C1F;
+        font-weight: bold;
+        text-align: center;
+        z-index: 10;
+        cursor: pointer;
+    }
+    
+    #window-door {
+        position: absolute;
+        top: 81.13%;
+        left: 44.0%;
+        width: 12.74%;
+        height: 10%;
+        background: rgba(212, 175, 55, 0.8);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.8rem;
+        color: #4A2C1F;
+        font-weight: bold;
+        text-align: center;
+        z-index: 10;
+        cursor: pointer;
+    }
+    
+    #window-hire {
+        position: absolute;
+        top: 80.13%;
+        left: 67.67%;
+        width: 11.78%;
+        height: 9.27%;
+        background: rgba(212, 175, 55, 0.8);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.7rem;
+        color: #4A2C1F;
+        font-weight: bold;
+        text-align: center;
+        z-index: 10;
+        cursor: pointer;
+    }
+    
+    /* Window Glow Effect (when playing) */
+    .video-window.playing {
+        box-shadow: 0 0 20px rgba(212, 175, 55, 0.8);
+        transition: box-shadow 0.3s ease;
+    }
+    
+    /* Category Labels (appear during playback) */
+    .window-label {
+        position: absolute;
+        bottom: 5px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(212, 175, 55, 0.9);
+        color: #4A2C1F;
+        font-size: 0.7rem;
+        padding: 3px 8px;
+        border-radius: 3px;
+        font-weight: bold;
+        text-align: center;
+        z-index: 20;
+        display: none;
+    }
+    
+    .video-window.playing .window-label {
+        display: block;
+    }
+    
+    /* Tagline below brownstone */
+    .brownstone-tagline {
+        margin-top: 15px;
+        color: #4A2C1F;
+        font-size: 1rem;
+        font-weight: bold;
+        text-shadow: -1px -1px 0 #FFF, 1px -1px 0 #FFF, -1px 1px 0 #FFF, 1px 1px 0 #FFF;
+        background: rgba(245, 241, 232, 0.8);
+        padding: 10px 20px;
+        border-radius: 8px;
+        display: inline-block;
+    }
+</style>
+
+<div class="brownstone-player-module">
+    <!-- FIXED: Removed "CityBlocks Brownstone" header text -->
+    
+    <div class="brownstone-container">
+        <!-- Brownstone Building Image -->
+        <img src="../images/brownstone.png" alt="CityBlocks Brownstone" class="brownstone-image">
+        
+        <!-- 12 VIDEO WINDOWS - EXACT POSITIONING -->
+        <div id="window-1" class="video-window" data-category="Voice Actors">
+            <video id="video1" muted playsinline loop>
+                <source src="../videos/window-1/video.mp4" type="video/mp4">
+            </video>
+            <span class="window-label">Voice Actors</span>
+        </div>
+        
+        <div id="window-2" class="video-window" data-category="Animators">
+            <video id="video2" muted playsinline loop>
+                <source src="../videos/window-2/video.mp4" type="video/mp4">
+            </video>
+            <span class="window-label">Animators</span>
+        </div>
+        
+        <div id="window-3" class="video-window" data-category="Musicians">
+            <video id="video3" muted playsinline loop>
+                <source src="../videos/window-3/video.mp4" type="video/mp4">
+            </video>
+            <span class="window-label">Musicians</span>
+        </div>
+        
+        <div id="window-4" class="video-window" data-category="Writers">
+            <video id="video4" muted playsinline loop>
+                <source src="../videos/window-4/video.mp4" type="video/mp4">
+            </video>
+            <span class="window-label">Writers</span>
+        </div>
+        
+        <div id="window-5" class="video-window" data-category="Composers">
+            <video id="video5" muted playsinline loop>
+                <source src="../videos/window-5/video.mp4" type="video/mp4">
+            </video>
+            <span class="window-label">Composers</span>
+        </div>
+        
+        <div id="window-6" class="video-window" data-category="Performers">
+            <video id="video6" muted playsinline loop>
+                <source src="../videos/window-6/video.mp4" type="video/mp4">
+            </video>
+            <span class="window-label">Performers</span>
+        </div>
+        
+        <div id="window-7" class="video-window" data-category="Visual Artists">
+            <video id="video7" muted playsinline loop>
+                <source src="../videos/window-7/video.mp4" type="video/mp4">
+            </video>
+            <span class="window-label">Visual Artists</span>
+        </div>
+        
+        <div id="window-8" class="video-window" data-category="Filmmakers">
+            <video id="video8" muted playsinline loop>
+                <source src="../videos/window-8/video.mp4" type="video/mp4">
+            </video>
+            <span class="window-label">Filmmakers</span>
+        </div>
+        
+        <div id="window-9" class="video-window" data-category="Game Developers">
+            <video id="video9" muted playsinline loop>
+                <source src="../videos/window-9/video.mp4" type="video/mp4">
+            </video>
+            <span class="window-label">Game Developers</span>
+        </div>
+        
+        <div id="window-10" class="video-window" data-category="Cosplayers">
+            <video id="video10" muted playsinline loop>
+                <source src="../videos/window-10/video.mp4" type="video/mp4">
+            </video>
+            <span class="window-label">Cosplayers</span>
+        </div>
+        
+        <div id="window-11" class="video-window" data-category="Producers">
+            <video id="video11" muted playsinline loop>
+                <source src="../videos/window-11/video.mp4" type="video/mp4">
+            </video>
+            <span class="window-label">Producers</span>
+        </div>
+        
+        <div id="window-12" class="video-window" data-category="Talent Agencies">
+            <video id="video12" muted playsinline loop>
+                <source src="../videos/window-12/video.mp4" type="video/mp4">
+            </video>
+            <span class="window-label">Talent Agencies</span>
+        </div>
+        
+        <!-- SPECIAL WINDOWS - BASEMENT LEVEL -->
+        <div id="window-collaborate">
+            🤝<br>Let's<br>Collaborate
+        </div>
+        
+        <div id="window-door">
+            🚪<br>Your Host
+        </div>
+        
+        <div id="window-hire">
+            💼<br>For Hire
+        </div>
+    </div>
+    
+    <div class="brownstone-tagline">
+        12 Windows • Sequential Dimensional™ Technology • Busker Brownstone™
+    </div>
+</div>
+
+<script>
+// Video control functions for playback module integration
+window.brownstoneVideos = {
+    videos: [],
+    windows: [],
+    
+    init: function() {
+        // Gather all video elements
+        for (let i = 1; i <= 12; i++) {
+            const video = document.getElementById(`video${i}`);
+            const windowDiv = document.getElementById(`window-${i}`);
+            if (video) {
+                this.videos.push(video);
+            }
+            if (windowDiv) {
+                this.windows.push(windowDiv);
+            }
+        }
+        console.log(`✅ Brownstone: ${this.videos.length} video windows initialized`);
+        console.log(`✅ Brownstone: ${this.windows.length} window containers initialized`);
+    },
+    
+    playWindow: function(num) {
+        const video = document.getElementById(`video${num}`);
+        const windowDiv = document.getElementById(`window-${num}`);
+        if (video && windowDiv) {
+            video.play();
+            windowDiv.classList.add('playing');
+        }
+    },
+    
+    pauseWindow: function(num) {
+        const video = document.getElementById(`video${num}`);
+        const windowDiv = document.getElementById(`window-${num}`);
+        if (video && windowDiv) {
+            video.pause();
+            windowDiv.classList.remove('playing');
+        }
+    },
+    
+    stopWindow: function(num) {
+        const video = document.getElementById(`video${num}`);
+        const windowDiv = document.getElementById(`window-${num}`);
+        if (video && windowDiv) {
+            video.pause();
+            video.currentTime = 0;
+            windowDiv.classList.remove('playing');
+        }
+    },
+    
+    playAll: function() {
+        this.videos.forEach((v, i) => {
+            v.play();
+            this.windows[i].classList.add('playing');
+        });
+    },
+    
+    pauseAll: function() {
+        this.videos.forEach((v, i) => {
+            v.pause();
+            this.windows[i].classList.remove('playing');
+        });
+    },
+    
+    stopAll: function() {
+        this.videos.forEach((v, i) => {
+            v.pause();
+            v.currentTime = 0;
+            this.windows[i].classList.remove('playing');
+        });
+    },
+    
+    muteAll: function() {
+        this.videos.forEach(v => v.muted = true);
+    },
+    
+    unmuteAll: function() {
+        this.videos.forEach(v => v.muted = false);
+    }
+};
+
+// Initialize when module loads
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => window.brownstoneVideos.init());
+} else {
+    window.brownstoneVideos.init();
+}
+</script>
