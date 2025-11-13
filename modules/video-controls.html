@@ -1,0 +1,134 @@
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     CITYBLOCKS VIDEO CONTROLS MODULE
+     Playback mode buttons for the brownstone
+     ═══════════════════════════════════════════════════════════════════════════ -->
+
+<style>
+    .video-controls-container {
+        background: linear-gradient(135deg, #2c1810 0%, #3d2415 100%);
+        border: 2px solid #d4af37;
+        border-radius: 15px;
+        padding: 20px;
+        margin: 20px auto;
+        max-width: 800px;
+        box-shadow: 0 5px 20px rgba(212, 175, 55, 0.3);
+    }
+
+    .controls-title {
+        color: #d4af37;
+        text-align: center;
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+        font-weight: bold;
+    }
+
+    .controls-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 10px;
+        margin-bottom: 15px;
+    }
+
+    .control-btn {
+        background: linear-gradient(135deg, #d4af37 0%, #f4d03f 100%);
+        border: 2px solid #b8941f;
+        color: #2c1810;
+        padding: 12px 20px;
+        font-size: 1rem;
+        font-weight: bold;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+    }
+
+    .control-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(212, 175, 55, 0.5);
+        background: linear-gradient(135deg, #f4d03f 0%, #d4af37 100%);
+    }
+
+    .control-btn:active {
+        transform: translateY(0);
+    }
+
+    .control-btn.stop-btn {
+        background: linear-gradient(135deg, #c0392b 0%, #e74c3c 100%);
+        border-color: #a93226;
+        color: white;
+    }
+
+    .control-btn.stop-btn:hover {
+        background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+    }
+
+    .control-btn.sound-btn {
+        background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+        border-color: #229954;
+        color: white;
+    }
+
+    .control-btn.sound-btn:hover {
+        background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+    }
+
+    .controls-footer {
+        text-align: center;
+        color: #d4af37;
+        font-size: 0.9rem;
+        margin-top: 15px;
+        padding-top: 15px;
+        border-top: 1px solid rgba(212, 175, 55, 0.3);
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+        .controls-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+
+<div class="video-controls-container">
+    <h3 class="controls-title">🎬 Brownstone Playback Controls</h3>
+    
+    <div class="controls-grid">
+        <button id="btn-sequential" class="control-btn">
+            ▶️ Sequential
+        </button>
+        
+        <button id="btn-random" class="control-btn">
+            🎲 Random
+        </button>
+        
+        <button id="btn-cacophony" class="control-btn">
+            💥 Cacophony
+        </button>
+        
+        <button id="btn-busker" class="control-btn">
+            🎵 Busker Mode
+        </button>
+        
+        <button id="btn-dimensional" class="control-btn">
+            📺 Sequential Dimensional™
+        </button>
+        
+        <button id="btn-stop" class="control-btn stop-btn">
+            ⏹️ Stop
+        </button>
+        
+        <button id="btn-sound-toggle" class="control-btn sound-btn">
+            🔊 Mute
+        </button>
+    </div>
+    
+    <div class="controls-footer">
+        <p><strong>Sequential Dimensional™</strong> is a CityBlocks exclusive feature</p>
+    </div>
+</div>
+
+<!-- Load the controls JavaScript -->
+<script src="../js/brownstone-controls.js"></script>
