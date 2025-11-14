@@ -80,24 +80,37 @@ async function loadModules(modules) {
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
-// USAGE EXAMPLE
+// INITIALIZE - Load all modules when DOM is ready
 // ═══════════════════════════════════════════════════════════════════════════
 
-/*
-// Load all modules when DOM is ready
 document.addEventListener('DOMContentLoaded', async () => {
+    console.log('🚀 Initializing CityBlocks module system...');
+    
+    // Load all HTML modules first
     await loadModules([
-        { selector: 'header', url: 'modules/header.html' },
-        { selector: '#video-controls', url: 'modules/video-controls.html' },
-        { selector: '#brownstone-player', url: 'modules/brownstone-player.html' },
-        { selector: 'footer', url: 'modules/footer.html' },
-        { selector: '.left-sidebar', url: 'modules/sidebar-left.html' },
-        { selector: '.right-sidebar', url: 'modules/sidebar-right.html' }
+        { selector: '#header-module-container', url: 'modules/header.html' },
+        { selector: '#left-sidebar-module-container', url: 'modules/sidebar-left.html' },
+        { selector: '#brownstone-module-container', url: 'modules/brownstone-player.html' },
+        { selector: '#right-sidebar-module-container', url: 'modules/sidebar-right.html' },
+        { selector: '#video-controls-module-container', url: 'modules/video-controls.html' },
+        { selector: '#footer-module-container', url: 'modules/footer.html' },
+        { selector: '#modals-container', url: 'modules/modals.html' }
     ]);
     
-    // Load JavaScript module AFTER HTML is loaded
+    console.log('✅ All HTML modules loaded!');
+    
+    // Load JavaScript module AFTER all HTML modules are loaded
+    console.log('📜 Loading brownstone-controls.js...');
     const script = document.createElement('script');
-    script.src = 'modules/brownstone-controls.js';
+    script.src = 'js/brownstone-controls.js';
+    script.onload = () => {
+        console.log('✅ brownstone-controls.js loaded!');
+        // Dispatch modulesLoaded event for any listeners
+        window.dispatchEvent(new Event('modulesLoaded'));
+        console.log('🎉 CityBlocks fully initialized!');
+    };
+    script.onerror = () => {
+        console.error('❌ Failed to load brownstone-controls.js');
+    };
     document.body.appendChild(script);
 });
-*/
