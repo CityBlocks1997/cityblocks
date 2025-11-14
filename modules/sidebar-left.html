@@ -1,0 +1,173 @@
+<!--
+═══════════════════════════════════════════════════════════════════════════
+CITYBLOCKS.COM - LEFT SIDEBAR MODULE
+Created: November 14, 2025
+Last Modified: November 14, 2025
+═══════════════════════════════════════════════════════════════════════════
+
+⚠️ CLAUDE OPERATING RULES - READ BEFORE MODIFYING THIS FILE ⚠️
+
+1. EXTRACT, NEVER REWRITE
+   • This code WORKS - do not "improve" it
+   • Do not "clean up" or "optimize"
+   • COPY working code exactly as it exists
+
+2. SHOW BEFORE DOING
+   • Show proposed changes BEFORE making them
+   • Wait for explicit approval
+   • No surprises, no assumptions
+
+3. IF IT WORKS, DON'T TOUCH IT
+   • Preserve working functionality above all
+   • Don't fix things that aren't broken
+   • Working code is SACRED
+
+4. FOLLOW RICHARD'S DESIGN
+   • Richard's specifications are law
+   • No creative liberties
+   • No "helpful" suggestions that break things
+
+5. ONE CHANGE AT A TIME
+   • Make one change, test, proceed
+   • Don't chain multiple changes
+   • If something breaks, ROLL BACK
+
+═══════════════════════════════════════════════════════════════════════════
+FILE PURPOSE: Left sidebar with "Get Started" section and Top Ten Creators
+═══════════════════════════════════════════════════════════════════════════
+
+DEPENDENCIES:
+• Main index.html (provides modal functions)
+• Feng Shui color scheme (browns, golds, tans)
+
+LOADED BY:
+• fixed-module-loader.js
+
+MODIFICATION HISTORY:
+• Nov 14, 2025 - Initial extraction from Beautiful_site_before_digital_ocean_index.html
+  CSS from lines 159-250
+  HTML from lines 774-800
+
+═══════════════════════════════════════════════════════════════════════════
+-->
+
+<style>
+    /* LEFT SIDEBAR STYLES - EXTRACTED FROM WORKING FILE */
+    
+    .left-sidebar {
+        background: linear-gradient(135deg, rgba(107, 68, 35, 0.95) 0%, rgba(139, 90, 60, 0.95) 100%); /* Dark brown - same as buttons */
+        border: 2px solid #4a2c1f;
+        border-radius: 15px;
+        padding: 18px;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .sidebar-section {
+        margin-bottom: 20px;
+    }
+
+    .sidebar-section h3 {
+        color: #ffffff;
+        font-size: 1.2rem;
+        margin-bottom: 15px;
+        padding: 12px;
+        background: linear-gradient(135deg, #d4af37 0%, #f5c842 100%);
+        border: 2px solid #b8941f;
+        border-radius: 8px;
+        text-align: center;
+        font-weight: bold;
+        box-shadow: 0 3px 10px rgba(212, 175, 55, 0.5);
+        -webkit-text-stroke: 0.5px #000000;
+        text-stroke: 0.5px #000000;
+    }
+    
+    /* Top Ten Creators header - dark green text */
+    .sidebar-section:has(.featured-creators) h3 {
+        color: #2d5016;
+    }
+
+    .sidebar-btn {
+        background: linear-gradient(135deg, #d4af37 0%, #f5c842 100%);
+        color: #2d5016;
+        border: 2px solid #b8941f;
+        padding: 12px;
+        width: 100%;
+        border-radius: 8px;
+        font-weight: bold;
+        font-size: 1.2rem;
+        cursor: pointer;
+        transition: all 0.3s;
+        margin-bottom: 10px;
+        box-shadow: 0 3px 10px rgba(212, 175, 55, 0.5);
+        text-align: center;
+        -webkit-text-stroke: 0.5px #000000;
+        text-stroke: 0.5px #000000;
+    }
+
+    .sidebar-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 20px rgba(212, 175, 55, 0.7);
+        background: linear-gradient(135deg, #f5c842 0%, #d4af37 100%);
+    }
+
+    .sidebar-list {
+        list-style: none;
+    }
+
+    .sidebar-list li {
+        padding: 12px 15px;
+        background: rgba(222, 184, 135, 0.6); /* Tan background */
+        border-radius: 8px;
+        margin-bottom: 8px;
+        cursor: pointer;
+        transition: all 0.3s;
+        border-left: 3px solid transparent;
+        color: #2c2416;
+        border: 1px solid rgba(139, 90, 60, 0.3);
+    }
+
+    .sidebar-list li:hover {
+        background: rgba(222, 184, 135, 0.85);
+        border-left-color: #6b4423;
+        border-color: #6b4423;
+        transform: translateX(5px);
+    }
+
+    /* Featured Creators - Centered Text */
+    .featured-creators li {
+        text-align: center;
+        border-left: none;
+        padding: 12px 15px;
+        color: #2d5016;
+        -webkit-text-stroke: 0.5px #000000;
+        text-stroke: 0.5px #000000;
+        font-weight: bold;
+    }
+</style>
+
+<!-- LEFT SIDEBAR HTML -->
+<div class="sidebar-section">
+    <h3 style="background: linear-gradient(135deg, #4a2c1f 0%, #6b4423 100%); border: 2px solid #4a2c1f; box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2); -webkit-text-stroke: 0.5px #000000; color: #ffffff;">Get Started</h3>
+    <button class="sidebar-btn" onclick="window.location.href='customize.html'" style="background: linear-gradient(135deg, #d4af37 0%, #f5c842 100%); color: #2d5016; border: 2px solid #b8941f; box-shadow: 0 3px 10px rgba(212, 175, 55, 0.5); -webkit-text-stroke: 0.5px #000000;">🏠 Customize Your Own Brownstone</button>
+    <ul class="sidebar-list">
+        <li style="background: linear-gradient(135deg, #4a2c1f 0%, #6b4423 100%); color: #ffffff; font-weight: bold; -webkit-text-stroke: 0.5px #000000;">📺 How it Works</li>
+        <li style="background: linear-gradient(135deg, #4a2c1f 0%, #6b4423 100%); color: #ffffff; font-weight: bold; -webkit-text-stroke: 0.5px #000000;">ℹ️ About</li>
+    </ul>
+</div>
+
+<div class="sidebar-section">
+    <h3>Top Ten Creators</h3>
+    <ul class="sidebar-list featured-creators">
+        <li>⭐ Creator #1</li>
+        <li>⭐ Creator #2</li>
+        <li>⭐ Creator #3</li>
+        <li>⭐ Creator #4</li>
+        <li>⭐ Creator #5</li>
+        <li>⭐ Creator #6</li>
+        <li>⭐ Creator #7</li>
+        <li>⭐ Creator #8</li>
+        <li>⭐ Creator #9</li>
+        <li>⭐ Creator #10</li>
+    </ul>
+</div>
