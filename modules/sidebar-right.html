@@ -1,0 +1,118 @@
+<!--
+═══════════════════════════════════════════════════════════════════════════
+CITYBLOCKS.COM - RIGHT SIDEBAR MODULE
+Created: November 14, 2025
+Last Modified: November 14, 2025
+═══════════════════════════════════════════════════════════════════════════
+
+⚠️ CLAUDE OPERATING RULES - READ BEFORE MODIFYING THIS FILE ⚠️
+
+1. EXTRACT, NEVER REWRITE
+   • This code WORKS - do not "improve" it
+   • Do not "clean up" or "optimize"
+   • COPY working code exactly as it exists
+
+2. SHOW BEFORE DOING
+   • Show proposed changes BEFORE making them
+   • Wait for explicit approval
+   • No surprises, no assumptions
+
+3. IF IT WORKS, DON'T TOUCH IT
+   • Preserve working functionality above all
+   • Don't fix things that aren't broken
+   • Working code is SACRED
+
+4. FOLLOW RICHARD'S DESIGN
+   • Richard's specifications are law
+   • No creative liberties
+   • No "helpful" suggestions that break things
+
+5. ONE CHANGE AT A TIME
+   • Make one change, test, proceed
+   • Don't chain multiple changes
+   • If something breaks, ROLL BACK
+
+═══════════════════════════════════════════════════════════════════════════
+FILE PURPOSE: Right sidebar with "Explore The Community" - 12 creator categories
+═══════════════════════════════════════════════════════════════════════════
+
+DEPENDENCIES:
+• Main index.html (provides modal functions)
+• brownstone-controls.js (handles category clicks)
+• Feng Shui color scheme (browns, golds, tans)
+
+LOADED BY:
+• fixed-module-loader.js
+
+MODIFICATION HISTORY:
+• Nov 14, 2025 - Initial extraction from Beautiful_site_before_digital_ocean_index.html
+  CSS from lines 259-302
+  HTML from lines 1014-1031
+
+═══════════════════════════════════════════════════════════════════════════
+-->
+
+<style>
+    /* RIGHT SIDEBAR STYLES - EXTRACTED FROM WORKING FILE */
+    
+    .right-sidebar {
+        background: linear-gradient(135deg, rgba(107, 68, 35, 0.95) 0%, rgba(139, 90, 60, 0.95) 100%); /* Dark brown - same as buttons */
+        border: 2px solid #4a2c1f;
+        border-radius: 15px;
+        padding: 18px;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .right-sidebar h3 {
+        color: #ffffff; /* White text on dark brown */
+        font-size: 1.2rem;
+        margin-bottom: 15px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid rgba(212, 175, 55, 0.3);
+        text-align: center;
+    }
+
+    .community-list {
+        list-style: none;
+    }
+
+    .community-list li {
+        padding: 12px 15px;
+        background: rgba(222, 184, 135, 0.6);
+        border-radius: 8px;
+        margin-bottom: 8px;
+        cursor: pointer;
+        transition: all 0.3s;
+        font-size: 1rem;
+        border-left: 3px solid transparent;
+        color: #2d5016; /* Dark green text */
+        border: 1px solid rgba(139, 90, 60, 0.3);
+        -webkit-text-stroke: 0.5px #000000; /* Thin black outline */
+        text-stroke: 0.5px #000000;
+    }
+
+    .community-list li:hover {
+        background: rgba(222, 184, 135, 0.85); /* Darker tan on hover */
+        border-left-color: #6b4423;
+        border-color: #6b4423;
+        transform: translateX(-5px);
+    }
+</style>
+
+<!-- RIGHT SIDEBAR HTML -->
+<h3 style="background: linear-gradient(135deg, #4a2c1f 0%, #6b4423 100%); border: 2px solid #4a2c1f; box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2); -webkit-text-stroke: 0.5px #000000; color: #ffffff; text-align: center; padding: 12px; margin: 0 auto; display: block;">Explore The Community</h3>
+<ul class="community-list">
+    <li>🎬 Animators</li>
+    <li>🎵 Composers</li>
+    <li>🦸‍♂️ Cosplayers</li>
+    <li>🎥 Filmmakers</li>
+    <li>🎮 Game Developers</li>
+    <li>🖼️ Illustrators/Graphic Artists</li>
+    <li>🥁 Musicians</li>
+    <li>💃 Actors/Models/Dancers</li>
+    <li>💰 Producers</li>
+    <li>💼 Talent Agencies</li>
+    <li>🎙️ Voice Actors</li>
+    <li>✍️ Writers</li>
+</ul>
