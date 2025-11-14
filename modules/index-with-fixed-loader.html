@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CityBlocks - Where Pure Creativity Resides</title>
+    
+    <!-- Your existing base styles go here -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: #F5F1E8;
+            color: #2c2416;
+            min-height: 100vh;
+            padding: 12px;
+        }
+
+        /* Add your other base styles... */
+    </style>
+    
+    <!-- FIXED MODULE LOADER - Load this FIRST -->
+    <script src="js/fixed-module-loader.js"></script>
+</head>
+<body>
+    <!-- Header will load here -->
+    <header id="site-header"></header>
+    
+    <div class="main-layout">
+        <!-- Left Sidebar will load here -->
+        <aside class="left-sidebar"></aside>
+        
+        <!-- Main Content -->
+        <main>
+            <!-- Brownstone Player will load here -->
+            <div id="brownstone-player"></div>
+            
+            <!-- Video Controls will load here -->
+            <div id="video-controls"></div>
+        </main>
+        
+        <!-- Right Sidebar will load here -->
+        <aside class="right-sidebar"></aside>
+    </div>
+    
+    <!-- Footer will load here -->
+    <footer id="site-footer"></footer>
+    
+    <!-- MODALS -->
+    <div id="category-modal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal()">&times;</span>
+            <h2 id="modal-title"></h2>
+            <div id="modal-description"></div>
+            <div id="modal-creators">
+                <h3>Featured Creators in this Category</h3>
+                <div id="creator-list"></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- LOAD ALL MODULES -->
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            console.log('🏙️ Loading CityBlocks modules...');
+            
+            // Load HTML modules in order
+            await loadModules([
+                { selector: '#site-header', url: 'modules/header.html' },
+                { selector: '.left-sidebar', url: 'modules/sidebar-left.html' },
+                { selector: '#brownstone-player', url: 'modules/brownstone-player.html' },
+                { selector: '#video-controls', url: 'modules/video-controls.html' },
+                { selector: '.right-sidebar', url: 'modules/sidebar-right.html' },
+                { selector: '#site-footer', url: 'modules/footer.html' }
+            ]);
+            
+            console.log('✅ All HTML modules loaded!');
+            
+            // Load JavaScript module AFTER all HTML is loaded
+            const script = document.createElement('script');
+            script.src = 'modules/brownstone-controls.js';
+            script.onload = () => {
+                console.log('✅ JavaScript loaded! Controls ready.');
+            };
+            document.body.appendChild(script);
+        });
+    </script>
+</body>
+</html>
